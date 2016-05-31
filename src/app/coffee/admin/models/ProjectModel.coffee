@@ -1,6 +1,7 @@
 define "models/ProjectModel", [ 
-  "marionette"
-], (Marionette)->
+  "backbone"
+], (Backbone)->
   ProjectModel = Backbone.Model.extend
     defaults:
       name: "Новый проект"
+      dim: "4x3"

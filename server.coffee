@@ -2,6 +2,7 @@ express      = require 'express'
 session      = require 'express-session'
 YAML         = require 'yamljs'
 body_parser  = require 'body-parser'
+jade_amd     = require "jade-amd"
 
 config       = require "./config.json"
 
@@ -16,6 +17,7 @@ app.use session config.session
 
 # static
 app.use "/static", express.static("dist")
+app.use "/static/html", jade_amd.jadeAmdMiddleware({})
 
 # set locale pack
 language_packages = {}

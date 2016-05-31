@@ -1,6 +1,6 @@
 define "views/home/HelloView", [ 
   "marionette"
-  "text!html/home/hello.html" 
+  "templates/home/hello" 
 ], (Marionette, HomeHelloTemplate)->
   HomeHelloView = Marionette.ItemView.extend
     template: HomeHelloTemplate

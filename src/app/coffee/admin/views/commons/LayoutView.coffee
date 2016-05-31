@@ -1,6 +1,6 @@
 define "views/commons/LayoutView", [ 
   "marionette"
-  "text!html/layout.html" 
+  "templates/layout" 
 ], (Marionette, LayoutTemplate)->
   LayoutView = Marionette.LayoutView.extend
     template: LayoutTemplate

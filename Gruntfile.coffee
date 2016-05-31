@@ -16,19 +16,19 @@ module.exports = (grunt) ->
     copy:
       vendor:
         files: [
-          {expand: true, cwd: 'vendor/', src: ['fonts/**/*.*', 'images/**/*.*'], dest: 'dist/'}
+          {expand: true, cwd: 'vendor/', src: [ 'fonts/**/*.*', 'images/**/*.*' ], dest: 'dist/'}
         ]
       vendor_js:
         files: [
-          {expand: true, cwd: 'vendor/', src: ['*.js'], dest: 'tmp/vendor'}
+          {expand: true, cwd: 'vendor/', src: [ '*.js' ], dest: 'tmp/vendor'}
         ]
       html_tmp:
         files: [
-          {expand: true, cwd: 'src/app/html/', src: ['**/*.html'], dest: 'tmp/html'}
+          {expand: true, cwd: 'src/app/html/', src: [ '**/*.html', '**/*.jade' ], dest: 'tmp/html'}
         ]
       html_dist:
         files: [
-          {expand: true, cwd: 'src/app/html/', src: ['**/*.html'], dest: 'dist/html'}
+          {expand: true, cwd: 'src/app/html/', src: [ '**/*.html', '**/*.jade' ], dest: 'dist/html'}
         ]        
       modules:
         files: [
@@ -71,7 +71,11 @@ module.exports = (grunt) ->
           {
             src: "node_modules/backbone.marionette/lib/backbone.marionette.js"
             dest: "tmp/modules/marionette.js"
-          }        
+          }  
+          {
+            src: "node_modules/jade/jade.js"
+            dest: "tmp/modules/jade.js"
+          }      
         ]
       requirejs: 
         files: [
@@ -82,6 +86,14 @@ module.exports = (grunt) ->
           {
             src: "node_modules/text/text.js"
             dest: "tmp/require_plugins/text.js"
+          }
+          {
+            src: "vendor/require.jade.js"
+            dest: "tmp/jadeRuntime.js"
+          }
+          {
+            src: "vendor/require.jade.js"
+            dest: "dist/js/jadeRuntime.js"
           }
         ]
       bootstrap_fonts:

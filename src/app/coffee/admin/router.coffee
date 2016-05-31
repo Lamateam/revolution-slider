@@ -4,6 +4,6 @@ define "admin/router", [
 ], (Marionette, LayoutController)->
   router = Marionette.AppRouter.extend
     controller: new LayoutController()
-    appRoutes:
+    appRoutes: 
       "": "home"
       "home/new_blanc_project": "home_new_blanc_project"
