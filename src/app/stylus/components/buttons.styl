@@ -1,0 +1,32 @@
+@import '../variables.styl'
+
+.btn
+  color white
+  text-transform uppercase
+  vertical-align middle
+  font-size 12px
+  height 36px
+  line-height 36px
+  padding 0 20px
+  border-radius 20px
+  transition 300ms all ease-in
+  outline none!important
+  border-radius(50%)
+
+  &:hover 
+    color white
+
+  &.btn-default
+    border 1px solid color_gray_hover
+    background color_gray
+    
+    &:hover
+      background color_gray_hover
+    
+  &-primary
+    background color_red
+    border-color color_red
+      
+    &:hover
+      background color_red_hover
+      border-color color_red_hover

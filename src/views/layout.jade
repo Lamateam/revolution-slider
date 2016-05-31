@@ -1,0 +1,15 @@
+html
+  head
+
+    meta(charset=config.encoding)
+    meta(name="viewport" content="width=device-width, initial-scale=1.0")
+
+    script(type="text/javascript", data-main="/static/js/admin.js", src="/static/require.js")
+    each href in config.styles
+      link(rel="stylesheet", href=href)
+    script(type="text/javascript")
+        | var tmp = "#{language_string}";
+        | window.language = JSON.parse(tmp.replace(/&quot;/g, '"'));
+    include includes/favicons.jade
+  body
+    block content

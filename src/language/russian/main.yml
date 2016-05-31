@@ -1,0 +1,20 @@
+global:
+  error: "Ошибка"
+  success: "Успешно"
+header:
+  main: "Главная"
+  exit: "Выйти"
+login:
+  login: "Логин"
+  nologin: "Вы не ввели логин"
+  password: "Пароль"
+  nopassword: "Вы не ввели пароль"
+  submit: "Войти"
+  error: "Логин или пароль неправильны"
+popup:
+  busy: "Это действие уже выполняется, подождите"
+admin:
+  buttons:
+    get_cards: "Получить карты для тестирования"
+footer:
+  mail: "Связаться с нами"

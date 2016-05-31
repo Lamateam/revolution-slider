@@ -1,0 +1,12 @@
+{
+  "port": 3000,
+  "languages": ["russian", "english"],
+  "jade": {
+    "encoding": "utf-8",
+    "styles": ["/static/style.css"],
+    "scripts": ["/static/require.js", "/static/admin.js"]
+  },
+  "session": {
+    "secret": "fpjfpwklef[wefkw['"
+  }
+}

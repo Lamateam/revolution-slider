@@ -1,0 +1,20 @@
+global:
+  error: "Error"
+  success: "Success"
+header:
+  main: "Main"
+  exit: "Exit"
+login:
+  login: "Login"
+  nologin: "You don't enter password "
+  password: "Password"
+  nopassword: "You don't enter password "
+  submit: "enter"
+  error: "Login or password is incorrect"
+popup:
+  busy: "This action already in action"
+admin:
+  buttons:
+    get_cards: "Get cards for test"
+footer:
+  mail: "Contact with us"  
