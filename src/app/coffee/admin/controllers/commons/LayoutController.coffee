@@ -10,6 +10,9 @@ define "controllers/commons/LayoutController", [
     home_new_blanc_project: ->
       @options.subcontroller = new HomeLayoutController() if !(@options.subcontroller instanceof HomeLayoutController)
       @options.subcontroller.new_blanc_project()
+    home_new_template_project: ->
+      @options.subcontroller = new HomeLayoutController() if !(@options.subcontroller instanceof HomeLayoutController)
+      @options.subcontroller.new_template_project()
     initialize: ->
       @options.regionManager = new Marionette.RegionManager
         regions:

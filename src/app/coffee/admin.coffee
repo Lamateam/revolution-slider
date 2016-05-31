@@ -8,6 +8,7 @@ require.config
     "controllers": "admin/controllers"
     "views": "admin/views"
     "models": "admin/models"
+    "collections": "admin/collections"
     "text": "require_plugins/text"
     "templates": "../html/admin"
   shim:

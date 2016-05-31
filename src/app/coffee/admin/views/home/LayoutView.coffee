@@ -2,8 +2,9 @@ define "views/home/LayoutView", [
   "marionette"
   "views/home/HelloView"
   "views/home/NewBlancProjectView"
+  "views/home/NewTemplateProjectView"
   "templates/home/layout" 
-], (Marionette, HelloView, NewBlancProjectView, HomeLayoutTemplate)->
+], (Marionette, HelloView, NewBlancProjectView, NewTemplateProjectView, HomeLayoutTemplate)->
   HomeLayoutView = Marionette.LayoutView.extend
     template: HomeLayoutTemplate
     regions:
@@ -12,3 +13,5 @@ define "views/home/LayoutView", [
       @showChildView "content", new HelloView()
     showNewBlancProject: ->
       @showChildView "content", new NewBlancProjectView()
+    showNewTemplateProject: ->
+      @showChildView "content", new NewTemplateProjectView()

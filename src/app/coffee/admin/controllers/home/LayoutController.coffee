@@ -7,6 +7,8 @@ define "controllers/home/LayoutController", [
       @getOption('layout').showHello()
     new_blanc_project: ->
       @getOption('layout').showNewBlancProject()
+    new_template_project: ->
+      @getOption('layout').showNewTemplateProject()
     initialize: ->
       @options.regionManager = new Marionette.RegionManager
         regions:

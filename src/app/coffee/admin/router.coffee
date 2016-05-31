@@ -7,3 +7,4 @@ define "admin/router", [
     appRoutes: 
       "": "home"
       "home/new_blanc_project": "home_new_blanc_project"
+      "home/new_template_project": "home_new_template_project"
