@@ -17,8 +17,6 @@ require.config
       exports: "LamaApi"
     "underscore":
       exports: "_"
-    "jade":
-      exports: "jade"
     "backbone":
       deps: [ "underscore", "jquery" ]
       exports: "Backbone"
@@ -27,13 +25,4 @@ require.config
       exports: "Marionette"
 
 define "admin", [ "admin/app" ], (App)->
-  Marionette.TemplateCache.prototype.loadTemplate = (templateId, options)->
-    $template = Backbone.$(templateId)
-
-    if !$template.length
-      $template = 
-        html: ->
-          jade.compile templateId, options
-
-    $template.html()
   new App().start()
