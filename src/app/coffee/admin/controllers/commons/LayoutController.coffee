@@ -4,7 +4,9 @@ define "controllers/commons/LayoutController", [
   "controllers/home/LayoutController"
 ], (Marionette, LayoutView, HomeLayoutController)->
   LayoutController = Marionette.Controller.extend
-    home: ->
+    goToHello: ->
+      Backbone.history.navigate "home/hello", {trigger: true}
+    home_hello: ->
       @options.subcontroller = new HomeLayoutController() if !(@options.subcontroller instanceof HomeLayoutController)
       @options.subcontroller.hello()
     home_new_blanc_project: ->
