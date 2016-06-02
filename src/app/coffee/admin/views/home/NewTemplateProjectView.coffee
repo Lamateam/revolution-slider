@@ -7,7 +7,7 @@ define "views/home/NewTemplateProjectView", [
     template: HomeNewTemplateProjectItemTemplate
     tagName: "li"
 
-  NewBlancProjectView = Marionette.CollectionView.extend
+  NewTemplateProjectView = Marionette.CollectionView.extend
     childView: NewBlancProjectItem
     tagName: "ul"
     initialize: ->

@@ -1,17 +1,22 @@
 define "views/home/LayoutView", [ 
   "marionette"
   "views/home/HelloView"
-  "views/home/NewBlancProjectView"
-  "views/home/NewTemplateProjectView"
+  "views/home/LayoutNewProjectView"
   "templates/home/layout" 
-], (Marionette, HelloView, NewBlancProjectView, NewTemplateProjectView, HomeLayoutTemplate)->
+], (Marionette, HelloView, LayoutNewProjectView, HomeLayoutTemplate)->
   HomeLayoutView = Marionette.LayoutView.extend
     template: HomeLayoutTemplate
     regions:
       content: "#content-home"
+    setCurrent: (SomeClass)->
+      if !(@currentView instanceof SomeClass)
+        @currentView = new SomeClass()
+        @showChildView "content", @currentView
     showHello: ->
-      @showChildView "content", new HelloView()
+      @setCurrent HelloView
     showNewBlancProject: ->
-      @showChildView "content", new NewBlancProjectView()
+      @setCurrent LayoutNewProjectView
+      @currentView.showNewBlancProject()
     showNewTemplateProject: ->
-      @showChildView "content", new NewTemplateProjectView()
+      @setCurrent LayoutNewProjectView
+      @currentView.showNewTemplateProject()
