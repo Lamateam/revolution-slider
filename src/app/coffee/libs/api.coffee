@@ -1,7 +1,6 @@
 define "libs/api", ->
-  console.log "!!!", $
-  JCapi_used_routes = {}
-  JCapi = (url, method='GET', data={}, force=false)->
+  LamaApi_used_routes = {}
+  window.LamaApi = (url, method='GET', data={}, force=false)->
     callbacks = {}
     if JCapi_used_routes[url] is undefined
       JCapi_used_routes[url] = true

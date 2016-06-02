@@ -9,6 +9,8 @@ require.config
     "views": "admin/views"
     "models": "admin/models"
     "collections": "admin/collections"
+    "behaviors": "admin/behaviors"
+    "overwrites": "admin/overwrites"
     "text": "require_plugins/text"
     "templates": "../html/admin"
   shim:

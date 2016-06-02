@@ -159,6 +159,7 @@ module.exports = (grunt) ->
         src: ['**/*.coffee']
         dest: 'tmp'
         ext: '.js'    
+        extDot: 'last'
     uglify:
       js:
         files:
