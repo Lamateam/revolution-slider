@@ -1,0 +1,28 @@
+
+<svg width="158px" height="105px" viewBox="21 21 158 105" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 3.8.3 (29802) - http://www.bohemiancoding.com/sketch -->
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <rect id="path-1" x="0" y="15" width="82" height="88" rx="5"></rect>
+        <mask id="mask-2" maskContentUnits="userSpaceOnUse" maskUnits="objectBoundingBox" x="0" y="0" width="82" height="88" fill="white">
+            <use xlink:href="#path-1"></use>
+        </mask>
+        <rect id="path-3" x="76" y="15" width="82" height="88" rx="5"></rect>
+        <mask id="mask-4" maskContentUnits="userSpaceOnUse" maskUnits="objectBoundingBox" x="0" y="0" width="82" height="88" fill="white">
+            <use xlink:href="#path-3"></use>
+        </mask>
+        <path d="M81.8615345,13.6974368 C78.6242984,14.4168226 76,17.6878406 76,20.9951113 L76,98.0048887 C76,101.315897 78.6264413,103.416346 81.8615345,102.697437 L142.138465,89.3025632 C145.375702,88.5831774 148,85.3121594 148,82.0048887 L148,4.99511128 C148,1.68410275 145.373559,-0.416346382 142.138465,0.302563224 L81.8615345,13.6974368 Z" id="path-5"></path>
+        <mask id="mask-6" maskContentUnits="userSpaceOnUse" maskUnits="objectBoundingBox" x="0" y="0" width="72" height="102.676907" fill="white">
+            <use xlink:href="#path-5"></use>
+        </mask>
+    </defs>
+    <g id="Rectangle-23-+-Rectangle-24-+-Rectangle-22" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" transform="translate(21.000000, 22.000000)">
+        <use id="Rectangle-23" stroke="#949CA4" mask="url(#mask-2)" stroke-width="12" xlink:href="#path-1"></use>
+        <path d="M36.1690497,70 L19.1735703,70 C18.0597387,70 17.6747139,69.256352 18.2973404,68.3390156 L27.581072,54.6609844 C28.2052243,53.7414 29.2646337,53.702397 29.9507371,54.5688477 L35.5435521,61.6317739 L43.8531894,48.6912449 C44.4562043,47.7521748 45.4755485,47.7159211 46.1371602,48.5990546 L60.9720214,68.4009454 C61.6353981,69.2864348 61.2737644,70 60.1682321,70 L36.1690497,70 Z M60.1699754,52 C62.3791144,52 64.1699754,50.209139 64.1699754,48 C64.1699754,45.790861 62.3791144,44 60.1699754,44 C57.9608364,44 56.1699754,45.790861 56.1699754,48 C56.1699754,50.209139 57.9608364,52 60.1699754,52 Z" id="Rectangle-202" fill="#949CA4"></path>
+        <use id="Rectangle-24" stroke="#ACB3BB" mask="url(#mask-4)" stroke-width="12" xlink:href="#path-3"></use>
+        <use id="Rectangle-22" stroke="#949CA4" mask="url(#mask-6)" stroke-width="12" fill="#CED6DD" xlink:href="#path-5"></use>
+        <path d="M93.5,37.5 L129.893355,29.701424" id="Line-2" stroke="#949CA4" stroke-width="5" stroke-linecap="round"></path>
+        <path d="M93.5,52.5 L129.893355,44.701424" id="Line-3" stroke="#949CA4" stroke-width="5" stroke-linecap="round"></path>
+        <path d="M93.5,67.5 L117.141091,62.434052" id="Line-4" stroke="#949CA4" stroke-width="5" stroke-linecap="round"></path>
+    </g>
+</svg>

@@ -1,0 +1,98 @@
+@import '../variables.styl'
+
+.home
+  &_container
+    position relative
+    margin 0 auto
+    margin-top 160px
+    padding 30px
+    padding-bottom 40px
+    width 740px
+    background #CED6DD
+    box-shadow 0px 2px 4px 0px rgba(0,0,0,0.03)
+    border-radius 6px
+    min-height 365px
+    
+    & h1
+      width 100%
+      text-align center
+      font-size 36px
+      color color_grown
+      padding 0px
+      margin 0px
+      margin-top 5px
+      position relative
+      display block
+      padding-bottom 25px
+      line-height 23px
+      border-bottom 2px solid rgba(165,173,181,0.60)
+      
+    & ul
+      padding-left 0px
+      position relative
+      width 100%
+      margin-top 25px
+
+      & li
+        list-style-type none
+        float left
+
+      &.choose_project
+        width 100%
+        
+        & li
+          width 30%
+          
+          &.new_project 
+            background url(images/newproject.svg) no-repeat center 10px
+            
+          &.template_project
+            background url(images/newtemplate.svg) no-repeat center 10px
+            
+          &.template_video
+            width 40%
+            text-align center
+            padding-left 4%
+            
+            & iframe
+              width 100%
+             
+            & span
+              position relative
+              margin-top 5px
+              width 100%
+              display block
+              font-size 14px
+              color color_grown
+              line-height 18px
+              text-align center 
+              padding-bottom 10px
+              
+              &.timer
+                padding-top 5px
+                padding-bottom 2px
+                padding-left 22px
+                height 20px
+                display inline
+                position relative
+                margin 0px auto
+                width auto
+                color color_gray_opacity
+                background url(images/timer.svg) no-repeat left center
+
+
+          & a
+            padding-top 140px
+            display block
+            width 100%
+            
+            & span
+              width 100%
+              display block
+              color color_grown_opacity
+              font-size 19px
+              line-height 21px
+              text-align center
+          
+          &.template_video
+            width 40%

@@ -1,10 +1,23 @@
 include headers/header_start.jade
-div
+div.home_container
   h1 С чего начать?
-  ul 
-    a(href="#home/new_blanc_project")
-      li Создать чистый проект
-    a(href="#home/new_template_project")
-      li Создать новый проект по шаблону
-    a(href="#home/video")
-      li Вводный скринкаст о работе с элементами анимации
+  ul.choose_project
+    li.new_project 
+      a(href="#home/new_blanc_project", title="Создать чистый проект") 
+        span 
+          | Создать 
+          br
+          | чистый проект
+    li.template_project
+      a(href="#home/new_template_project", title="Создать проект по шаблону") 
+        span 
+          | Создать проект 
+          br
+          | по шаблону
+    li.template_video
+      iframe#video(src='//player.vimeo.com/video/80312270?api=1', frameborder='0', webkitallowfullscreen='', mozallowfullscreen='', width = "100%", allowfullscreen='true')
+      span 
+        | Вводный скринкаст о работе
+        br
+        | с элементами анимации 
+      span.timer 00:17:26

@@ -3,7 +3,7 @@
     <desc>Created with Sketch.</desc>
     <defs>
         <circle id="path-1" cx="22" cy="22" r="22"></circle>
-        <mask id="mask-2" maskContentUnits="userSpaceOnUse" maskUnits="objectBoundingBox" x="0" y="0" width="44" height="44" fill="white">
+        <mask id="mask-2" maskContentUnits="userSpaceOnUse" maskUnits="objectBoundingBox" x="0" y="0" width="42" height="42" fill="white">
             <use xlink:href="#path-1"></use>
         </mask>
     </defs>
