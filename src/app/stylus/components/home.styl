@@ -1,17 +1,56 @@
 @import '../variables.styl'
 
 .home
+  
   &_container
     position relative
     margin 0 auto
     margin-top 160px
     padding 30px
-    padding-bottom 40px
     width 740px
     background #CED6DD
     box-shadow 0px 2px 4px 0px rgba(0,0,0,0.03)
     border-radius 6px
     min-height 365px
+    overflow hidden
+    
+    &.padding
+      padding 25px
+
+    &_menu
+      position relative
+      float left
+      width 240px
+      border-right 2px solid rgba(165,173,181,0.60)
+      
+      &-video
+        padding-right 25px
+        text-align center
+        margin-top 50px
+        float left
+        
+        & span
+          position relative
+          margin-top 5px
+          width 100%
+          display block
+          font-size 14px
+          color color_grown
+          line-height 18px
+          text-align center 
+          padding-bottom 7px
+          
+          &.timer
+            padding-top 5px
+            padding-bottom 2px
+            padding-left 22px
+            height 20px
+            display inline
+            position relative
+            margin 0px auto
+            width auto
+            color color_gray_opacity
+            background url(images/timer.svg) no-repeat left center
     
     & h1
       width 100%
@@ -31,13 +70,66 @@
       padding-left 0px
       position relative
       width 100%
-      margin-top 25px
 
       & li
         list-style-type none
         float left
-
+        cursor pointer
+        
+      &.home_menu
+        
+        & li
+          height 50px
+          width 100%
+          transition 300ms all ease-in
+          overflow hidden
+          border-radius 6px 0px 0px 6px
+          border 2px solid transparent
+          
+          & a
+            padding-left 45px
+            height 100%
+            display block
+          
+          &.item_1
+            & a
+              background url(images/1item.svg) no-repeat 7px center 
+            
+          &.item_2
+            & a
+              background url(images/2item.svg) no-repeat 7px center 
+          
+          &.item_3
+            & a
+              background url(images/3item.svg) no-repeat 7px center 
+          
+          & a
+            color color_gray_opacity_small
+            font-size 16px
+            line-height 50px
+            
+          &.active
+          &:hover
+            background color_gray
+            border 2px solid transparent
+            
+            & a
+              color white
+              
+            &.item_1
+              & a
+                background url(images/1itemactive.svg) no-repeat 7px center 
+            
+            &.item_2
+              & a
+                background url(images/2itemactive.svg) no-repeat 7px center 
+            
+            &.item_3
+              & a
+                background url(images/3itemactive.svg) no-repeat 7px center 
+              
       &.choose_project
+        margin-top 25px
         width 100%
         
         & li
@@ -48,6 +140,14 @@
             
           &.template_project
             background url(images/newtemplate.svg) no-repeat center 10px
+            
+          &.new_project
+          &.template_project
+            transition 300ms all ease-in
+            
+            &:hover
+              opacity 0.7
+            
             
           &.template_video
             width 40%
