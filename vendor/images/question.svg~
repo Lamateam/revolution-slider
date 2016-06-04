@@ -1,0 +1,14 @@
+<svg width="44px" height="44px" viewBox="30 726 44 44" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 3.8.3 (29802) - http://www.bohemiancoding.com/sketch -->
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <circle id="path-1" cx="22" cy="22" r="22"></circle>
+        <mask id="mask-2" maskContentUnits="userSpaceOnUse" maskUnits="objectBoundingBox" x="0" y="0" width="44" height="44" fill="white">
+            <use xlink:href="#path-1"></use>
+        </mask>
+    </defs>
+    <g id="Oval-2-+-?-2" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" transform="translate(30.000000, 726.000000)">
+        <use id="Oval-2" stroke-opacity="0.5" stroke="#FFFFFF" mask="url(#mask-2)" stroke-width="4" xlink:href="#path-1"></use>
+        <path d="M20.6485714,26.0542857 L23.1942857,26.0542857 L23.5085714,23.5085714 C26.9971429,22.9114286 29.8257143,21.12 29.8257143,17.16 C29.8257143,13.1685714 26.8714286,10.7171429 22.4714286,10.7171429 C19.0771429,10.7171429 16.72,12.1314286 14.8971429,14.2057143 L17.2542857,16.72 C18.7628571,15.1171429 20.3971429,14.2371429 22.3771429,14.2371429 C24.64,14.2371429 25.9914286,15.4628571 25.9914286,17.2228571 C25.9914286,19.36 24.1685714,20.6485714 20.1771429,20.8057143 L20.02,20.9628571 L20.6485714,26.0542857 Z M19.7371429,33 L23.9485714,33 L23.9485714,28.6942857 L19.7371429,28.6942857 L19.7371429,33 Z" id="?" fill="#FFFFFF" opacity="0.5"></path>
+    </g>
+</svg>

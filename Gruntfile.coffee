@@ -172,6 +172,12 @@ module.exports = (grunt) ->
       main:
         files: ["src/app/**/*.*"]
         tasks: ["compile-development"]
+      styles:
+        files: ["src/app/**/*.*"]
+        tasks: ["compile-styles-short"]
+      vendor:
+        files: ["vendor/**/*.*"]
+        tasks: ["compile-test"]
     mkdir:
       all:
         options:
@@ -198,6 +204,8 @@ module.exports = (grunt) ->
   grunt.registerTask "compile-release", ["compile-development", "uglify:js", "cssmin"]
   
   grunt.registerTask "compile-test", [ "clean:tmp", "clean:dist", "copy", "compile-scripts", "requirejs:compile_dev", "compile-styles", "mkdir" ]
+
+  grunt.registerTask "compile-styles-short", ["compile-styles", "cssmin", "clean:tmp", "watch:styles"]
 
   grunt.registerTask "start-development", ["compile-development", "shell:start", "watch"]  
   grunt.registerTask "start", ["compile-release", "shell:start"]
