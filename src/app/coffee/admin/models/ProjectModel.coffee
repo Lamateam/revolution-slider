@@ -3,5 +3,5 @@ define "models/ProjectModel", [
 ], (Backbone)->
   ProjectModel = Backbone.Model.extend
     defaults:
-      name: "Новый проект"
+      name: ""
       dim: "4x3"

@@ -1,31 +1,43 @@
-div
+div.home_container_right
   form.pd-submit-behavior
-    h2 Название проекта
-    input(type="text", name="name", value=name)
-    h2 Формат экрана
-    ul
+    span.home_container_right-input_header.margintop_5 Название проекта
+    input.home_container_right-input_text.margintop_5(type="text", name="name", value=name, placeholder="")
+    span.home_container_right-input_header.margintop_20 Формат экрана
+    ul.home_container_right-choose_size.margintop_5
       li
-        label(for="4x3") 4:3
         if dim == "4x3"
           input(type="radio", name="dim", id="4x3", value="4x3", checked="true")
         else
           input(type="radio", name="dim", id="4x3", value="4x3")
+        label.item_1(for="4x3")
+          div
+            span 4:3
       li
-        label(for="3x4") 3:4
         if dim == "3x4"
           input(type="radio", name="dim", id="3x4", value="3x4", checked="true")
         else
           input(type="radio", name="dim", id="3x4", value="3x4")
+        label.item_2(for="3x4") 
+          div
+            span 3:4
+        
       li
-        label(for="16x9") 16:9
         if dim == "16x9"
           input(type="radio", name="dim", id="16x9", value="16x9", checked="true")
         else
           input(type="radio", name="dim", id="16x9", value="16x9")
+        label.item_3(for="16x9") 
+          div
+            span 16:9
+
       li
-        label(for="9x16") 9x16
         if dim == "9x16"
           input(type="radio", name="dim", id="9x16", value="9x16", checked="true")
         else
           input(type="radio", name="dim", id="9x16", value="9x16")
-    input(type="submit", value="Создать проект")
+        label.item_4(for="9x16") 
+          div
+            span 9x16
+
+    input.home_container_right-submit.margintop_140(type="submit", value="Создать проект")
+

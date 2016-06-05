@@ -1,7 +1,5 @@
 @import '../variables.styl'
-
-.home
-  
+.home  
   &_container
     position relative
     margin 0 auto
@@ -14,8 +12,172 @@
     min-height 365px
     overflow hidden
     
+    &_right
+      position relative
+      float left
+      width 445px
+      padding-left 20px
+      
+      &-input_header
+        font-size 16px
+        color color_gray
+        position relative
+        display block
+      
+      &-input_text
+        position relative
+        background transparent
+        width 100%
+        outline none
+        border none
+        display block
+        box-shadow none
+        height 38px
+        font-size 18px
+        border 2px solid #B1B8C0
+        border-radius 4px
+        padding-left 7px
+        padding-right 7px
+        color color_gray
+        
+      &-submit   
+        background #3A7CC8
+        box-shadow inset 0px -2px 0px 0px #2D66A7
+        border-radius 4px
+        font-size 18px
+        color #FFFFFF
+        width 200px
+        height 52px
+        outline none
+        border none
+        position relative
+        margin-left auto
+        margin-right auto
+        display block
+        transition 300ms all ease-in
+        
+        &:hover
+          opacity 0.7
+
+        
+      &-choose_size
+        overflow hidden
+        
+        & li
+          width 22%
+          
+          & + li
+            margin-left 4% 
+          
+          & label
+            width 100%
+            cursor pointer
+            transition 300ms all ease-in
+            
+            &:hover
+              & div
+                border-color #4F5963
+                
+                & span
+                  color white
+                
+            &.item_1
+              & div
+                background url(images/4.3.svg) no-repeat center 15px 
+            
+            &.item_2
+              & div
+                background url(images/3.4.svg) no-repeat center 10px 
+                
+            &.item_3
+              & div
+                background url(images/16.9.svg) no-repeat center 15px 
+                
+            &.item_4
+              & div
+                background url(images/9.16.svg) no-repeat center 10px 
+                
+            &.item_1:hover
+              & div
+                background #4F5963 url(images/4.3active.svg) no-repeat center 15px 
+            
+            &.item_2:hover
+              & div
+                background #4F5963 url(images/3.4active.svg) no-repeat center 10px 
+                
+            &.item_3:hover
+              & div
+                background #4F5963 url(images/16.9active.svg) no-repeat center 15px 
+                
+            &.item_4:hover
+              & div
+                background #4F5963 url(images/9.16active.svg) no-repeat center 10px 
+            
+            & div
+              text-align center
+              width 100%
+              position relative
+              height 78px
+              border 2px solid #B1B8C0
+              border-radius 4px
+              transition 300ms all ease-in
+              
+              & span
+                font-size 13px
+                position absolute
+                bottom 0px
+                width 100%
+                display block
+                color color_gray_opacity
+                transition 300ms all ease-in
+                
+        
+          & input
+            display none
+            
+            &:checked + label
+              & div
+                background #4F5963
+                border-color #4F5963
+                box-shadow inset 0px 1px 3px 0px rgba(0,0,0,0.10)
+                
+                & span
+                  color white
+                  
+              &.item_1
+                & div
+                  background #4F5963 url(images/4.3active.svg) no-repeat center 15px 
+              
+              &.item_2
+                & div
+                  background #4F5963 url(images/3.4active.svg) no-repeat center 10px 
+                  
+              &.item_3
+                & div
+                  background #4F5963 url(images/16.9active.svg) no-repeat center 15px 
+                  
+              &.item_4
+                & div
+                  background #4F5963 url(images/9.16active.svg) no-repeat center 10px 
+                  
+      & form
+        width 100%
+    
     &.padding
       padding 25px
+      
+    &-close
+      position absolute
+      right 12px
+      top 15px
+      width 30px
+      transition 500ms all linear
+      height 30px
+      background url(images/close.svg) no-repeat center 
+      
+      &:hover
+        transform rotate(180deg)
+        opacity 0.7
 
     &_menu
       position relative
