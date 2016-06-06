@@ -32,7 +32,6 @@ define "views/home/NewTemplateProjectView", [
       @collection.add new @collection.model()
       @collection.add new @collection.model()
 
-    onRender: ->
-      console.log "here"
-      @$el.parent().append("<div style='clear: both'></div>").mCustomScrollbar
-        axis: "y"
+    onShow: ->
+      console.log "here", @$el[0].parentNode
+      $(@$el[0].parentNode).mCustomScrollbar()
