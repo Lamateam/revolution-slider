@@ -1,6 +1,5 @@
 @import '../variables.styl'
-#content-home-project
-  height: 410px
+  
 .home  
   &_container
     position relative
@@ -33,6 +32,9 @@
             border-radius 9px
             overflow hidden
             position relative
+            
+            & img
+              max-height 120px
             
             & .add
             & .play
@@ -250,10 +252,13 @@
       padding 25px
       margin-top 140px
       
+      &_right
+        padding-right 7px
+      
     &-close
       position absolute
-      right 12px
-      top 15px
+      right 13px
+      top 8px
       width 30px
       user-select none
       transition 500ms all linear
