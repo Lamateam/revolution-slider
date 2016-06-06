@@ -14,6 +14,7 @@ require.config
     "text": "require_plugins/text"
     "templates": "../html/admin"
     "mCSB": "modules/jquery.mCustomScrollbar"
+    "SweetAlert": "modules/sweetalert"
   shim:
     "libs/api": 
       deps: [ "jquery" ]
@@ -28,6 +29,9 @@ require.config
       exports: "Marionette"
     "mCSB":
       deps: [ "jquery", "modules/jquery.mousewheel" ]
+    "SweetAlert":
+      deps: ["jquery"]
+      
 require [ "marionette", "overwrites/behaviors" ], (Marionette, BehaviorsOverWrite)->
   BehaviorsOverWrite(Marionette)
   require [ "admin/app" ], (App)->

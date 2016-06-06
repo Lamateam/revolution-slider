@@ -4,6 +4,7 @@ define "views/home/NewTemplateProjectView", [
   "templates/home/new_template_project" 
   "templates/home/new_template_project_item" 
   "behaviors/MCustomScrollbar"
+  "SweetAlert"
 ], (Marionette, TemplatesCollection, HomeNewTemplateProjectTemplate, HomeNewTemplateProjectItemTemplate, MCustomScrollbarBehavior)->
   NewBlancProjectItem = Marionette.ItemView.extend
     template: HomeNewTemplateProjectItemTemplate
