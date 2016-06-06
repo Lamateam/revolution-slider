@@ -2,6 +2,7 @@ define "views/home/NewTemplateProjectView", [
   "marionette"
   "collections/TemplatesCollection"
   "templates/home/new_template_project_item" 
+  "mCSB"
 ], (Marionette, TemplatesCollection, HomeNewTemplateProjectItemTemplate)->
   NewBlancProjectItem = Marionette.ItemView.extend
     template: HomeNewTemplateProjectItemTemplate
@@ -30,3 +31,8 @@ define "views/home/NewTemplateProjectView", [
       @collection.add new @collection.model()
       @collection.add new @collection.model()
       @collection.add new @collection.model()
+
+    onRender: ->
+      console.log "here"
+      @$el.parent().append("<div style='clear: both'></div>").mCustomScrollbar
+        axis: "y"

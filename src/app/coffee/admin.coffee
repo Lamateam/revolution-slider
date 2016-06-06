@@ -13,6 +13,7 @@ require.config
     "overwrites": "admin/overwrites"
     "text": "require_plugins/text"
     "templates": "../html/admin"
+    "mCSB": "modules/jquery.mCustomScrollbar"
   shim:
     "libs/api": 
       deps: [ "jquery" ]
@@ -25,6 +26,8 @@ require.config
     "marionette":
       deps: [ "backbone", "modules/backbone.babysitter", "modules/backbone.wreqr" ]
       exports: "Marionette"
+    "mCSB":
+      deps: [ "jquery", "modules/jquery.mousewheel" ]
 
 define "admin", [ "admin/app" ], (App)->
   new App().start()

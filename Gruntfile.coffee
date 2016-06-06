@@ -22,13 +22,12 @@ module.exports = (grunt) ->
         files: [
           {expand: true, cwd: 'vendor/', src: [ '*.js' ], dest: 'tmp/vendor'}
         ]
-      html_tmp:
+      modules_images:
         files: [
-          {expand: true, cwd: 'src/app/html/', src: [ '**/*.html', '**/*.jade' ], dest: 'tmp/html'}
-        ]
-      html_dist:
-        files: [
-          {expand: true, cwd: 'src/app/html/', src: [ '**/*.html', '**/*.jade' ], dest: 'dist/html'}
+          {
+            src: "node_modules/malihu-custom-scrollbar-plugin/mCSB_buttons.png"
+            dest: "dist/images/mCSB_buttons.png"
+          }
         ]        
       modules:
         files: [
@@ -75,7 +74,15 @@ module.exports = (grunt) ->
           {
             src: "node_modules/jade/jade.js"
             dest: "tmp/modules/jade.js"
-          }      
+          }    
+          {
+            src: "node_modules/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.js"
+            dest: "tmp/modules/jquery.mCustomScrollbar.js"
+          }
+          {
+            src: "node_modules/jquery-mousewheel/jquery.mousewheel.js"
+            dest: "tmp/modules/jquery.mousewheel.js"
+          }
         ]
       requirejs: 
         files: [
@@ -119,7 +126,18 @@ module.exports = (grunt) ->
           findNestedDependencies: true
           inlineText: true
           mainConfigFile: './tmp/admin.js'
-          keepBuildDir: true        
+          keepBuildDir: true   
+    "regex-replace":  
+      mCSB:
+        src: [ "./dist/style.css" ]
+        actions: [
+          {
+            name: "mCSB"
+            search: "mCSB_buttons.png"
+            replace: "/static/images/mCSB_buttons.png"
+            flags: "gi"
+          }
+        ]
     concat:
       fileupload:
         src: [
@@ -140,6 +158,7 @@ module.exports = (grunt) ->
           "node_modules/sweetalert/dist/sweetalert.css"
           "node_modules/blueimp-file-upload/css/jquery.fileupload.css"
           "node_modules/blueimp-file-upload/css/jquery.fileupload-ui.css"
+          "node_modules/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.css"
           "tmp/vendor.css"
           "tmp/style.css"
         ]
@@ -196,10 +215,11 @@ module.exports = (grunt) ->
   grunt.loadNpmTasks 'grunt-contrib-requirejs'
   grunt.loadNpmTasks 'grunt-mkdir'
   grunt.loadNpmTasks 'grunt-shell'
+  grunt.loadNpmTasks 'grunt-regex-replace'
 
   # Default task.
   grunt.registerTask "compile-scripts", [ "coffee", "concat:fileupload" ]
-  grunt.registerTask "compile-styles", ["stylus", "concat:vendor_css", "concat:css"]
+  grunt.registerTask "compile-styles", ["stylus", "concat:vendor_css", "concat:css", "regex-replace"]
   grunt.registerTask "compile-development", ["clean:tmp", "clean:dist", "compile-scripts", "compile-styles", "copy", "mkdir", "clean:tmp"]
   grunt.registerTask "compile-release", ["compile-development", "uglify:js", "cssmin"]
   

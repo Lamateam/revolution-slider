@@ -9,3 +9,4 @@ define "admin/router", [
       "home/hello": "home_hello"
       "home/new_blanc_project": "home_new_blanc_project"
       "home/new_template_project": "home_new_template_project"
+      "workspace": "workspace"
