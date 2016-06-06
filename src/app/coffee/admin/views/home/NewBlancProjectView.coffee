@@ -10,10 +10,8 @@ define "views/home/NewBlancProjectView", [
       name: 'input[name="name"]'
       dim: 'input[name="dim"]'
     behaviors:
-      PreventDefaultStopPropagation:
-        submit: 
-          prefix: "Form"
+      PreventDefaultStopPropagation: {}
     initialize: ->
       @model = new ProjectModel()
-    onSubmitForm: ->
+    onSubmit: ->
       console.log @ui

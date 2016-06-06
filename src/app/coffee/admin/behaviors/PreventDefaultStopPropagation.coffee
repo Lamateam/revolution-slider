@@ -16,7 +16,9 @@ define "behaviors/PreventDefaultStopPropagation", [
       e.stopPropagation()
     preventDefaultSubmit: (e)->
       e.preventDefault()
-      Marionette.triggerMethodOn @view, "submit" + (if (@options.submit is undefined) or (@options.submit.prefix is undefined) then "" else @options.submit.prefix), e
+      arr = e.target.className.match /pd-submit-behavior-prefix-([A-Za-z]+)/i
+      prefix = if arr then arr[1] else ""
+      Marionette.triggerMethodOn @view, "submit" + prefix, e
     stopPropagationSubmit: (e)->
       e.stopPropagation()
       
