@@ -3,6 +3,7 @@ define "views/home/NewTemplateProjectView", [
   "collections/TemplatesCollection"
   "templates/home/new_template_project_item" 
   "mCSB"
+  "SweatAlert"
 ], (Marionette, TemplatesCollection, HomeNewTemplateProjectItemTemplate)->
   NewBlancProjectItem = Marionette.ItemView.extend
     template: HomeNewTemplateProjectItemTemplate

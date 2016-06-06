@@ -14,6 +14,7 @@ require.config
     "text": "require_plugins/text"
     "templates": "../html/admin"
     "mCSB": "modules/jquery.mCustomScrollbar"
+    "SweatAlert": "modules/sweetalert"
   shim:
     "libs/api": 
       deps: [ "jquery" ]
@@ -28,6 +29,8 @@ require.config
       exports: "Marionette"
     "mCSB":
       deps: [ "jquery", "modules/jquery.mousewheel" ]
+    "SweatAlert":
+      deps: ["jquery"]
 
 define "admin", [ "admin/app" ], (App)->
   new App().start()
