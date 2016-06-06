@@ -28,6 +28,7 @@ require.config
       exports: "Marionette"
     "mCSB":
       deps: [ "jquery", "modules/jquery.mousewheel" ]
-
-define "admin", [ "admin/app" ], (App)->
-  new App().start()
+require [ "marionette", "overwrites/behaviors" ], (Marionette, BehaviorsOverWrite)->
+  BehaviorsOverWrite(Marionette)
+  require [ "admin/app" ], (App)->
+    window.App = new App().start()

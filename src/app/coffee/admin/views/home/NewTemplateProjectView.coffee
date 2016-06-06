@@ -1,37 +1,41 @@
 define "views/home/NewTemplateProjectView", [ 
   "marionette"
   "collections/TemplatesCollection"
+  "templates/home/new_template_project" 
   "templates/home/new_template_project_item" 
-  "mCSB"
-], (Marionette, TemplatesCollection, HomeNewTemplateProjectItemTemplate)->
+  "behaviors/MCustomScrollbar"
+], (Marionette, TemplatesCollection, HomeNewTemplateProjectTemplate, HomeNewTemplateProjectItemTemplate, MCustomScrollbarBehavior)->
   NewBlancProjectItem = Marionette.ItemView.extend
     template: HomeNewTemplateProjectItemTemplate
     tagName: "li"
     className: "home_container_project"
 
-  NewTemplateProjectView = Marionette.CollectionView.extend
+  NewTemplateProjectView = Marionette.CompositeView.extend
     childView: NewBlancProjectItem
-    tagName: "ul"
-    className: "home_container_right"
+    childViewContainer: "ul"
+    template: HomeNewTemplateProjectTemplate
+    className: "home_container_right mcsb-behavior"
+    behaviors:
+      MCustomScrollbarBehavior: {}
     initialize: ->
       @collection = new TemplatesCollection()
-      @collection.add new @collection.model()
-      @collection.add new @collection.model()
-      @collection.add new @collection.model()
-      @collection.add new @collection.model()
-      @collection.add new @collection.model()
-      @collection.add new @collection.model()
-      @collection.add new @collection.model()
-      @collection.add new @collection.model()
-      @collection.add new @collection.model()
-      @collection.add new @collection.model()
-      @collection.add new @collection.model()
-      @collection.add new @collection.model()
-      @collection.add new @collection.model()
-      @collection.add new @collection.model()
-      @collection.add new @collection.model()
-      @collection.add new @collection.model()
-
     onShow: ->
-      console.log "here", @$el[0].parentNode
-      $(@$el[0].parentNode).mCustomScrollbar()
+      @collection.add new @collection.model()
+      @collection.add new @collection.model()
+      @collection.add new @collection.model()
+      @collection.add new @collection.model()
+      @collection.add new @collection.model()
+      @collection.add new @collection.model()
+      @collection.add new @collection.model()
+      @collection.add new @collection.model()
+      @collection.add new @collection.model()
+      @collection.add new @collection.model()
+      @collection.add new @collection.model()
+      @collection.add new @collection.model()
+      @collection.add new @collection.model()
+      @collection.add new @collection.model()
+      @collection.add new @collection.model()
+      @collection.add new @collection.model()
+    # onAddChild: ->
+    #   console.log "update"
+    #   @$el.mCustomScrollbar("update")
