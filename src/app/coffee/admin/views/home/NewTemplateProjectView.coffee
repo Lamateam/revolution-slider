@@ -17,7 +17,7 @@ define "views/home/NewTemplateProjectView", [
     template: HomeNewTemplateProjectTemplate
     className: "home_container_right mcsb-behavior"
     behaviors:
-      MCustomScrollbarBehavior: {}
+      MCustomScrollbar: {}
     initialize: ->
       @collection = new TemplatesCollection()
     onShow: ->
@@ -37,6 +37,3 @@ define "views/home/NewTemplateProjectView", [
       @collection.add new @collection.model()
       @collection.add new @collection.model()
       @collection.add new @collection.model()
-    # onAddChild: ->
-    #   console.log "update"
-    #   @$el.mCustomScrollbar("update")

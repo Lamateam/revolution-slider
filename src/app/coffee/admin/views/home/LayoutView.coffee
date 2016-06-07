@@ -14,9 +14,9 @@ define "views/home/LayoutView", [
         @showChildView "content", @currentView
     showHello: ->
       @setCurrent HelloView
-    showNewBlancProject: ->
+    showNewBlancProject: (options)->
       @setCurrent LayoutNewProjectView
-      @currentView.showNewBlancProject()
+      @currentView.showNewBlancProject(options)
     showNewTemplateProject: ->
       @setCurrent LayoutNewProjectView
       @currentView.showNewTemplateProject()

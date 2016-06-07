@@ -1,9 +1,8 @@
 define "views/home/NewBlancProjectView", [ 
   "marionette"
-  "models/ProjectModel"
   "behaviors/PreventDefaultStopPropagation"
   "templates/home/new_blanc_project" 
-], (Marionette, ProjectModel, PreventDefaultStopPropagation, HomeNewBlancProjectTemplate)->
+], (Marionette, PreventDefaultStopPropagation, HomeNewBlancProjectTemplate)->
   NewBlancProjectView = Marionette.ItemView.extend
     template: HomeNewBlancProjectTemplate
     ui:
@@ -11,7 +10,10 @@ define "views/home/NewBlancProjectView", [
       dim: 'input[name="dim"]'
     behaviors:
       PreventDefaultStopPropagation: {}
-    initialize: ->
-      @model = new ProjectModel()
+    error: ->
+      alert "error"
     onSubmit: ->
-      console.log @ui
+      res = 
+        name: @ui.name.val()
+        dim: @ui.dim.filter(":checked").val()
+      if res.name.length is 0 then @error() else window.App.trigger "project:create", res

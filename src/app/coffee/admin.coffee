@@ -31,8 +31,9 @@ require.config
       deps: [ "jquery", "modules/jquery.mousewheel" ]
     "SweetAlert":
       deps: ["jquery"]
-      
-require [ "marionette", "overwrites/behaviors" ], (Marionette, BehaviorsOverWrite)->
-  BehaviorsOverWrite(Marionette)
+
+window.Behaviors = {}
+require [ "overwrites/behaviors", "overwrites/controller" ], ->
   require [ "admin/app" ], (App)->
-    window.App = new App().start()
+    window.App = new App()
+    window.App.start()

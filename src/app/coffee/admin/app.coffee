@@ -1,9 +1,9 @@
 define "admin/app", [ 
   "marionette"
-  "admin/router"
-], (Marionette, Router, Layout)->
+], (Marionette)->
   app = Marionette.Application.extend
     onStart: ->
-      new Router()
-      Backbone.history.start()
+      require [ "admin/router" ], (Router)->
+        new Router()
+        Backbone.history.start()
         

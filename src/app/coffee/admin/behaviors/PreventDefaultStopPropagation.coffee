@@ -1,7 +1,6 @@
 define "behaviors/PreventDefaultStopPropagation", [ 
   "marionette"
-  "overwrites/behaviors"
-], (Marionette, BehaviorsOverWrite)->
+], (Marionette)->
   window.Behaviors.PreventDefaultStopPropagation = Marionette.Behavior.extend
     events:
       "click .pd-click-behavior": "preventDefaultClick"
