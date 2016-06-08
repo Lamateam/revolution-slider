@@ -11,7 +11,9 @@ define "controllers/workspace/LayoutController", [
         model: @getOption('projectModel')
     renderCanvas: ->
       c = new ElementsCollection()
-      c.add {type: "fill_rect", color: "#ff0000", x: 10, y: 10, width: 100, height: 100}
+      c.add {type: "rect", props: { style: "fill:rgb(255,0,0)", x: 10, y: 10, width: 100, height: 100 } }
+      c.add {type: "circle", props: { style: "fill:rgb(255,255,0)", cx: 50, cy: 50, r: 100 } }
+
       @getOption('layout').renderCanvas
         collection: c
         width: 500

@@ -5,6 +5,7 @@ require.config
     "backbone": "modules/backbone"
     "marionette": "modules/marionette"
     "jquery": "modules/jquery"
+    "jquery-ui": "modules/jquery-ui"
     "controllers": "admin/controllers"
     "views": "admin/views"
     "models": "admin/models"
@@ -15,6 +16,7 @@ require.config
     "templates": "../html/admin"
     "mCSB": "modules/jquery.mCustomScrollbar"
     "SweetAlert": "modules/sweetalert"
+    "d3": "modules/d3"
   shim:
     "libs/api": 
       deps: [ "jquery" ]
@@ -30,7 +32,9 @@ require.config
     "mCSB":
       deps: [ "jquery", "modules/jquery.mousewheel" ]
     "SweetAlert":
-      deps: ["jquery"]
+      deps: [ "jquery" ]
+    "jquery-ui":
+      deps: [ "jquery" ]
 
 window.Behaviors = {}
 require [ "overwrites/behaviors", "overwrites/controller" ], ->

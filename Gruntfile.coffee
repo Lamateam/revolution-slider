@@ -36,6 +36,10 @@ module.exports = (grunt) ->
             dest: "tmp/modules/jquery.js"            
           }
           {
+            src: "node_modules/jquery-ui/jquery-ui.js"
+            dest: "tmp/modules/jquery-ui.js"            
+          }
+          {
             src: "node_modules/jquery-knob/dist/jquery.knob.min.js"
             dest: "tmp/modules/jquery.knob.js"            
           }
@@ -82,6 +86,10 @@ module.exports = (grunt) ->
           {
             src: "node_modules/jquery-mousewheel/jquery.mousewheel.js"
             dest: "tmp/modules/jquery.mousewheel.js"
+          }
+          {
+            src: "node_modules/d3/d3.js"
+            dest: "tmp/modules/d3.js"
           }
         ]
       requirejs: 
