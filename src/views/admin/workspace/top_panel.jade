@@ -1,6 +1,9 @@
 div.workspace-top_panel-folder
 div.workspace-top_panel-main
-  h2= name
+  if isNameChange()
+    input.bind-name_change(type="text", value=name, autofocus)
+  else
+    h2.bind-name= name
   span= slides.length + " " + getSlidesPostfix(slides.length)
 ul.workspace-top_panel-buttons
   li.workspace-top_panel-buttons-preview.bind-preview

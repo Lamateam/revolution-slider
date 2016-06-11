@@ -16,9 +16,9 @@ define "controllers/commons/LayoutController", [
     home_new_template_project: ->
       @getOption('homeController').renderLayout()
       @getOption('homeController').new_template_project()
-    workspace: (id)->
+    workspace: (id, slide)->
       @getOption('workspaceController').renderLayout()
-      @getOption('workspaceController').openProject id
+      @getOption('workspaceController').openProject id, slide
     initialize: ->
       @options.regionManager = new Marionette.RegionManager
         regions:

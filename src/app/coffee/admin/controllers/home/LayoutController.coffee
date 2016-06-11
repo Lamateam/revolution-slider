@@ -9,10 +9,11 @@ define "controllers/home/LayoutController", [
       @getOption('projectModel').save data,
         wait: true
         success: (model)->
-          Backbone.history.navigate "workspace/" + model.get("id"), {trigger: true}     
+          Backbone.history.navigate "workspace/" + model.get("id") + "/0", {trigger: true}     
     initialize: ->
       @options.projectModel = new ProjectModel()
       @listenTo window.App, "project:create", @onProjectCreate
+      
       Marionette.LayoutController.prototype.initialize.apply @
     hello: ->
       @getOption('layout').showHello()

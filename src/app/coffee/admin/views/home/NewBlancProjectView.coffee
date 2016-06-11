@@ -10,8 +10,6 @@ define "views/home/NewBlancProjectView", [
       dim: 'input[name="dim"]'
     behaviors:
       PreventDefaultStopPropagation: {}
-    error: ->
-      alert "error"
     onSubmit: ->
       res = 
         name: @ui.name.val()

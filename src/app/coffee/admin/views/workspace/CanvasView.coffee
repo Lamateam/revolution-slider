@@ -5,20 +5,29 @@ define "views/workspace/CanvasView", [
 ], (Marionette, CanvasTemplate)->
   CanvasItem = Marionette.ItemView.extend
     tagName: "g"
+    id: ->
+      "element_" + @model.get "id"
     _createElement: (tagName)->
-      @d3_el = d3.select(@options.svg).append tagName
+      @d3_el.remove() if @d3_el isnt undefined
+      @d3_el = d3.select(@options.svg).append(tagName)
       @d3_el.node()
+    _removeElement: ()->
+      @$el.remove()
+      @d3_el.remove() if @d3_el isnt undefined
     _setAttributes: (attributes)->
-      @d3_el.attr key, value for key, value of attributes
+      @d3_el.data attributes
+      @d3_el.attr key, value for own key, value of attributes
     template: ->
       "some stuff"
+    modelEvents:
+      "sync": "render"
     attachElContent: ->
       props  = @model.get("props")
       width  = if props.width then props.width else props.r
       height = if props.height then props.height else props.r
 
-      @options.node = @d3_el.append @model.get("type")
-      @options.node.attr key, value for key, value of props
+      @options.node = @d3_el.append @model.get("type") if @options.node is undefined
+      @options.node.attr key, value for own key, value of props
 
       @initDnD @options.node
       @initEvents @options.node
@@ -28,12 +37,19 @@ define "views/workspace/CanvasView", [
 
         console.log "clicked"
     initDnD: (n)->
-      props  = @model.get("props")
-      t      = @model.get("type")
+      props  = @model.get "props"
+      t      = @model.get "type"
+
       width  = if props.width isnt undefined then props.width else 0
       height = if props.height isnt undefined then props.height else 0
+
       x_val  = if t is "circle" then "cx" else "x"
       y_val  = if t is "circle" then "cy" else "y"
+
+      id     = @model.get "id"
+      old_x  = n.attr x_val
+      old_y  = n.attr y_val
+      console.log id, old_y, old_x
 
       drag = d3.behavior.drag()
 
@@ -59,6 +75,13 @@ define "views/workspace/CanvasView", [
           timeout = null
           n.style "opacity", 1
           dragInitiated = false
+
+          data = 
+            el: id
+            props: {}
+          data.props[x_val] = n.attr(x_val) - old_x
+          data.props[y_val] = n.attr(y_val) - old_y
+          window.App.trigger "element:move", data
 
       n.call drag
 

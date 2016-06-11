@@ -37,7 +37,7 @@ require.config
       deps: [ "jquery" ]
 
 window.Behaviors = {}
-require [ "overwrites/behaviors", "overwrites/controller" ], ->
+require [ "overwrites/behaviors", "overwrites/controller", "overwrites/views" ], ->
   require [ "admin/app" ], (App)->
     window.App = new App()
     window.App.start()

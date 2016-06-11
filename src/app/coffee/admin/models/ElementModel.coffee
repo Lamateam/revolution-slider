@@ -1,8 +1,9 @@
 define "models/ElementModel", [ 
   "backbone"
 ], (Backbone)->
-  ProjectModel = Backbone.Model.extend
+  ElementModel = Backbone.Model.extend
+    urlRoot: ->
+      "/api/project/" + @collection.project_id + "/" + @collection.slide_id
     defaults:
-      x: 0
-      y: 0
+      type: "rect"
       props: []
