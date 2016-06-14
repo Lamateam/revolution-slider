@@ -1,4 +1,38 @@
 div(id="content-top_panel")
 div(id="content-left_panel")
+  div.workspace-left_panel
+    ul.workspace-left_panel-top_list
+
+      //- Добавить класс active, если активый
+  
+      //- Запускает режим объектов  01_02
+
+      li.workspace-left_panel-top_list-add
+        button.bind-add
+
+      //- Запускает список слайдов 01_03_workspace_slides
+      li.workspace-left_panel-top_list-show
+        button.bind-show
+
+      ul.workspace-left_panel-bottom_list
+        li.workspace-left_panel-bottom_list-mod
+
+          //-Не трогать label - он всегда должен идти после инпута
+          input.bind-drag(id="bind-drag", type="radio", name="cursor_mod", value="drag", checked="checked")
+          label.workspace-left_panel-bottom_list-mod_drag(for="bind-drag")
+
+          input.bind-click(id="bind-click",type="radio", name="cursor_mod",value="click")
+          label.workspace-left_panel-bottom_list-mod_click(for="bind-click")
+
+        //-Я так и не понял, куда ведет помощь
+
+        li.workspace-left_panel-bottom_list-help
+          button.bind-help
+
+        //- Вызов таймлайна
+
+        li.workspace-left_panel-bottom_list-timeline
+          button.bind-timeline
+
 div(id="content-right_panel")
 div(id="content-canvas")

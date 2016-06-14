@@ -76,3 +76,115 @@
           
       &-preview
         background url(images/header/eye.svg) no-repeat center
+        
+  &-left_panel
+    background-image linear-gradient(-90deg, #303C45 52%, #36414A 100%)
+    box-shadow 2px 0px 14px 0px rgba(0,0,0,0.20)
+    width 70px
+    left 0px
+    top 60px
+    bottom 0px
+    position fixed 
+    overflow hidden 
+    
+    &-top_list
+    &-bottom_list
+      float left
+      width 100%
+      padding-left 0px
+      margin-bottom 0px
+      
+      &-add
+        background url(images/leftpart/add.svg) no-repeat center  
+        
+        &.active
+        &:hover
+        &:active
+          background url(images/leftpart/add_active.svg) no-repeat center  
+            
+      &-show
+        background url(images/leftpart/slydes.svg) no-repeat center 
+        
+        &.active
+        &:hover
+        &:active
+          background url(images/leftpart/slydes_active.svg) no-repeat center  
+      
+      & li
+        width 70px
+        height 70px
+        transition 200ms all ease-in
+        box-shadow inset 0px -1px 0px 0px #283037
+        
+        &:first-child
+          box-shadow inset 0px 1px 0px 0px #1B2329, inset 0px -1px 0px 0px #283037
+        
+        button
+          width 100%
+          height 100%
+          
+        &.active
+        &:hover
+          background-color #29333A
+          box-shadow 1px 0px 0px 0px #1A2329, inset 0px 1px 0px 0px #1A2329, inset 0px 1px 20px 0px #18242C, inset 0px 1px 0px 0px #283037
+
+    &-bottom_list
+      position absolute
+      bottom 0px
+      
+      &:first-child
+        box-shadow inset 0px 1px 0px 0px #1B2329, inset 0px -1px 0px 0px #283037
+        
+      &-mod
+        height 35px!important
+        box-shadow none!important
+        
+        label
+          height 100%
+          width 50%
+          cursor pointer
+          box-shadow inset 0px 1px 0px 0px #1B2329, inset 0px -1px 0px 0px #283037
+        
+        &.active
+        &:hover
+        &:active
+          background-color transparent!important
+          box-shadow none
+        
+        & input
+          visibility hidden
+          width 50%
+          height 100%
+          position absolute
+        
+          &:checked + label
+          .workspace-left_panel-bottom_list-mod label:hover
+          .workspace-left_panel-bottom_list-mod label:active
+            background-color #29333A
+            box-shadow 1px 0px 0px 0px #1A2329, inset 0px 1px 0px 0px #1A2329, inset 0px 1px 20px 0px #18242C, inset 0px 1px 0px 0px #283037
+        
+        &_drag
+          background url(images/leftpart/hand_active.svg) no-repeat center 
+          
+        &_click 
+          background url(images/leftpart/cursor.svg) no-repeat center 
+
+
+      &-timeline
+        background url(images/leftpart/timeline.svg) no-repeat center 
+        
+        &.active
+        &:hover
+        &:active
+          background url(images/leftpart/timeline.svg) no-repeat center 
+      
+      &-help
+        background url(images/leftpart/question.svg) no-repeat center 
+        
+        &.active
+        &:hover
+        &:active
+          background url(images/leftpart/question.svg) no-repeat center 
+          
+
+        

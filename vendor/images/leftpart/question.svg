@@ -1,0 +1,15 @@
+
+<svg width="28px" height="28px" viewBox="21 21 28 28" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 3.8.3 (29802) - http://www.bohemiancoding.com/sketch -->
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <circle id="path-1" cx="14" cy="14" r="14"></circle>
+        <mask id="mask-2" maskContentUnits="userSpaceOnUse" maskUnits="objectBoundingBox" x="0" y="0" width="28" height="28" fill="white">
+            <use xlink:href="#path-1"></use>
+        </mask>
+    </defs>
+    <g id="Oval-2-+-?" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" transform="translate(21.000000, 21.000000)">
+        <use id="Oval-2" stroke-opacity="0.5" stroke="#FFFFFF" mask="url(#mask-2)" stroke-width="4" xlink:href="#path-1"></use>
+        <path d="M13.14,16.58 L14.76,16.58 L14.96,14.96 C17.18,14.58 18.98,13.44 18.98,10.92 C18.98,8.38 17.1,6.82 14.3,6.82 C12.14,6.82 10.64,7.72 9.48,9.04 L10.98,10.64 C11.94,9.62 12.98,9.06 14.24,9.06 C15.68,9.06 16.54,9.84 16.54,10.96 C16.54,12.32 15.38,13.14 12.84,13.24 L12.74,13.34 L13.14,16.58 Z M12.56,21 L15.24,21 L15.24,18.26 L12.56,18.26 L12.56,21 Z" id="?" fill="#FFFFFF" opacity="0.5"></path>
+    </g>
+</svg>

@@ -1,0 +1,19 @@
+
+<svg width="34px" height="26px" viewBox="18 21 34 26" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 3.8.3 (29802) - http://www.bohemiancoding.com/sketch -->
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <path d="M8,20 L3.00793008,20 C1.34312337,20 0,18.6594501 0,17.0057979 L0,2.99420208 C0,1.34331197 1.34669617,0 3.00793008,0 L22.9920699,0 C24.6568766,0 26,1.34054993 26,2.99420208 L26,6 L30.9920699,6 C32.6568766,6 34,7.34054993 34,8.99420208 L34,23.0057979 C34,24.656688 32.6533038,26 30.9920699,26 L11.0079301,26 C9.34312337,26 8,24.6594501 8,23.0057979 L8,20 Z" id="path-1"></path>
+        <mask id="mask-2" maskContentUnits="userSpaceOnUse" maskUnits="objectBoundingBox" x="0" y="0" width="34" height="26" fill="white">
+            <use xlink:href="#path-1"></use>
+        </mask>
+        <rect id="path-3" x="8" y="6" width="26" height="20" rx="3"></rect>
+        <mask id="mask-4" maskContentUnits="userSpaceOnUse" maskUnits="objectBoundingBox" x="0" y="0" width="26" height="20" fill="white">
+            <use xlink:href="#path-3"></use>
+        </mask>
+    </defs>
+    <g id="Rectangle-19-+-Rectangle-20" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" transform="translate(18.000000, 21.000000)">
+        <use id="Rectangle-19" stroke="#FFFFFF" mask="url(#mask-2)" stroke-width="4" xlink:href="#path-1"></use>
+        <use id="Rectangle-20" stroke="#FFFFFF" mask="url(#mask-4)" stroke-width="4" xlink:href="#path-3"></use>
+    </g>
+</svg>
