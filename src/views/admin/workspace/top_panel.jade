@@ -1,13 +1,34 @@
-div.workspace-top_panel-folder
-div.workspace-top_panel-main
-  if isNameChange()
-    input.bind-name_change(type="text", value=name, autofocus)
-  else
-    h2.bind-name= name
-  span= slides.length + " " + getSlidesPostfix(slides.length)
-ul.workspace-top_panel-buttons
-  li.workspace-top_panel-buttons-preview.bind-preview
-  li.workspace-top_panel-buttons-saved.bind-status
-  li.workspace-top_panel-buttons-undo.bind-undo
-  li.workspace-top_panel-buttons-redo.bind-redo
-  li.workspace-top_panel-buttons-download.bind-download
+header
+  //- меню слайдов - пока не понятно, что оно вызывает
+  div.workspace-top_panel-folder 
+
+  div.workspace-top_panel-main
+
+    //- нажатие этой кнопки приводит к появлению project_1.png в правом меню
+    button.workspace-top_panel-name.bind-name_change Coca-Cola New Year P:
+
+    span= slides.length + " " + getSlidesPostfix(slides.length)
+
+
+  ul.workspace-top_panel-buttons
+
+    //- Запускает привив - 04_01_preview.jpg
+    li.workspace-top_panel-buttons-preview
+      button.bind-preview
+
+    //- Как я понял, при любом изменении должна идти сохранение
+    //- следовательно еще 2 статуса - сохраняется и не сохранено
+    li.workspace-top_panel-buttons-saved
+      button.bind-status сохранено
+
+
+    li.workspace-top_panel-buttons-undo
+      button.bind-undo
+
+
+    li.workspace-top_panel-buttons-redo
+      button.bind-redo
+
+    //- Загружает фаил
+    li.workspace-top_panel-buttons-download
+      button.bind-download

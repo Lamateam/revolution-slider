@@ -1,0 +1,10 @@
+
+<svg width="28px" height="16px" viewBox="16 22 28 16" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 3.8.3 (29802) - http://www.bohemiancoding.com/sketch -->
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Shape-3-+-Oval-3" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" transform="translate(16.000000, 22.000000)">
+        <path d="M14,16 C6.52371429,16 0.664571429,8.82624325 0.418571429,8.52060933 L0,8.00012896 L0.418571429,7.47939067 C0.664571429,7.17375675 6.52371429,0 14,0 C21.476,0 27.3354286,7.17375675 27.5811429,7.47939067 L28,8.00012896 L27.5811429,8.52086725 C27.3354286,8.82624325 21.476,16 14,16 Z M14,13 C16.7614237,13 19,10.7614237 19,8 C19,5.23857625 16.7614237,3 14,3 C11.2385763,3 9,5.23857625 9,8 C9,10.7614237 11.2385763,13 14,13 Z" id="Shape-3" fill="#91969A"></path>
+        <circle id="Oval-4" fill-opacity="0.5" fill="#FFFFFF" cx="14" cy="8" r="3"></circle>
+    </g>
+</svg>
