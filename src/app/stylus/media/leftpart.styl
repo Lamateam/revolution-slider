@@ -1,0 +1,23 @@
+@media (max-height: 730px)
+
+  .workspace
+    &-left_panel
+      &-top_list
+        &-add_list
+          max-width 200px
+          
+          
+          & ul
+            & li
+              &:not(.workspace-left_panel-top_list-add_list_header)
+                height 100px!important
+              
+              &.workspace-left_panel-top_list-add_list_header
+                h2
+                  font-size 12px
+                
+      & li
+        &.active
+        &:hover
+          & ul
+            width 200px
