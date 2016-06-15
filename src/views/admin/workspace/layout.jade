@@ -14,28 +14,28 @@ div(id="content-left_panel")
             ul
               li.workspace-left_panel-top_list-add_list_header
                 h2 Объекты
-              li.workspace-left_panel-top_list-add_list_text 
+              li.workspace-left_panel-top_list-add_list_text.bind-text-btn
                 button Текст
-              li.workspace-left_panel-top_list-add_list_paragraph
+              li.workspace-left_panel-top_list-add_list_paragraph.bind-paragraph-btn
                 button Параграф
-              li.workspace-left_panel-top_list-add_list_graph
+              li.workspace-left_panel-top_list-add_list_graph.bind-graph-btn
                 button Графика
-              li.workspace-left_panel-top_list-add_list_graph
+              li.workspace-left_panel-top_list-add_list_video.bind-video-btn
                 button Видео
-              li.workspace-left_panel-top_list-add_list_figures
+              li.workspace-left_panel-top_list-add_list_figures.bind-figures-btn
                 button Фигура
               li
           li
             ul 
               li.workspace-left_panel-top_list-add_list_header
                 h2 Виджеты
-              li.workspace-left_panel-top_list-add_list_news
+              li.workspace-left_panel-top_list-add_list_news.bind-news-btn
                 button Новости
-              li.workspace-left_panel-top_list-add_list_time
+              li.workspace-left_panel-top_list-add_list_time.bind-time-btn
                 button Время
-              li.workspace-left_panel-top_list-add_list_weather
+              li.workspace-left_panel-top_list-add_list_weather.bind-weather-btn
                 button Погода
-              li.workspace-left_panel-top_list-add_list_date
+              li.workspace-left_panel-top_list-add_list_date.bind-date-btn
                 button Дата
 
       //- Запускает список слайдов 01_03_workspace_slides
@@ -63,16 +63,6 @@ div(id="content-left_panel")
         button.bind-timeline
 
 div(id="content-right_panel")
-  div.workspace-right_panel
-    //- Вариант для слайдов
-    .workspace-right_panel-slydes
-      .workspace-right_panel-header
-        h2 Слайд
-        //- Настройки чего - я так и не понял
-        buttom.workspace-right_panel-settings
-      .workspace-right_panel-container
-
-
 
 div(id="content-canvas")
 

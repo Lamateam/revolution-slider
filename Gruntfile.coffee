@@ -40,6 +40,10 @@ module.exports = (grunt) ->
             dest: "tmp/modules/jquery-ui.js"            
           }
           {
+            src: "vendor/jscolor.js"
+            dest: "tmp/modules/jscolor.js"
+          }
+          {
             src: "node_modules/jquery-knob/dist/jquery.knob.min.js"
             dest: "tmp/modules/jquery.knob.js"            
           }
