@@ -27,10 +27,15 @@ define "views/workspace/TopPanelView", [
       val = @ui.name_change.val()
       if val.length is 0 then @error() else window.App.trigger "project:update", {name: val}
     templateHelpers: ->
+      stateModel        = @getOption 'stateModel'
+      historyCollection = @getOption 'historyCollection'
       res = 
-        isNameChange: =>
-          console.log "here render"
-          @getOption('stateModel').get "isNameChange"
+        isNameChange: ->
+          stateModel.get "isNameChange"
+        canUndo: ->
+          historyCollection.canUndo()
+        canRedo: ->
+          historyCollection.canRedo()
         getSlidesPostfix: (count)->
           res = switch
             when count is 1 then "слайд"
@@ -38,4 +43,5 @@ define "views/workspace/TopPanelView", [
             when true then "слайдов"
     initialize: (opt)->
       @listenTo opt.stateModel, "change", @render
+      @listenTo opt.historyCollection, "action_change", @render
       

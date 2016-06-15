@@ -3,15 +3,13 @@
     h1
       //- Номер слайда
       //- к нему "." прибавь
-      span.workspace-center_panel-settings-number 2.
+      span.workspace-center_panel-settings-number= id+1 + '.'
 
       //- Название слайда
-      span.workspace-center_panel-settings-name What’s new
+      span.workspace-center_panel-settings-name= name
 
     //- Вызов настроек слайда (текущее справа)
     button.workspace-center_panel-settings-setting
-
-  //-svg(width=width, height=height)
 
   //- По нему
   //- В дизайне в варианте 16:9 - тут просто width 100%
