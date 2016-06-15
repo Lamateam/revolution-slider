@@ -66,7 +66,7 @@ define "controllers/workspace/LayoutController", [
             data = {}
             data[key] = -value for own key, value of options
             @moveElement el, data
-          when "resize" then @resizeElement el, options.previous
+          when "resize", "change" then @changeElement el, options.previous
           when "change_slide" then @changeSlide options.previous
 
     onWorkspaceRedo: ->
@@ -79,7 +79,7 @@ define "controllers/workspace/LayoutController", [
 
         switch action
           when "move" then @moveElement el, options
-          when "resize" then @resizeElement el, options.current
+          when "resize", "change" then @changeElement el, options.current
           when "change_slide" then @changeSlide options.current
     onWorkspaceDownload: ->
 
@@ -96,7 +96,7 @@ define "controllers/workspace/LayoutController", [
       props = model.get 'props'
       props[key] = props[key] + value for key, value of data
       model.save { props: props }, { wait: true, patch: true }
-    resizeElement: (el, data)->
+    changeElement: (el, data)->
       model = @getOption('elementsCollection').findWhere { id: el }
       props = model.get 'props'
       props[key] = value for key, value of data
@@ -114,13 +114,12 @@ define "controllers/workspace/LayoutController", [
     onElementResize: (data)->
       model = @getOption('elementsCollection').findWhere { id: data.el }
       @getOption('historyCollection').addAction { action: "resize", el: data.el, options: {current: data.props, previous: _.clone(model.get('props')) } }
-      @resizeElement data.el, data.props
+      @changeElement data.el, data.props
     onElementChange: (data)->
       console.log data
-      model = @getOption('elementsCollection').findWhere { id: data.id }
-      delete data.id
-      @getOption('historyCollection').addAction { action: "resize", el: model.get('id'), options: {current: data, previous: _.clone(model.get('props')) } }
-      @resizeElement data.id, data.props      
+      model = @getOption('elementsCollection').findWhere { id: data.el }
+      @getOption('historyCollection').addAction { action: "change", el: data.el, options: {current: data.props, previous: _.clone(model.get('props')) } }
+      @changeElement data.el, data.props      
     onSlideChange: (data)->
       console.log data
       @getOption('historyCollection').addAction { action: "change_slide", options: {current: data, previous: @getOption('slideModel').toJSON() } }

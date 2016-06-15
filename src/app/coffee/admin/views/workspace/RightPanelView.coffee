@@ -27,7 +27,7 @@ define "views/workspace/RightPanelView", [
       'blur [name="bind-element_height"]': 'onElementChange'
       'blur [name="bind-element_r"]': 'onElementChange'
     modelEvents:
-      'change': 'render'
+      'sync': 'render'
     template: WorkspaceRightPanelTemplate
     onShow: ->
       console.log "show right panel"
@@ -37,14 +37,12 @@ define "views/workspace/RightPanelView", [
       @initPicker()
     initPicker: ->
       onFillChange = @onFillChange.bind @
-      new jscolor @ui.element_fill[0], { 
-        onFineChange: ->
-          onFillChange @
-      } if @ui.element_fill.length isnt 0      
+      picker       = new jscolor @ui.element_fill[0] if @ui.element_fill.length isnt 0      
+      @ui.element_fill.on 'blur', _.once ->
+        onFillChange picker
     onFillChange: (picker)->
-      console.log picker.toRGBString()
       data = { el: @model.get('id'), props: { fill: picker.toRGBString() } }
-      window.App.trigger "element:resize", data
+      window.App.trigger "element:change", data
     templateHelpers: ->
       res = 
         type: @getOption 'type'
@@ -64,7 +62,7 @@ define "views/workspace/RightPanelView", [
     onElementChange: ->
       data = { el: @model.get('id'), props: {} }
       data.props = if @model.get('type') is 'circle' then { cx: @ui.element_cx.val(), cy: @ui.element_cy.val(), r: @ui.element_r.val() } else { x: @ui.element_x.val(), y: @ui.element_y.val(), width: @ui.element_width.val(), height: @ui.element_height.val() }
-      window.App.trigger "element:resize", data
+      window.App.trigger "element:change", data
     onSlideChange: ->
       window.App.trigger "slide:change", { id: @model.get('id'), name: @ui.slide_name.val(), duration: @ui.slide_duration.val() }
       
