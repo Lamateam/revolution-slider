@@ -10,40 +10,52 @@ div(id="content-left_panel")
       li.workspace-left_panel-top_list-add
         button.bind-add
         ul.workspace-left_panel-top_list-add_list
-          li.workspace-left_panel-top_list-add_list_header Объекты
-          li.workspace-left_panel-top_list-add_list_text Текст
-          li.workspace-left_panel-top_list-add_list_paragraph Параграф
-          li.workspace-left_panel-top_list-add_list_graph Графика
-          li.workspace-left_panel-top_list-add_list_figures Фигура
-          li.workspace-left_panel-top_list-add_list_header Виджеты
-          li.workspace-left_panel-top_list-add_list_news Новости
-          li.workspace-left_panel-top_list-add_list_time Время
-          li.workspace-left_panel-top_list-add_list_weather Погода
-          li.workspace-left_panel-top_list-add_list_date Дата
+          li
+            ul.workspace-left_panel-top_list-add_list
+              li.workspace-left_panel-top_list-add_list_header Объекты
+              li.workspace-left_panel-top_list-add_list_text 
+                button Текст
+              li.workspace-left_panel-top_list-add_list_paragraph
+                button Параграф
+              li.workspace-left_panel-top_list-add_list_graph
+                button Графика
+              li.workspace-left_panel-top_list-add_list_figures
+                button Фигура
+          li
+            ul 
+              li.workspace-left_panel-top_list-add_list_header Виджеты
+              li.workspace-left_panel-top_list-add_list_news
+                button Новости
+              li.workspace-left_panel-top_list-add_list_time
+                button Время
+              li.workspace-left_panel-top_list-add_list_weather
+                button Погода
+              li.workspace-left_panel-top_list-add_list_date
+                button Дата
 
       //- Запускает список слайдов 01_03_workspace_slides
       li.workspace-left_panel-top_list-show
         button.bind-show
 
-      ul.workspace-left_panel-bottom_list
-        li.workspace-left_panel-bottom_list-mod
+    ul.workspace-left_panel-bottom_list
+      li.workspace-left_panel-bottom_list-mod
 
-          //-Не трогать label - он всегда должен идти после инпута
-          input.bind-drag(id="bind-drag", type="radio", name="cursor_mod", value="drag", checked="checked")
-          label.workspace-left_panel-bottom_list-mod_drag(for="bind-drag")
+        //-Не трогать label - он всегда должен идти после инпута
+        input.bind-drag(id="bind-drag", type="radio", name="cursor_mod", value="drag", checked="checked")
+        label.workspace-left_panel-bottom_list-mod_drag(for="bind-drag")
 
-          input.bind-click(id="bind-click",type="radio", name="cursor_mod",value="click")
-          label.workspace-left_panel-bottom_list-mod_click(for="bind-click")
+        input.bind-click(id="bind-click",type="radio", name="cursor_mod",value="click")
+        label.workspace-left_panel-bottom_list-mod_click(for="bind-click")
 
-        //-Я так и не понял, куда ведет помощь
+      //-Я так и не понял, куда ведет помощь
 
-        li.workspace-left_panel-bottom_list-help
-          button.bind-help
+      li.workspace-left_panel-bottom_list-help
+        button.bind-help
 
-        //- Вызов таймлайна
+      //- Вызов таймлайна
 
-        li.workspace-left_panel-bottom_list-timeline
-          button.bind-timeline
+      li.workspace-left_panel-bottom_list-timeline
+        button.bind-timeline
 
 div(id="content-right_panel")
   div.workspace-right_panel

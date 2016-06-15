@@ -84,14 +84,29 @@
     top 60px
     bottom 0px
     position fixed 
-    overflow hidden 
     
+    &-top_list
+      top 0px
+      height 100%
+      
     &-top_list
     &-bottom_list
       float left
-      width 100%
+      width 100%      
+      position absolute
+      left 0px
+
       padding-left 0px
       margin-bottom 0px
+      
+      &-add_list
+        z-index 15
+        position absolute
+        top 0px
+        width 240px
+        left 2px
+        background-image: linear-gradient(-90deg,#303c45 52%,#36414a 100%);
+        box-shadow: 2px 0 14px 0 rgba(0,0,0,0.2);
       
       &-add
         background url(images/leftpart/add.svg) no-repeat center  
@@ -130,6 +145,7 @@
     &-bottom_list
       position absolute
       bottom 0px
+      top 
       
       &:first-child
         box-shadow inset 0px 1px 0px 0px #1B2329, inset 0px -1px 0px 0px #283037
