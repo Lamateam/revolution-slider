@@ -1,0 +1,15 @@
+
+<svg width="40px" height="40px" viewBox="40 30 40 40" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 3.8.3 (29802) - http://www.bohemiancoding.com/sketch -->
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <rect id="path-1" x="0" y="0" width="40" height="40" rx="20"></rect>
+        <mask id="mask-2" maskContentUnits="userSpaceOnUse" maskUnits="objectBoundingBox" x="0" y="0" width="40" height="40" fill="white">
+            <use xlink:href="#path-1"></use>
+        </mask>
+    </defs>
+    <g id="Rectangle-29-+-What’s-new-4" opacity="0.700000048" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" transform="translate(40.000000, 30.000000)">
+        <use id="Rectangle-29" stroke="#FFFFFF" mask="url(#mask-2)" stroke-width="6" fill-opacity="0" fill="#4F5963" opacity="0.5" xlink:href="#path-1"></use>
+        <path d="M20.2424726,22.8438937 C20.1972373,22.7851204 20.1558198,22.7222278 20.118766,22.6553809 L15.2622005,13.8939048 C14.8604286,13.1690891 15.1265916,12.2640298 15.8511503,11.8624003 C16.5807605,11.4579708 17.4867689,11.7191364 17.8860596,12.4394759 L22.4540212,20.6802967 L29.5814878,20.6802967 C30.4163857,20.6802967 31.0879263,21.3518696 31.0879263,22.1802967 C31.0879263,23.0144995 30.4134708,23.6802967 29.5814878,23.6802967 L21.5943648,23.6802967 C20.9995821,23.6802967 20.4877059,23.3394626 20.2424726,22.8438937 Z" id="Rectangle-95" fill-opacity="0.300000012" fill="#FFFFFF" transform="translate(23.081363, 17.676076) rotate(30.000000) translate(-23.081363, -17.676076) "></path>
+    </g>
+</svg>

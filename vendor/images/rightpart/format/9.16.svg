@@ -1,0 +1,12 @@
+
+<svg width="22px" height="38px" viewBox="49 10 22 38" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 3.8.3 (29802) - http://www.bohemiancoding.com/sketch -->
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <rect id="path-1" x="49" y="10" width="22" height="38" rx="3"></rect>
+        <mask id="mask-2" maskContentUnits="userSpaceOnUse" maskUnits="objectBoundingBox" x="0" y="0" width="22" height="38" fill="white">
+            <use xlink:href="#path-1"></use>
+        </mask>
+    </defs>
+    <use id="Rectangle-93" stroke="#CDCDCD" mask="url(#mask-2)" stroke-width="4" fill="none" opacity="0.300000012" xlink:href="#path-1"></use>
+</svg>

@@ -1,0 +1,15 @@
+
+<svg width="19px" height="15px" viewBox="10 8 19 15" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 3.8.3 (29802) - http://www.bohemiancoding.com/sketch -->
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <path d="M15.2608696,5.03225806 C15.1742606,2.52038568 13.2278259,0.419354839 10.9565217,0.419354839 C8.96278246,0.419354839 7.37739118,1.68733484 6.65217391,3.35483871 C6.34921729,2.98310824 5.76486947,2.6728738 5.08695652,2.51612903 C3.87199994,2.6728738 2.86956517,3.75456289 2.73913043,5.03225806 C2.86956517,5.24864596 2.88486952,5.40188525 2.73913043,5.4516129 C1.26260867,5.84507731 0,7.38122607 0,9.22580645 C0,11.3203772 1.55686954,13 3.52173913,13 L14.4782609,13 C16.4431302,13 17.9999997,11.3203772 18,9.22580645 C18.0006954,7.40451243 16.7721736,5.88038244 15.2608696,5.4516129 C15.1686954,5.4116505 15.1742606,5.26291825 15.2608696,5.03225806 Z" id="path-1"></path>
+        <mask id="mask-2" maskContentUnits="userSpaceOnUse" maskUnits="objectBoundingBox" x="0" y="0" width="18.0000003" height="12.5806452" fill="white">
+            <use xlink:href="#path-1"></use>
+        </mask>
+    </defs>
+    <g id="Oval-42-+-Cloud-2" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" transform="translate(10.000000, 9.000000)" stroke-opacity="0.5">
+        <ellipse id="Oval-42" stroke="#FFFFFF" fill="#3B474F" cx="4.5" cy="3.56451613" rx="3.32608696" ry="3.56451613"></ellipse>
+        <use id="Cloud-2" stroke="#FFFFFF" mask="url(#mask-2)" stroke-width="2" fill="#3B474F" xlink:href="#path-1"></use>
+    </g>
+</svg>

@@ -1,0 +1,23 @@
+
+<svg width="17px" height="14px" viewBox="9 8 17 14" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 3.8.3 (29802) - http://www.bohemiancoding.com/sketch -->
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <rect id="path-1" x="0" y="0" width="17" height="14" rx="2"></rect>
+        <mask id="mask-2" maskContentUnits="userSpaceOnUse" maskUnits="objectBoundingBox" x="0" y="0" width="17" height="14" fill="white">
+            <use xlink:href="#path-1"></use>
+        </mask>
+        <mask id="mask-4" maskContentUnits="userSpaceOnUse" maskUnits="objectBoundingBox" x="0" y="0" width="17" height="14" fill="white">
+            <use xlink:href="#path-1"></use>
+        </mask>
+    </defs>
+    <g id="Rectangle-19-+-Rectangle-23" opacity="0.5" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" transform="translate(9.000000, 8.000000)">
+        <mask id="mask-3" fill="white">
+            <use xlink:href="#path-1"></use>
+        </mask>
+        <g id="Rectangle-19" stroke="#FFFFFF" mask="url(#mask-2)" stroke-width="2">
+            <use mask="url(#mask-4)" xlink:href="#path-1"></use>
+        </g>
+        <path d="M9.46714341,4.41959929 C9.19585959,3.93404566 8.73794889,3.91314712 8.43891058,4.38147303 L5.70841941,8.65771367 C5.41182592,9.12221074 5.61762386,9.49876002 6.16327666,9.49876002 L11.3130356,9.49876002 C11.8608399,9.49876002 12.0864991,9.10781712 11.8137201,8.61958741 L9.46714341,4.41959929 Z" id="Rectangle-201" fill="#FFFFFF" mask="url(#mask-3)" transform="translate(8.751085, 6.770625) rotate(-270.000000) translate(-8.751085, -6.770625) "></path>
+    </g>
+</svg>
