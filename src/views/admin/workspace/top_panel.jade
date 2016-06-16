@@ -6,7 +6,10 @@ header
 
     //- нажатие этой кнопки приводит к появлению project_1.png в правом меню
     //-Название слайда
-    button.workspace-top_panel-name.bind-name_change Coca-Cola New Year P:
+    if isNameChange()
+      input.bind-name_change(value=name, autofocus)
+    else
+      button.workspace-top_panel-name.bind-name= name
 
     span= slides.length + " " + getSlidesPostfix(slides.length)
 
@@ -23,12 +26,19 @@ header
       button.bind-status сохранено
 
 
-    li.workspace-top_panel-buttons-undo
-      button.bind-undo
+    if canUndo()
+      li.workspace-top_panel-buttons-undo
+        button.bind-undo
+    else
+      li.workspace-top_panel-buttons-undo(style="opacity:0")
+        button.bind-undo
 
-
-    li.workspace-top_panel-buttons-redo
-      button.bind-redo
+    if canRedo()
+      li.workspace-top_panel-buttons-redo
+        button.bind-redo
+    else
+      li.workspace-top_panel-buttons-redo(style="opacity:0")
+        button.bind-redo
 
     //- Загружает фаил
     li.workspace-top_panel-buttons-download

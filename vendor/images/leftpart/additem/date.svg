@@ -1,0 +1,15 @@
+
+<svg width="40px" height="35px" viewBox="39 32 40 35" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 3.8.3 (29802) - http://www.bohemiancoding.com/sketch -->
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Rectangle-198-+-Rectangle-200" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" transform="translate(39.000000, 32.000000)">
+        <g id="Rectangle-198-+-Rectangle-199" transform="translate(0.000000, 3.000000)" fill="#636F75">
+            <rect id="Rectangle-198" x="0" y="0" width="40" height="32" rx="3"></rect>
+        </g>
+        <path d="M30,5 L10,5 L10,1.99810135 C10,0.894580447 9.11227036,0 8,0 C6.8954305,0 6,0.886706352 6,1.99810135 L6,5 L3.99970728,5 C2.89529944,5 2,5.88772964 2,7 C2,8.1045695 2.88989258,9 3.99970728,9 L36.0002927,9 C37.1047006,9 38,8.11227036 38,7 C38,5.8954305 37.1101074,5 36.0002927,5 L34,5 L34,1.99810135 C34,0.894580447 33.1122704,0 32,0 C30.8954305,0 30,0.886706352 30,1.99810135 L30,5 Z" id="Rectangle-220" fill="#7B888D"></path>
+        <text id="21" opacity="0.400000006" font-family="GothamPro-Bold, Gotham Pro" font-size="18" font-weight="bold" fill="#FFFFFF">
+            <tspan x="11" y="27">21</tspan>
+        </text>
+    </g>
+</svg>

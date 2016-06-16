@@ -1,0 +1,12 @@
+
+<svg width="30px" height="20px" viewBox="110 14 30 20" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 3.8.3 (29802) - http://www.bohemiancoding.com/sketch -->
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <path d="M135.434782,21.3333333 C135.290434,17.3401003 132.046376,14 128.260869,14 C124.937971,14 122.295652,16.0157631 121.086956,18.6666667 C120.582029,18.0757105 119.608116,17.5825173 118.478261,17.3333333 C116.453333,17.5825173 114.782609,19.3021256 114.565217,21.3333333 C114.782609,21.6773346 114.808116,21.9209458 114.565217,22 C112.104348,22.6255075 110,25.0675902 110,28 C110,31.3298304 112.594783,34 115.869565,34 L134.130434,34 C137.405216,34 139.999999,31.3298304 140,28 C140.001158,25.1046095 137.953622,22.6816336 135.434782,22 C135.281159,21.93647 135.290434,21.7000239 135.434782,21.3333333 Z" id="path-1"></path>
+        <mask id="mask-2" maskContentUnits="userSpaceOnUse" maskUnits="objectBoundingBox" x="0" y="0" width="30" height="20" fill="white">
+            <use xlink:href="#path-1"></use>
+        </mask>
+    </defs>
+    <use id="Cloud-4" stroke-opacity="0.5" stroke="#FFFFFF" mask="url(#mask-2)" stroke-width="4" fill-opacity="1.49011614e-09" fill="#636F75" fill-rule="evenodd" xlink:href="#path-1"></use>
+</svg>

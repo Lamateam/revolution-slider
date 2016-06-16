@@ -1,0 +1,22 @@
+
+<svg width="32px" height="32px" viewBox="87 315 32 32" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 3.8.3 (29802) - http://www.bohemiancoding.com/sketch -->
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <path d="M2.00585866,3.63636364 C0.898053512,3.63636364 0.107528687,4.5161438 0.243239764,5.62650716 L1.75676024,18.0098565 C1.89109785,19.1089824 2.88743329,20 3.99961498,20 L10.000385,20 C11.1047419,20 12.1075287,19.1202198 12.2432398,18.0098565 L13.7567602,5.62650716 C13.8910978,4.52738124 13.1029399,3.63636364 11.9941413,3.63636364 L2.00585866,3.63636364 Z" id="path-1"></path>
+        <mask id="mask-2" maskContentUnits="userSpaceOnUse" maskUnits="objectBoundingBox" x="0" y="0" width="13.5330171" height="16.3636364" fill="white">
+            <use xlink:href="#path-1"></use>
+        </mask>
+    </defs>
+    <g id="icon_3058-2" opacity="0.200000018" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" transform="translate(87.000000, 315.000000)">
+        <g id="Rectangle-84-+-Line-+-Line-2" stroke="#FFFFFF">
+            <g id="Group" transform="translate(9.000000, 7.000000)">
+                <use id="Rectangle-84" mask="url(#mask-2)" stroke-width="4" fill-opacity="0" fill="#D8D8D8" xlink:href="#path-1"></use>
+                <path d="M5,5.17045455 L6,18.59375" id="Line" stroke-width="2" stroke-linecap="square"></path>
+                <path d="M9,5.17045455 L8,18.4659091" id="Line-2" stroke-width="2" stroke-linecap="square"></path>
+                <path d="M0.4375,1.81818182 L13.6139706,1.81818182" id="Line" stroke-width="2" stroke-linecap="round"></path>
+                <path d="M5.6875,0.909090909 L8.98161765,0.909090909" id="Line-2" stroke-width="2" stroke-linecap="round"></path>
+            </g>
+        </g>
+    </g>
+</svg>

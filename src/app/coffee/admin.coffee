@@ -6,6 +6,7 @@ require.config
     "marionette": "modules/marionette"
     "jquery": "modules/jquery"
     "jquery-ui": "modules/jquery-ui"
+    "jscolor": "modules/jscolor"
     "controllers": "admin/controllers"
     "views": "admin/views"
     "models": "admin/models"

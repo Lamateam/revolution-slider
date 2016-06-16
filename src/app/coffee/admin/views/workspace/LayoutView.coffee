@@ -2,8 +2,9 @@ define "views/workspace/LayoutView", [
   "marionette"
   "views/workspace/CanvasView"
   "views/workspace/TopPanelView"
+  "views/workspace/RightPanelView"
   "templates/workspace/layout" 
-], (Marionette, CanvasView, TopPanelView, WorkspaceLayoutTemplate)->
+], (Marionette, CanvasView, TopPanelView, RightPanelView, WorkspaceLayoutTemplate)->
   WorkspaceLayoutView = Marionette.LayoutView.extend
     template: WorkspaceLayoutTemplate
     regions:
@@ -15,4 +16,6 @@ define "views/workspace/LayoutView", [
       @showChildView "canvas", new CanvasView options
     renderTopPanel: (options)->
       @showChildView "top_panel", new TopPanelView options
+    renderRightPanel: (options)->
+      @showChildView "right_panel", new RightPanelView options
       
