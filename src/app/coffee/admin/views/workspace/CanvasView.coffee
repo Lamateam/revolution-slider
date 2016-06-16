@@ -175,6 +175,10 @@ define "views/workspace/CanvasView", [
   CanvasView = Marionette.CompositeView.extend
     childView: CanvasItem
     childViewContainer: "svg"
+    modelEvents:
+      'change:name': 'render'
+    events:
+      'click .bind-slide-edit': 'onSlideEditClick'
     childViewOptions: ->
       res = 
         stateModel: @options.stateModel
@@ -186,4 +190,6 @@ define "views/workspace/CanvasView", [
         width: @options.width
         height: @options.height
     template: CanvasTemplate
+    onSlideEditClick: ->
+      window.App.trigger "slide:select", { id: @model.get 'id' }
 

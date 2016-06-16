@@ -1,11 +1,12 @@
 define "controllers/workspace/LayoutController", [ 
   "marionette"
   "models/ProjectModel"
+  "models/SlideModel"
   "models/WorkspaceStateModel"
   "collections/HistoryCollection"
   "collections/ElementsCollection"
   "views/workspace/LayoutView"
-], (Marionette, ProjectModel, WorkspaceStateModel, HistoryCollection, ElementsCollection, WorkspaceLayoutView)->
+], (Marionette, ProjectModel, SlideModel, WorkspaceStateModel, HistoryCollection, ElementsCollection, WorkspaceLayoutView)->
   WorkspaceLayoutController = Marionette.LayoutController.extend
     Layout: WorkspaceLayoutView
     initialize: ->
@@ -25,6 +26,10 @@ define "controllers/workspace/LayoutController", [
       @listenTo window.App, "element:move", @onElementMove
       @listenTo window.App, "element:click", @onElementClick
       @listenTo window.App, "element:resize", @onElementResize
+      @listenTo window.App, "element:change", @onElementChange
+
+      @listenTo window.App, "slide:change", @onSlideChange
+      @listenTo window.App, "slide:select", @onSlideSelect
 
       Marionette.LayoutController.prototype.initialize.apply @
     renderTopPanel: ->
@@ -34,14 +39,18 @@ define "controllers/workspace/LayoutController", [
         historyCollection: @getOption 'historyCollection'
     renderCanvas: (slide)->
       c = @getOption('elementsCollection')
-      c.reset slide.elements
+      c.reset slide.get 'elements'
 
       @getOption('layout').renderCanvas
         collection: c
         width: 500
         height: 500
-        model: new Backbone.Model {id: slide.id, name: slide.name}
+        model: slide
         stateModel: @getOption 'stateModel'
+    renderRightPanel: (model, type)->
+      @getOption('layout').renderRightPanel
+        model: model
+        type: type
     onWorkspaceName: ->
       @getOption('stateModel').setState "isNameChange"
     onWorkspaceUndo: ->
@@ -57,7 +66,8 @@ define "controllers/workspace/LayoutController", [
             data = {}
             data[key] = -value for own key, value of options
             @moveElement el, data
-          when "resize" then @resizeElement el, options.previous
+          when "resize", "change" then @changeElement el, options.previous
+          when "change_slide" then @changeSlide options.previous
 
     onWorkspaceRedo: ->
       if @getOption('historyCollection').canRedo()
@@ -69,7 +79,8 @@ define "controllers/workspace/LayoutController", [
 
         switch action
           when "move" then @moveElement el, options
-          when "resize" then @resizeElement el, options.current
+          when "resize", "change" then @changeElement el, options.current
+          when "change_slide" then @changeSlide options.current
     onWorkspaceDownload: ->
 
     onWorkspacePreview: ->
@@ -78,30 +89,49 @@ define "controllers/workspace/LayoutController", [
       @getOption('projectModel').save obj, 
         success: =>
           @getOption('stateModel').clearStates()
+        wait: true
+        patch: true
     moveElement: (el, data)->
       model = @getOption('elementsCollection').findWhere { id: el }
       props = model.get 'props'
       props[key] = props[key] + value for key, value of data
-      model.save { props: props }, { wait: true }
-    resizeElement: (el, data)->
+      model.save { props: props }, { wait: true, patch: true }
+    changeElement: (el, data)->
       model = @getOption('elementsCollection').findWhere { id: el }
       props = model.get 'props'
       props[key] = value for key, value of data
-      model.save { props: props }, { wait: true }      
+      model.save { props: props }, { wait: true, patch: true }  
+    changeSlide: (data)->
+      @getOption('slideModel').save data, { wait: true, patch: true }        
     onElementMove: (data)->
       @getOption('historyCollection').addAction { action: "move", el: data.el, options: data.props }
       @getOption('stateModel').setState "isElementSelected", data.el
       @moveElement data.el, data.props
     onElementClick: (data)->
       @getOption('stateModel').setState "isElementSelected", data.id
+      model = @getOption('elementsCollection').findWhere { id: data.id }
+      @renderRightPanel model, 'element'
     onElementResize: (data)->
-      console.log 'catch element', data
       model = @getOption('elementsCollection').findWhere { id: data.el }
       @getOption('historyCollection').addAction { action: "resize", el: data.el, options: {current: data.props, previous: _.clone(model.get('props')) } }
-      @resizeElement data.el, data.props
+      @changeElement data.el, data.props
+    onElementChange: (data)->
+      console.log data
+      model = @getOption('elementsCollection').findWhere { id: data.el }
+      @getOption('historyCollection').addAction { action: "change", el: data.el, options: {current: data.props, previous: _.clone(model.get('props')) } }
+      @changeElement data.el, data.props      
+    onSlideChange: (data)->
+      console.log data
+      @getOption('historyCollection').addAction { action: "change_slide", options: {current: data, previous: @getOption('slideModel').toJSON() } }
+      @changeSlide data
+    onSlideSelect: (data)->
+      console.log data
     openSlide: ->
-      slide = @getOption('projectModel').get('slides')[@slide]
-      @renderCanvas slide
+      @options.slideModel            = new SlideModel @getOption('projectModel').get('slides')[@slide]
+      @options.slideModel.project_id = @getOption('projectModel').get 'id'
+
+      @renderCanvas @options.slideModel
+      @renderRightPanel @options.slideModel, 'slide'
     openProject: (id, @slide)->
       projectModel       = @getOption('projectModel')
       elementsCollection = @getOption('elementsCollection')

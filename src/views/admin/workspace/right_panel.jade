@@ -1,0 +1,17 @@
+.workspace-right_panel-slydes
+  .workspace-right_panel-header
+    h2= getHeaderText(type)
+    buttom.workspace-right_panel-settings
+  .workspace-right_panel-container
+    if type === 'slide'
+      .workspace-right_panel-container-input_block
+        label Название слайда
+        input.bind-slide_name(type="text", value=name)
+      .workspace-right_panel-container-input_block
+        label Продолжительность (с)
+        input.bind-slide_duration(type="text", value=duration)
+    else if type === 'element'
+      each val, index in props
+        .workspace-right_panel-container-input_block
+          label= getLabelText(index)
+          input(type="text", value=val, name="bind-element_"+index)        
