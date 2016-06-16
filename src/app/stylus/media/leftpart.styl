@@ -6,15 +6,76 @@
         &-add_list
           max-width 200px
           
+          & li
           
-          & ul
-            & li
-              &:not(.workspace-left_panel-top_list-add_list_header)
-                height 100px!important
+            &:first-child
               
-              &.workspace-left_panel-top_list-add_list_header
-                h2
-                  font-size 12px
+              & ul
+                & li:not(.workspace-left_panel-top_list-add_list_header):last-child
+                  width 101px!important
+            
+            & ul
+              & li
+                &:not(.workspace-left_panel-top_list-add_list_header)
+                  height 100px!important
+                
+                &.workspace-left_panel-top_list-add_list_header
+                  h2
+                    font-size 12px
+                
+                &.workspace-left_panel-top_list-add_list_text
+                  background url(images/leftpart/additem/text.svg) no-repeat center 23px!important
+                  
+                  &:hover
+                    background url(images/leftpart/additem/text.svg) no-repeat center 23px!important
+                
+                &.workspace-left_panel-top_list-add_list_paragraph
+                  background url(images/leftpart/additem/paragraph.svg) no-repeat center 24px!important
+                  
+                  &:hover
+                    background url(images/leftpart/additem/paragraph.svg) no-repeat center 24px!important
+                &.workspace-left_panel-top_list-add_list_graph
+                  background url(images/leftpart/additem/graphics.svg) no-repeat center 24px!important
+                  
+                  &:hover
+                    background url(images/leftpart/additem/graphics.svg) no-repeat center 24px!important
+                
+                &.workspace-left_panel-top_list-add_list_video
+                  background url(images/leftpart/additem/video.svg) no-repeat center 18px!important
+                  
+                  &:hover
+                    background url(images/leftpart/additem/video.svg) no-repeat center 18px!important
+                
+                &.workspace-left_panel-top_list-add_list_figures
+                  background url(images/leftpart/additem/figure.svg) no-repeat center 10px!important
+                  
+                  &:hover
+                    background url(images/leftpart/additem/figure.svg) no-repeat center 10px!important              
+                
+                &.workspace-left_panel-top_list-add_list_news
+                  background url(images/leftpart/additem/news.svg) no-repeat center 18px!important
+                  
+                  &:hover
+                    background url(images/leftpart/additem/news.svg) no-repeat center 18px!important            
+                
+                &.workspace-left_panel-top_list-add_list_time
+                  background url(images/leftpart/additem/time.svg) no-repeat center 16px!important
+                  
+                  &:hover
+                    background url(images/leftpart/additem/time.svg) no-repeat center 16px!important  
+                              
+                &.workspace-left_panel-top_list-add_list_weather
+                  background url(images/leftpart/additem/weather.svg) no-repeat center 21px!important
+                  
+                  &:hover
+                    background url(images/leftpart/additem/weather.svg) no-repeat center 21px!important            
+                &.workspace-left_panel-top_list-add_list_date
+                  background url(images/leftpart/additem/date.svg) no-repeat center 18px!important
+                  
+                  &:hover
+                    background url(images/leftpart/additem/date.svg) no-repeat center 18px!important
+
+
                 
       & li
         &.active
