@@ -53,6 +53,18 @@
             
         & ul
           width 100%
+          
+          &:first-child
+            
+            & li:not(.workspace-left_panel-top_list-add_list_header):last-child
+              width 121px!important
+              border-right 1px solid #283038
+              box-shadow inset 1px 0 0 0 #283038!important
+              
+            &:last-child
+              & li.workspace-left_panel-top_list-add_list_header
+                border-top 1px solid #283038
+              
 
           & li
             float left

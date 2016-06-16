@@ -30,14 +30,14 @@ header
       li.workspace-top_panel-buttons-undo
         button.bind-undo
     else
-      li.workspace-top_panel-buttons-undo(style="opacity:0")
+      li.workspace-top_panel-buttons-undo.disabled
         button.bind-undo
 
     if canRedo()
       li.workspace-top_panel-buttons-redo
         button.bind-redo
     else
-      li.workspace-top_panel-buttons-redo(style="opacity:0")
+      li.workspace-top_panel-buttons-redo.disabled
         button.bind-redo
 
     //- Загружает фаил
