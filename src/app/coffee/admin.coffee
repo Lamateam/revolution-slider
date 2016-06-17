@@ -6,7 +6,8 @@ require.config
     "marionette": "modules/marionette"
     "jquery": "modules/jquery"
     "jquery-ui": "modules/jquery-ui"
-    "jscolor": "modules/jscolor"
+    "jscolor": "vendor/jscolor"
+    "ddslick": "vendor/ddslick"
     "controllers": "admin/controllers"
     "views": "admin/views"
     "models": "admin/models"
@@ -35,6 +36,8 @@ require.config
     "SweetAlert":
       deps: [ "jquery" ]
     "jquery-ui":
+      deps: [ "jquery" ]
+    "ddslick": 
       deps: [ "jquery" ]
 
 window.Behaviors = {}

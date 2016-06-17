@@ -46,9 +46,14 @@ define "views/workspace/CanvasView", [
       props  = @model.get("props")
       width  = if props.width then props.width else props.r
       height = if props.height then props.height else props.r
+      type   = @model.get 'type'
 
-      @options.node = @d3_el.append @model.get("type") if @options.node is undefined
-      @options.node.attr key, value for own key, value of props
+      @options.node = @d3_el.append type if @options.node is undefined
+      for own key, value of props
+        if key is 'text' then @options.node.text(value) else @options.node.attr(key, value)
+      
+      @canResize = false if type is 'text'
+      
       @setActive() if @getOption("stateModel").get("isElementSelected") is @model.get("id")
 
       @initDnD @options.node if @canMove
@@ -102,7 +107,7 @@ define "views/workspace/CanvasView", [
           n.style "opacity", 1
           dragInitiated = false
 
-          @initResize(n) if @getOption("stateModel").get("isElementSelected") is @model.get("id")
+          @initResize(n) if @canResize and @getOption("stateModel").get("isElementSelected") is @model.get("id")
 
           data = 
             el: id
@@ -178,7 +183,7 @@ define "views/workspace/CanvasView", [
     modelEvents:
       'change:name': 'render'
     events:
-      'click .bind-slide-edit': 'onSlideEditClick'
+      'click .bind-slide-select': 'onSlideEditClick'
     childViewOptions: ->
       res = 
         stateModel: @options.stateModel

@@ -27,6 +27,7 @@ define "controllers/workspace/LayoutController", [
       @listenTo window.App, "element:click", @onElementClick
       @listenTo window.App, "element:resize", @onElementResize
       @listenTo window.App, "element:change", @onElementChange
+      @listenTo window.App, "element:create", @onElementCreate
 
       @listenTo window.App, "slide:change", @onSlideChange
       @listenTo window.App, "slide:select", @onSlideSelect
@@ -51,6 +52,9 @@ define "controllers/workspace/LayoutController", [
       @getOption('layout').renderRightPanel
         model: model
         type: type
+    renderLeftPanel: ->
+      @getOption('layout').renderLeftPanel
+        model: @getOption('projectModel')
     onWorkspaceName: ->
       @getOption('stateModel').setState "isNameChange"
     onWorkspaceUndo: ->
@@ -107,6 +111,7 @@ define "controllers/workspace/LayoutController", [
       @getOption('historyCollection').addAction { action: "move", el: data.el, options: data.props }
       @getOption('stateModel').setState "isElementSelected", data.el
       @moveElement data.el, data.props
+      @renderRightPanel @getOption('elementsCollection').findWhere({ id: data.el }), 'element'
     onElementClick: (data)->
       @getOption('stateModel').setState "isElementSelected", data.id
       model = @getOption('elementsCollection').findWhere { id: data.id }
@@ -120,18 +125,24 @@ define "controllers/workspace/LayoutController", [
       model = @getOption('elementsCollection').findWhere { id: data.el }
       @getOption('historyCollection').addAction { action: "change", el: data.el, options: {current: data.props, previous: _.clone(model.get('props')) } }
       @changeElement data.el, data.props      
+    onElementCreate: (data)->
+      elementsCollection = @getOption 'elementsCollection'
+      data.id = elementsCollection.last().get('id') + 1
+      elementsCollection.addElement data
     onSlideChange: (data)->
       console.log data
       @getOption('historyCollection').addAction { action: "change_slide", options: {current: data, previous: @getOption('slideModel').toJSON() } }
       @changeSlide data
     onSlideSelect: (data)->
-      console.log data
+      @getOption('stateModel').clearState "isElementSelected"
+      @renderRightPanel @options.slideModel, 'slide'
     openSlide: ->
       @options.slideModel            = new SlideModel @getOption('projectModel').get('slides')[@slide]
       @options.slideModel.project_id = @getOption('projectModel').get 'id'
 
       @renderCanvas @options.slideModel
       @renderRightPanel @options.slideModel, 'slide'
+      @renderLeftPanel()
     openProject: (id, @slide)->
       projectModel       = @getOption('projectModel')
       elementsCollection = @getOption('elementsCollection')
