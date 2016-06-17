@@ -1,5 +1,5 @@
 //-Меняй вот этот класс
-//-.workspace-right_panel-project - проект
+
 //-.workspace-right_panel-paragraph - параграф
 //-.workspace-right_panel-time - время
 //-.workspace-right_panel-news - новость
@@ -8,71 +8,135 @@
 //-.workspace-right_panel-video - видео
 //-.workspace-right_panel-weather - погода
 //-.workspace-right_panel-photo - фото
-//-слайд
-.workspace-right_panel-slydes 
+
+
+
+
+
+//- проект
+.workspace-right_panel-project 
   .workspace-right_panel-header
-    h2= getHeaderText(type)
+    h2 Проект
     buttom.workspace-right_panel-settings.rotate_1080deg
-  .workspace-right_panel-container
+  .workspace-right_panel-container 
+    .workspace-right_panel-container-input_block
+      label Название проекта
+      input.bind-slide_name(type="text", value=name)
+    .workspace-right_panel-container_big
+      h3 Формат
+      .workspace-right_panel-container-radio_format
+        .row_line
+          input(type="radio", name="format", id = "43")
+          label.item_1(for="43")
+            span 4:3        
+          input(type="radio", name="format", id = "34")
+          label.item_2(for="34")
+            span 3:4
+        .row_line   
+          input(type="radio", name="format", id = "169")
+          label.item_3(for="169")
+            span 16:9 
+          input(type="radio", name="format", id = "916")
+          label.item_4(for="916")
+            span 9:16   
 
-    if type === 'slide'
-      .workspace-right_panel-container-input_block.with_eye
-        label Название слайда
-        input.bind-slide_name(type="text", value=name)
+    .workspace-right_panel-container_big
+      h3 Звук
+      .workspace-right_panel-container-checkbox_block
+        input(type="checkbox", name="repeat", id = "norepeatvoice")
+        label.margintop_7(for="norepeatvoice")
+        label(for="norepeatvoice") 
+          | Не воспроизводить звук из 
+          br
+          | вставленных видео      
+    .workspace-right_panel-container_big
+      h3 Повтор
+      .workspace-right_panel-container-radio_block
+        input(type="radio", name="repeat", id = "norepeat")
+        label(for="norepeat")
+        label(for="norepeat") Не повторять
 
-      .workspace-right_panel-container-select_block.fourth
-        label Порядок
-        select.bind-slide_duration
-          option(value="1") 1
-          option(value="2",selected="selected") 2
-          option(value="3") 3
+      .workspace-right_panel-container-radio_block
+        input(type="radio", name="repeat", id = "repeatcycle")
+        label(for="repeatcycle")
+        label(for="repeatcycle") Повторять циклично
 
-      .workspace-right_panel-container_big
-        h3 Повтор
-        .workspace-right_panel-container-radio_block
-          input(type="radio", name="repeat", id = "norepeat")
-          label(for="norepeat")
-          label(for="norepeat") Не повторять
-        .workspace-right_panel-container-radio_block
-          .half
-            input(type="radio", name="repeat", id = "repeat")
-            label(for="repeat")
-            label(for="repeat") Повторить
-          .half
-            //- этому инпуту дай класс disabled и атрибут disabled
-            input.width50.margintop_-5(type="text")
-            span раз
-
-      .workspace-right_panel-container_big
-        h3 Вход
-
-        .workspace-right_panel-container_row_time
-          span 00:00:000 – 00:00:50
-          button.rotate_1080deg
-
-        .workspace-right_panel-container-select_block.margintop_5
-          select
-            option(value="1", selected="selected") Из непрозрачного в прозрачный
-
-        .workspace-right_panel-container-block.margintop_15
-          select
-            option(selected="selected") Ease In/Out
-          .workspace-right_panel-container-block_plus
-            input.time(type="text", value="500")
-            button.plus
-            button.minus          
+      .workspace-right_panel-container-radio_block
+        .half
+          input(type="radio", name="repeat", id = "repeat")
+          label(for="repeat")
+          label(for="repeat") Повторить
+        .half
+          //- этому инпуту дай класс disabled и атрибут disabled
+          input.width50.margintop_-5(type="text")
+          span раз     
 
 
+//-слайд
+//-.workspace-right_panel-slydes 
+//-  
+//-    h2= getHeaderText(type)
+//-    buttom.workspace-right_panel-settings.rotate_1080deg
+//-  .workspace-right_panel-container
 
-        button.workspace-right_panel_add
+//-    if type === 'slide'
+//-      .workspace-right_panel-container-input_block.with_eye
+//-        label Название слайда
+//-        input.bind-slide_name(type="text", value=name)
 
-      .workspace-right_panel-container_big
-        h3 Выход
+//-      .workspace-right_panel-container-select_block.fourth
+//-        label Порядок
+//-        select.bind-slide_duration
+//-          option(value="1") 1
+//-          option(value="2",selected="selected") 2
+//-          option(value="3") 3
 
-        button.workspace-right_panel_add
+//-      .workspace-right_panel-container_big
+//-        h3 Повтор
+//-        .workspace-right_panel-container-radio_block
+//-          input(type="radio", name="repeat", id = "norepeat")
+//-          label(for="norepeat")
+//-          label(for="norepeat") Не повторять
+//-        .workspace-right_panel-container-radio_block
+//-          .half
+//-            input(type="radio", name="repeat", id = "repeat")
+//-            label(for="repeat")
+//-            label(for="repeat") Повторить
+//-          .half
+//-            //- этому инпуту дай класс disabled и атрибут disabled
+//-            input.width50.margintop_-5(type="text")
+//-            span раз//-
 
-    else if type === 'element'
-      each val, index in props
-        .workspace-right_panel-container-input_block
-          label= getLabelText(index)
-          input(type="text", value=val, name="bind-element_"+index)        
+//-      .workspace-right_panel-container_big
+//-        h3 Вход//-
+
+//-        .workspace-right_panel-container_row_time
+//-          span 00:00:000 – 00:00:50
+//-          button.rotate_1080deg
+
+//-        .workspace-right_panel-container-select_block.margintop_5
+//-          select
+//-            option(value="1", selected="selected") Из непрозрачного в прозрачный
+
+//-        .workspace-right_panel-container-block.margintop_15
+//-          select
+//-            option(selected="selected") Ease In/Out
+//-          .workspace-right_panel-container-block_plus
+//-            input.time(type="text", value="500")
+//-            button.plus
+//-            button.minus          
+//-
+//-
+
+//-        button.workspace-right_panel_add
+
+//-      .workspace-right_panel-container_big
+//-        h3 Выход//-
+
+//-        button.workspace-right_panel_add
+
+//-    else if type === 'element'
+//-      each val, index in props
+//-        .workspace-right_panel-container-input_block
+//-          label= getLabelText(index)
+//-          input(type="text", value=val, name="bind-element_"+index)        

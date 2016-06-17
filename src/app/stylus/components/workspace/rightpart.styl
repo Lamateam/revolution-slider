@@ -27,7 +27,9 @@
     &-slydes
       h2
         background url(images/rightpart/slydes/slydes.svg) no-repeat 8px center
-        
+    &-project
+      h2
+        background url(images/rightpart/project_header/project.svg) no-repeat 8px center   
 
     &-header
       margin-left -15px
@@ -82,9 +84,10 @@
         display none
         
       input[type="radio"] + label
+      input[type="checkbox"] + label
         width 18px
         float left
-        margin-right 10px
+        margin-right 7px
         cursor pointer
         margin-top 0px
         margin-bottom 0px
@@ -96,12 +99,21 @@
           color color_white
           cursor pointer
           line-height 18px
-        
-      input[type="radio"]:checked + label       
+
+      input[type="checkbox"] + label
+        width 28px
+        height 28px
+        background url(images/rightpart/checkbox/checkbox.svg) no-repeat center 
+                
+      input[type="radio"]:checked + label
+      input[type="checkbox"]:checked + label        
         background url(images/rightpart/radio_active.svg) no-repeat center 
         
         & + label
           color rgba(255,255,255,0.90)
+          
+      input[type="checkbox"]:checked + label
+        background url(images/rightpart/checkbox/checkbox_active.svg) no-repeat center   
         
       & input
       & select
@@ -137,6 +149,7 @@
       &-input_block
       &-select_block
       &-radio_block
+      &-checkbox_block
         padding-top 8px
         
         &.with_eye
@@ -245,7 +258,93 @@
             margin-top 3px
             color color_white
             margin-left 10px 
+            
+      &-radio_format
+        
+        & .row_line
+          margin-top 10px
+          position relative
+          overflow hidden
 
+          & label
+            float left!important
+            transition 200ms all ease-in
+            
+            &.item_1
+              background #4F5963 url(images/rightpart/format/4.3.svg)  center 13px no-repeat
+              
+              &:hover
+                  background #cdcdcd url(images/rightpart/format/4.3_active.svg)  center 13px no-repeat             
+
+            &.item_2
+              background #4F5963 url(images/rightpart/format/3.4.svg) center 11px no-repeat
+              
+              &:hover
+                  background #cdcdcd url(images/rightpart/format/3.4_active.svg)  center 11px no-repeat    
+                  
+            &.item_3
+              background #4F5963 url(images/rightpart/format/16.9.svg) center 18px no-repeat
+              
+              &:hover
+                  background #cdcdcd url(images/rightpart/format/16.9_active.svg) center 18px no-repeat    
+                  
+            &.item_4
+              background #4F5963 url(images/rightpart/format/9.16.svg)  center 10px no-repeat
+              
+              &:hover
+                  background #cdcdcd url(images/rightpart/format/9.16_active.svg)  center 10px no-repeat    
+          
+            
+            & span
+              opacity 0.59
+              text-align center
+              font-size 13px
+              width 100%
+              margin-top 58px
+              display block              
+              color #CDCDCD
+              transition 200ms all ease-in
+              
+            &:hover
+              
+              & span
+                color #4F5963
+                opacity 1
+            
+            &:last-child
+              float right!important
+
+        input[type="radio"]
+          & + label
+            background-color #4F5963
+            box-shadow 0px 2px 4px 0px rgba(0,0,0,0.03)
+            border-radius 3px
+            width 120px
+            float inherit
+            margin-right 0px
+            height 80px
+            
+          
+          &:checked + label
+            background-color #cdcdcd
+            box-shadow 0px 2px 4px 0px rgba(0,0,0,0.03)
+            border-radius 3px
+            
+            & span
+              color #4F5963
+              opacity 1
+              
+            &.item_1
+              background #cdcdcd url(images/rightpart/format/4.3_active.svg)  center 13px no-repeat             
+
+            &.item_2
+              background #cdcdcd url(images/rightpart/format/3.4_active.svg)  center 11px no-repeat    
+                  
+            &.item_3
+              background #cdcdcd url(images/rightpart/format/16.9_active.svg) center 18px no-repeat    
+                  
+            &.item_4
+              background #cdcdcd url(images/rightpart/format/9.16_active.svg)  center 10px no-repeat
           
 
       
