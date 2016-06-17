@@ -16,6 +16,8 @@ define "views/workspace/RightPanelView", [
       element_width: '[name="bind-element_width"]'
       element_height: '[name="bind-element_height"]'
       element_fill: '[name="bind-element_fill"]'
+      element_text: '[name="bind-element_text"]'
+      element_font_size: '[name="bind-element_font-size"]'
     events:
       'blur .bind-slide_name': 'onSlideChange'
       'blur .bind-slide_duration': 'onSlideChange'
@@ -26,12 +28,11 @@ define "views/workspace/RightPanelView", [
       'blur [name="bind-element_width"]': 'onElementChange'
       'blur [name="bind-element_height"]': 'onElementChange'
       'blur [name="bind-element_r"]': 'onElementChange'
+      'blur [name="bind-element_text"]': 'onElementChange'
+      'blur [name="bind-element_font-size"]': 'onElementChange'
     modelEvents:
       'sync': 'render'
     template: WorkspaceRightPanelTemplate
-    onShow: ->
-      console.log "show right panel"
-      @initPicker()
     onRender: ->
       console.log "render right panel"
       @initPicker()
@@ -49,6 +50,7 @@ define "views/workspace/RightPanelView", [
         getHeaderText: (type)->
           switch type
             when 'slide' then "Слайд"
+            when 'project' then "Проект"
             when 'element' then "Элемент"
         getLabelText: (type)->
           label = switch type
@@ -58,10 +60,15 @@ define "views/workspace/RightPanelView", [
             when 'width' then "Ширина"
             when 'height' then "Высота"
             when 'r' then "Радиус"
+            when 'text' then "Текст"
+            when 'font-size' then "Размер шрифта"
           res = label + ":"
     onElementChange: ->
       data = { el: @model.get('id'), props: {} }
-      data.props = if @model.get('type') is 'circle' then { cx: @ui.element_cx.val(), cy: @ui.element_cy.val(), r: @ui.element_r.val() } else { x: @ui.element_x.val(), y: @ui.element_y.val(), width: @ui.element_width.val(), height: @ui.element_height.val() }
+      data.props = switch @model.get('type') 
+        when 'circle' then { cx: parseInt(@ui.element_cx.val(), 10), cy: parseInt(@ui.element_cy.val(), 10), r: parseInt(@ui.element_r.val(), 10) } 
+        when 'text' then { x: parseInt(@ui.element_x.val(), 10), y: parseInt(@ui.element_y.val()), text: @ui.element_text.val(), "font-size": @ui.element_font_size.val() }
+        when 'rect' then { x: parseInt(@ui.element_x.val(), 10), y: parseInt(@ui.element_y.val(), 10), width: parseInt(@ui.element_width.val(), 10), height: parseInt(@ui.element_height.val(), 10) }
       window.App.trigger "element:change", data
     onSlideChange: ->
       window.App.trigger "slide:change", { id: @model.get('id'), name: @ui.slide_name.val(), duration: @ui.slide_duration.val() }

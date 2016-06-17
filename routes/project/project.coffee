@@ -22,6 +22,10 @@ exports.init = (app)->
     slide[key] = value for own key, value of req.body
     res.send slide
 
+  app.put "/api/project/:project_id/:slide_id/:id", (req, res, next)->
+    elements = projects[req.params.project_id].slides[req.params.slide_id].elements
+    elements.push req.body
+    res.send req.body
   app.patch "/api/project/:project_id/:slide_id/:id", (req, res, next)->
     el = projects[req.params.project_id].slides[req.params.slide_id].elements[req.params.id]
     el[key] = value for own key, value of req.body
