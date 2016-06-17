@@ -43,25 +43,45 @@ body
   font-family GothaProReg, sans-serif
   background #1B232A
 
+.half
+  width 50%
+  float left
+ 
+  & + .half
+    padding-left 15px
 
 .margin
   &top
     &_5
-      margin-top 5px     
+      margin-top 5px 
+      
+    &_10
+      margin-top 10px 
+
+    &_15
+      margin-top 10px 
+          
     &_20
       margin-top 20px
       
     &_120
       margin-top 120px  
     &_140
-      margin-top 140px  
+      margin-top 140px
+      
+    &_-5
+      margin-top -5px  
 
   &bottom
     &_20
       margin-bottom 20px
 
+.width
+  &50
+    width 50px!important
 
 .rotate
+  
   &_1080deg
     transition 1500ms transform linear!important
     

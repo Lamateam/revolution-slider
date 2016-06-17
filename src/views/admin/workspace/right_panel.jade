@@ -1,15 +1,76 @@
-.workspace-right_panel-slydes
+//-Меняй вот этот класс
+//-.workspace-right_panel-project - проект
+//-.workspace-right_panel-paragraph - параграф
+//-.workspace-right_panel-time - время
+//-.workspace-right_panel-news - новость
+//-.workspace-right_panel-date - дата
+//-.workspace-right_panel-text - текст
+//-.workspace-right_panel-video - видео
+//-.workspace-right_panel-weather - погода
+//-.workspace-right_panel-photo - фото
+//-слайд
+.workspace-right_panel-slydes 
   .workspace-right_panel-header
     h2= getHeaderText(type)
-    buttom.workspace-right_panel-settings
+    buttom.workspace-right_panel-settings.rotate_1080deg
   .workspace-right_panel-container
+
     if type === 'slide'
-      .workspace-right_panel-container-input_block
+      .workspace-right_panel-container-input_block.with_eye
         label Название слайда
         input.bind-slide_name(type="text", value=name)
-      .workspace-right_panel-container-input_block
-        label Продолжительность (с)
-        input.bind-slide_duration(type="text", value=duration)
+
+      .workspace-right_panel-container-select_block.fourth
+        label Порядок
+        select.bind-slide_duration
+          option(value="1") 1
+          option(value="2",selected="selected") 2
+          option(value="3") 3
+
+      .workspace-right_panel-container_big
+        h3 Повтор
+        .workspace-right_panel-container-radio_block
+          input(type="radio", name="repeat", id = "norepeat")
+          label(for="norepeat")
+          label(for="norepeat") Не повторять
+        .workspace-right_panel-container-radio_block
+          .half
+            input(type="radio", name="repeat", id = "repeat")
+            label(for="repeat")
+            label(for="repeat") Повторить
+          .half
+            //- этому инпуту дай класс disabled и атрибут disabled
+            input.width50.margintop_-5(type="text")
+            span раз
+
+      .workspace-right_panel-container_big
+        h3 Вход
+
+        .workspace-right_panel-container_row_time
+          span 00:00:000 – 00:00:50
+          button.rotate_1080deg
+
+        .workspace-right_panel-container-select_block.margintop_5
+          select
+            option(value="1", selected="selected") Из непрозрачного в прозрачный
+
+        .workspace-right_panel-container-block.margintop_15
+          select
+            option(selected="selected") Ease In/Out
+          .workspace-right_panel-container-block_plus
+            input.time(type="text", value="500")
+            button.plus
+            button.minus          
+
+
+
+        button.workspace-right_panel_add
+
+      .workspace-right_panel-container_big
+        h3 Выход
+
+        button.workspace-right_panel_add
+
     else if type === 'element'
       each val, index in props
         .workspace-right_panel-container-input_block

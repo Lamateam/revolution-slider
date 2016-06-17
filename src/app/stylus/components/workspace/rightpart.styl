@@ -10,6 +10,20 @@
     padding-left 15px
     padding-right 15px
     
+    &_add
+      width 100%
+      border 2px dashed rgba(40,46,51,0.60)
+      box-shadow 0px 2px 4px 0px rgba(0,0,0,0.03)
+      border-radius 4px
+      HEIGHT 50px
+      width 100%
+      margin-top 15px
+      transition 300ms all ease-in
+      background url(images/rightpart/add.svg) no-repeat center
+      
+      &:hover
+        opacity 0.7
+
     &-slydes
       h2
         background url(images/rightpart/slydes/slydes.svg) no-repeat 8px center
@@ -23,7 +37,7 @@
       box-shadow 0px 2px 4px 0px rgba(0,0,0,0.03)
       
       h2
-        line-height 34px
+        line-height 32px
         height 30px
         padding 0px
         padding-left 32px
@@ -47,3 +61,193 @@
       &:hover
       &:active
         opacity 0.7
+        
+    &-container
+      
+      &_big
+        margin-top 22px
+        overflow hidden
+        
+        & h3
+          color color_white
+          width 100%
+          display block
+          font-size 13px
+          text-transform uppercase
+          padding-bottom 6px
+          border-bottom 2px solid #292E33
+
+      input[type="radio"]
+      input[type="checkbox"]
+        display none
+        
+      input[type="radio"] + label
+        width 18px
+        float left
+        margin-right 10px
+        cursor pointer
+        margin-top 0px
+        margin-bottom 0px
+        height 18px
+        background url(images/rightpart/radio.svg) no-repeat center 
+        
+        & + label
+          font-size 13px
+          color color_white
+          cursor pointer
+          line-height 18px
+        
+      input[type="radio"]:checked + label       
+        background url(images/rightpart/radio_active.svg) no-repeat center 
+        
+        & + label
+          color rgba(255,255,255,0.90)
+        
+      & input
+      & select
+        font-family Arial, sans-serif
+        font-size 14px
+        padding-left 9px
+        padding-right 9px
+        color color_white_70
+        background #4F5963
+        height 34px
+        line-height 34px
+        vertical-align middle
+        border none
+        outline none
+        box-shadow 0px 2px 4px 0px rgba(0,0,0,0.03)
+        border-radius 3px
+        
+        &.time
+          background-image url(images/rightpart/slydes/time.svg)
+          background-repeat no-repeat
+          background-position 8px center
+          padding-left 29px 
+        
+        & option
+          height 34px
+          font-size 12px
+          color color_white
+          
+          &:hover
+            background #4F5963
+
+      
+      &-input_block
+      &-select_block
+      &-radio_block
+        padding-top 8px
+        
+        &.with_eye
+          & input
+            background-image url("images/rightpart/slydes/eye.svg")
+            background-repeat no-repeat
+            background-position 222px center
+        
+        &.fourth
+          width 68px
+        
+        & label
+        & span
+          font-family GothaProReg, sans-serif
+          margin-top 3px
+          margin-bottom 4px
+          color color_white
+          font-size 13px
+
+        & input
+        & select
+          overflow visible
+          width 100%
+      
+      &_row
+        
+        &_time
+          padding-top 10px
+          overflow hidden
+          
+          
+          & span
+            float left
+            opacity 0.2
+            font-size 12px
+            color #FFFFFF
+            padding-left 24px
+            background url(images/rightpart/time00.00.svg) no-repeat left center
+            
+          & button
+            float right
+            width 15px
+            height 15px
+            transition 300ms all ease-in
+            background url(images/rightpart/settings.svg) no-repeat center
+            
+            &:hover
+              opacity 0.7
+
+      &-block
+        & select
+          width 142px
+          float left
+
+        &_plus
+          width 90px
+          float right
+          position relative
+
+          & input
+            width 100%
+            
+          & button
+            &.plus
+            &.minus
+              position absolute
+              z-index 2
+              background-color #78818a
+              box-shadow 0px 2px 4px 0px rgba(0,0,0,0.03)
+              border-radius 2px
+              width 15px
+              border 1px solid rgba(79,89,99,0.30)
+              height 15px
+              right 2px
+              
+            &.plus
+              background-image url(images/rightpart/slydes/plus.svg)
+              background-repeat no-repeat
+              background-position center 
+              top 2px           
+            &.minus
+              background-image url(images/rightpart/slydes/minus.svg)
+              background-repeat no-repeat
+              background-position center
+              top 17px  
+                    
+      &-radio_block
+        padding-top 14px 
+        
+        & + &
+          padding-top 10px
+        
+        & input[type=text]
+          float left
+          
+          &.disabled
+          &:disabled
+          &[disabled="disabled"]
+            opacity 0.5
+            
+            & + span
+              opacity 0.5
+          
+          & + span
+            float left
+            margin-top 3px
+            color color_white
+            margin-left 10px 
+
+          
+
+      
+        
+
