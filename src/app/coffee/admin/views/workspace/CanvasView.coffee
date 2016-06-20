@@ -71,7 +71,6 @@ define "views/workspace/CanvasView", [
       center_y = if @model.get('type') is 'circle' then @model.get('props').cy else @model.get('props').y+@model.get('props').height*0.5
       switch 
         when key is 'text' then node.text value
-        when key is 'texts'
         when key is 'angle' 
           props = @model.get 'props'
           w2    = props.width*0.5
