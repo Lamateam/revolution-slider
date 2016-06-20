@@ -5,11 +5,8 @@ header
   div.workspace-top_panel-main
 
     //- нажатие этой кнопки приводит к появлению project_1.png в правом меню
-    //-Название слайда
-    if isNameChange()
-      input.bind-name_change(value=name, autofocus)
-    else
-      button.workspace-top_panel-name.bind-name= name
+
+    button.workspace-top_panel-name.bind-name= name
 
     span= slides.length + " " + getSlidesPostfix(slides.length)
 
