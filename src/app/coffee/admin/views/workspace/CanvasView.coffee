@@ -105,7 +105,7 @@ define "views/workspace/CanvasView", [
           # n.attr x_val, d3.event.x - width*0.5
           # n.attr y_val, d3.event.y - height*0.5
           # # @setNodeAttribute n, 'angle', props.angle
-          @d3_el.attr 'transform', 'rotate(' + props.angle + ',' + d3.event.x + ',' + d3.event.y + ')'
+          # @d3_el.attr 'transform', 'rotate(' + props.angle + ',' + d3.event.x + ',' + d3.event.y + ')'
 
       drag.on "dragend", =>
         clearTimeout timeout
