@@ -18,6 +18,7 @@ define "views/workspace/RightPanelView", [
       element_fill: '[name="bind-element_fill"]'
       element_text: '[name="bind-element_text"]'
       element_font_size: '[name="bind-element_font-size"]'
+      element_xlink_href: '[name="bind-element_xlink:href"]'
     events:
       'blur .bind-slide_name': 'onSlideChange'
       'blur .bind-slide_duration': 'onSlideChange'
@@ -30,6 +31,7 @@ define "views/workspace/RightPanelView", [
       'blur [name="bind-element_r"]': 'onElementChange'
       'blur [name="bind-element_text"]': 'onElementChange'
       'blur [name="bind-element_font-size"]': 'onElementChange'
+      'blur [name="bind-element_xlink:href"]': 'onElementChange'
     modelEvents:
       'sync': 'render'
     template: WorkspaceRightPanelTemplate
@@ -63,13 +65,15 @@ define "views/workspace/RightPanelView", [
             when 'text' then "Текст"
             when 'font-size' then "Размер шрифта"
             when 'angle' then "Поворот"
+            when 'xlink:href' then "Ссылка на изображение"
           res = label + ":"
     onElementChange: ->
       data = { el: @model.get('id'), props: {} }
       data.props = switch @model.get('type') 
-        when 'circle' then { cx: parseInt(@ui.element_cx.val(), 10), cy: parseInt(@ui.element_cy.val(), 10), r: parseInt(@ui.element_r.val(), 10) } 
-        when 'text' then { x: parseInt(@ui.element_x.val(), 10), y: parseInt(@ui.element_y.val()), text: @ui.element_text.val(), "font-size": @ui.element_font_size.val() }
-        when 'rect' then { x: parseInt(@ui.element_x.val(), 10), y: parseInt(@ui.element_y.val(), 10), width: parseInt(@ui.element_width.val(), 10), height: parseInt(@ui.element_height.val(), 10) }
+        when 'circle' then { cx: parseFloat(@ui.element_cx.val(), 10), cy: parseFloat(@ui.element_cy.val(), 10), r: parseFloat(@ui.element_r.val(), 10) } 
+        when 'text' then { x: parseFloat(@ui.element_x.val(), 10), y: parseFloat(@ui.element_y.val()), text: @ui.element_text.val(), "font-size": @ui.element_font_size.val() }
+        when 'rect' then { x: parseFloat(@ui.element_x.val(), 10), y: parseFloat(@ui.element_y.val(), 10), width: parseFloat(@ui.element_width.val(), 10), height: parseFloat(@ui.element_height.val(), 10) }
+        when 'image' then { x: parseFloat(@ui.element_x.val(), 10), y: parseFloat(@ui.element_y.val(), 10), width: parseFloat(@ui.element_width.val(), 10), height: parseFloat(@ui.element_height.val(), 10), "xlink:href": @ui.element_xlink_href.val() }
       window.App.trigger "element:change", data
     onSlideChange: ->
       window.App.trigger "slide:change", { id: @model.get('id'), name: @ui.slide_name.val(), duration: @ui.slide_duration.val() }
