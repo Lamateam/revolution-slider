@@ -62,6 +62,7 @@ define "views/workspace/RightPanelView", [
             when 'r' then "Радиус"
             when 'text' then "Текст"
             when 'font-size' then "Размер шрифта"
+            when 'angle' then "Поворот"
           res = label + ":"
     onElementChange: ->
       data = { el: @model.get('id'), props: {} }

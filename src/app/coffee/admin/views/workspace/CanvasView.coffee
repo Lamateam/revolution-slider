@@ -49,9 +49,8 @@ define "views/workspace/CanvasView", [
       type   = @model.get 'type'
 
       @options.node = @d3_el.append type if @options.node is undefined
-      for own key, value of props
-        if key is 'text' then @options.node.text(value) else @options.node.attr(key, value)
-      
+      @setNodeAttribute(@options.node, key, value) for own key, value of props
+
       @canResize = false if type is 'text'
       
       @setActive() if @getOption("stateModel").get("isElementSelected") is @model.get("id")
@@ -85,6 +84,11 @@ define "views/workspace/CanvasView", [
       dragInitiated = false
       timeout       = null
 
+      setCenter = (x, y)->
+        dimensions = n.node().getBBox()
+        n.attr 'x', x - dimensions.width*0.5
+        n.attr 'y', y - dimensions.height*0.5
+
       drag.on "dragstart", =>
         button = d3.event.sourceEvent.button
         timeout = setTimeout ()=>
@@ -94,10 +98,14 @@ define "views/workspace/CanvasView", [
             dragInitiated = true
         , 150
 
-      drag.on "drag", ->
+      drag.on "drag", =>
         if dragInitiated
-          n.attr x_val, d3.event.x - width*0.5
-          n.attr y_val, d3.event.y - height*0.5
+          setCenter d3.event.x, d3.event.y
+          # # console.log d3.event.x, d3.event.y
+          # n.attr x_val, d3.event.x - width*0.5
+          # n.attr y_val, d3.event.y - height*0.5
+          # # @setNodeAttribute n, 'angle', props.angle
+          @d3_el.attr 'transform', 'rotate(' + props.angle + ',' + d3.event.x + ',' + d3.event.y + ')'
 
       drag.on "dragend", =>
         clearTimeout timeout
@@ -112,35 +120,43 @@ define "views/workspace/CanvasView", [
           data = 
             el: id
             props: {}
-          data.props[x_val] = n.attr(x_val) - old_x
-          data.props[y_val] = n.attr(y_val) - old_y
-          window.App.trigger "element:move", data
+          data.props[x_val] = parseFloat n.attr(x_val), 10
+          data.props[y_val] = parseFloat n.attr(y_val), 10
+          console.log data.props
+          window.App.trigger "element:change", data
 
       n.call drag
-    createDot: (x, y, moveHandler)->
-      dot  = @d3_el.append("circle").classed("dot", true).attr("r", 3).attr("fill", @model.get("props").fill).attr("cx", x).attr("cy", y)
-      type = @model.get 'type'
-      id   = @model.get 'id'
-      node = @options.node
-      dot.on "mousedown", ->
-        return if d3.event.defaultPrevented
-        html.on 'mousemove', =>
-          coords = d3.mouse @
-          moveHandler coords[0], coords[1]
-        html.on 'mouseup', ->
-          props = if type is 'circle' then { cx: parseInt(node.attr('cx'), 10), cy: parseInt(node.attr('cy'), 10), r: parseInt(node.attr('r'), 10) } else { x: parseInt(node.attr('x'), 10), y: parseInt(node.attr('y'), 10), width: parseInt(node.attr('width'), 10), height: parseInt(node.attr('height'), 10) }
-          window.App.trigger "element:resize", { el: id, props: props }
-          html.on 'mousemove', null
-          html.on 'mouseup', null
+    setNodeAttribute: (node, key, value)->
+      center_x = if @model.get('type') is 'circle' then @model.get('props').cx else @model.get('props').x+@model.get('props').width*0.5
+      center_y = if @model.get('type') is 'circle' then @model.get('props').cy else @model.get('props').y+@model.get('props').height*0.5
+      switch 
+        when key is 'text' then node.text value
+        when key is 'angle' 
+          props = @model.get 'props'
+          console.log 'center props: ', props
+          w2    = props.width*0.5
+          h2    = props.height*0.5
+          sin   = Math.sin value
+          cos   = Math.cos value
+          @d3_el.attr 'transform', 'rotate(' + value + ',' + (props.x+w2) + ',' + (props.y+h2) + ')'
+        when true then node.attr key, value
     moveDots: ->
       dimensions = @options.node.node().getBBox()
       x_center   = dimensions.x + dimensions.width*0.5
       y_center   = dimensions.y + dimensions.height*0.5
 
-      @options.top_dot.attr('cx', x_center).attr('cy', dimensions.y) if @options.top_dot isnt undefined
-      @options.bottom_dot.attr('cx', dimensions.x + dimensions.width*0.5).attr('cy', dimensions.y + dimensions.height) if @options.bottom_dot isnt undefined
-      @options.right_dot.attr('cx', dimensions.x + dimensions.width).attr('cy', y_center) if @options.right_dot isnt undefined
-      @options.left_dot.attr('cx', dimensions.x).attr('cy', y_center) if @options.left_dot isnt undefined
+      @options.dots.data([
+        { x: x_center, y: dimensions.y, name: 'n' }
+        { x: dimensions.x + dimensions.width, y: y_center, name: 'e' }
+        { x: dimensions.x + dimensions.width, y: dimensions.y, name: 'ne' }
+        { x: dimensions.x, y: dimensions.y, name: 'nw' }
+      ], (d)->
+        d.name
+      ).attr('cx', (d)->
+        d.x
+      ).attr('cy', (d)->
+        d.y
+      )
     initResize: (n)->
       @destroyResize()
 
@@ -148,34 +164,59 @@ define "views/workspace/CanvasView", [
       x_center   = dimensions.x + dimensions.width*0.5
       y_center   = dimensions.y + dimensions.height*0.5
       type       = @model.get 'type'
+      props      = @model.get 'props'
+      node       = @options.node
 
-      @options.top_dot    = @createDot x_center, dimensions.y, (x, y)=>
-        new_d = if type is "circle" then parseInt(n.attr('cy'), 10) - y else parseInt(n.attr('height'), 10) + parseInt(n.attr('y'), 10) - y
-        if new_d > 20
-          if type is "circle" then n.attr("r", new_d) else n.attr('height', new_d).attr('y', y)        
-          @moveDots()
-      @options.bottom_dot = @createDot x_center, dimensions.y + dimensions.height, (x, y)=>
-        new_d = if type is "circle" then y - parseInt(n.attr('cy'), 10) else y - parseInt(n.attr('y'), 10)
-        if new_d > 20
-          if type is "circle" then n.attr("r", new_d) else n.attr('height', new_d).attr('y', y - new_d)        
-          @moveDots()
-      @options.right_dot  = @createDot dimensions.x + dimensions.width, y_center, (x, y)=>
-        new_d = if type is "circle" then x - parseInt(n.attr('cx'), 10) else x - parseInt(n.attr('x'), 10)
-        if new_d > 20  
-          if type is "circle" then n.attr("r", new_d) else n.attr('width', new_d).attr('x', x - new_d)        
-          @moveDots()   
-      @options.left_dot    = @createDot dimensions.x, y_center, (x, y)=>
-        new_d = if type is "circle" then parseInt(n.attr('cx'), 10) - x else parseInt(n.attr('width'), 10) + parseInt(n.attr('x'), 10) - x
-        if new_d > 20
-          if type is "circle" then n.attr("r", new_d) else n.attr('width', new_d).attr('x', x)        
-          @moveDots()   
+      drag = d3.behavior.drag()
+      drag.on 'drag', (d)=>
+        x          = d3.event.x
+        y          = d3.event.y
+        dimensions = n.node().getBBox()
+        x_center   = dimensions.x + dimensions.width*0.5
+        y_center   = dimensions.y + dimensions.height*0.5
+
+        console.log x_center, y_center, dimensions.x, dimensions.y
+
+        new_d = Math.sqrt Math.pow( y - y_center, 2 ) + Math.pow( x - x_center, 2 )
+        console.log 'new dim: ', new_d, ', x_center: ', x_center, y_center
+        switch d.name
+          when 'n'
+            dh = new_d*2 - dimensions.height
+            @setNodeAttribute n, 'height', new_d*2
+            console.log 'dh: ', dh
+
+            @setNodeAttribute n, 'y', dimensions.y - dh*0.5
+          when 'ne', 'nw'
+            if (x isnt x_center) or (y isnt y_center)
+              props.angle = props.angle + (180 / Math.PI) * Math.atan2(y - y_center, x - x_center)
+              dalpha      = (180 / Math.PI) * Math.atan(dimensions.width / dimensions.height)
+              console.log dalpha
+              props.angle = props.angle + 90 - dalpha if d.name is 'ne'
+              props.angle = props.angle + dalpha + 90 if d.name is 'nw'
+              @setNodeAttribute n, 'angle', props.angle
+
+        @moveDots()
+
+      drag.on 'dragend', =>
+        props = if type is 'circle' then { cx: parseFloat(node.attr('cx'), 10), cy: parseFloat(node.attr('cy'), 10), r: parseFloat(node.attr('r'), 10) } else { angle: @model.get('props').angle % 360, x: parseFloat(node.attr('x'), 10), y: parseFloat(node.attr('y'), 10), width: parseFloat(node.attr('width'), 10), height: parseFloat(node.attr('height'), 10) }
+        window.App.trigger "element:resize", { el: @model.get('id'), props: props }
+
+
+      @options.dots = @d3_el.selectAll('.dot').data([
+        { x: x_center, y: dimensions.y, name: 'n' }
+        { x: dimensions.x + dimensions.width, y: y_center, name: 'e' }
+        { x: dimensions.x + dimensions.width, y: dimensions.y, name: 'ne' }
+        { x: dimensions.x, y: dimensions.y, name: 'nw' }
+      ], (d)->
+        d.name
+      ).enter().append('circle').classed('dot', true).attr('cx', (d)->
+        d.x
+      ).attr('cy', (d)->
+        d.y
+      ).attr('r', 3).attr('fill', @model.get('props').fill).call drag
         
     destroyResize: ->
       @d3_el.selectAll('.dot').remove()
-      @options.top_dot    = undefined
-      @options.bottom_dot = undefined
-      @options.left_dot   = undefined
-      @options.right_dot  = undefined
 
   CanvasView = Marionette.CompositeView.extend
     childView: CanvasItem
