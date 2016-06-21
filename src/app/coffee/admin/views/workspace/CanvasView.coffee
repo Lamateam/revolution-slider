@@ -67,12 +67,20 @@ define "views/workspace/CanvasView", [
     onSomeElementSelected: ->
       if @getOption("stateModel").get("isElementSelected") is @model.get("id") then @setActive() else @setInactive()
     setNodeAttribute: (node, key, value)->
-      center_x = if @model.get('type') is 'circle' then @model.get('props').cx else @model.get('props').x+@model.get('props').width*0.5
-      center_y = if @model.get('type') is 'circle' then @model.get('props').cy else @model.get('props').y+@model.get('props').height*0.5
+      props    = @model.get 'props'
+      center_x = if @model.get('type') is 'circle' then props.cx else props.x + props.width*0.5
+      center_y = if @model.get('type') is 'circle' then props.cy else props.y + props.height*0.5
       switch 
-        when key is 'text' then node.text value
+        when key is 'x', key is 'y'
+          node.selectAll('tspan').attr 'x', props.x
+          node.attr key, value
+        when key is 'text', key is 'texts'
+          node.selectAll('tspan').remove()
+          arr   = value.split '\n'
+          fsize = props['font-size']
+          for str, i in arr
+            node.append('tspan').attr('dy', if i is 0 then 0 else fsize).attr('x', props.x).text(str)
         when key is 'angle' 
-          props = @model.get 'props'
           w2    = props.width*0.5
           h2    = props.height*0.5
           @d3_el.attr 'transform', 'rotate(' + value + ',' + (props.x+w2) + ',' + (props.y+h2) + ')'

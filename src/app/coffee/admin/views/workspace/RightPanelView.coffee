@@ -17,6 +17,7 @@ define "views/workspace/RightPanelView", [
       element_height: '[name="bind-element_height"]'
       element_fill: '[name="bind-element_fill"]'
       element_text: '[name="bind-element_text"]'
+      element_texts: '[name="bind-element_texts"]'
       element_font_size: '[name="bind-element_font-size"]'
       element_xlink_href: '[name="bind-element_xlink:href"]'
     events:
@@ -30,6 +31,7 @@ define "views/workspace/RightPanelView", [
       'blur [name="bind-element_height"]': 'onElementChange'
       'blur [name="bind-element_r"]': 'onElementChange'
       'blur [name="bind-element_text"]': 'onElementChange'
+      'blur [name="bind-element_texts"]': 'onElementChange'
       'blur [name="bind-element_font-size"]': 'onElementChange'
       'blur [name="bind-element_xlink:href"]': 'onElementChange'
     modelEvents:
@@ -48,7 +50,7 @@ define "views/workspace/RightPanelView", [
       window.App.trigger "element:change", data
     templateHelpers: ->
       res = 
-        type: @getOption 'type'
+        selection_type: @getOption 'type'
         getHeaderText: (type)->
           switch type
             when 'slide' then "Слайд"
@@ -62,7 +64,7 @@ define "views/workspace/RightPanelView", [
             when 'width' then "Ширина"
             when 'height' then "Высота"
             when 'r' then "Радиус"
-            when 'text' then "Текст"
+            when 'text', 'texts' then "Текст"
             when 'font-size' then "Размер шрифта"
             when 'angle' then "Поворот"
             when 'xlink:href' then "Ссылка на изображение"
@@ -71,7 +73,10 @@ define "views/workspace/RightPanelView", [
       data = { el: @model.get('id'), props: {} }
       data.props = switch @model.get('type') 
         when 'circle' then { cx: parseFloat(@ui.element_cx.val(), 10), cy: parseFloat(@ui.element_cy.val(), 10), r: parseFloat(@ui.element_r.val(), 10) } 
-        when 'text' then { x: parseFloat(@ui.element_x.val(), 10), y: parseFloat(@ui.element_y.val()), text: @ui.element_text.val(), "font-size": @ui.element_font_size.val() }
+        when 'text' 
+          _data = { x: parseFloat(@ui.element_x.val(), 10), y: parseFloat(@ui.element_y.val()), "font-size": @ui.element_font_size.val() }
+          if @model.get('props').text isnt undefined then _data.text = @ui.element_text.val() else _data.texts = @ui.element_texts.val()
+          _data
         when 'rect' then { x: parseFloat(@ui.element_x.val(), 10), y: parseFloat(@ui.element_y.val(), 10), width: parseFloat(@ui.element_width.val(), 10), height: parseFloat(@ui.element_height.val(), 10) }
         when 'image' then { x: parseFloat(@ui.element_x.val(), 10), y: parseFloat(@ui.element_y.val(), 10), width: parseFloat(@ui.element_width.val(), 10), height: parseFloat(@ui.element_height.val(), 10), "xlink:href": @ui.element_xlink_href.val() }
       window.App.trigger "element:change", data

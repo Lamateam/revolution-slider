@@ -79,7 +79,7 @@
     buttom.workspace-right_panel-settings.rotate_1080deg
  .workspace-right_panel-container
 
-   if type === 'slide'
+   if selection_type === 'slide'
      .workspace-right_panel-container-input_block.with_eye
        label Название слайда
        input.bind-slide_name(type="text", value=name)
@@ -135,8 +135,11 @@
 
        button.workspace-right_panel_add
 
-   else if type === 'element'
-     each val, index in props
-       .workspace-right_panel-container-input_block
-         label= getLabelText(index)
-         input(type="text", value=val, name="bind-element_"+index)        
+   else if selection_type === 'element'
+      each val, index in props
+        .workspace-right_panel-container-input_block
+          label= getLabelText(index)
+          if index === 'texts'
+            textarea(name="bind-element_texts")= val
+          else
+            input(type="text", value=val, name="bind-element_"+index)        
