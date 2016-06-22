@@ -144,6 +144,11 @@
         background #4F5963
         box-shadow 0px 2px 4px 0px rgba(0,0,0,0.03)
         border-radius 3px
+        transition 150ms all ease-in
+        
+        &:focus
+        &:active
+          background-color #6b747d
         
         &.time
           background-image url(images/rightpart/slydes/time.svg)
@@ -159,11 +164,11 @@
           &:hover
             background #4F5963
 
-      
       &-input_block
       &-select_block
       &-radio_block
       &-checkbox_block
+      &-color_picker
         padding-top 8px
         
         &.with_eye
@@ -173,7 +178,7 @@
             background-position 222px center
         
         &.fourth
-          width 68px
+          width 60px
         
         & label
         & span
@@ -197,7 +202,7 @@
           
           & span
             float left
-            opacity 0.2
+            opacity 0.45
             font-size 12px
             color #FFFFFF
             padding-left 24px

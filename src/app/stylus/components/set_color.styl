@@ -1,18 +1,36 @@
+.colorpicker-wrap
+  right 0!important
+  left auto
+
+
 .set
   &_color
     
     &_button
-      width 24px
-      height 24px
+      width 22px
+      height 22px
+      border-radius 3px
       
-    
     &_div
+      transition 150ms all ease-in
+      padding-left 7px
+      padding-top 6px
       border none
       outline none
       background #4F5963
       box-shadow 0px 2px 4px 0px rgba(0,0,0,0.03)
       border-radius 3px
-      width 68px
+      width 60px
+      height 34px
+      background-image url("images/header/triangle_down.svg")
+      background-repeat no-repeat
+      background-position 40px center
+      
+      &.active
+        background #6b747d
+        background-image url("images/header/triangle_down_active.svg")
+        background-repeat no-repeat
+        background-position 40px center        
 
     &_input
       display none
