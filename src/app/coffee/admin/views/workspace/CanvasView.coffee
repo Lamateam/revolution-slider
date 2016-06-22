@@ -44,11 +44,8 @@ define "views/workspace/CanvasView", [
       @d3_el.attr "stroke", "transparent"
       @destroyDots()
     attachElContent: ->
-      props  = @model.get("props")
-      width  = if props.width then props.width else props.r
-      height = if props.height then props.height else props.r
-      type   = @model.get 'type'
-
+      @setD3Attributes @model.get('type'), @model.get('props')
+    setD3Attributes: (type, props)->
       @options.node = @d3_el.append type if @options.node is undefined
       @setNodeAttribute(@options.node, key, value) for own key, value of props
 
@@ -195,6 +192,13 @@ define "views/workspace/CanvasView", [
     destroyDots: ->
       @d3_el.selectAll('.dot').remove()
 
+  CanvasWidget = CanvasItem.extend
+    canResize: false
+    canRotate: false
+    attachElContent: ->
+      visualize = @model.get 'visualize'
+      @setD3Attributes visualize.type, visualize.props
+
   CanvasView = Marionette.CompositeView.extend
     childView: CanvasItem
     childViewContainer: "svg"
@@ -202,6 +206,13 @@ define "views/workspace/CanvasView", [
       'change:name': 'render'
     events:
       'click .bind-slide-select': 'onSlideEditClick'
+    buildChildView: (item, ItemViewType, itemViewOptions)->
+      console.log 'here switch type'
+      options = _.extend { model: item }, itemViewOptions
+      View = switch
+        when item.get('type') is 'widget' then CanvasWidget
+        when true then CanvasItem
+      new View options
     childViewOptions: ->
       res = 
         stateModel: @options.stateModel

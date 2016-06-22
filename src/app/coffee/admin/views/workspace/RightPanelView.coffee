@@ -1,8 +1,10 @@
 define "views/workspace/RightPanelView", [ 
   "marionette"
-  "templates/workspace/right_panel" 
+  "templates/workspace/right_panel/project"
+  "templates/workspace/right_panel/slydes" 
+  "templates/workspace/right_panel/text"  
   "jscolor"
-], (Marionette, WorkspaceRightPanelTemplate)->
+], (Marionette, WorkspaceRightPanelProjectTemplate, WorkspaceRightPanelSlideTemplate, WorkspaceRightPanelTextTemplate)->
   WorkspaceRightPanelView = Marionette.ItemView.extend
     className: 'workspace-right_panel'
     ui:
@@ -36,7 +38,12 @@ define "views/workspace/RightPanelView", [
       'blur [name="bind-element_xlink:href"]': 'onElementChange'
     modelEvents:
       'sync': 'render'
-    template: WorkspaceRightPanelTemplate
+    template: ->
+      console.log 'here fetch template'
+      res = switch
+        when @getOption('type') is 'project' then WorkspaceRightPanelProjectTemplate
+        when @getOption('type') is 'slide' then WorkspaceRightPanelSlideTemplate
+        when @model.get('type') is 'text' then WorkspaceRightPanelTextTemplate
     onRender: ->
       console.log "render right panel"
       @initPicker()
