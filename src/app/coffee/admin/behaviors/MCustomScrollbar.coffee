@@ -12,6 +12,9 @@ define "behaviors/MCustomScrollbar", [
     onShow: ->
       if @$el.hasClass "mcsb-behavior"
         @initScrollbar @$el
+      else
+        el = @$el.find '.mcsb-behavior'
+        @initScrollbar el
     onBeforeDestroy: ->
       if @$el.hasClass "mcsb-behavior"
         @destroyScrollbar @$el
