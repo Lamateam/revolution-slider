@@ -10,17 +10,34 @@
       h3 Формат
       .workspace-right_panel-container-radio_format
         .row_line
-          input(type="radio", name="format", id = "4x3")
+
+          if dim == "4x3"
+            input(type="radio", name="format", id = "4x3", checked="checked")
+          else
+            input(type="radio", name="format", id = "4x3")
           label.item_1(for="4x3")
-            span 4:3        
-          input(type="radio", name="format", id = "3x4")
+            span 4:3
+
+          if dim == "3x4"
+            input(type="radio", name="format", id = "3x4", checked="checked")
+          else
+            input(type="radio", name="format", id = "3x4")
           label.item_2(for="3x4")
             span 3:4
+        
         .row_line   
-          input(type="radio", name="format", id = "16x9")
+
+          if dim == "16x9"
+            input(type="radio", name="format", id = "16x9", checked="checked")
+          else
+            input(type="radio", name="format", id = "16x9")
           label.item_3(for="16x9")
             span 16:9 
-          input(type="radio", name="format", id = "9x16")
+
+          if dim == "9x16"  
+            input(type="radio", name="format", id = "9x16", checked="checked")
+          else
+            input(type="radio", name="format", id = "9x16")
           label.item_4(for="9x16")
             span 9:16   
 
