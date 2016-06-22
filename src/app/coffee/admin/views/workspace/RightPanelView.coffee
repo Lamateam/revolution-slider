@@ -8,6 +8,7 @@ define "views/workspace/RightPanelView", [
   WorkspaceRightPanelView = Marionette.ItemView.extend
     className: 'workspace-right_panel'
     ui:
+      set_color: '.set_color'
       slide_name: '.bind-slide_name'
       slide_duration: '.bind-slide_duration'
       element_x: '[name="bind-element_x"]'
@@ -48,13 +49,15 @@ define "views/workspace/RightPanelView", [
       console.log "render right panel"
       @initPicker()
     initPicker: ->
-      onFillChange = @onFillChange.bind @
-      picker       = new jscolor @ui.element_fill[0] if @ui.element_fill.length isnt 0      
-      @ui.element_fill.on 'blur', _.once ->
-        onFillChange picker
-    onFillChange: (picker)->
-      data = { el: @model.get('id'), props: { fill: picker.toRGBString() } }
-      window.App.trigger "element:change", data
+      new jscolor el for el in @ui.set_color
+    # initPicker: ->
+    #   onFillChange = @onFillChange.bind @
+    #   picker       = new jscolor @ui.element_fill[0] if @ui.element_fill.length isnt 0      
+    #   @ui.element_fill.on 'blur', _.once ->
+    #     onFillChange picker
+    # onFillChange: (picker)->
+    #   data = { el: @model.get('id'), props: { fill: picker.toRGBString() } }
+    #   window.App.trigger "element:change", data
     templateHelpers: ->
       res = 
         selection_type: @getOption 'type'
