@@ -38,7 +38,7 @@ define "views/workspace/RightPanelView", [
       'blur [name="bind-element_xlink:href"]': 'onElementChange'
     modelEvents:
       'sync': 'render'
-    template: ->
+    getTemplate: ->
       console.log 'here fetch template'
       res = switch
         when @getOption('type') is 'project' then WorkspaceRightPanelProjectTemplate
