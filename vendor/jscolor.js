@@ -999,8 +999,8 @@ var jsc = {
 
     // Color Picker options
     //
-    this.width = 181; // width of color palette (in px)
-    this.height = 101; // height of color palette (in px)
+    this.width = 191; // width of color palette (in px)
+    this.height = 191; // height of color palette (in px)
     this.showOnClick = true; // whether to display the color picker when user clicks on its target element
     this.mode = 'HSV'; // HSV | HVS | HS | HV - layout of the color picker controls
     this.position = 'bottom'; // left | right | top | bottom - position relative to the target element
@@ -1012,11 +1012,11 @@ var jsc = {
     this.buttonColor = '#000000'; // CSS color
     this.buttonHeight = 18; // px
     this.padding = 12; // px
-    this.backgroundColor = '#FFFFFF'; // CSS color
-    this.borderWidth = 1; // px
+    this.backgroundColor = '#45525b'; // CSS color
+    this.borderWidth = 0; // px
     this.borderColor = '#BBBBBB'; // CSS color
-    this.borderRadius = 8; // px
-    this.insetWidth = 1; // px
+    this.borderRadius = 3; // px
+    this.insetWidth = 0; // px
     this.insetColor = '#BBBBBB'; // CSS color
     this.shadow = true; // whether to display shadow
     this.shadowBlur = 15; // px
