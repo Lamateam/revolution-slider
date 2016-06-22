@@ -2,7 +2,7 @@
   .workspace-right_panel-header
     h2 Слайд
     buttom.workspace-right_panel-settings
-  form.workspace-right_panel-container.mcsb-behavior
+  form.workspace-right_panel-container.mcsb-behavior.pd-submit-behavior
     .workspace-right_panel-container-input_block.with_eye
       label Название слайда
       input.bind-slide_name(type="text", value=name)
@@ -16,7 +16,7 @@
 
       .workspace-right_panel-container-color_picker
         div.set_color_div
-          button#set_slide_button.set_color_button(data-valueelement = "set_slide_input", data-styleelement="set_slide_button")
+          button#set_slide_button.set_color_button.set_color(data-valueelement = "set_slide_input", data-styleelement="set_slide_button")
 
           input#set_slide_input.set_color_input(value="#fff")
 
