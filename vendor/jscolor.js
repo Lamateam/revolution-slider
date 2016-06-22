@@ -1038,12 +1038,14 @@ var jsc = {
 
     this.hide = function () {
       if (isPickerOwner()) {
+        $(targetElement.parentNode).removeClass('active');
         detachPicker();
       }
     };
 
 
     this.show = function () {
+      $(targetElement.parentNode).addClass('active');
       drawPicker();
     };
 
@@ -1438,6 +1440,7 @@ var jsc = {
       p.wrap.style.width = (dims[0] + 2 * THIS.borderWidth) + 'px';
       p.wrap.style.height = (dims[1] + 2 * THIS.borderWidth) + 'px';
       p.wrap.style.zIndex = THIS.zIndex;
+      p.wrap.className = 'colorpicker-wrap';
 
       // picker
       p.box.style.width = dims[0] + 'px';
