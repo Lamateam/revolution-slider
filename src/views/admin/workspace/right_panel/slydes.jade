@@ -7,21 +7,21 @@
       label Название слайда
       input.bind-slide_name(type="text", value=name)
 
-    .workspace-right_panel-container-select_block.fourth
-      label Порядок
-      select.bind-slide_duration
-        option(value="1") 1
-        option(value="2",selected="selected") 2
-        option(value="3") 3
 
-    .workspace-right_panel-container-color_picker
-      div.set_color_div
-        button#set_slide_button.set_color_button(data-valueelement = "set_slide_input", data-styleelement="set_slide_button")
-        input#set_slide_input.set_color_input
+    div
+      .workspace-right_panel-container-select_block.fourth
+        label Порядок
+        select.bind-slide_duration
+          option(value="1") 1
+          option(value="2",selected="selected") 2
+          option(value="3") 3
 
-    .workspace-right_panel-container-select_block.fourth
-      label Фон
-      input.set_color(type="text")
+      .workspace-right_panel-container-color_picker
+        div.set_color_div
+          button#set_slide_button.set_color_button(data-valueelement = "set_slide_input", data-styleelement="set_slide_button")
+
+          input#set_slide_input.set_color_input(value="#fff")
+
 
     .workspace-right_panel-container_big
       h3 Повтор
