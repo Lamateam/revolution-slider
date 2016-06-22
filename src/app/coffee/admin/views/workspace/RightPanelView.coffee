@@ -46,10 +46,9 @@ define "views/workspace/RightPanelView", [
         when @getOption('type') is 'slide' then WorkspaceRightPanelSlideTemplate
         when @model.get('type') is 'text' then WorkspaceRightPanelTextTemplate
     onRender: ->
-      console.log "render right panel"
       @initPicker()
     initPicker: ->
-      new jscolor el for el in @ui.set_color
+      new jscolor(el, { valueElement: @$el.find('#' + el.getAttribute('data-valueelement'))[0], styleElement: @$el.find('#' + el.getAttribute('data-styleelement'))[0] }) for el in @ui.set_color
     # initPicker: ->
     #   onFillChange = @onFillChange.bind @
     #   picker       = new jscolor @ui.element_fill[0] if @ui.element_fill.length isnt 0      
