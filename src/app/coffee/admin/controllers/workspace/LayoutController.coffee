@@ -56,7 +56,8 @@ define "controllers/workspace/LayoutController", [
       @getOption('layout').renderLeftPanel
         model: @getOption('projectModel')
     onWorkspaceName: ->
-      @getOption('stateModel').setState "isNameChange"
+      @getOption('stateModel').clearState "isElementSelected"
+      @renderRightPanel @getOption('projectModel'), 'project'      
     onWorkspaceUndo: ->
       if @getOption('historyCollection').canUndo()
         console.log "undo"
@@ -130,7 +131,6 @@ define "controllers/workspace/LayoutController", [
       data.id = elementsCollection.last().get('id') + 1
       elementsCollection.addElement data
     onSlideChange: (data)->
-      console.log data
       @getOption('historyCollection').addAction { action: "change_slide", options: {current: data, previous: @getOption('slideModel').toJSON() } }
       @changeSlide data
     onSlideSelect: (data)->

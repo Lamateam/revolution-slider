@@ -39,7 +39,7 @@ define "views/workspace/RightPanelView", [
     modelEvents:
       'sync': 'render'
     getTemplate: ->
-      console.log 'here fetch template'
+      console.log @getOption('type')
       res = switch
         when @getOption('type') is 'project' then WorkspaceRightPanelProjectTemplate
         when @getOption('type') is 'slide' then WorkspaceRightPanelSlideTemplate

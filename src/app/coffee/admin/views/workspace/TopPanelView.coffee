@@ -7,7 +7,6 @@ define "views/workspace/TopPanelView", [
     ui:
       "name_change": ".bind-name_change"
     events: 
-      "blur .bind-name_change": "onBlurNameChange"
       "click .bind-name": "onNameClick"
       "click .bind-undo": "onUndoClick"
       "click .bind-redo": "onRedoClick"
