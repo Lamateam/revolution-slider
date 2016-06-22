@@ -3,6 +3,7 @@ define "views/workspace/RightPanelView", [
   "templates/workspace/right_panel/project"
   "templates/workspace/right_panel/slydes" 
   "templates/workspace/right_panel/text" 
+  "behaviors/PreventDefaultStopPropagation"
   "behaviors/MCustomScrollbar" 
   "jscolor"
 ], (Marionette, WorkspaceRightPanelProjectTemplate, WorkspaceRightPanelSlideTemplate, WorkspaceRightPanelTextTemplate)->
@@ -10,6 +11,7 @@ define "views/workspace/RightPanelView", [
     className: 'workspace-right_panel'
     behaviors:
       MCustomScrollbar: {}
+      PreventDefaultStopPropagation: {}
     ui:
       set_color: '.set_color'
       slide_name: '.bind-slide_name'
