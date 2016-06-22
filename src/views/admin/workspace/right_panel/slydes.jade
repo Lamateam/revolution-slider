@@ -2,7 +2,7 @@
   .workspace-right_panel-header
     h2 Слайд
     buttom.workspace-right_panel-settings
-  .workspace-right_panel-container
+  form.workspace-right_panel-container
     .workspace-right_panel-container-input_block.with_eye
       label Название слайда
       input.bind-slide_name(type="text", value=name)
@@ -18,7 +18,6 @@
       div.set_color_div
         button#set_slide_button.set_color_button(data-valueelement = "set_slide_input", data-styleelement="set_slide_button")
         input#set_slide_input.set_color_input
-
 
     .workspace-right_panel-container-select_block.fourth
       label Фон
