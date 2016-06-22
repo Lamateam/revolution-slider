@@ -5,7 +5,7 @@
     <defs></defs>
     <g id="U-+-Rectangle-132" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" transform="translate(68.000000, 0.000000)">
         <g transform="translate(11.000000, 8.000000)">
-            <text id="U" stroke="#979797" opacity="0.699999988" font-family=".HelveticaNeueDeskInterface-Regular, .Helvetica Neue DeskInterface" font-size="14" font-weight="normal" fill="#FFFFFF">
+            <text id="U" stroke="#FFFFFF" opacity="0.699999988" font-family=".HelveticaNeueDeskInterface-Regular, .Helvetica Neue DeskInterface" font-size="14" font-weight="normal" fill="#FFFFFF">
                 <tspan x="1" y="14">U</tspan>
             </text>
             <rect id="Rectangle-132" fill="#D8D8D8" opacity="0.7" x="0" y="16" width="13" height="1"></rect>

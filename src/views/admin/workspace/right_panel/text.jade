@@ -1,9 +1,59 @@
-.workspace-right_panel-project 
+.workspace-right_panel-text 
   .workspace-right_panel-header
     h2 Текст
     buttom.workspace-right_panel-settings
   form.workspace-right_panel-container.mcsb-behavior.pd-submit-behavior
-    .workspace-right_panel-container-select_block.margintop_5
-      select
-        option(value="", selected="selected") Helvetica
 
+    .workspace-right_panel-container-input_block
+      label Текст
+      input.bind-text(type="text", value=name)
+
+    .workspace-right_panel-container_big
+      h3 Настройки текста 
+      .workspace-right_panel-container-select_block.margintop_5
+        select
+          option(value="", selected="selected") Helvetica
+
+        div.floatleft.width100.margintop5
+          .workspace-right_panel-container-input_block.biu
+            button.bold
+            button.italic
+            button.underline
+          .workspace-right_panel-container-color_picker
+            div.set_color_div.set_color(data-valueelement = "set_slide_input", data-styleelement="set_slide_button")
+              button#set_slide_button.set_color_button
+              input#set_slide_input.set_color_input(value="#fff")
+
+          .workspace-right_panel-container-select_block.fourth
+            select.bind-slide_duration
+              option(value="8") 8
+              option(value="9",selected="selected") 9
+              option(value="10") 10
+              option(value="11") 11
+              option(value="12") 12
+              option(value="14") 14
+              option(value="16") 16
+              option(value="18") 18
+              option(value="20") 20
+              option(value="24") 24
+              option(value="30") 30
+              option(value="36") 36
+              option(value="48") 48
+              option(value="60") 60
+              option(value="72") 72
+              option(value="90") 90
+
+    .workspace-right_panel-container_big
+      h3 Позиция   
+
+    .workspace-right_panel-container_big
+      h3 Вход   
+      button.workspace-right_panel_add
+
+    .workspace-right_panel-container_big
+      h3 Анимации
+      button.workspace-right_panel_add
+
+    .workspace-right_panel-container_big
+      h3 Выход
+      button.workspace-right_panel_add

@@ -16,8 +16,8 @@
 
       .workspace-right_panel-container-color_picker
         label Фон
-        div.set_color_div
-          button#set_slide_button.set_color_button.set_color(data-valueelement = "set_slide_input", data-styleelement="set_slide_button")
+        div.set_color_div.set_color(data-valueelement = "set_slide_input", data-styleelement="set_slide_button")
+          button#set_slide_button.set_color_button
           input#set_slide_input.set_color_input(value="#fff")
 
     .workspace-right_panel-container_big
@@ -53,7 +53,7 @@
         input.time(type="text", value="500")
         button.plus
         button.minus          
-        button.workspace-right_panel_add
+      button.workspace-right_panel_add
 
     .workspace-right_panel-container_big
       h3 Выход

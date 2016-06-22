@@ -999,8 +999,8 @@ var jsc = {
 
     // Color Picker options
     //
-    this.width = 191; // width of color palette (in px)
-    this.height = 191; // height of color palette (in px)
+    this.width = 198; // width of color palette (in px)
+    this.height = 198; // height of color palette (in px)
     this.showOnClick = true; // whether to display the color picker when user clicks on its target element
     this.mode = 'HSV'; // HSV | HVS | HS | HV - layout of the color picker controls
     this.position = 'bottom'; // left | right | top | bottom - position relative to the target element
