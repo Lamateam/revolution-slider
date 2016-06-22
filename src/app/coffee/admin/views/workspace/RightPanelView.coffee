@@ -2,11 +2,14 @@ define "views/workspace/RightPanelView", [
   "marionette"
   "templates/workspace/right_panel/project"
   "templates/workspace/right_panel/slydes" 
-  "templates/workspace/right_panel/text"  
+  "templates/workspace/right_panel/text" 
+  "behaviors/MCustomScrollbar" 
   "jscolor"
 ], (Marionette, WorkspaceRightPanelProjectTemplate, WorkspaceRightPanelSlideTemplate, WorkspaceRightPanelTextTemplate)->
   WorkspaceRightPanelView = Marionette.ItemView.extend
     className: 'workspace-right_panel'
+    behaviors:
+      MCustomScrollbar: {}
     ui:
       set_color: '.set_color'
       slide_name: '.bind-slide_name'
