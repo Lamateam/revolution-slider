@@ -8,16 +8,21 @@
       input.bind-slide_name(type="text", value=name)
 
     .workspace-right_panel-container-select_block.fourth
-      label Фон
-      input.set_color(type="text")
-
-
-    .workspace-right_panel-container-select_block.fourth
       label Порядок
       select.bind-slide_duration
         option(value="1") 1
         option(value="2",selected="selected") 2
         option(value="3") 3
+
+    .workspace-right_panel-container-color_picker
+      div
+        button#set_slide.set_color(data-valueelement = "set_slide", data-styleelement="set_slide")
+        input#set_slide.set_color
+
+
+    .workspace-right_panel-container-select_block.fourth
+      label Фон
+      input.set_color(type="text")
 
     .workspace-right_panel-container_big
       h3 Повтор
@@ -43,7 +48,7 @@
 
       .workspace-right_panel-container-select_block.margintop_5
         select
-        option(value="1", selected="selected") Из непрозрачного в прозрачный
+          option(value="1", selected="selected") Из непрозрачного в прозрачный
 
       .workspace-right_panel-container-block.margintop_15
         select
