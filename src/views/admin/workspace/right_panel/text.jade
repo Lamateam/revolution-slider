@@ -44,7 +44,49 @@
               option(value="90") 90
 
     .workspace-right_panel-container_big
-      h3 Позиция   
+      h3 Позиция
+      .workspace-right_panel-container-position
+      
+        if position == "1"
+          input(type="radio", name="position", id = "1", checked="checked")
+        else
+          input(type="radio", name="position", id = "1")
+        label.item1(for="1")
+
+        if position == "2"
+          input(type="radio", name="position", id = "2", checked="checked")
+        else
+          input(type="radio", name="position", id = "2")
+        label.item2(for="2")
+
+        if position == "3"
+          input(type="radio", name="position", id = "3", checked="checked")
+        else
+          input(type="radio", name="position", id = "3")
+        label.item3(for="3")
+
+        if position == "4"
+          input(type="radio", name="position", id = "4", checked="checked")
+        else
+          input(type="radio", name="position", id = "4")
+        label.item4(for="4")
+
+      .workspace-right_panel-container-rotate.margintop10
+        .rotate.width50_percent
+          input(type="text")
+
+        .zindex.width50_percent
+          label Z-index
+          input(type="text")
+      .workspace-right_panel-container-rotate.margintop15
+        .zindex.width50_percent.pos
+          label X
+          input(type="text")
+        .zindex.width50_percent.pos
+          label Y
+          input(type="text")
+
+
 
     .workspace-right_panel-container_big
       h3 Вход   

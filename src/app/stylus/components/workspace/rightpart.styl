@@ -1,7 +1,8 @@
 .workspace
   &-right_panel
-    top 60px
-    bottom 0px
+    height 100%
+    padding-top 60px
+    overflow hidden
     right 0px
     position absolute
     background-image linear-gradient(-90deg, #303C45 52%, #36414A 100%)
@@ -79,6 +80,8 @@
         
     &-container
       padding-bottom 30px
+      height 100%
+      height calc(100% - 60px)
       
       &_big
         margin-top 22px
@@ -131,6 +134,7 @@
         
       & input
       & select
+      & textarea
         font-family Arial, sans-serif
         font-size 14px
         padding-left 9px
@@ -150,12 +154,19 @@
         &:active
           background-color #6b747d
         
+      & textarea
+        height 85px
+
+      & input
+
         &.time
           background-image url(images/rightpart/slydes/time.svg)
           background-repeat no-repeat
           background-position 8px center
           padding-left 29px 
-        
+      
+
+      & select
         & option
           height 34px
           font-size 12px
@@ -164,22 +175,46 @@
           &:hover
             background #4F5963
 
-      &-input_block
+      &-rotate
+        padding-top 8px        
+
+
+
       &-select_block
       &-radio_block
       &-checkbox_block
       &-color_picker
+      &-position
+      &-rotate
+      &-input_block  
         padding-top 8px
         
+        &.fourth
+          width 60px
+          
+          & select
+            text-align center
+                  
+        & label
+        & span
+          font-family GothaProReg, sans-serif
+          margin-top 3px
+          margin-bottom 4px
+          color color_white
+          font-size 13px
+
+        & input
+        & select
+          overflow visible
+          width 100%
+ 
+      &-input_block     
         &.with_eye
           & input
             background-image url("images/rightpart/slydes/eye.svg")
             background-repeat no-repeat
             background-position 222px center
         
-        &.fourth
-          width 60px
-          
         &.biu
           overflow hidden
           margin-top 8px
@@ -206,21 +241,8 @@
             &.italic
               background-image url("images/rightpart/type_text/italic.svg")
             &.underline
-              background-image url("images/rightpart/type_text/underline.svg")
-                  
-        & label
-        & span
-          font-family GothaProReg, sans-serif
-          margin-top 3px
-          margin-bottom 4px
-          color color_white
-          font-size 13px
+              background-image url("images/rightpart/type_text/underline.svg")      
 
-        & input
-        & select
-          overflow visible
-          width 100%
-      
       &_row
         
         &_time
@@ -393,6 +415,110 @@
             &.item_4
               background #cdcdcd url(images/rightpart/format/9.16_active.svg)  center 10px no-repeat
           
+      &-position
+        & input[type="radio"]
+          & + label
+            width 25%
+            height 40px
+            float left
+            margin-right 0px
+            background-position center
+            background-repeat no-repeat
+            transition 150ms all ease-in
+            
+            &.item1
+              background-image url(images/rightpart/position/1.svg)
+
+              &:hover
+                background-image url(images/rightpart/position/1_active.svg)                
+
+            &.item2
+              background-image url(images/rightpart/position/2.svg)
+
+              &:hover
+                background-image url(images/rightpart/position/2_active.svg) 
+            
+            &.item3
+              background-image url(images/rightpart/position/3.svg)          
+
+              &:hover
+                background-image url(images/rightpart/position/3_active.svg)   
+
+            &.item4
+              background-image url(images/rightpart/position/4.svg) 
+
+              &:hover
+                background-image url(images/rightpart/position/4_active.svg) 
+                
+          &:checked + label
+            
+            &.item1
+              background-image url(images/rightpart/position/1_active.svg)
+               
+
+            &.item2
+              background-image url(images/rightpart/position/2_active.svg)
+
+            
+            &.item3
+              background-image url(images/rightpart/position/3_active.svg)          
+  
+
+            &.item4
+              background-image url(images/rightpart/position/4_active.svg) 
+
+      &-rotate
+        float left
+        width 100%
+        
+        & .rotate
+          float left        
+          overflow hidden
+          padding-right 38px
+          background url("images/rightpart/rotate/rotate_right.svg") left center no-repeat, url("images/rightpart/rotate/deg.svg") 95px 9px no-repeat
+
+          & input
+            text-align center
+            width 50px
+            float right
+        
+          & + .zindex
+            float right
+
+        & .zindex
+          overflow hidden
+          float left
+
+          label
+            width 50%
+            text-align center
+            margin-top 0px
+            margin-bottom 0px
+            height 34px
+            line-height 36px
+
+          input
+            width 50%
+            float right
+            text-align center
+            
+          &.pos
+            
+            label
+              width 33%
+              
+            input
+              width 66%
+
+        
+
+
+            
+
+              
+
+                         
+
 
       
         
