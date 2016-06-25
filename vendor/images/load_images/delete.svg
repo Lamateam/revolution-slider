@@ -1,0 +1,20 @@
+
+<svg width="18px" height="23px" viewBox="459 92 18 23" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 3.8.3 (29802) - http://www.bohemiancoding.com/sketch -->
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <path d="M1.99406028,4 C0.892771196,4 0.113348927,4.8926228 0.251149812,5.97780477 L2.03456447,20.0221952 C2.17327068,21.1145066 3.18249512,22 4.2764195,22 L11.7235805,22 C12.8230166,22 13.8276346,21.1073772 13.9654355,20.0221952 L15.7488502,5.97780477 C15.8875564,4.88549336 15.1054862,4 14.0059397,4 L1.99406028,4 Z" id="path-1"></path>
+        <mask id="mask-2" maskContentUnits="userSpaceOnUse" maskUnits="objectBoundingBox" x="0" y="0" width="15.4663053" height="18" fill="white">
+            <use xlink:href="#path-1"></use>
+        </mask>
+    </defs>
+    <g id="icon_3058" opacity="0.699999988" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" transform="translate(460.000000, 93.000000)">
+        <g id="Rectangle-84-+-Line-+-Line-2" stroke="#FFFFFF">
+            <use id="Rectangle-84" mask="url(#mask-2)" stroke-width="4" fill-opacity="0" fill="#D8D8D8" xlink:href="#path-1"></use>
+            <path d="M5.71428571,5.6875 L6.85714286,20.453125" id="Line" stroke-width="2" stroke-linecap="square"></path>
+            <path d="M10.2857143,5.6875 L9.14285714,20.3125" id="Line-2" stroke-width="2" stroke-linecap="square"></path>
+            <path d="M0.5,2 L15.5588235,2" id="Line" stroke-width="2" stroke-linecap="round"></path>
+            <path d="M6.5,1 L10.2647059,1" id="Line-2" stroke-width="2" stroke-linecap="round"></path>
+        </g>
+    </g>
+</svg>

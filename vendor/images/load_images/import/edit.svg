@@ -1,0 +1,15 @@
+
+<svg width="24px" height="24px" viewBox="0 2 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 3.8.3 (29802) - http://www.bohemiancoding.com/sketch -->
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <path d="M8.47192802,21.742421 L8.85418182,22.1245059 L24,6.97498814 L17.0293281,0 L1.87672727,15.1501344 L2.26012395,15.5333617 L0.0783083004,23.9241581 L8.47192802,21.742421 Z" id="path-1"></path>
+        <mask id="mask-2" maskContentUnits="userSpaceOnUse" maskUnits="objectBoundingBox" x="0" y="0" width="23.9216917" height="23.9241581" fill="white">
+            <use xlink:href="#path-1"></use>
+        </mask>
+    </defs>
+    <g id="icon_22169-2" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" transform="translate(0.000000, 2.000000)">
+        <use id="Shape" stroke="#939BA3" mask="url(#mask-2)" stroke-width="4" fill-opacity="0" fill="#939BA3" xlink:href="#path-1"></use>
+        <path d="M8.5,20.5 L3.75633324,15.7563332" id="Line" stroke="#939BA3" stroke-width="2" stroke-linecap="square"></path>
+    </g>
+</svg>

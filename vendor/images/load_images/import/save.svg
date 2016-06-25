@@ -1,0 +1,15 @@
+
+<svg width="30px" height="24px" viewBox="0 2 30 24" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 3.8.3 (29802) - http://www.bohemiancoding.com/sketch -->
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <rect id="path-1" x="0" y="0" width="30" height="24" rx="3"></rect>
+        <mask id="mask-2" maskContentUnits="userSpaceOnUse" maskUnits="objectBoundingBox" x="0" y="0" width="30" height="24" fill="white">
+            <use xlink:href="#path-1"></use>
+        </mask>
+    </defs>
+    <g id="Rectangle-198-+-Rectangle-202" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" transform="translate(0.000000, 2.000000)">
+        <use id="Rectangle-198" stroke="#939BA3" mask="url(#mask-2)" stroke-width="4" xlink:href="#path-1"></use>
+        <path d="M13.4956501,19 L6.00276013,19 C4.89354265,19 4.49897526,18.2515371 5.11449245,17.3282613 L8.88550755,11.6717387 C9.49876335,10.751855 10.5494886,10.7064854 11.2273172,11.5779792 L13.0920245,13.9754601 L16.3344225,8.70656347 C16.9114408,7.76890868 17.9048198,7.72457045 18.5465245,8.61837339 L24.8380909,17.3816266 C25.4740381,18.2674102 25.1072288,19 24.0059397,19 L13.4956501,19 Z M22.915048,9.11243196 C24.0506647,9.11243196 24.971264,8.19183271 24.971264,7.05621598 C24.971264,5.92059925 24.0506647,5 22.915048,5 C21.7794313,5 20.858832,5.92059925 20.858832,7.05621598 C20.858832,8.19183271 21.7794313,9.11243196 22.915048,9.11243196 Z" id="Rectangle-199" fill="#939BA3"></path>
+    </g>
+</svg>

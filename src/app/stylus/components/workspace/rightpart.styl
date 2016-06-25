@@ -45,6 +45,10 @@
       h2
         background url(images/rightpart/project_header/time.svg) no-repeat 8px center
 
+    &-shape
+      h2
+        background url(images/rightpart/project_header/figure.svg) no-repeat 8px center
+
     &-header
       margin-left -15px
       margin-right -15px
@@ -191,6 +195,7 @@
       &-checkbox_block
       &-color_picker
       &-position
+      &-shape
       &-rotate
       &-input_block  
         padding-top 8px
@@ -431,7 +436,58 @@
                   
             &.item_4
               background #cdcdcd url(images/rightpart/format/9.16_active.svg)  center 10px no-repeat
+
+
+      &-shape
+        & input[type="radio"]
+          & + label
+            width 33.3%
+            height 52px
+            float left
+            margin-right 0px
+            background-position center
+            background-repeat no-repeat
+            transition 150ms all ease-in
+            background-color #cdcdcd
+            box-shadow 0 2px 4px 0 rgba(0,0,0,0.03)
+
+            
+            &:hover
+              background-color #cdcdcd
+              box-shadow 0 2px 4px 0 rgba(0,0,0,0.03)            
+
+            &.item1
+              background-image url(images/rightpart/figure/1.svg)
+
+              &:hover
+                background-image url(images/rightpart/figure/1_active.svg)                
+
+            &.item2
+              background-image url(images/rightpart/figure/2.svg)
+
+              &:hover
+                background-image url(images/rightpart/figure/2_active.svg) 
+            
+            &.item3
+              background-image url(images/rightpart/figure/3.svg)          
+
+              &:hover
+                background-image url(images/rightpart/figure/3_active.svg)   
+                
+          &:checked + label
+            
+            &.item1
+              background-image url(images/rightpart/figure/1_active.svg)
+               
+
+            &.item2
+              background-image url(images/rightpart/figure/2_active.svg)
+
+            
+            &.item3
+              background-image url(images/rightpart/figure/3_active.svg)          
           
+
       &-position
         & input[type="radio"]
           & + label
@@ -442,7 +498,8 @@
             background-position center
             background-repeat no-repeat
             transition 150ms all ease-in
-            
+
+        
             &.item1
               background-image url(images/rightpart/position/1.svg)
 
