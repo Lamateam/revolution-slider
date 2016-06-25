@@ -153,9 +153,14 @@
         &:focus
         &:active
           background-color #6b747d
+          
+
+        &.text-center
+          text-align center
         
       & textarea
         height 85px
+        resize none
 
       & input
 
@@ -167,6 +172,7 @@
       
 
       & select
+        
         & option
           height 34px
           font-size 12px
@@ -194,6 +200,16 @@
           
           & select
             text-align center
+            
+        &.lineheight
+          width 103px
+          padding-top 0px
+          margin-top 8px
+          background url("images/rightpart/size_text.svg") 9px center no-repeat
+          
+          & select
+            width 60px
+            float right
                   
         & label
         & span
@@ -205,6 +221,7 @@
 
         & input
         & select
+        & textarea
           overflow visible
           width 100%
  
