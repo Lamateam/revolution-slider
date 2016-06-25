@@ -78,13 +78,16 @@
         .zindex.width50_percent
           label Z-index
           input(type="text")
-      .workspace-right_panel-container-rotate.margintop15
-        .zindex.width50_percent.pos
-          label X
-          input(type="text")
-        .zindex.width50_percent.pos
-          label Y
-          input(type="text")
+      .floatleft.width100.margintop10
+        .workspace-right_panel-container-size_block.margintop5
+          .width50_percent.position
+            label X
+            input(type="text")
+            span px
+          .width50_percent.position.y
+            label Y
+            input(type="text")
+            span px
 
 
 
@@ -106,25 +109,62 @@
     h2 Фигура
     buttom.workspace-right_panel-settings
   form.workspace-right_panel-container.mcsb-behavior.pd-submit-behavior
-    .workspace-right_panel-container_big
-      .workspace-right_panel-container-shape
-        if shape == "rect"
-          input(type="radio", name="shape", id = "rect", checked="checked")
-        else
-          input(type="radio", name="shape", id = "rect")
-        label.item1(for="rect")
+    .workspace-right_panel-container-shape
+      if shape == "rect"
+        input(type="radio", name="shape", id = "rect", checked="checked")
+      else
+        input(type="radio", name="shape", id = "rect")
+      label.item1(for="rect")
 
-        if shape == "circle"
-          input(type="radio", name="shape", id = "circle", checked="checked")
-        else
-          input(type="radio", name="shape", id = "circle")
-        label.item2(for="circle")
+      if shape == "circle"
+        input(type="radio", name="shape", id = "circle", checked="checked")
+      else
+        input(type="radio", name="shape", id = "circle")
+      label.item2(for="circle")
 
-        if shape == "round"
-          input(type="radio", name="shape", id = "round", checked="checked")
-        else
-          input(type="radio", name="shape", id = "round")
-        label.item3(for="round")
+      if shape == "round"
+        input(type="radio", name="shape", id = "round", checked="checked")
+      else
+        input(type="radio", name="shape", id = "round")
+      label.item3(for="round")
+
+
+    .floatleft.width100.margintop10
+      .workspace-right_panel-container-size_block
+        .width50_percent.hor
+          input(type="text")
+          span px
+        .width50_percent.ver
+          input(type="text")
+          span px
+    .floatleft.width100.margintop10
+      .workspace-right_panel-container-size_block.margintop10
+        .width50_percent.position
+          label X
+          input(type="text")
+          span px
+        .width50_percent.position.y
+          label Y
+          input(type="text")
+          span px
+
+
+
+    .floatleft.width100.margintop10
+      .workspace-right_panel-container-color_picker
+        //- не вешается active на блок!
+        .set_color_div.set_color(data-valueelement = "set_slide_input", data-styleelement="set_slide_button")
+          button#set_slide_button.set_color_button
+          input#set_slide_input.set_color_input(value="#fff")
+
+
+      if shape == "round"            
+        .workspace-right_panel-container-input_block.floatright
+          span.radius Радиус угла
+          .workspace-right_panel-container-block_plus.radius.margintop10
+            input(type="text", value="500")
+            button.plus
+            button.minus     
 
 
 

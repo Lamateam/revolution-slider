@@ -1,6 +1,5 @@
 import_tree('./mixins')
 import_tree('./components')
-import_tree('./components/workspace')
 import_tree('./media')
 
 @import 'variables.styl'
@@ -101,6 +100,10 @@ body
         
         & + div
           float right   
+          
+.float
+  &right
+    float right!important
 
 
 .rotate

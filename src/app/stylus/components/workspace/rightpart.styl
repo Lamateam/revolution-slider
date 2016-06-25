@@ -47,7 +47,7 @@
 
     &-shape
       h2
-        background url(images/rightpart/project_header/figure.svg) no-repeat 8px center
+        background url(images/rightpart/project_header/figure.svg) no-repeat 5px center
 
     &-header
       margin-left -15px
@@ -197,6 +197,7 @@
       &-position
       &-shape
       &-rotate
+      &-size_block
       &-input_block  
         padding-top 8px
         
@@ -230,7 +231,12 @@
           overflow visible
           width 100%
  
-      &-input_block     
+      &-input_block
+        
+        & span.radius
+          line-height 34px
+          
+
         &.with_eye
           & input
             background-image url("images/rightpart/slydes/eye.svg")
@@ -299,6 +305,20 @@
           width 90px
           float right
           position relative
+          
+          &.radius
+            float right!important
+            margin-left 0px
+            width 80px
+            padding-left 7px
+            
+            & span
+              font-family GothaProReg, sans-serif
+              color color_white
+              font-size 13px
+              line-height 34px
+              
+
 
           & input
             width 100%
@@ -439,18 +459,23 @@
 
 
       &-shape
+        overflow hidden
+        padding-top 14px
+
         & input[type="radio"]
           & + label
-            width 33.3%
+            width 82px
             height 52px
             float left
             margin-right 0px
             background-position center
             background-repeat no-repeat
             transition 150ms all ease-in
-            background-color #cdcdcd
+            background-color #4F5963
             box-shadow 0 2px 4px 0 rgba(0,0,0,0.03)
 
+            & + input + label
+              margin-left 1px
             
             &:hover
               background-color #cdcdcd
@@ -458,6 +483,7 @@
 
             &.item1
               background-image url(images/rightpart/figure/1.svg)
+              border-radius 6px 0px 0px 6px
 
               &:hover
                 background-image url(images/rightpart/figure/1_active.svg)                
@@ -469,12 +495,15 @@
                 background-image url(images/rightpart/figure/2_active.svg) 
             
             &.item3
-              background-image url(images/rightpart/figure/3.svg)          
+              background-image url(images/rightpart/figure/3.svg)
+              border-radius 0px 6px 6px 0px          
 
               &:hover
                 background-image url(images/rightpart/figure/3_active.svg)   
                 
           &:checked + label
+            background-color #cdcdcd
+            box-shadow 0 2px 4px 0 rgba(0,0,0,0.03)   
             
             &.item1
               background-image url(images/rightpart/figure/1_active.svg)
@@ -498,6 +527,7 @@
             background-position center
             background-repeat no-repeat
             transition 150ms all ease-in
+            
 
         
             &.item1
@@ -583,6 +613,55 @@
               
             input
               width 66%
+      &-size_block
+        width 100%
+        overflow hidden
+
+        & .ver
+        & .hor
+        & .position
+          float left
+          padding-left 25px
+          overflow hidden
+          
+          & input
+            float left
+            width 68px
+            
+          & span
+          & label
+            margin 0px
+            margin-right 9px
+            line-height 32px
+            float right
+            
+        & .position
+          padding-left 4px
+          
+          &.y
+            padding-left 8px
+            
+            & label
+              margin-right 9px
+              
+          & label
+            line-height 36px
+            margin 0px
+            float left
+            margin-right 13px
+            
+
+          & span
+            line-height 34px
+            
+            
+          
+        & .ver
+          background url("images/rightpart/size/ver.svg") 8px center no-repeat
+
+        & .hor
+          background url("images/rightpart/size/gor.svg") left center no-repeat          
+
 
         
 

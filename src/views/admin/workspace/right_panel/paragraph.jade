@@ -20,7 +20,7 @@
             button.italic
             button.underline
           .workspace-right_panel-container-color_picker
-            div.set_color_div.set_color(data-valueelement = "set_slide_input", data-styleelement="set_slide_button")
+            .set_color_div.set_color(data-valueelement = "set_slide_input", data-styleelement="set_slide_button")
               button#set_slide_button.set_color_button
               input#set_slide_input.set_color_input(value="#fff")
 
@@ -89,13 +89,16 @@
         .zindex.width50_percent
           label Z-index
           input(type="text")
-      .workspace-right_panel-container-rotate.margintop15
-        .zindex.width50_percent.pos
-          label X
-          input(type="text")
-        .zindex.width50_percent.pos
-          label Y
-          input(type="text")
+      .floatleft.width100.margintop10
+        .workspace-right_panel-container-size_block.margintop5
+          .width50_percent.position
+            label X
+            input(type="text")
+            span px
+          .width50_percent.position.y
+            label Y
+            input(type="text")
+            span px
 
 
 
