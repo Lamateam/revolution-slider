@@ -1,8 +1,25 @@
-.workspace-right_panel-time
+.workspace-right_panel-date
   .workspace-right_panel-header
-    h2 Время
+    h2 Дата
     buttom.workspace-right_panel-settings
   form.workspace-right_panel-container.mcsb-behavior.pd-submit-behavior
+
+    .workspace-right_panel-container-radio_block
+      input(type="radio", name="dateformat", id = "a")
+      label(for="a")
+      label(for="a") 24 марта
+    .workspace-right_panel-container-radio_block
+      input(type="radio", name="dateformat", id = "b")
+      label(for="b")
+      label(for="b") 24 марта, 2014
+    .workspace-right_panel-container-radio_block
+      input(type="radio", name="dateformat", id = "c")
+      label(for="c")
+      label(for="c") Понедельник, 24 марта
+    .workspace-right_panel-container-radio_block
+      input(type="radio", name="dateformat", id = "d")
+      label(for="d")
+      label(for="d") Понедельник, 24 марта, 2014
 
     .workspace-right_panel-container_big
       h3 Позиция
