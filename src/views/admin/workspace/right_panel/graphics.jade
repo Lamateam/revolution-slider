@@ -1,0 +1,69 @@
+.workspace-right_panel-graphics
+  .workspace-right_panel-header
+    h2 Графика
+    buttom.workspace-right_panel-settings
+  form.workspace-right_panel-container.mcsb-behavior.pd-submit-behavior
+
+    .floatleft.width100
+      .workspace-right_panel-container-size_block.margintop_10
+        .width50_percent.hor
+          input(type="text")
+          span px
+        .width50_percent.ver
+          input(type="text")
+          span px
+
+    .workspace-right_panel-container-position
+      
+      if position == "1"
+        input(type="radio", name="position", id = "1", checked="checked")
+      else
+        input(type="radio", name="position", id = "1")
+      label.item1(for="1")
+
+      if position == "2"
+        input(type="radio", name="position", id = "2", checked="checked")
+      else
+        input(type="radio", name="position", id = "2")
+      label.item2(for="2")
+
+      if position == "3"
+        input(type="radio", name="position", id = "3", checked="checked")
+      else
+        input(type="radio", name="position", id = "3")
+      label.item3(for="3")
+
+      if position == "4"
+        input(type="radio", name="position", id = "4", checked="checked")
+      else
+        input(type="radio", name="position", id = "4")
+      label.item4(for="4")
+
+    .floatleft.width100.margintop10
+      .workspace-right_panel-container-size_block
+        .width50_percent.position
+          label X
+          input(type="text")
+          span px
+        .width50_percent.position.y
+          label Y
+          input(type="text")
+          span px
+
+
+    .workspace-right_panel-container_big
+      h3 Фаил
+      button.workspace-right_panel_add.file.loading
+
+
+    .workspace-right_panel-container_big
+      h3 Вход   
+      button.workspace-right_panel_add
+
+    .workspace-right_panel-container_big
+      h3 Анимации
+      button.workspace-right_panel_add
+
+    .workspace-right_panel-container_big
+      h3 Выход
+      button.workspace-right_panel_add

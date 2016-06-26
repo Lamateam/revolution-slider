@@ -23,36 +23,14 @@
       transition 300ms all ease-in
       background url(images/rightpart/add.svg) no-repeat center
       
+      &.file
+        background url(images/rightpart/file/cloud.svg) no-repeat center
+       
+
+
       &:hover
         opacity 0.7
-
-    &-slydes
-      h2
-        background url(images/rightpart/slydes/slydes.svg) no-repeat 8px center
-    &-project
-      h2
-        background url(images/rightpart/project_header/project.svg) no-repeat 8px center   
-
-    &-text
-      h2
-        background url(images/rightpart/project_header/text.svg) no-repeat 10px center 
-
-    &-paragraph
-      h2
-        background url(images/rightpart/project_header/paragraph.svg) no-repeat 8px center
-
-    &-time
-      h2
-        background url(images/rightpart/project_header/time.svg) no-repeat 8px center
-
-    &-shape
-      h2
-        background url(images/rightpart/project_header/figure.svg) no-repeat 5px center
-
-    &-date
-      h2
-        line-height 34px
-        background url(images/rightpart/project_header/date.svg) no-repeat 8px center
+        
 
     &-header
       margin-left -15px
@@ -71,6 +49,49 @@
         display block
         float left
         color color_white
+
+    &-slydes
+      h2
+        background url(images/rightpart/slydes/slydes.svg) no-repeat 8px center
+        
+    &-weather
+      h2
+        background url(images/rightpart/project_header/weather.svg) no-repeat 8px center
+        line-height 32px
+
+
+    &-project
+      h2
+        background url(images/rightpart/project_header/project.svg) no-repeat 8px center   
+
+    &-text
+      h2
+        background url(images/rightpart/project_header/text.svg) no-repeat 10px center 
+
+    &-paragraph
+      h2
+        background url(images/rightpart/project_header/paragraph.svg) no-repeat 8px center
+
+    &-time
+      h2
+        background url(images/rightpart/project_header/time.svg) no-repeat 8px center
+
+    &-graphics
+      h2
+        background url(images/rightpart/project_header/graphics.svg) no-repeat 8px center
+
+    &-video
+      h2
+        background url(images/rightpart/project_header/video.svg) no-repeat 8px center
+
+    &-shape
+      h2
+        background url(images/rightpart/project_header/figure.svg) no-repeat 5px center
+
+    &-date
+      h2
+        line-height 34px
+        background url(images/rightpart/project_header/date.svg) no-repeat 8px center
     
     &-settings
       background url(images/rightpart/settings.svg) no-repeat center
@@ -159,6 +180,28 @@
         border-radius 3px
         transition 150ms all ease-in
         
+        &:-moz-placeholder
+          color color_white_70
+          font-family Arial, sans-serif
+          font-size 14px
+
+        &::-moz-placeholder
+          color color_white_70
+          font-family Arial, sans-serif
+          font-size 14px
+
+        &::-webkit-input-placeholder
+          color color_white_70
+          font-family Arial, sans-serif
+          font-size 14px
+
+        &:-ms-input-placeholder
+          color color_white_70
+          font-family Arial, sans-serif
+          font-size 14px
+
+
+        
         &:focus
         &:active
           background-color #6b747d
@@ -175,6 +218,12 @@
 
         &.time
           background-image url(images/rightpart/slydes/time.svg)
+          background-repeat no-repeat
+          background-position 8px center
+          padding-left 29px 
+          
+        &.search
+          background-image url(images/load_images/loop.svg)
           background-repeat no-repeat
           background-position 8px center
           padding-left 29px 
@@ -203,7 +252,9 @@
       &-shape
       &-rotate
       &-size_block
-      &-input_block  
+      &-input_block
+      &-time 
+      &-file 
         padding-top 8px
         
         &.fourth
@@ -666,8 +717,58 @@
 
         & .hor
           background url("images/rightpart/size/gor.svg") left center no-repeat          
+      
+      &-time
+        & input
+          width 70px
+          
+        & span
+          margin 0px
+          font-size 16px
+          margin-left 15px
+          line-height 34px
+          
+      &-file
+        & .half1
+        & .half2
+          width 50%
+          float left
+          
+        & .half1
+          
+          & .iframe_div
+            width 75px
+            position relative
+            height 75px
+            float left
+            border-radius 15px
+            overflow hidden
 
+            & iframe
+            & img
+              width 100%
+              height 100%
 
+            
+          & button
+            float left
+            position relative
+            width 32px
+            margin-left 5px
+            height 32px
+            transition 150ms all ease-in
+          
+
+            &:hover
+              opacity 0.7
+
+            &.edit
+              background url(images/rightpart/file/edit.svg) no-repeat center
+
+            &.delete
+              margin-top 10px
+              background url(images/rightpart/file/delete.svg) no-repeat center
+            
         
 
 

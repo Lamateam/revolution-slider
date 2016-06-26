@@ -1,0 +1,204 @@
+.workspace-right_panel-weather
+  .workspace-right_panel-header
+    h2 Погода
+    buttom.workspace-right_panel-settings
+  form.workspace-right_panel-container.mcsb-behavior.pd-submit-behavior
+    .floatleft.width100.margintop_10
+      .workspace-right_panel-container-size_block
+        .width50_percent.hor
+          input(type="text")
+          span px
+        .width50_percent.ver
+          input(type="text")
+          span px
+
+    .workspace-right_panel-container-input_block
+      input.search.bind-text(type="text", value=name, placeholder="Населенный пункт")
+    .floatleft.width100
+      .workspace-right_panel-container-file 
+        .half2
+          .workspace-right_panel-container-checkbox_block
+            input(type="checkbox", name="weather", id = "header")
+            label(for="header")
+            label.margintop_5(for="header") Заголовок
+        .half2
+          .workspace-right_panel-container-checkbox_block
+            input(type="checkbox", name="weather", id = "photo")
+            label(for="photo")
+            label.margintop_5(for="photo") Фото
+        .half2
+          .workspace-right_panel-container-checkbox_block
+            input(type="checkbox", name="weather", id = "text")
+            label(for="text")
+            label.margintop_5(for="text") Текст
+        .half2
+          .workspace-right_panel-container-checkbox_block
+            input(type="checkbox", name="weather", id = "date")
+            label(for="date")
+            label.margintop_5(for="date") Дата
+
+    .workspace-right_panel-container_big
+      h3 Позиция
+      .workspace-right_panel-container-position
+      
+        if position == "1"
+          input(type="radio", name="position", id = "1", checked="checked")
+        else
+          input(type="radio", name="position", id = "1")
+        label.item1(for="1")
+
+        if position == "2"
+          input(type="radio", name="position", id = "2", checked="checked")
+        else
+          input(type="radio", name="position", id = "2")
+        label.item2(for="2")
+
+        if position == "3"
+          input(type="radio", name="position", id = "3", checked="checked")
+        else
+          input(type="radio", name="position", id = "3")
+        label.item3(for="3")
+
+        if position == "4"
+          input(type="radio", name="position", id = "4", checked="checked")
+        else
+          input(type="radio", name="position", id = "4")
+        label.item4(for="4")
+
+      .floatleft.width100.margintop10
+        .workspace-right_panel-container-size_block
+          .width50_percent.position
+            label X
+            input(type="text")
+            span px
+          .width50_percent.position.y
+            label Y
+            input(type="text")
+            span px
+
+
+      .workspace-right_panel-container-rotate.margintop10
+        .zindex.width50_percent
+          label Z-index
+          input(type="text")
+
+
+
+    .workspace-right_panel-container_big
+      h3 Города
+      .workspace-right_panel-container-select_block.margintop_5
+        select
+          option(value="", selected="selected") Helvetica
+
+        div.floatleft.width100.margintop5
+          .workspace-right_panel-container-input_block.biu
+            button.bold
+            button.italic
+            button.underline
+          .workspace-right_panel-container-color_picker
+            div.set_color_div.set_color(data-valueelement = "set_slide_input", data-styleelement="set_slide_button")
+              button#set_slide_button.set_color_button
+              input#set_slide_input.set_color_input(value="#fff")
+
+          .workspace-right_panel-container-select_block.fourth
+            select.bind-slide_duration.text-center
+              option(value="8") 8
+              option(value="9",selected="selected") 9
+              option(value="10") 10
+              option(value="11") 11
+              option(value="12") 12
+              option(value="14") 14
+              option(value="16") 16
+              option(value="18") 18
+              option(value="20") 20
+              option(value="24") 24
+              option(value="30") 30
+              option(value="36") 36
+              option(value="48") 48
+              option(value="60") 60
+              option(value="72") 72
+              option(value="90") 90
+
+
+    .workspace-right_panel-container_big
+      h3 Температура
+      .workspace-right_panel-container-select_block.margintop_5
+        select
+          option(value="", selected="selected") Helvetica
+
+        div.floatleft.width100.margintop5
+          .workspace-right_panel-container-input_block.biu
+            button.bold
+            button.italic
+            button.underline
+          .workspace-right_panel-container-color_picker
+            div.set_color_div.set_color(data-valueelement = "set_slide_input", data-styleelement="set_slide_button")
+              button#set_slide_button.set_color_button
+              input#set_slide_input.set_color_input(value="#fff")
+
+          .workspace-right_panel-container-select_block.fourth
+            select.bind-slide_duration.text-center
+              option(value="8") 8
+              option(value="9",selected="selected") 9
+              option(value="10") 10
+              option(value="11") 11
+              option(value="12") 12
+              option(value="14") 14
+              option(value="16") 16
+              option(value="18") 18
+              option(value="20") 20
+              option(value="24") 24
+              option(value="30") 30
+              option(value="36") 36
+              option(value="48") 48
+              option(value="60") 60
+              option(value="72") 72
+              option(value="90") 90
+
+
+    .workspace-right_panel-container_big
+      h3 Облачность 
+      .workspace-right_panel-container-select_block.margintop_5
+        select
+          option(value="", selected="selected") Helvetica
+
+        div.floatleft.width100.margintop5
+          .workspace-right_panel-container-input_block.biu
+            button.bold
+            button.italic
+            button.underline
+          .workspace-right_panel-container-color_picker
+            div.set_color_div.set_color(data-valueelement = "set_slide_input", data-styleelement="set_slide_button")
+              button#set_slide_button.set_color_button
+              input#set_slide_input.set_color_input(value="#fff")
+
+          .workspace-right_panel-container-select_block.fourth
+            select.bind-slide_duration.text-center
+              option(value="8") 8
+              option(value="9",selected="selected") 9
+              option(value="10") 10
+              option(value="11") 11
+              option(value="12") 12
+              option(value="14") 14
+              option(value="16") 16
+              option(value="18") 18
+              option(value="20") 20
+              option(value="24") 24
+              option(value="30") 30
+              option(value="36") 36
+              option(value="48") 48
+              option(value="60") 60
+              option(value="72") 72
+              option(value="90") 90
+
+    .workspace-right_panel-container_big
+      h3 Вход   
+      button.workspace-right_panel_add
+
+    .workspace-right_panel-container_big
+      h3 Анимации
+      button.workspace-right_panel_add
+
+    .workspace-right_panel-container_big
+      h3 Выход
+      button.workspace-right_panel_add

@@ -8,5 +8,5 @@
             <use xlink:href="#path-1"></use>
         </mask>
     </defs>
-    <use id="Oval-27" stroke="" mask="url(#mask-2)" stroke-width="8" fill="none" opacity="0.5" xlink:href="#path-1"></use>
+    <use id="Oval-27" stroke="" mask="url(#mask-2)" stroke-width="8" stroke="white" fill="none" opacity="0.5" xlink:href="#path-1"></use>
 </svg>

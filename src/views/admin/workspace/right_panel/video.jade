@@ -1,0 +1,90 @@
+.workspace-right_panel-video
+  .workspace-right_panel-header
+    h2 Видео
+    buttom.workspace-right_panel-settings
+  form.workspace-right_panel-container.mcsb-behavior.pd-submit-behavior
+
+    .floatleft.width100
+      .workspace-right_panel-container-size_block.margintop_10
+        .width50_percent.hor
+          input(type="text")
+          span px
+        .width50_percent.ver
+          input(type="text")
+          span px
+
+    .workspace-right_panel-container-position
+      
+      if position == "1"
+        input(type="radio", name="position", id = "1", checked="checked")
+      else
+        input(type="radio", name="position", id = "1")
+      label.item1(for="1")
+
+      if position == "2"
+        input(type="radio", name="position", id = "2", checked="checked")
+      else
+        input(type="radio", name="position", id = "2")
+      label.item2(for="2")
+
+      if position == "3"
+        input(type="radio", name="position", id = "3", checked="checked")
+      else
+        input(type="radio", name="position", id = "3")
+      label.item3(for="3")
+
+      if position == "4"
+        input(type="radio", name="position", id = "4", checked="checked")
+      else
+        input(type="radio", name="position", id = "4")
+      label.item4(for="4")
+
+    .floatleft.width100.margintop10
+      .workspace-right_panel-container-size_block
+        .width50_percent.position
+          label X
+          input(type="text")
+          span px
+        .width50_percent.position.y
+          label Y
+          input(type="text")
+          span px
+    .floatleft.width100.margintop10
+      .workspace-right_panel-container-rotate.margintop10
+        .zindex.width50_percent
+          label Z-index
+          input(type="text")
+
+
+    .workspace-right_panel-container_big
+      h3 Фаил
+      //-button.workspace-right_panel_add.file
+      .workspace-right_panel-container-file 
+        .half1
+          .iframe_div
+            iframe#video(src='//player.vimeo.com/video/80312270?api=1', frameborder='0', webkitallowfullscreen='', mozallowfullscreen='', width = "100%", allowfullscreen='true')
+
+          button.edit
+          button.delete
+        .half2   
+          .workspace-right_panel-container-checkbox_block.margintop_5
+            input(type="checkbox", name="round", id = "round")
+            label(for="round")
+            label.margintop_5(for="round") По кругу
+          .workspace-right_panel-container-checkbox_block
+            input(type="checkbox", name="nosound", id = "nosound")
+            label(for="nosound")
+            label.margintop_5(for="nosound") Без звука
+
+
+    .workspace-right_panel-container_big
+      h3 Вход   
+      button.workspace-right_panel_add
+
+    .workspace-right_panel-container_big
+      h3 Анимации
+      button.workspace-right_panel_add
+
+    .workspace-right_panel-container_big
+      h3 Выход
+      button.workspace-right_panel_add

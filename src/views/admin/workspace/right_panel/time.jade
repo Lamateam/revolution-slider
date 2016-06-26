@@ -3,6 +3,14 @@
     h2 Время
     buttom.workspace-right_panel-settings
   form.workspace-right_panel-container.mcsb-behavior.pd-submit-behavior
+    .workspace-right_panel-container-time
+      input.time(type="text")
+      span GMT +3 
+      //- показываешь текущее смещение
+    .workspace-right_panel-container-checkbox_block
+      input(type="checkbox", name="showsec", id = "showsec")
+      label(for="showsec")
+      label(for="showsec") показывать секунды
 
     .workspace-right_panel-container_big
       h3 Позиция
