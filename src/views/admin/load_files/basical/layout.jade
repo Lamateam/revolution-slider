@@ -1,0 +1,15 @@
+extends ../layout.jade
+block load_container
+  div.home_container_menu 
+    ul.bind-menu.home_menu
+      //- li.bind-my.item_1.active 
+        a(href="#home/my_projects", title="Мои проекты") Мои проекты
+      li.bind-blanc.item_4
+        a(href="#", title="Мои изображения") Мои изображения
+      li.bind-template.item_5    
+        a(href="#", title="Импорт из сети") Импорт из сети
+    div.home_container_menu-video 
+
+  div.home_container_right
+    block load_block
+
