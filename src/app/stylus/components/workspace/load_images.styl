@@ -5,7 +5,37 @@
   height 100%
   z-index 100
   width 100%
-
+  
+  &-input
+    font-size 16px
+    color color_gray
+    background transparent
+    width 100%
+    height 42px
+    border 2px solid #B1B8C0
+    border-radius 4px
+    
+    &.loop
+      border-radius 43px
+      background-image url(images/load_images/loop.svg)
+      background-repeat no-repeat
+      background-position 12px center
+      padding-left 35px 
+      height 38px
+      width 95%
+  
+  &_button
+    font-size 16px
+    color white
+    padding-left 40px
+    margin-top 260px
+    width 215px
+    padding-top 15px
+    padding-bottom 15px
+    background-image url(images/load_images/cloud.svg) 
+    background-position 13px 15px
+    background-repeat no-repeat
+    
   &_opacity
     position absolute
     background rgba(17,22,27,0.70)
@@ -14,5 +44,6 @@
     width 100%
     height 100%
     z-index 150 
+    
       & + div
         z-index 200

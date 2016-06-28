@@ -15,7 +15,7 @@ define "views/home/NewTemplateProjectView", [
     childView: NewBlancProjectItem
     childViewContainer: "ul"
     template: HomeNewTemplateProjectTemplate
-    className: "home_container_right mcsb-behavior"
+    className: "home_container_right scroll mcsb-behavior"
     behaviors:
       MCustomScrollbar: {}
     initialize: ->
