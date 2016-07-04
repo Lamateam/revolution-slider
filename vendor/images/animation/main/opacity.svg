@@ -1,0 +1,20 @@
+
+<svg width="28px" height="28px" viewBox="1027 430 28 28" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 3.8.3 (29802) - http://www.bohemiancoding.com/sketch -->
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <linearGradient x1="100%" y1="50%" x2="39.1741071%" y2="50%" id="linearGradient-1">
+            <stop stop-color="#FFFFFF" stop-opacity="0.7" offset="0%"></stop>
+            <stop stop-color="#FFFFFF" stop-opacity="0" offset="100%"></stop>
+        </linearGradient>
+        <path d="M14,28 C21.7319865,28 28,21.7319865 28,14 C28,6.2680135 21.7319865,0 14,0 C6.2680135,0 0,6.2680135 0,14 C0,21.7319865 6.2680135,28 14,28 Z" id="path-2"></path>
+        <mask id="mask-3" maskContentUnits="userSpaceOnUse" maskUnits="objectBoundingBox" x="0" y="0" width="28" height="28" fill="white">
+            <use xlink:href="#path-2"></use>
+        </mask>
+    </defs>
+    <g id="Oval-25-+-Line-+-Rectangle-100" opacity="0.799999952" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" transform="translate(1027.000000, 430.000000)">
+        <use id="Oval-25" stroke="#FFFFFF" mask="url(#mask-3)" stroke-width="2" fill="url(#linearGradient-1)" xlink:href="#path-2"></use>
+        <polyline id="Line" stroke="#FFFFFF" stroke-linecap="square" transform="translate(16.608341, 14.463596) rotate(-45.000000) translate(-16.608341, -14.463596) " points="18.7805287 12.2914087 18.7805287 16.6357843 14.4361531 16.6357843"></polyline>
+        <path d="M9,14 L9,15 L12,15 L12,14 L9,14 Z M14,14 L14,15 L19,15 L19,14 L14,14 Z" id="Rectangle-99" fill="#FFFFFF"></path>
+    </g>
+</svg>\

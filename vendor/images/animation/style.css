@@ -1,0 +1,83 @@
+
+POPUP
+
+	/* Rectangle 69: */
+	background-image: linear-gradient(-180deg, rgba(255,255,255,0.50) 0%, rgba(255,255,255,0.50) 100%);
+	box-shadow: 0px 1px 4px 0px rgba(0,0,0,0.20);
+	border-radius: 50px;
+	/* Oval 12: */
+	background: #D8D8D8;
+	border: 1px solid #979797;
+	/* Rectangle 20: */
+	transform: rotate(-315deg);
+	background: #1B232A;
+	border-radius: 40px;
+	/* Измените масштаб объ: */
+	font-family: .HelveticaNeueDeskInterface-Regular;
+	font-size: 18px;
+	color: #1B232A;
+	width: 755px
+	height: 48p
+
+	/* Измените масштаб объ: */
+	font-family: .HelveticaNeueDeskInterface-Regular;
+	font-size: 18px;
+	color: #1B232A;
+
+
+OPACITY ACTIVE Rightpartblock
+
+	/* Rectangle 66: */
+	background: rgba(255,255,255,0.04);
+	box-shadow: 0px 1px 24px 0px rgba(0,0,0,0.20), inset 0px 1px 0px 0px rgba(0,0,0,0.40), inset 0px -1px 0px 0px rgba(0,0,0,0.40);
+
+100%
+
+	/* Rectangle 207: */
+	background: rgba(0,0,0,0.80);
+	border-radius: 3px;
+	/* 100%: */
+	font-family: .HelveticaNeueDeskInterface-Regular;
+	font-size: 14px;
+	color: #FFFFFF;
+	line-height: 23px;
+
+
+
+
+button
+
+	width 120px
+	height 40px
+
+
+	left
+	/* Rectangle 29: */
+	background: #3A7CC8;
+	box-shadow: inset 0px -2px 0px 0px #5499E9;
+	border-radius: 3px;
+	/* Сохранить: */
+	font-family: .HelveticaNeueDeskInterface-Regular;
+	font-size: 16px;
+	color: #FFFFFF;
+
+	Undo
+
+	/* Rectangle 29: */
+	background: #2F373D;
+	border-radius: 3px;
+	/* Отменить: */
+	opacity: 0.59;
+	font-family: .HelveticaNeueDeskInterface-Regular;
+	font-size: 16px;
+	color: #FFFFFF;
+
+
+
+ROTATE
+		/* 90° → 120°: */
+	opacity: 0.5;
+	font-family: .HelveticaNeueDeskInterface-Regular;
+	font-size: 13px;
+	color: #FFFFFF;
+	line-height: 15px;

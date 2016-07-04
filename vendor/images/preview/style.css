@@ -1,0 +1,86 @@
+/* Coca-Cola New Year P: */
+font-family: .HelveticaNeueDeskInterface-Regular;
+font-size: 24px;
+color: #FFFFFF;
+
+/* 02:25:34: */
+opacity: 0.6;
+font-family: .HelveticaNeueDeskInterface-Regular;
+font-size: 14px;
+color: #FFFFFF;
+
+/* 45.2 Мб: */
+opacity: 0.5;
+font-family: .HelveticaNeueDeskInterface-Regular;
+font-size: 14px;
+color: #FFFFFF;
+
+UPLOAD
+
+/* Rectangle 29: */
+background: #3A7CC8;
+box-shadow: inset 0px -2px 0px 0px #5499E9;
+border-radius: 4px;
+/* Загрузить: */
+font-family: .HelveticaNeueDeskInterface-Regular;
+font-size: 16px;
+color: #FFFFFF;
+/* Rectangle 28: */
+background: #FFFFFF;
+border-radius: 10px;
+
+/* Загрузить: */
+font-family: .HelveticaNeueDeskInterface-Regular;
+font-size: 16px;
+color: #FFFFFF;
+
+SVG
+	width 850px
+	height 480px
+
+
+
+/* 1.: */
+opacity: 0.3;
+font-family: .HelveticaNeueDeskInterface-Regular;
+font-size: 13px;
+color: #FFFFFF;
+/* Welcome: */
+opacity: 0.6;
+font-family: .HelveticaNeueDeskInterface-Regular;
+font-size: 13px;
+color: #FFFFFF;
+
+ACITVE
+
+/* 2.: */
+font-family: .HelveticaNeueDeskInterface-Regular;
+font-size: 13px;
+color: #FFFFFF;
+
+/* What’s new: */
+font-family: .HelveticaNeueDeskInterface-Regular;
+font-size: 13px;
+color: #FFFFFF;
+
+
+
+PAUSE
+	/* Rectangle 198: */
+	background: rgba(47,121,207,0.95);
+	border-radius: 3px;
+	/* Rectangle 199: */
+	transform: rotate(-270deg);
+	background: #FFFFFF;
+	border-radius: 2px;
+	/* Rectangle 76: */
+	background: #FFFFFF;
+	border-radius: 2px;
+
+/* Rectangle 206: */
+background: #2E74C7;
+border-radius: 3px;
+
+/* Rectangle 202: */
+background: rgba(255,255,255,0.20);
+border-radius: 3px;

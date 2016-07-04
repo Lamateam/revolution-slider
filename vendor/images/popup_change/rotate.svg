@@ -1,0 +1,19 @@
+
+<svg width="40px" height="38px" viewBox="395 94 40 38" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 3.8.3 (29802) - http://www.bohemiancoding.com/sketch -->
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <path d="M23.8236568,7.1919755 C21.7608056,2.92785064 17.4973577,0 12.5725583,0 C5.62892608,0 0,5.82029825 0,13 C0,20.1797017 5.62892608,26 12.5725583,26 L12.5725583,23.4 C7.01765252,23.4 2.51451166,18.7437614 2.51451166,13 C2.51451166,7.2562386 7.01765252,2.6 12.5725583,2.6 C16.3359556,2.6 19.6165993,4.73718425 21.341236,7.90181063 L17.931712,8.87674602 L24.795087,14.5906133 L28.0748023,5.97638288 L23.8236568,7.1919755 Z" id="path-1"></path>
+        <filter x="-50%" y="-50%" width="200%" height="200%" filterUnits="objectBoundingBox" id="filter-2">
+            <feOffset dx="0" dy="2" in="SourceAlpha" result="shadowOffsetOuter1"></feOffset>
+            <feGaussianBlur stdDeviation="3" in="shadowOffsetOuter1" result="shadowBlurOuter1"></feGaussianBlur>
+            <feColorMatrix values="0 0 0 0 0   0 0 0 0 0   0 0 0 0 0  0 0 0 0.1 0" type="matrix" in="shadowBlurOuter1"></feColorMatrix>
+        </filter>
+    </defs>
+    <g id="icon_31935-4" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" transform="translate(401.000000, 98.000000)">
+        <g id="Oval-29">
+            <use fill="black" fill-opacity="1" filter="url(#filter-2)" xlink:href="#path-1"></use>
+            <use fill="#FFFFFF" fill-rule="evenodd" xlink:href="#path-1"></use>
+        </g>
+    </g>
+</svg>
