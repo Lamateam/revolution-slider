@@ -1,0 +1,37 @@
+.workspace-right_panel-container_row_time
+  span 00:00:000 – 00:00:50
+  button.rotate_1080deg
+
+.workspace-right_panel-container-select_block.margintop_5
+  select
+    if link == 'enter'
+      if type == 'fadeIn'
+        option(value="fadeIn", selected) Из непрозрачного в прозрачный
+      else
+        option(value="fadeIn") Из непрозрачного в прозрачный
+        
+    if link == 'process'
+      if type == 'rotate'
+        option(value="rotate", selected) Поворот
+      else
+        option(value="rotate") Поворот
+      if type == 'pulsar'
+        option(value="pulsar", selected) Пульсация
+      else
+        option(value="pulsar") Пульсация      
+
+    if link == 'leave'
+      if type == 'fadeOut'
+        option(value="fadeOut", selected) Из прозрачного в непрозрачный
+      else
+        option(value="fadeOut") Из прозрачного в непрозрачный
+
+.workspace-right_panel-container-block.margintop_15
+  select
+    option(selected="selected") Ease In/Out
+.workspace-right_panel-container-block_plus
+  input.time(type="text", value="500")
+  button.plus
+  button.minus
+
+div(style="clear:both;")

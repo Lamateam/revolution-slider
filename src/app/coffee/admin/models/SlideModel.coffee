@@ -8,3 +8,7 @@ define "models/SlideModel", [
       name: "Новый слайд"
       duration: 3
       elements: []
+      background: "#ffffff"
+      repeat: 'no-repeat'
+      repeatNum: 1
+      animations: []

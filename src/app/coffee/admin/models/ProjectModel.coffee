@@ -6,3 +6,7 @@ define "models/ProjectModel", [
     defaults:
       name: ""
       dim: "4x3"
+      repeat: 'no-repeat'
+      repeatNum: 1
+      disableSound: false
+      animations: []

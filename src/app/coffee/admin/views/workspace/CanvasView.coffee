@@ -204,6 +204,7 @@ define "views/workspace/CanvasView", [
     childViewContainer: "svg"
     modelEvents:
       'change:name': 'render'
+      'change:background': 'render'
     events:
       'click .bind-slide-select': 'onSlideEditClick'
     buildChildView: (item, ItemViewType, itemViewOptions)->

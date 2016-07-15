@@ -6,6 +6,9 @@ define "controllers/home/LayoutController", [
   HomeLayoutController = Marionette.LayoutController.extend
     Layout: HomeLayoutView
     onProjectCreate: (data)->
+      data.repeat       = 'no-repeat'
+      data.repeatNum    = 1
+      data.disableSound = false
       @getOption('projectModel').save data,
         wait: true
         success: (model)->

@@ -2,7 +2,7 @@ define "views/workspace/TopPanelView", [
   "marionette"
   "templates/workspace/top_panel" 
 ], (Marionette, WorkspaceTopPanelTemplate)->
-  WorkspaceTopPanelView = Marionette.ItemView.extend
+  Marionette.ItemView.extend
     template: WorkspaceTopPanelTemplate
     ui:
       "name_change": ".bind-name_change"

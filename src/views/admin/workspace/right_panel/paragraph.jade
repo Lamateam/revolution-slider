@@ -6,7 +6,7 @@
 
     .workspace-right_panel-container-input_block
       label Текст
-      textarea.bind-textarea(type="text", value=name)
+      textarea.bind-props(type="text", bind-to="texts")= props.texts
 
     .workspace-right_panel-container_big
       h3 Настройки текста 
@@ -14,43 +14,91 @@
         select
           option(value="", selected="selected") Helvetica
 
-        .floatleft.width100.margintop5
+        div.floatleft.width100.margintop5
           .workspace-right_panel-container-input_block.biu
             button.bold
             button.italic
             button.underline
           .workspace-right_panel-container-color_picker
-            .set_color_div.set_color(data-valueelement = "set_slide_input", data-styleelement="set_slide_button")
+            div.set_color_div.set_color(data-valueelement = "set_text_input", data-styleelement="set_slide_button")
               button#set_slide_button.set_color_button
-              input#set_slide_input.set_color_input(value="#fff")
+              input#set_text_input.set_color_input(value=props.fill, bind-to="fill")
 
           .workspace-right_panel-container-select_block.fourth
-            select.bind-slide_duration.text-center
-              option(value="8") 8
-              option(value="9",selected="selected") 9
-              option(value="10") 10
-              option(value="11") 11
-              option(value="12") 12
-              option(value="14") 14
-              option(value="16") 16
-              option(value="18") 18
-              option(value="20") 20
-              option(value="24") 24
-              option(value="30") 30
-              option(value="36") 36
-              option(value="48") 48
-              option(value="60") 60
-              option(value="72") 72
-              option(value="90") 90
+            select.bind-props.text-center(bind-to="font-size")
+              if props['font-size'] == '8px'
+                option(value="8px", selected) 8
+              else
+                option(value="8px") 8
+              if props['font-size'] == '9px'
+                option(value="8px", selected) 9
+              else
+                option(value="9px") 9
+              if props['font-size'] == '10px'
+                option(value="8px", selected) 10
+              else
+                option(value="10px") 10
+              if props['font-size'] == '11px'
+                option(value="8px", selected) 11
+              else
+                option(value="8px") 11
+              if props['font-size'] == '12px'
+                option(value="12px", selected) 12
+              else
+                option(value="12px") 12
+              if props['font-size'] == '14px'
+                option(value="8px", selected) 14
+              else
+                option(value="8px") 14
+              if props['font-size'] == '16px'
+                option(value="8px", selected) 16
+              else
+                option(value="8px") 16
+              if props['font-size'] == '18px'
+                option(value="18px", selected) 18
+              else
+                option(value="18px") 18
+              if props['font-size'] == '20px'
+                option(value="20px", selected) 20
+              else
+                option(value="20px") 20
+              if props['font-size'] == '24px'
+                option(value="24px", selected) 24
+              else
+                option(value="24px") 24
+              if props['font-size'] == '30px'
+                option(value="30px", selected) 30
+              else
+                option(value="30px") 30
+              if props['font-size'] == '36px'
+                option(value="36px", selected) 36
+              else
+                option(value="36px") 36
+              if props['font-size'] == '48px'
+                option(value="48px", selected) 48
+              else
+                option(value="48px") 48
+              if props['font-size'] == '60px'
+                option(value="60px", selected) 60
+              else
+                option(value="60px") 60
+              if props['font-size'] == '72px'
+                option(value="72px", selected) 72
+              else
+                option(value="72px") 72
+              if props['font-size'] == '90px'
+                option(value="90px", selected) 90
+              else
+                option(value="90px") 90
 
 
-        .floatleft.width100.margintop5
-          .workspace-right_panel-container-select_block.lineheight
-            select.bind-lineheight.text-center
-              option(value="1") 1
-              option(value="1.15") 1.15
-              option(value="1.5") 1.5
-              option(value="2") 2
+        //- .floatleft.width100.margintop5
+        //-   .workspace-right_panel-container-select_block.lineheight
+        //-     select.bind-lineheight.text-center
+        //-       option(value="1") 1
+        //-       option(value="1.15") 1.15
+        //-       option(value="1.5") 1.5
+        //-       option(value="2") 2
 
 
 
@@ -86,32 +134,37 @@
         .workspace-right_panel-container-size_block
           .width50_percent.position
             label X
-            input(type="text")
+            input.bind-props(type="text", value=props.x, bind-to="x")
             span px
           .width50_percent.position.y
             label Y
-            input(type="text")
+            input.bind-props(type="text", value=props.y, bind-to="y")
             span px
 
-      .workspace-right_panel-container-rotate.margintop10
-        .rotate.width50_percent
-          input(type="text")
+      //- .workspace-right_panel-container-rotate.margintop10
+      //-   .rotate.width50_percent
+      //-     input(type="text")
 
-        .zindex.width50_percent
-          label Z-index
-          input(type="text")
+      //-   .zindex.width50_percent
+      //-     label Z-index
+      //-     input(type="text")
 
 
 
 
     .workspace-right_panel-container_big
-      h3 Вход   
-      button.workspace-right_panel_add
+      h3 Вход
+
+      div(id="animations_enter")
+
 
     .workspace-right_panel-container_big
       h3 Анимации
-      button.workspace-right_panel_add
+
+      div(id="animations_process")
+
 
     .workspace-right_panel-container_big
       h3 Выход
-      button.workspace-right_panel_add
+
+      div(id="animations_leave")
