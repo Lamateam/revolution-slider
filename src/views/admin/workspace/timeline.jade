@@ -1,0 +1,5 @@
+ul
+  for timesegment in timesegments
+    - var seconds = (timesegment.seconds == 0 ? '0' + timesegment.seconds : timesegment.seconds)
+    li=timesegment.minutes + ':' + seconds
+.bind-timeline-items

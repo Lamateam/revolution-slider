@@ -6,3 +6,4 @@ define "models/ElementModel", [
       type: "rect"
       isActive: true
       props: []
+      animations: []

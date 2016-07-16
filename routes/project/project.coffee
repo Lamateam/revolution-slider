@@ -4,13 +4,25 @@ exports.init = (app)->
     res.send projects[req.params.id]
 
   app.post "/api/project/", (req, res, next)->
+    req.body.id         = projects.length
+    req.body.animations = []
+    req.body.slides = [
+      {
+        id: 0
+        name: "Новый слайд"
+        duration: 3
+        background: "ffffff"
+        repeat: 'no-repeat'
+        repeatNum: 1
+        animations: []
+        elements: [ 
+          { id: 0, type: "rect", animations: [], props: { fill: "rgb(255,0,0)", x: 100, y: 100, angle: 30, width: 100, height: 100 } }
+          # { id: 1, type: "circle", props: { fill: "rgb(255,255,0)", cx: 50, cy: 50, r: 100 } } 
+          { id: 1, type: "rect", animations: [], props: { fill: "rgb(255,0,0)", x: 0, y: 0, angle: 0, width: 100, height: 100 } }
+        ]
+      }
+    ]
     projects.push req.body
-    req.body.id = projects.length - 1
-    req.body.slides = [{id: 0, name: "Новый слайд", duration: 3, elements: [ 
-      { id: 0, type: "rect", props: { fill: "rgb(255,0,0)", x: 100, y: 100, angle: 30, width: 100, height: 100 } }
-      # { id: 1, type: "circle", props: { fill: "rgb(255,255,0)", cx: 50, cy: 50, r: 100 } } 
-      { id: 1, type: "rect", props: { fill: "rgb(255,0,0)", x: 0, y: 0, angle: 0, width: 100, height: 100 } }
-    ]}]
     res.send req.body
 
   app.patch "/api/project/:id", (req, res, next)->

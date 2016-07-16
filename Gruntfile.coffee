@@ -91,6 +91,46 @@ module.exports = (grunt) ->
             src: "node_modules/d3/d3.js"
             dest: "tmp/modules/d3.js"
           }
+          {
+            src: "node_modules/blueimp-file-upload/js/vendor/jquery.ui.widget.js"
+            dest: "tmp/modules/jquery.ui.widget.js"
+          }
+          {
+            src: "node_modules/blueimp-file-upload/js/jquery.iframe-transport.js"
+            dest: "tmp/modules/jquery.iframe-transport.js"
+          }
+          {
+            src: "node_modules/blueimp-file-upload/js/jquery.fileupload.js"
+            dest: "tmp/modules/jquery.fileupload.js"
+          }
+          {
+            src: "node_modules/blueimp-file-upload/js/jquery.fileupload-ui.js"
+            dest: "tmp/modules/jquery.fileupload-ui.js"
+          }
+          {
+            src: "node_modules/blueimp-file-upload/js/jquery.fileupload-image.js"
+            dest: "tmp/modules/jquery.fileupload-image.js"
+          }
+          {
+            src: "node_modules/blueimp-file-upload/js/jquery.fileupload-audio.js"
+            dest: "tmp/modules/jquery.fileupload-audio.js"
+          }
+          {
+            src: "node_modules/blueimp-file-upload/js/jquery.fileupload-video.js"
+            dest: "tmp/modules/jquery.fileupload-video.js"
+          }
+          {
+            src: "node_modules/blueimp-file-upload/js/jquery.fileupload-validate.js"
+            dest: "tmp/modules/jquery.fileupload-validate.js"
+          }
+          {
+            src: "node_modules/blueimp-file-upload/js/jquery.fileupload-process.js"
+            dest: "tmp/modules/jquery.fileupload-process.js"
+          }
+          {
+            src: "node_modules/blueimp-tmpl/js/tmpl.js"
+            dest: "tmp/modules/tmpl.js"
+          }
         ]
       requirejs: 
         files: [
@@ -147,13 +187,6 @@ module.exports = (grunt) ->
           }
         ]
     concat:
-      fileupload:
-        src: [
-          "node_modules/blueimp-file-upload/js/jquery.fileupload.js"
-          "node_modules/blueimp-file-upload/js/jquery.fileupload-ui.js"
-          "node_modules/blueimp-file-upload/js/jquery.iframe-transport.js"
-        ]
-        dest: "tmp/modules/fileupload.js"
       vendor_css:
         src: [
           "vendor/animate.css"
@@ -226,7 +259,7 @@ module.exports = (grunt) ->
   grunt.loadNpmTasks 'grunt-regex-replace'
 
   # Default task.
-  grunt.registerTask "compile-scripts", [ "coffee", "concat:fileupload" ]
+  grunt.registerTask "compile-scripts", [ "coffee" ]
   grunt.registerTask "compile-styles", ["stylus", "concat:vendor_css", "concat:css", "regex-replace"]
   grunt.registerTask "compile-development", ["clean:tmp", "clean:dist", "compile-scripts", "compile-styles", "copy", "mkdir", "clean:tmp"]
   grunt.registerTask "compile-release", ["compile-development", "uglify:js", "cssmin"]

@@ -204,10 +204,10 @@ define "views/workspace/CanvasView", [
     childViewContainer: "svg"
     modelEvents:
       'change:name': 'render'
+      'change:background': 'render'
     events:
       'click .bind-slide-select': 'onSlideEditClick'
     buildChildView: (item, ItemViewType, itemViewOptions)->
-      console.log 'here switch type'
       options = _.extend { model: item }, itemViewOptions
       View = switch
         when item.get('type') is 'widget' then CanvasWidget
@@ -218,7 +218,6 @@ define "views/workspace/CanvasView", [
         stateModel: @options.stateModel
         svg: @el.getElementsByTagName("svg")[0]
     attachHtml: (collectionView, childView, index)->
-      console.log "Here junk attachHtml"
     templateHelpers: ->
       res = 
         width: @options.width

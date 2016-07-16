@@ -1,0 +1,18 @@
+div.load_opacity
+div._modal
+  div.home_container.padding
+    a.home_container-close.event-close-btn(href="javascript:void(0);", title="Назад")
+    
+    div.home_container_menu 
+      ul.bind-menu.home_menu
+        //- li.bind-my.item_1.active 
+          a(href="#home/my_projects", title="Мои проекты") Мои проекты
+        //- li.bind-blanc.item_4
+        //-   a(href="#", title="Мои изображения") Мои изображения
+        li.bind-template.item_5.active
+          a(href="#", title="Импорт из сети") Импорт из сети
+      div.load_button.btn.bind-image-button Загрузить с диска
+        input#fileupload.bind-image-input(type="file", accept=".png,.jpg,.jpeg,.gif,.bmp", data-url='/api/images/upload/file')
+
+    div.home_container_right
+      input.load-input.loop.bind-image-url(type="text")

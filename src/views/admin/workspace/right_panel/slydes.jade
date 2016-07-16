@@ -5,56 +5,54 @@
   form.workspace-right_panel-container.mcsb-behavior.pd-submit-behavior
     .workspace-right_panel-container-input_block.with_eye
       label Название слайда
-      input.bind-slide_name(type="text", value=name)
-    div.floatleft.width100
-      .workspace-right_panel-container-select_block.fourth
-        label Порядок
-        select.bind-slide_duration
-          option(value="1") 1
-          option(value="2",selected="selected") 2
-          option(value="3") 3
+      input.bind(type="text", value=name, bind-to="name")
+    .floatleft.width100
+      //- .workspace-right_panel-container-select_block.fourth
+      //-   label Порядок
+      //-   select.bind-slide_duration
+      //-     option(value="1") 1
+      //-     option(value="2",selected="selected") 2
+      //-     option(value="3") 3
 
       .workspace-right_panel-container-color_picker
         label Фон
-        div.set_color_div.set_color(data-valueelement = "set_slide_input", data-styleelement="set_slide_button")
+        .set_color_div.set_color(data-valueelement = "set_slide_input", data-styleelement="set_slide_button")
           button#set_slide_button.set_color_button
-          input#set_slide_input.set_color_input(value="#fff")
+          input#set_slide_input.set_color_input(value="#" + background, bind-to="background")
 
     .workspace-right_panel-container_big
       h3 Повтор
       .workspace-right_panel-container-radio_block
-        input(type="radio", name="repeat", id = "norepeat")
-        label(for="norepeat")
-        label(for="norepeat") Не повторять
+        if repeat == 'no-repeat'
+          input.bind(type="radio", bind-to="repeat", name="repeat", id = "no-repeat", checked, value="no-repeat")
+        else
+          input.bind(type="radio", bind-to="repeat", name="repeat", id = "no-repeat", value="no-repeat")
+        label(for="no-repeat")
+        label(for="no-repeat") Не повторять
+
       .workspace-right_panel-container-radio_block
         .half
-          input(type="radio", name="repeat", id = "repeat")
+          if repeat == 'repeat'
+            input.bind(type="radio", bind-to="repeat", name="repeat", id = "repeat", checked, value="repeat")
+          else
+            input.bind(type="radio", bind-to="repeat", name="repeat", id = "repeat", value="repeat")
           label(for="repeat")
           label(for="repeat") Повторить
         .half
-          input.width50.margintop_-5(type="text")
-          span раз
+          //- этому инпуту дай класс disabled и атрибут disabled
+          if repeat == 'repeat'
+            input.width50.margintop_-5.bind(type="text", name="repeatNum", bind-to="repeatNum", parse-int, value=repeatNum)
+          else
+            input.width50.margintop_-5.disabled(type="text", disabled)
+          span раз 
 
     .workspace-right_panel-container_big
       h3 Вход
 
-      .workspace-right_panel-container_row_time
-        span 00:00:000 – 00:00:50
-        button.rotate_1080deg
+      div(id="animations_enter")
 
-      .workspace-right_panel-container-select_block.margintop_5
-        select
-          option(value="1", selected="selected") Из непрозрачного в прозрачный
-
-      .workspace-right_panel-container-block.margintop_15
-        select
-          option(selected="selected") Ease In/Out
-      .workspace-right_panel-container-block_plus
-        input.time(type="text", value="500")
-        button.plus
-        button.minus          
-      button.workspace-right_panel_add
 
     .workspace-right_panel-container_big
       h3 Выход
-      button.workspace-right_panel_add
+
+      div(id="animations_leave")

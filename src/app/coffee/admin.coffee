@@ -19,6 +19,20 @@ require.config
     "mCSB": "modules/jquery.mCustomScrollbar"
     "SweetAlert": "modules/sweetalert"
     "d3": "modules/d3"
+    "jquery.fileupload": "modules/jquery.fileupload"
+    "jquery.fileupload-ui": "modules/jquery.fileupload-ui"
+    "jquery.fileupload-image": "modules/jquery.fileupload-image"
+    "jquery.fileupload-video": "modules/jquery.fileupload-video"
+    "jquery.fileupload-audio": "modules/jquery.fileupload-audio"
+    "jquery.fileupload-validate": "modules/jquery.fileupload-validate"
+    "jquery.fileupload-process": "modules/jquery.fileupload-process"
+    "jquery.ui.widget": "modules/jquery.ui.widget"
+    "jquery.iframe-transport": "modules/jquery.iframe-transport"
+    "tmpl": "modules/tmpl"
+    "load-image": "vendor/load-image"
+    "load-image-meta": "vendor/load-image-meta"
+    "load-image-exif": "vendor/load-image-exif"
+    "canvas-to-blob": "vendor/canvas-to-blob"
   shim:
     "libs/api": 
       deps: [ "jquery" ]
@@ -38,6 +52,12 @@ require.config
     "jquery-ui":
       deps: [ "jquery" ]
     "ddslick": 
+      deps: [ "jquery" ]
+    "jquery.iframe-transport":
+      deps: [ "jquery" ]
+    "jquery.fileupload-ui":
+      deps: [ "jquery" ]
+    "jquery.ui.widget":
       deps: [ "jquery" ]
 
 window.Behaviors = {}
