@@ -11,7 +11,7 @@ define "views/workspace/TimelineView", [
     template: TimelineTemplate
     childView: TimelineItem
     behaviors:
-      MCustomScrollbar: { axis: 'yx' }
+      MCustomScrollbar: { mouseWheel: { invert: true } }
     className: 'timeline'
     childViewContainer: ".bind-timeline-items"
     initialize: (options)->
