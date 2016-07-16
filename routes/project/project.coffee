@@ -43,3 +43,8 @@ exports.init = (app)->
     el = projects[req.params.project_id].slides[req.params.slide_id].elements[req.params.id]
     el[key] = value for own key, value of req.body
     res.send el
+
+  app.get '/api/project/:id/export', (req, res, next)->
+    p = projects[req.params.id]
+
+    res.render "client/index", p

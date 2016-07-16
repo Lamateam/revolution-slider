@@ -212,6 +212,9 @@ module.exports = (grunt) ->
             font_face: require 'stylus-font-face'
         files:
           "tmp/style.css": "src/app/stylus/style.styl"
+      client:
+        files:
+          "dist/client.css": "src/app/stylus/client.styl"
     coffee:
       app:
         expand: true

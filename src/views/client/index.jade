@@ -1,0 +1,58 @@
+doctype html
+html
+  head
+    meta(charset="utf-8")
+    meta(name="viewport" content="width=device-width, initial-scale=1.0")
+
+    script(type="text/javascript")
+      include ../../../node_modules/jquery/dist/jquery.min.js
+
+    script(type="text/javascript")
+      include ../../../vendor/jquery.themepunch.tools.min.js
+    script(type="text/javascript")
+      include ../../../vendor/jquery.themepunch.revolution.min.js
+
+    script(type="text/javascript")
+      include ../../../vendor/revolution.extension.actions.min.js
+    script(type="text/javascript")
+      include ../../../vendor/revolution.extension.carousel.min.js
+    script(type="text/javascript")
+      include ../../../vendor/revolution.extension.kenburn.min.js
+    script(type="text/javascript")
+      include ../../../vendor/revolution.extension.layeranimation.min.js
+    script(type="text/javascript")
+      include ../../../vendor/revolution.extension.migration.min.js
+    script(type="text/javascript")
+      include ../../../vendor/revolution.extension.navigation.min.js
+    script(type="text/javascript")
+      include ../../../vendor/revolution.extension.parallax.min.js
+    script(type="text/javascript")
+      include ../../../vendor/revolution.extension.slideanims.min.js
+    script(type="text/javascript")
+      include ../../../vendor/revolution.extension.video.min.js
+
+    style
+      include ../../../vendor/revolution.navigation.css
+      include ../../../vendor/revolution.layers.css
+      include ../../../vendor/revolution.settings.css
+      include ../../../dist/client.css
+  body
+    .rev_slider_wrapper.fullscreen-container
+      .rev_slider.fullscreenbanner(style="display:none;", data-version="5.2.0")
+        ul
+          for slide in slides
+            li(
+              data-index='slide-' + slide.id, 
+              data-transition='parallaxtobottom', 
+              data-slotamount='default', 
+              data-easein='default', 
+              data-easeout='default', 
+              data-masterspeed='default', 
+              data-rotate='0', 
+              data-saveperformance='off'
+            )
+
+              img.rev-slide-bg(src="http://mediastart.org/wp-content/uploads/2013/07/catik.jpg", data-bgposition="center center", data-bgfit="cover", data-bgrepeat="no-repeat")
+
+    script(type="text/javascript")
+      include ../../../vendor/revolution.start.js

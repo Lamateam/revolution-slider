@@ -1,9 +1,10 @@
 define "views/workspace/CanvasView", [ 
   "marionette"
   "libs/helpers"
+  "views/workspace/TimelineView"
   "templates/workspace/canvas"
   "d3"
-], (Marionette, Helpers, CanvasTemplate)->
+], (Marionette, Helpers, TimelineView, CanvasTemplate)->
   html = d3.select 'html'
   CanvasItem = Marionette.ItemView.extend
     tagName: "g"
@@ -223,6 +224,15 @@ define "views/workspace/CanvasView", [
         width: @options.width
         height: @options.height
     template: CanvasTemplate
+    onRender: ->
+      setTimeout =>
+        manager = new Marionette.RegionManager
+          regions:
+            timelineRegion: '#timeline'
+
+        manager.get('timelineRegion').show new TimelineView
+          elements: @collection
+      , 0
     onSlideEditClick: ->
       window.App.trigger "slide:select", { id: @model.get 'id' }
 

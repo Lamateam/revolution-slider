@@ -1,5 +1,54 @@
-ul
-  for timesegment in timesegments
-    - var seconds = (timesegment.seconds == 0 ? '0' + timesegment.seconds : timesegment.seconds)
-    li=timesegment.minutes + ':' + seconds
-.bind-timeline-items
+.timeline_scale
+  //- 5 секунд - 40px, 1 cекунда - 8 пикселей
+  ul
+    for timesegment in timesegments
+      - var seconds = (timesegment.seconds == 0 ? '0' + timesegment.seconds : timesegment.seconds)
+      li
+        span=timesegment.minutes + ':' + seconds
+.timeline_items.mcsb-behavior.bind-timeline-items
+  //-если загруженный объект
+  .timeline_item.custom.active
+    img(src="static/images/demo/layout_images.jpg")
+    ul
+      li(style='left: 20px; width: 50px')
+      li(style='left: 50px; width: 30px')
+  //- .timeline_item.date
+  //-   img(src="static/images/rightpart/project_header/date.svg")
+  //-   ul
+  //-     li(left="20px", width="50px")
+  //-     li(left="100px", width="30px")
+  //- .timeline_item.graphics
+  //-   img(src="static/images/rightpart/project_header/graphics.svg")
+  //-   ul
+  //-     li(left="20px", width="50px")
+  //-     li(left="100px", width="30px")
+  //- .timeline_item.paragraph
+  //-   img(src="static/images/rightpart/project_header/paragraph.svg")
+  //-   ul
+  //-     li(left="20px", width="50px")
+  //-     li(left="100px", width="30px")
+  //- .timeline_item.shape
+  //-   img(src="static/images/rightpart/project_header/figure.svg")
+  //-   ul
+  //-     li(left="20px", width="50px")
+  //-     li(left="100px", width="30px")
+  //- .timeline_item.text
+  //-   img(src="static/images/rightpart/project_header/text.svg")
+  //-   ul
+  //-     li(left="20px", width="50px")
+  //-     li(left="100px", width="30px")
+  //- .timeline_item.time
+  //-   img(src="static/images/rightpart/project_header/time.svg")
+  //-   ul
+  //-     li(left="20px", width="50px")
+  //-     li(left="100px", width="30px")
+  //- .timeline_item.video
+  //-   img(src="static/images/rightpart/project_header/video.svg")
+  //-   ul
+  //-     li(left="20px", width="50px")
+  //-     li(left="100px", width="30px")
+  //- .timeline_item.weather
+  //-   img(src="static/images/rightpart/project_header/weather.svg")
+  //-   ul
+  //-     li(left="20px", width="50px")
+  //-     li(left="100px", width="30px")

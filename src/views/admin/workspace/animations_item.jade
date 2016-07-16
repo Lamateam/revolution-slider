@@ -22,9 +22,13 @@
         
     if link == 'process'
       if type == 'rotate'
-        option(value="rotate", selected) Поворот
+        option(value="rotate", selected) Поворот (по часовой)
       else
-        option(value="rotate") Поворот
+        option(value="rotate") Поворот (по часовой)
+      if type == 'antirotate'
+        option(value="rotate", selected) Поворот (против часовой)
+      else
+        option(value="antirotate") Поворот (против часовой)
       if type == 'pulsar'
         option(value="pulsar", selected) Пульсация
       else

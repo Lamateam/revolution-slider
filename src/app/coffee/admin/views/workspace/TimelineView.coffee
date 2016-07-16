@@ -2,12 +2,17 @@ define "views/workspace/TimelineView", [
   "marionette"
   "templates/workspace/timeline"
   "templates/workspace/timeline_item"
+  "behaviors/MCustomScrollbar"
 ], (Marionette, TimelineTemplate, TimelineItemTemplate)->
   TimelineItem = Marionette.ItemView.extend
     template: TimelineItemTemplate
+
   Marionette.CompositeView.extend
     template: TimelineTemplate
     childView: TimelineItem
+    behaviors:
+      MCustomScrollbar: { axis: 'yx' }
+    className: 'timeline'
     childViewContainer: ".bind-timeline-items"
     initialize: (options)->
       maxTime = { minutes: 0, seconds: 0 }
