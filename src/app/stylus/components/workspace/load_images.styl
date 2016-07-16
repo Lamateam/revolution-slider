@@ -6,14 +6,78 @@
   z-index 100
   width 100%
   
+  &_myimages
+    &_header
+      font-size: 14px; 
+      color color_gray
+      margin-top 3px
+      
+    &_size
+      color color_gray_opacity
+      font-size 12px
+      margin-top 1px
+  
+  &_picture
+    margin-top 15px
+    text-align center
+    
+    &_image
+      display inline-block
+      max-height 220px
+      max-width 100%
+      box-shadow 0px 2px 10px 0px rgba(0,0,0,0.3)
+      
+    &_name
+      font-size: 16px;
+      color color_gray
+      margin-top 20px
+    
+    &_size
+      color color_gray_opacity 
+      font-size 12px
+      margin-top 10px
+      
+    &_buttons
+      bottom 0px
+      position absolute
+      transition 150ms all ease-in
+      width 450px
+      left -15px
+      
+    &_button
+      width 33%
+      text-align center
+      font-size 14px
+      color color_gray_opacity_small
+      
+      &:hover
+        color color_blue
+      
+      & *
+        display inline
+        
+      & img
+        padding-right 5px
+  
+  &_header
+    font-size 18px
+    color color_gray
+    line-height 20px
+    padding-bottom 10px
+  
   &-input
     font-size 16px
     color color_gray
     background transparent
-    width 100%
+    width 95%
     height 42px
+    padding-left 10px
+    padding-right 10px
     border 2px solid #B1B8C0
     border-radius 4px
+    
+    &.loading
+      background url(images/load_images/loading.svg) 195px center no-repeat
     
     &.loop
       border-radius 43px
@@ -22,7 +86,7 @@
       background-position 12px center
       padding-left 35px 
       height 38px
-      width 95%
+      width 90%
   
   &_button
     font-size 16px

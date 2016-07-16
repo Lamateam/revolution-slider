@@ -4,7 +4,7 @@
     <desc>Created with Sketch.</desc>
     <defs>
         <circle id="path-1" cx="469" cy="49" r="12"></circle>
-        <mask id="mask-2" maskContentUnits="userSpaceOnUse" maskUnits="objectBoundingBox" x="0" y="0" width="24" height="24" fill="white">
+        <mask id="mask-2" maskContentUnits="userSpaceOnUse" maskUnits="objectBoundingBox" x="0" y="0" width="24" height="24" fill="3A7CC8">
             <use xlink:href="#path-1"></use>
         </mask>
     </defs>

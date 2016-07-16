@@ -1,0 +1,19 @@
+extends layout.jade
+block load_block
+  h2.load_header Прямая ссылка на изображение
+  input.load-input(type="text", placeholder="http://")
+
+  .load_picture
+    img.img-responsive.load_picture_image(src="static/images/demo/layout_images.jpg", alt=name)
+    h3.load_picture_name picture.jpg
+    span.load_picture_size 1600x990, 3.12 Мб
+    .load_picture_buttons
+      button.load_picture_button 
+        img(src="static/images/load_images/import/ok.svg",alt="Добавить")
+        | Добавить
+      button.load_picture_button
+        img(src="static/images/load_images/import/edit.svg",alt="Редактировать")
+        |  Редактировать
+      button.load_picture_button
+        img(src="static/images/load_images/import/save.svg",alt="Сохранить")
+        |  Сохранить

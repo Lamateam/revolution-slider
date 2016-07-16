@@ -3,7 +3,6 @@ opacity
 /* Rectangle 67: */
 background: rgba(17,22,27,0.70);
 
-
 /* Загрузить с диска: */
 font-family: .HelveticaNeueDeskInterface-Regular;
 font-size: 16px;
@@ -35,7 +34,7 @@ border: 2px solid #B1B8C0;
 
 
 
-/* 1600x1200, 4.2 Мб: */
+/*  : */
 opacity: 0.5;
 font-family: .HelveticaNeueDeskInterface-Regular;
 font-size: 12px;
@@ -96,9 +95,6 @@ opacity: 0.5;
 font-family: .HelveticaNeueDeskInterface-Regular;
 font-size: 12px;
 color: #4F5963;
-
-
-
 
 /* http://: */
 opacity: 0.5;

@@ -30,6 +30,7 @@
         & .image_size
           max-width 75%
           width auto
+          display inline-block
           margin 0 auto
           
           & .image_block
@@ -41,11 +42,18 @@
               max-height 120px
             
             & .add
+            & .ok
             & .play
+            & .delete
+            & .edit
               position absolute
-              bottom 10px
               opacity 0
               transition 300ms all ease-in
+              
+            & .add
+            & .ok
+            & .play
+              bottom 10px
 
             & .play
               left 10px
@@ -58,6 +66,26 @@
               width 24px 
               height 24px
               background url(images/add.svg) no-repeat center 
+              
+            & .ok
+              left 10px
+              width 25px
+              height 18px
+              background url(images/load_images/ok.svg) no-repeat center 
+              
+            & .delete
+              top 10px
+              width 18px
+              height 23px
+              right 10px
+              background url(images/load_images/delete.svg) no-repeat center
+              
+            & .edit
+              top 10px
+              left 10px
+              width 20px
+              height 20px
+              background url(images/load_images/edit.svg) no-repeat center
             
             & .opacity
               border-radius 9px
@@ -91,9 +119,16 @@
               
               & .add
               & .play
-                opacity 1
+              & .edit
+              & .delete
+              & .ok
+                opacity 0.7
+                
+                &:hover
+                  opacity 1
 
           & span
+          & h3
             color color_blue
                       
     &_right
@@ -106,7 +141,7 @@
       height 414px
       
       &.scroll
-        width 470px
+        width 465px
       // min-height 410px
       // max-height 414px
       
@@ -253,11 +288,11 @@
       
     &-close
       position absolute
-      right 13px
+      right 8px
       top 8px
       width 30px
       user-select none
-      transition 500ms all linear
+      transition 400ms all linear
       height 30px
       background url(images/close.svg) no-repeat center 
       
@@ -322,6 +357,9 @@
         list-style-type none
         float left
         cursor pointer
+
+        &.margintop
+          margin-top 15px
         
       &.home_menu
         width 100%
