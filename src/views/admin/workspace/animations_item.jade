@@ -1,5 +1,15 @@
 .workspace-right_panel-container_row_time
-  span 00:00:000 – 00:00:50
+  - var _start = Math.floor(start / 10)
+  - var _duration = Math.floor(duration / 10)
+  - var start_minutes = Math.floor(_start / 60)
+  - var start_seconds = _start % 60
+  - var duration_minutes = Math.floor(_duration / 60)
+  - var duration_seconds = _duration % 60
+  - start_seconds = (start_seconds < 10 ? "0" + start_seconds : start_seconds)
+  - start_minutes = (start_minutes < 10 ? "0" + start_minutes : start_minutes)
+  - duration_seconds = (duration_seconds < 10 ? "0" + duration_seconds : duration_seconds)
+  - duration_minutes = (duration_minutes < 10 ? "0" + duration_minutes : duration_minutes)
+  span= start_minutes + ":" + start_seconds + " – " + duration_minutes + ":" + duration_seconds
   button.rotate_1080deg
 
 .workspace-right_panel-container-select_block.margintop_5
