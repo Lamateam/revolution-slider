@@ -1,6 +1,7 @@
 .timeline
   bottom 0px
   width 100%
+  overflow hidden
   height 220px
   position absolute
   background-image: linear-gradient(-180deg, #2B363F 0%, #202B33 73%);
@@ -9,16 +10,19 @@
   &_scale
     height 30px
     width 100%
-    
+    white-space nowrap
+
     & ul
       padding-left 32px
       height 100%
       position relative
+      white-space nowrap
       
       & li
         width 40px
+        white-space: nowrap;
         position relative
-        float left
+        display inline-block
         text-align center
         
         &:before
