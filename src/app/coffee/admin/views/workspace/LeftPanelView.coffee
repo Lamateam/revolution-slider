@@ -1,7 +1,8 @@
 define "views/workspace/LeftPanelView", [ 
   "marionette"
+  "views/workspace/TimelineView"
   "templates/workspace/left_panel"
-], (Marionette, WorkspaceLeftPanelTemplate)->
+], (Marionette, TimelineView, WorkspaceLeftPanelTemplate)->
   WorkspaceLeftPanelView = Marionette.ItemView.extend
     className: 'workspace-left_panel'
     events:
@@ -11,6 +12,15 @@ define "views/workspace/LeftPanelView", [
     modelEvents:
       'sync': 'render'
     template: WorkspaceLeftPanelTemplate
+    onRender: ->
+      setTimeout =>
+        manager = new Marionette.RegionManager
+          regions:
+            timelineRegion: '#timeline'
+
+        manager.get('timelineRegion').show new TimelineView
+          elements: @getOption 'elements'
+      , 0
     onTextButtonClick: ->
       window.App.trigger "element:create", { type: "text", props: { x: 250, y: 250, fill: "rgb(0,0,0)", "font-size": "12px", text: "Текст" } }
     onGraphButtonClick: ->

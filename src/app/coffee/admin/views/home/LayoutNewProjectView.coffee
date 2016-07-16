@@ -17,7 +17,6 @@ define "views/home/LayoutNewProjectView", [
       @ui.all_li.removeClass "active"
       li.addClass "active"
     showNewBlancProject: (options)->
-      console.log options
       view = new NewBlancProjectView(options)
       @showChildView "content", view
       @toggleActiveLi @ui.blanc_li

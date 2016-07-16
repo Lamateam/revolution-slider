@@ -6,6 +6,11 @@ define "views/workspace/AnimationsView", [
 ], (Marionette, AnimationsCollection, AnimationsTemplate, AnimationsItemTemplate)->
   AnimationItem = Marionette.ItemView.extend
     template: AnimationsItemTemplate
+    events: 
+      'blur .bind-duration': 'changeDuration'
+    changeDuration: (e)->
+      duration = parseInt e.target.value, 10
+      @model.collection.changeAnimation @model.get('id'), { duration: duration }
   Marionette.CompositeView.extend
     template: AnimationsTemplate
     childView: AnimationItem
@@ -19,7 +24,6 @@ define "views/workspace/AnimationsView", [
       for a in options.animations
         filtered.push(a) if a.link is options.link
       @collection = new AnimationsCollection filtered, { element: options.element }
-      console.log 'options: ', options
     addAnimation: ->
       link = @options.link
       type = switch link 

@@ -38,6 +38,7 @@ define "controllers/workspace/LayoutController", [
       @listenTo window.App, "image:url_upload", @onImageUrlUpload
 
       @listenTo window.App, "animation:add", @onAnimationAdd
+      @listenTo window.App, "animation:change", @onAnimationChange
 
       Marionette.LayoutController.prototype.initialize.apply @
     renderTopPanel: ->
@@ -62,6 +63,7 @@ define "controllers/workspace/LayoutController", [
     renderLeftPanel: ->
       @getOption('layout').renderLeftPanel
         model: @getOption('projectModel')
+        elements: @getOption('elementsCollection')
     onWorkspaceName: ->
       @getOption('stateModel').clearState "isElementSelected"
       @renderRightPanel @getOption('projectModel'), 'project'      
@@ -151,13 +153,11 @@ define "controllers/workspace/LayoutController", [
         contentType: "application/json"
         data: JSON.stringify _data
         success: (data)->
-          console.log data
           if _data.id isnt undefined
             window.App.trigger "element:change", { el: _data.id, props: { "xlink:href": data.url } }
           else
             window.App.trigger "element:create", { type: "image", props: { x: 100, y: 100, angle: 0, width: 170, height: 200, fill: "rgb(0,0,0)", "xlink:href": data.fileName } }
     onAnimationAdd: (data)->
-      console.log 'add animation catch: ', data
       switch data.element.type
         when 'slide'
           animations = @getOption('slideModel').get 'animations'
@@ -165,9 +165,30 @@ define "controllers/workspace/LayoutController", [
           @changeSlide { animations: animations }
         when 'element'
           model = @getOption('elementsCollection').findWhere { id: data.element.id }
-          animations = model.get('animations')
+          animations = model.get 'animations'
           animations.push data.model.toJSON()
           model.save { animations: animations }, { wait: true, patch: true } 
+    onAnimationChange: (data)->
+      switch data.element.type
+        when 'slide'
+          animations = @getOption('slideModel').get 'animations'
+
+          for animation in animations
+            console.log 'diff: ', animation.id, data.id
+            if animation.id is data.id
+              animation[key] = value for own key, value of data.data
+
+          @changeSlide { animations: animations }
+        when 'element'
+          model = @getOption('elementsCollection').findWhere { id: data.element.id }
+          animations = model.get 'animations'
+
+          for animation in animations
+            console.log 'diff: ', animation.id, data.id
+            if animation.id is data.id
+              animation[key] = value for own key, value of data.data  
+
+          model.save { animations: animations }, { wait: true, patch: true }                  
     openSlide: ->
       @options.slideModel            = new SlideModel @getOption('projectModel').get('slides')[@slide]
       @options.slideModel.project_id = @getOption('projectModel').get 'id'

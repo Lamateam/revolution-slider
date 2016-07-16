@@ -7,4 +7,5 @@ define "models/AnimationModel", [
       duration: 500
       effect: 'ease'
       link: 'enter'
+      start: 0
 

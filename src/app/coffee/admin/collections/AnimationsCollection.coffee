@@ -6,6 +6,8 @@ define "collections/AnimationsCollection", [
     comparator: 'id'
     model: AnimationModel
     initialize: (data, @options)->
+    changeAnimation: (id, data)->
+      window.App.trigger 'animation:change', { id: id, element: @options.element, data: data }
     addAnimation: (data)->
       data.id = if @length is 0 then 1 else @last().get('id') + 1
       @add data

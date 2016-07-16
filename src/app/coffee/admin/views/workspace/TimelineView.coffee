@@ -3,28 +3,38 @@ define "views/workspace/TimelineView", [
   "templates/workspace/timeline"
   "templates/workspace/timeline_item"
 ], (Marionette, TimelineTemplate, TimelineItemTemplate)->
-  AnimationItem = Marionette.ItemView.extend
-    template: AnimationsItemTemplate
+  TimelineItem = Marionette.ItemView.extend
+    template: TimelineItemTemplate
   Marionette.CompositeView.extend
-    template: AnimationsTemplate
-    childView: AnimationItem
-    childViewContainer: ".bind-animations"
-    modelEvents:
-      'change': 'render'
-    events:
-      'click .bind-add-animation': 'addAnimation'
+    template: TimelineTemplate
+    childView: TimelineItem
+    childViewContainer: ".bind-timeline-items"
     initialize: (options)->
-      filtered = []
-      for a in options.animations
-        filtered.push(a) if a.link is options.link
-      @collection = new AnimationsCollection filtered, { element: options.element }
-      console.log 'options: ', options
-    addAnimation: ->
-      link = @options.link
-      type = switch link 
-        when 'enter' then 'fadeIn'
-        when 'process' then 'rotate' 
-        when 'leave' then 'fadeOut'
-      @collection.addAnimation { link: link, type: type }
+      maxTime = { minutes: 0, seconds: 0 }
+      console.log options
+      for element in options.elements.toJSON()
+        console.log 'timeline element: ', element
+        for animation in element.animations
+          console.log 'timeline animation: ', animation
+          animationTime   = { minutes: 0, seconds: 0 }
+          durationSeconds = Math.round((animation.duration + animation.start) / 10)
 
+          animationTime.minutes = Math.floor(durationSeconds / 60)
+          animationTime.seconds = durationSeconds % 60
 
+          maxTime = animationTime if (maxTime.minutes < animationTime.minutes) or ((maxTime.minutes is animationTime.minutes) and (maxTime.seconds < animationTime.seconds))
+
+      console.log maxTime
+
+      timesegments = [  ]
+      if maxTime.minutes isnt 0
+        for i in [0..maxTime.minutes-1]
+          for j in [0..5]
+            timesegments.push { minutes: i, seconds: j*10 }
+
+      for j in [0..Math.floor(maxTime.seconds / 10)]
+        timesegments.push { minutes: maxTime.minutes, seconds: j*10 }
+
+      console.log timesegments
+
+      @model = new Backbone.Model { timesegments: timesegments }
