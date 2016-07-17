@@ -1,1 +1,10 @@
-.rounded
+img(src="static/images/demo/layout_images.jpg")
+ul
+  for animation in animations
+    - var offset = animation.start * 0.8
+    - var dur    = animation.duration * 0.8
+    - var dataAnimation = JSON.stringify(animation)
+    li(
+      style='left: ' + offset + 'px; width: ' + dur + 'px', 
+      data-animation=dataAnimation
+    )

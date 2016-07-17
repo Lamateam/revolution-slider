@@ -14,18 +14,12 @@ define "collections/AnimationsCollection", [
     addAnimation: (data)->
       data.id = if @length is 0 then 1 else @last().get('id') + 1
 
-      if @last()
-        console.log 'animation id: ', @length, @last().get('id'), data.id
-      else
-        console.log data.id
-
       animations = [  ]
       
       start = 0
       @each (model)=>
         link     = model.get 'link'
         duration = model.get 'duration'
-        console.log link, data.link, leave_queue.indexOf(link), leave_queue.indexOf(data.link)
         if (link is data.link) or (leave_queue.indexOf(link) < leave_queue.indexOf(data.link))
           start += duration
 

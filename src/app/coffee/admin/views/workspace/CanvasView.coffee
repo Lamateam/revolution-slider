@@ -62,6 +62,28 @@ define "views/workspace/CanvasView", [
         return if d3.event.defaultPrevented
         window.App.trigger "element:click", { id: id }
       @listenTo @getOption("stateModel"), "change:isElementSelected", @onSomeElementSelected
+      @listenTo window.App, 'element:' + @model.get('id') + ':animation:play', @playAnimation
+    playAnimation: (data)->
+      switch data.type
+        when 'fadeIn'
+          @$el.hide().fadeIn data.duration
+        when 'fadeOut'
+          @$el.fadeOut data.duration, => @$el.show()
+        when 'rotate'
+          props    = @model.get 'props'
+          w2       = props.width*0.5
+          h2       = props.height*0.5
+          angle    = parseFloat props.angle, 10
+
+          @$el.animate { borderSpacing: 360 }, {
+            duration: data.duration
+            step: (now, fx)=>
+              @d3_el.attr 'transform', 'rotate(' + (angle + now) + ',' + (props.x+w2) + ',' + (props.y+h2) + ')'
+            done: =>
+              @$el
+                .css 'borderSpacing', 0
+              @d3_el.attr 'transform', 'rotate(' + angle + ',' + (props.x+w2) + ',' + (props.y+h2) + ')'
+          }
     onSomeElementSelected: ->
       if @getOption("stateModel").get("isElementSelected") is @model.get("id") then @setActive() else @setInactive()
     setNodeAttribute: (node, key, value)->

@@ -20,7 +20,6 @@ define "views/workspace/RightPanelView", [
     behaviors:
       MCustomScrollbar: { scrollbarPosition: 'outside' }
       PreventDefaultStopPropagation: {  }
-    modelEvents: { sync: 'render' }
     ui:
       set_color: '.set_color'
       # WorkspaceRightPanelProjectTemplate ui

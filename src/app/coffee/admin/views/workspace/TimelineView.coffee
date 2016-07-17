@@ -6,7 +6,16 @@ define "views/workspace/TimelineView", [
 ], (Marionette, TimelineTemplate, TimelineItemTemplate)->
   TimelineItem = Marionette.ItemView.extend
     template: TimelineItemTemplate
-
+    className: 'timeline_item custom.active'
+    events:
+      'click [data-animation]': 'playAnimation'
+    initialize: ->
+      @listenTo window.App, 'element:' + @model.get('id') + ':animation:change', @changeAnimation
+    playAnimation: (e)->
+      window.App.trigger 'element:' + @model.get('id') + ':animation:play', JSON.parse(e.target.getAttribute('data-animation'))
+    changeAnimation: (data)->
+      @model.set 'animations', data.animations
+      @render()
   Marionette.CompositeView.extend
     template: TimelineTemplate
     childView: TimelineItem
@@ -15,8 +24,8 @@ define "views/workspace/TimelineView", [
     className: 'timeline'
     childViewContainer: ".bind-timeline-items"
     initialize: (options)->
-      maxTime = { minutes: 0, seconds: 0 }
-      console.log options
+      maxTime    = { minutes: 0, seconds: 0 }
+
       for element in options.elements.toJSON()
         for animation in element.animations
           animationTime   = { minutes: 0, seconds: 0 }
@@ -26,8 +35,7 @@ define "views/workspace/TimelineView", [
           animationTime.seconds = durationSeconds % 60
 
           maxTime = animationTime if (maxTime.minutes < animationTime.minutes) or ((maxTime.minutes is animationTime.minutes) and (maxTime.seconds < animationTime.seconds))
-
-      console.log maxTime
+      
 
       timesegments = [  ]
       if maxTime.minutes isnt 0
@@ -38,6 +46,8 @@ define "views/workspace/TimelineView", [
       for j in [0..Math.floor(maxTime.seconds / 10)]
         timesegments.push { minutes: maxTime.minutes, seconds: j*10 }
 
-      console.log timesegments
+      
 
       @model = new Backbone.Model { timesegments: timesegments }
+
+      @collection = options.elements

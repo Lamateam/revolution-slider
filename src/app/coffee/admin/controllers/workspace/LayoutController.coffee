@@ -189,7 +189,8 @@ define "controllers/workspace/LayoutController", [
             if animation.id is data.id
               animation[key] = value for own key, value of data.data  
 
-          model.save { animations: animations }, { wait: true, patch: true }   
+          model.save { animations: animations }, { wait: true, patch: true } 
+          window.App.trigger 'element:' + model.get('id') + ':animation:change', { animations: animations }  
     onAnimationsChange: (data)->
       console.log 'data: ', data
       switch data.element.type
@@ -221,7 +222,9 @@ define "controllers/workspace/LayoutController", [
 
             animations.push a if is_new
 
-          model.save { animations: animations }, { wait: true, patch: true, success: ()-> alert('hey!') }               
+          model.save { animations: animations }, { wait: true, patch: true, success: => @renderRightPanel model, 'element' }               
+          
+          window.App.trigger 'element:' + model.get('id') + ':animation:change', { animations: animations }
     openSlide: ->
       @options.slideModel            = new SlideModel @getOption('projectModel').get('slides')[@slide]
       @options.slideModel.project_id = @getOption('projectModel').get 'id'
