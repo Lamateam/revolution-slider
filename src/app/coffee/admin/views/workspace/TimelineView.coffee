@@ -18,13 +18,11 @@ define "views/workspace/TimelineView", [
       maxTime = { minutes: 0, seconds: 0 }
       console.log options
       for element in options.elements.toJSON()
-        console.log 'timeline element: ', element
         for animation in element.animations
-          console.log 'timeline animation: ', animation
           animationTime   = { minutes: 0, seconds: 0 }
-          durationSeconds = Math.round((animation.duration + animation.start) / 10)
+          durationSeconds = Math.round (animation.duration + animation.start) / 10
 
-          animationTime.minutes = Math.floor(durationSeconds / 60)
+          animationTime.minutes = Math.floor durationSeconds / 60
           animationTime.seconds = durationSeconds % 60
 
           maxTime = animationTime if (maxTime.minutes < animationTime.minutes) or ((maxTime.minutes is animationTime.minutes) and (maxTime.seconds < animationTime.seconds))

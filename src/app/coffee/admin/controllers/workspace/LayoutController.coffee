@@ -39,6 +39,7 @@ define "controllers/workspace/LayoutController", [
 
       @listenTo window.App, "animation:add", @onAnimationAdd
       @listenTo window.App, "animation:change", @onAnimationChange
+      @listenTo window.App, "animations:change", @onAnimationsChange
 
       Marionette.LayoutController.prototype.initialize.apply @
     renderTopPanel: ->
@@ -188,10 +189,45 @@ define "controllers/workspace/LayoutController", [
             if animation.id is data.id
               animation[key] = value for own key, value of data.data  
 
-          model.save { animations: animations }, { wait: true, patch: true }                  
+          model.save { animations: animations }, { wait: true, patch: true }   
+    onAnimationsChange: (data)->
+      console.log 'data: ', data
+      switch data.element.type
+        when 'slide'
+          animations = @getOption('slideModel').get 'animations'
+          for a in data.animations
+            is_new = true
+
+            for animation in animations
+              console.log 'diff: ', animation.id, a.id
+              if animation.id is a.id
+                animation[key] = value for own key, value of a.data
+                is_new         = false
+
+            animations.push a if is_new
+
+          @changeSlide { animations: animations }
+        when 'element'
+          model = @getOption('elementsCollection').findWhere { id: data.element.id }
+          animations = model.get 'animations'
+          for a in data.animations
+            is_new = true
+
+            for animation in animations
+              console.log 'diff: ', animation.id, a.id
+              if animation.id is a.id
+                animation[key] = value for own key, value of data.data  
+                is_new         = false
+
+            animations.push a if is_new
+
+          model.save { animations: animations }, { wait: true, patch: true, success: ()-> alert('hey!') }               
     openSlide: ->
       @options.slideModel            = new SlideModel @getOption('projectModel').get('slides')[@slide]
       @options.slideModel.project_id = @getOption('projectModel').get 'id'
+
+      @listenTo @options.slideModel, 'sync', ->
+        @renderRightPanel @options.slideModel, 'slide'
 
       @renderCanvas @options.slideModel
       @renderRightPanel @options.slideModel, 'slide'

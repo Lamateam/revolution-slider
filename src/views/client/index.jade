@@ -40,7 +40,9 @@ html
     .rev_slider_wrapper.fullscreen-container
       .rev_slider.fullscreenbanner(style="display:none;", data-version="5.2.0")
         ul
+
           for slide in slides
+
             li(
               data-index='slide-' + slide.id, 
               data-transition='parallaxtobottom', 
@@ -53,6 +55,11 @@ html
             )
 
               img.rev-slide-bg(src="http://mediastart.org/wp-content/uploads/2013/07/catik.jpg", data-bgposition="center center", data-bgfit="cover", data-bgrepeat="no-repeat")
+
+              for element in slide.elements
+
+                .tp-caption
+
 
     script(type="text/javascript")
       include ../../../vendor/revolution.start.js

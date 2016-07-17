@@ -3,6 +3,7 @@ define "models/AnimationModel", [
 ], (Backbone)->
   Backbone.Model.extend
     defaults:
+      id: 0
       type: 'fadeIn'
       duration: 500
       effect: 'ease'
