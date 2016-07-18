@@ -5,5 +5,6 @@ define "models/ElementModel", [
     defaults:
       type: "rect"
       isActive: true
-      props: []
-      animations: []
+      props: {  }
+      order: 0
+      animations: [  ]

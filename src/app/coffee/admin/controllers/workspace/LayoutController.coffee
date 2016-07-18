@@ -29,6 +29,7 @@ define "controllers/workspace/LayoutController", [
       @listenTo window.App, "element:resize", @onElementResize
       @listenTo window.App, "element:change", @onElementChange
       @listenTo window.App, "element:create", @onElementCreate
+      @listenTo window.App, "element:reorder", @onElementReOrder
 
       @listenTo window.App, "slide:change", @onSlideChange
       @listenTo window.App, "slide:select", @onSlideSelect
@@ -135,8 +136,15 @@ define "controllers/workspace/LayoutController", [
       @changeElement data.el, data.props      
     onElementCreate: (data)->
       elementsCollection = @getOption 'elementsCollection'
-      data.id = elementsCollection.last().get('id') + 1
+      ids                = elementsCollection.pluck 'id'
+
+      data.order = if elementsCollection.last() then elementsCollection.last().get('order') + 1 else 0
+      data.id    = if ids.length is 0 then 0 else Math.max.apply(null, ids) + 1
+
       elementsCollection.addElement data
+    onElementReOrder: (data)->
+      model = @getOption('elementsCollection').findWhere { id: data.el }
+      model.save { order: data.order }, { patch: true, wait: true }
     onSlideChange: (data)->
       @getOption('historyCollection').addAction { action: "change_slide", options: {current: data, previous: @getOption('slideModel').toJSON() } }
       @changeSlide data

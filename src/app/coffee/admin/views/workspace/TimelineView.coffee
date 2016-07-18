@@ -3,6 +3,7 @@ define "views/workspace/TimelineView", [
   "templates/workspace/timeline"
   "templates/workspace/timeline_item"
   "behaviors/MCustomScrollbar"
+  "jquery-ui"
 ], (Marionette, TimelineTemplate, TimelineItemTemplate)->
   TimelineItem = Marionette.ItemView.extend
     template: TimelineItemTemplate
@@ -11,6 +12,8 @@ define "views/workspace/TimelineView", [
       'click [data-animation]': 'playAnimation'
     initialize: ->
       @listenTo window.App, 'element:' + @model.get('id') + ':animation:change', @changeAnimation
+    onRender: ->
+      @el.setAttribute 'model-id', @model.get 'id'
     playAnimation: (e)->
       window.App.trigger 'element:' + @model.get('id') + ':animation:play', JSON.parse(e.target.getAttribute('data-animation'))
     changeAnimation: (data)->
@@ -19,10 +22,18 @@ define "views/workspace/TimelineView", [
   Marionette.CompositeView.extend
     template: TimelineTemplate
     childView: TimelineItem
-    behaviors:
-      MCustomScrollbar: { mouseWheel: { invert: true } }
+    # behaviors:
+    #   MCustomScrollbar: { mouseWheel: { invert: true } }
     className: 'timeline'
     childViewContainer: ".bind-timeline-items"
+    events:
+      'sortstop .bind-timeline-items': 'reOrderElements'
+    onRender: ->
+      setTimeout =>
+        @$el.find('.bind-timeline-items').sortable
+          placeholder: "ui-state-highlight"
+        @$el.disableSelection()
+      , 0
     initialize: (options)->
       maxTime    = { minutes: 0, seconds: 0 }
 
@@ -51,3 +62,12 @@ define "views/workspace/TimelineView", [
       @model = new Backbone.Model { timesegments: timesegments }
 
       @collection = options.elements
+
+    reOrderElements: ->
+      @$el.find('.timeline_item').each (index, element)=>
+        model_id = element.getAttribute 'model-id'
+        model    = @collection.get model_id
+
+        if model.get('order') isnt index
+          model.set 'order', index
+          window.App.trigger "element:reorder", { el: model.get('id'), order: index }

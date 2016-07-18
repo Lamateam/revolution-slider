@@ -3,7 +3,7 @@ define "collections/ElementsCollection", [
   "models/ElementModel"
 ], (Backbone, ElementModel)->
   ElementsCollection = Backbone.Collection.extend
-    comparator: 'id'
+    comparator: 'order'
     url: ->
       "/api/project/" + @project_id + "/" + @slide_id
     model: ElementModel

@@ -69,21 +69,33 @@ define "views/workspace/CanvasView", [
           @$el.hide().fadeIn data.duration
         when 'fadeOut'
           @$el.fadeOut data.duration, => @$el.show()
-        when 'rotate'
-          props    = @model.get 'props'
-          w2       = props.width*0.5
-          h2       = props.height*0.5
-          angle    = parseFloat props.angle, 10
+        when 'rotate', 'antirotate'
+          props     = @model.get 'props'
+          w2        = props.width*0.5
+          h2        = props.height*0.5
+          angle     = parseFloat props.angle, 10
+          el        = @d3_el
+          step      = data.duration / 360
+          direction = if data.type is 'rotate' then 1 else -1
 
-          @$el.animate { borderSpacing: 360 }, {
-            duration: data.duration
-            step: (now, fx)=>
-              @d3_el.attr 'transform', 'rotate(' + (angle + now) + ',' + (props.x+w2) + ',' + (props.y+h2) + ')'
-            done: =>
-              @$el
-                .css 'borderSpacing', 0
-              @d3_el.attr 'transform', 'rotate(' + angle + ',' + (props.x+w2) + ',' + (props.y+h2) + ')'
-          }
+          handler  = (now)->
+            ->
+              el.attr 'transform', 'rotate(' + (angle + direction*now) + ',' + (props.x+w2) + ',' + (props.y+h2) + ')'
+
+          for i in [1..360]
+            setTimeout handler(i), i*step
+
+          setTimeout -> el.attr 'transform', 'rotate(' + angle + ',' + (props.x+w2) + ',' + (props.y+h2) + ')'
+
+          # @$el.animate { borderSpacing: 360 }, {
+          #   duration: data.duration
+          #   step: (now, fx)=>
+          #     @d3_el.attr 'transform', 'rotate(' + (angle + now) + ',' + (props.x+w2) + ',' + (props.y+h2) + ')'
+          #   done: =>
+          #     @$el
+          #       .css 'borderSpacing', 0
+          #     @d3_el.attr 'transform', 'rotate(' + angle + ',' + (props.x+w2) + ',' + (props.y+h2) + ')'
+          # }
     onSomeElementSelected: ->
       if @getOption("stateModel").get("isElementSelected") is @model.get("id") then @setActive() else @setInactive()
     setNodeAttribute: (node, key, value)->

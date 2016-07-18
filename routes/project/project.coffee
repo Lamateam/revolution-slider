@@ -5,7 +5,6 @@ exports.init = (app)->
 
   app.post "/api/project/", (req, res, next)->
     req.body.id         = projects.length
-    req.body.animations = []
     req.body.slides = [
       {
         id: 0
@@ -16,9 +15,9 @@ exports.init = (app)->
         repeatNum: 1
         animations: []
         elements: [ 
-          { id: 0, type: "rect", animations: [], props: { fill: "rgb(255,0,0)", x: 100, y: 100, angle: 30, width: 100, height: 100 } }
+          { id: 0, order: 1, type: "rect", animations: [], props: { fill: "rgb(255,0,0)", x: 100, y: 100, angle: 30, width: 100, height: 100 } }
           # { id: 1, type: "circle", props: { fill: "rgb(255,255,0)", cx: 50, cy: 50, r: 100 } } 
-          { id: 1, type: "rect", animations: [], props: { fill: "rgb(255,0,0)", x: 0, y: 0, angle: 0, width: 100, height: 100 } }
+          { id: 1, order: 0, type: "rect", animations: [], props: { fill: "rgb(255,0,0)", x: 0, y: 0, angle: 0, width: 100, height: 100 } }
         ]
       }
     ]
@@ -26,9 +25,9 @@ exports.init = (app)->
     res.send req.body
 
   app.patch "/api/project/:id", (req, res, next)->
-    p = projects[req.params.id]
-    p[key] = value for own key, value of req.body
-    res.send p
+    project = projects[req.params.id]
+    project[key] = value for own key, value of req.body
+    res.send project
 
   app.patch "/api/project/:project_id/:id/", (req, res, next)->
     slide = projects[req.params.project_id].slides[req.params.id]
@@ -45,6 +44,6 @@ exports.init = (app)->
     res.send el
 
   app.get '/api/project/:id/export', (req, res, next)->
-    p = projects[req.params.id]
+    project = projects[req.params.id]
 
-    res.render "client/index", p
+    res.render "client/index", project
