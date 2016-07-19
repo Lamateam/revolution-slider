@@ -8,14 +8,43 @@ define "views/workspace/TimelineView", [
   TimelineItem = Marionette.ItemView.extend
     template: TimelineItemTemplate
     className: 'timeline_item custom.active'
+    ui:
+      runner: '.timeline_time'
     events:
       'click [data-animation]': 'playAnimation'
     initialize: ->
+      @active_animations = [  ]
       @listenTo window.App, 'element:' + @model.get('id') + ':animation:change', @changeAnimation
     onRender: ->
       @el.setAttribute 'model-id', @model.get 'id'
+      @ui.runner.hide()
+    runAll: ->
+      for animation in @model.get 'animations'
+        @runAnimation animation, animation.start
+    runAnimation: (data, start=0)->
+      r    = @ui.runner
+      left = data.start*0.12
+      arr  = @active_animations
+
+      arr.push setTimeout ->
+        r.css { left: left + 'px' }
+        r.show()
+        handler = (now)->
+          ->
+            r.css { left: (left+now*0.12) + 'px' }
+
+        for i in [0..data.duration]
+          setTimeout handler(i), i
+
+        setTimeout ->
+          arr.pop()
+          r.hide() if arr.length is 0
+        , data.duration
+      , start 
     playAnimation: (e)->
-      window.App.trigger 'element:' + @model.get('id') + ':animation:play', JSON.parse(e.target.getAttribute('data-animation'))
+      data = JSON.parse(e.target.getAttribute('data-animation'))
+      window.App.trigger 'element:' + @model.get('id') + ':animation:play', data
+      @runAnimation data
     changeAnimation: (data)->
       @model.set 'animations', data.animations
       @render()
@@ -37,7 +66,8 @@ define "views/workspace/TimelineView", [
     playAnimations: ->
       @collection.each (model)->
         window.App.trigger 'element:' + model.get('id') + ':animations:play', { animations: model.get 'animations' }
-
+      @children.each (view)->
+        view.runAll()
     initialize: (options)->
       maxTime    = { minutes: 0, seconds: 0, milliseconds: 0 }
 

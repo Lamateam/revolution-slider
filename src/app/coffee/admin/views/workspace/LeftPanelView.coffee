@@ -5,11 +5,14 @@ define "views/workspace/LeftPanelView", [
 ], (Marionette, TimelineView, WorkspaceLeftPanelTemplate)->
   WorkspaceLeftPanelView = Marionette.ItemView.extend
     className: 'workspace-left_panel'
+    ui:
+      playBtn: '.bind-play'
     events:
       'click .bind-text-btn': 'onTextButtonClick'
       'click .bind-graph-btn': 'onGraphButtonClick'
       'click .bind-paragraph-btn': 'onParagraphButtonClick'
-      'click .bind-play': 'playAnimations'
+      'click .bind-play:not(.active)': 'playAnimations'
+      # 'click .bind-play.active': 'stopAnimations'
     modelEvents:
       'sync': 'render'
     template: WorkspaceLeftPanelTemplate
@@ -24,3 +27,7 @@ define "views/workspace/LeftPanelView", [
       window.App.trigger "element:create", { type: "text", props: { x: 250, y: 250, fill: "rgb(0,0,0)", "font-size": "12px", texts: "Текст \n Новая строка" } }
     playAnimations: ->
       window.App.trigger "animations:play"
+      # @ui.playBtn.addClass 'active'
+    stopAnimations: ->
+      window.App.trigger "animations:stop"
+      @ui.playBtn.removeClass 'active'
