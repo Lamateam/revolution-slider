@@ -1,0 +1,368 @@
+0 info it worked if it ends with ok
+1 verbose cli [ '/usr/local/bin/node', '/usr/local/bin/npm', 'install' ]
+2 info using npm@2.15.1
+3 info using node@v4.4.3
+4 verbose readDependencies loading dependencies from /Users/dima/revolution-slider/package.json
+5 verbose install where, deps [ '/Users/dima/revolution-slider',
+5 verbose install   [ 'backbone',
+5 verbose install     'backbone.babysitter',
+5 verbose install     'backbone.marionette',
+5 verbose install     'backbone.wreqr',
+5 verbose install     'blueimp-file-upload',
+5 verbose install     'blueimp-tmpl',
+5 verbose install     'body-parser',
+5 verbose install     'bootstrap',
+5 verbose install     'busboy',
+5 verbose install     'coffee-script',
+5 verbose install     'd3',
+5 verbose install     'events',
+5 verbose install     'express',
+5 verbose install     'express-session',
+5 verbose install     'fs',
+5 verbose install     'grunt',
+5 verbose install     'grunt-cli',
+5 verbose install     'grunt-contrib-clean',
+5 verbose install     'grunt-contrib-coffee',
+5 verbose install     'grunt-contrib-concat',
+5 verbose install     'grunt-contrib-copy',
+5 verbose install     'grunt-contrib-cssmin',
+5 verbose install     'grunt-contrib-requirejs',
+5 verbose install     'grunt-contrib-stylus',
+5 verbose install     'grunt-contrib-uglify',
+5 verbose install     'grunt-contrib-watch',
+5 verbose install     'grunt-mkdir',
+5 verbose install     'grunt-regex-replace',
+5 verbose install     'grunt-replace',
+5 verbose install     'grunt-shell',
+5 verbose install     'grunt-string-replace',
+5 verbose install     'http',
+5 verbose install     'https',
+5 verbose install     'jade',
+5 verbose install     'jade-amd',
+5 verbose install     'jade-runtime',
+5 verbose install     'jquery',
+5 verbose install     'jquery-knob',
+5 verbose install     'jquery-mousewheel',
+5 verbose install     'jquery-ui',
+5 verbose install     'malihu-custom-scrollbar-plugin',
+5 verbose install     'react',
+5 verbose install     'request',
+5 verbose install     'require-jade',
+5 verbose install     'requirejs',
+5 verbose install     'stylus',
+5 verbose install     'stylus-font-face',
+5 verbose install     'stylus-import-tree',
+5 verbose install     'sweetalert',
+5 verbose install     'sys',
+5 verbose install     'text',
+5 verbose install     'underscore',
+5 verbose install     'url' ] ]
+6 verbose install where, peers [ '/Users/dima/revolution-slider', [] ]
+7 verbose installManyTop reading for lifecycle /Users/dima/revolution-slider/package.json
+8 info preinstall revolution-slider@1.0.0
+9 verbose installManyTop reading scoped package data from /Users/dima/revolution-slider/node_modules/backbone/package.json
+10 verbose installManyTop reading scoped package data from /Users/dima/revolution-slider/node_modules/backbone.babysitter/package.json
+11 verbose installManyTop reading scoped package data from /Users/dima/revolution-slider/node_modules/backbone.marionette/package.json
+12 verbose installManyTop reading scoped package data from /Users/dima/revolution-slider/node_modules/backbone.wreqr/package.json
+13 verbose installManyTop reading scoped package data from /Users/dima/revolution-slider/node_modules/blueimp-file-upload/package.json
+14 verbose installManyTop reading scoped package data from /Users/dima/revolution-slider/node_modules/blueimp-tmpl/package.json
+15 verbose installManyTop reading scoped package data from /Users/dima/revolution-slider/node_modules/body-parser/package.json
+16 verbose installManyTop reading scoped package data from /Users/dima/revolution-slider/node_modules/bootstrap/package.json
+17 verbose installManyTop reading scoped package data from /Users/dima/revolution-slider/node_modules/busboy/package.json
+18 verbose installManyTop reading scoped package data from /Users/dima/revolution-slider/node_modules/coffee-script/package.json
+19 verbose installManyTop reading scoped package data from /Users/dima/revolution-slider/node_modules/d3/package.json
+20 verbose installManyTop reading scoped package data from /Users/dima/revolution-slider/node_modules/events/package.json
+21 verbose installManyTop reading scoped package data from /Users/dima/revolution-slider/node_modules/express/package.json
+22 verbose installManyTop reading scoped package data from /Users/dima/revolution-slider/node_modules/express-session/package.json
+23 verbose installManyTop reading scoped package data from /Users/dima/revolution-slider/node_modules/fs/package.json
+24 verbose installManyTop reading scoped package data from /Users/dima/revolution-slider/node_modules/grunt/package.json
+25 verbose installManyTop reading scoped package data from /Users/dima/revolution-slider/node_modules/grunt-cli/package.json
+26 verbose installManyTop reading scoped package data from /Users/dima/revolution-slider/node_modules/grunt-contrib-clean/package.json
+27 verbose installManyTop reading scoped package data from /Users/dima/revolution-slider/node_modules/grunt-contrib-coffee/package.json
+28 verbose installManyTop reading scoped package data from /Users/dima/revolution-slider/node_modules/grunt-contrib-concat/package.json
+29 verbose installManyTop reading scoped package data from /Users/dima/revolution-slider/node_modules/grunt-contrib-copy/package.json
+30 verbose installManyTop reading scoped package data from /Users/dima/revolution-slider/node_modules/grunt-contrib-cssmin/package.json
+31 verbose installManyTop reading scoped package data from /Users/dima/revolution-slider/node_modules/grunt-contrib-requirejs/package.json
+32 verbose installManyTop reading scoped package data from /Users/dima/revolution-slider/node_modules/grunt-contrib-stylus/package.json
+33 verbose installManyTop reading scoped package data from /Users/dima/revolution-slider/node_modules/grunt-contrib-uglify/package.json
+34 verbose installManyTop reading scoped package data from /Users/dima/revolution-slider/node_modules/grunt-contrib-watch/package.json
+35 verbose installManyTop reading scoped package data from /Users/dima/revolution-slider/node_modules/grunt-mkdir/package.json
+36 verbose installManyTop reading scoped package data from /Users/dima/revolution-slider/node_modules/grunt-regex-replace/package.json
+37 verbose installManyTop reading scoped package data from /Users/dima/revolution-slider/node_modules/grunt-replace/package.json
+38 verbose installManyTop reading scoped package data from /Users/dima/revolution-slider/node_modules/grunt-shell/package.json
+39 verbose installManyTop reading scoped package data from /Users/dima/revolution-slider/node_modules/grunt-string-replace/package.json
+40 verbose installManyTop reading scoped package data from /Users/dima/revolution-slider/node_modules/http/package.json
+41 verbose installManyTop reading scoped package data from /Users/dima/revolution-slider/node_modules/https/package.json
+42 verbose installManyTop reading scoped package data from /Users/dima/revolution-slider/node_modules/jade/package.json
+43 verbose installManyTop reading scoped package data from /Users/dima/revolution-slider/node_modules/jade-amd/package.json
+44 verbose installManyTop reading scoped package data from /Users/dima/revolution-slider/node_modules/jade-runtime/package.json
+45 verbose installManyTop reading scoped package data from /Users/dima/revolution-slider/node_modules/jquery/package.json
+46 verbose installManyTop reading scoped package data from /Users/dima/revolution-slider/node_modules/jquery-knob/package.json
+47 verbose installManyTop reading scoped package data from /Users/dima/revolution-slider/node_modules/jquery-mousewheel/package.json
+48 verbose installManyTop reading scoped package data from /Users/dima/revolution-slider/node_modules/jquery-ui/package.json
+49 verbose installManyTop reading scoped package data from /Users/dima/revolution-slider/node_modules/malihu-custom-scrollbar-plugin/package.json
+50 verbose installManyTop reading scoped package data from /Users/dima/revolution-slider/node_modules/react/package.json
+51 verbose installManyTop reading scoped package data from /Users/dima/revolution-slider/node_modules/request/package.json
+52 verbose installManyTop reading scoped package data from /Users/dima/revolution-slider/node_modules/require-jade/package.json
+53 verbose installManyTop reading scoped package data from /Users/dima/revolution-slider/node_modules/requirejs/package.json
+54 verbose installManyTop reading scoped package data from /Users/dima/revolution-slider/node_modules/stylus/package.json
+55 verbose installManyTop reading scoped package data from /Users/dima/revolution-slider/node_modules/stylus-font-face/package.json
+56 verbose installManyTop reading scoped package data from /Users/dima/revolution-slider/node_modules/stylus-import-tree/package.json
+57 verbose installManyTop reading scoped package data from /Users/dima/revolution-slider/node_modules/sweetalert/package.json
+58 verbose installManyTop reading scoped package data from /Users/dima/revolution-slider/node_modules/sys/package.json
+59 verbose installManyTop reading scoped package data from /Users/dima/revolution-slider/node_modules/text/package.json
+60 verbose installManyTop reading scoped package data from /Users/dima/revolution-slider/node_modules/underscore/package.json
+61 verbose installManyTop reading scoped package data from /Users/dima/revolution-slider/node_modules/url/package.json
+62 info package.json backbone.babysitter@0.1.12 No license field.
+63 info package.json backbone.wreqr@1.3.7 No license field.
+64 info package.json busboy@0.2.13 No license field.
+65 info package.json events@1.1.1 events is also the name of a node core module.
+66 info package.json fs@0.0.2 fs is also the name of a node core module.
+67 info package.json fs@0.0.2 No description
+68 info package.json fs@0.0.2 No repository field.
+69 info package.json grunt@0.4.5 No license field.
+70 info package.json grunt-cli@0.1.13 No license field.
+71 info package.json grunt-contrib-concat@0.5.1 No license field.
+72 info package.json grunt-contrib-coffee@0.13.0 No license field.
+73 info package.json grunt-contrib-watch@0.6.1 No license field.
+74 info package.json grunt-mkdir@0.1.3 No license field.
+75 info package.json http@0.0.0 http is also the name of a node core module.
+76 info package.json http@0.0.0 No description
+77 info package.json http@0.0.0 No repository field.
+78 info package.json https@1.0.0 https is also the name of a node core module.
+79 info package.json https@1.0.0 No repository field.
+80 info package.json sys@0.0.1 No repository field.
+81 info package.json sys@0.0.1 license should be a valid SPDX license expression
+82 info package.json url@0.11.0 url is also the name of a node core module.
+83 info package.json backbone.marionette@2.4.7 No license field.
+84 info package.json grunt-regex-replace@0.2.10 No license field.
+85 info package.json grunt-string-replace@1.2.1 No license field.
+86 info package.json jade-amd@0.2.3 No license field.
+87 info package.json jquery-mousewheel@3.1.13 No license field.
+88 info package.json require-jade@0.0.1 No license field.
+89 verbose readDependencies loading dependencies from /Users/dima/revolution-slider/package.json
+90 verbose targetResolver reading package data from /Users/dima/revolution-slider/node_modules/backbone/package.json
+91 verbose targetResolver reading package data from /Users/dima/revolution-slider/node_modules/backbone.babysitter/package.json
+92 verbose targetResolver reading package data from /Users/dima/revolution-slider/node_modules/backbone.marionette/package.json
+93 verbose targetResolver reading package data from /Users/dima/revolution-slider/node_modules/backbone.wreqr/package.json
+94 verbose targetResolver reading package data from /Users/dima/revolution-slider/node_modules/blueimp-file-upload/package.json
+95 verbose targetResolver reading package data from /Users/dima/revolution-slider/node_modules/blueimp-tmpl/package.json
+96 verbose targetResolver reading package data from /Users/dima/revolution-slider/node_modules/body-parser/package.json
+97 verbose targetResolver reading package data from /Users/dima/revolution-slider/node_modules/bootstrap/package.json
+98 verbose targetResolver reading package data from /Users/dima/revolution-slider/node_modules/busboy/package.json
+99 verbose targetResolver reading package data from /Users/dima/revolution-slider/node_modules/coffee-script/package.json
+100 verbose targetResolver reading package data from /Users/dima/revolution-slider/node_modules/d3/package.json
+101 verbose targetResolver reading package data from /Users/dima/revolution-slider/node_modules/events/package.json
+102 verbose targetResolver reading package data from /Users/dima/revolution-slider/node_modules/express/package.json
+103 verbose targetResolver reading package data from /Users/dima/revolution-slider/node_modules/express-session/package.json
+104 verbose targetResolver reading package data from /Users/dima/revolution-slider/node_modules/fs/package.json
+105 verbose targetResolver reading package data from /Users/dima/revolution-slider/node_modules/grunt/package.json
+106 verbose targetResolver reading package data from /Users/dima/revolution-slider/node_modules/grunt-cli/package.json
+107 verbose targetResolver reading package data from /Users/dima/revolution-slider/node_modules/grunt-contrib-clean/package.json
+108 verbose targetResolver reading package data from /Users/dima/revolution-slider/node_modules/grunt-contrib-coffee/package.json
+109 verbose targetResolver reading package data from /Users/dima/revolution-slider/node_modules/grunt-contrib-concat/package.json
+110 verbose targetResolver reading package data from /Users/dima/revolution-slider/node_modules/grunt-contrib-copy/package.json
+111 verbose targetResolver reading package data from /Users/dima/revolution-slider/node_modules/grunt-contrib-cssmin/package.json
+112 verbose targetResolver reading package data from /Users/dima/revolution-slider/node_modules/grunt-contrib-requirejs/package.json
+113 verbose targetResolver reading package data from /Users/dima/revolution-slider/node_modules/grunt-contrib-stylus/package.json
+114 verbose targetResolver reading package data from /Users/dima/revolution-slider/node_modules/grunt-contrib-uglify/package.json
+115 verbose targetResolver reading package data from /Users/dima/revolution-slider/node_modules/grunt-contrib-watch/package.json
+116 verbose targetResolver reading package data from /Users/dima/revolution-slider/node_modules/grunt-mkdir/package.json
+117 verbose targetResolver reading package data from /Users/dima/revolution-slider/node_modules/grunt-regex-replace/package.json
+118 verbose targetResolver reading package data from /Users/dima/revolution-slider/node_modules/grunt-replace/package.json
+119 verbose targetResolver reading package data from /Users/dima/revolution-slider/node_modules/grunt-shell/package.json
+120 verbose targetResolver reading package data from /Users/dima/revolution-slider/node_modules/grunt-string-replace/package.json
+121 verbose targetResolver reading package data from /Users/dima/revolution-slider/node_modules/http/package.json
+122 verbose targetResolver reading package data from /Users/dima/revolution-slider/node_modules/https/package.json
+123 verbose targetResolver reading package data from /Users/dima/revolution-slider/node_modules/jade/package.json
+124 verbose targetResolver reading package data from /Users/dima/revolution-slider/node_modules/jade-amd/package.json
+125 verbose targetResolver reading package data from /Users/dima/revolution-slider/node_modules/jade-runtime/package.json
+126 verbose targetResolver reading package data from /Users/dima/revolution-slider/node_modules/jquery/package.json
+127 verbose targetResolver reading package data from /Users/dima/revolution-slider/node_modules/jquery-knob/package.json
+128 verbose targetResolver reading package data from /Users/dima/revolution-slider/node_modules/jquery-mousewheel/package.json
+129 verbose targetResolver reading package data from /Users/dima/revolution-slider/node_modules/jquery-ui/package.json
+130 verbose targetResolver reading package data from /Users/dima/revolution-slider/node_modules/malihu-custom-scrollbar-plugin/package.json
+131 verbose targetResolver reading package data from /Users/dima/revolution-slider/node_modules/react/package.json
+132 verbose targetResolver reading package data from /Users/dima/revolution-slider/node_modules/request/package.json
+133 verbose targetResolver reading package data from /Users/dima/revolution-slider/node_modules/require-jade/package.json
+134 verbose targetResolver reading package data from /Users/dima/revolution-slider/node_modules/requirejs/package.json
+135 verbose targetResolver reading package data from /Users/dima/revolution-slider/node_modules/stylus/package.json
+136 verbose targetResolver reading package data from /Users/dima/revolution-slider/node_modules/stylus-font-face/package.json
+137 verbose targetResolver reading package data from /Users/dima/revolution-slider/node_modules/stylus-import-tree/package.json
+138 verbose targetResolver reading package data from /Users/dima/revolution-slider/node_modules/sweetalert/package.json
+139 verbose targetResolver reading package data from /Users/dima/revolution-slider/node_modules/sys/package.json
+140 verbose targetResolver reading package data from /Users/dima/revolution-slider/node_modules/text/package.json
+141 verbose targetResolver reading package data from /Users/dima/revolution-slider/node_modules/underscore/package.json
+142 verbose targetResolver reading package data from /Users/dima/revolution-slider/node_modules/url/package.json
+143 verbose targetResolver reading package data from /Users/dima/revolution-slider/node_modules/.bin/cake/package.json
+144 verbose targetResolver reading package data from /Users/dima/revolution-slider/node_modules/.bin/coffee/package.json
+145 verbose targetResolver reading package data from /Users/dima/revolution-slider/node_modules/.bin/grunt/package.json
+146 verbose targetResolver reading package data from /Users/dima/revolution-slider/node_modules/.bin/grunt-regex-replace/package.json
+147 verbose targetResolver reading package data from /Users/dima/revolution-slider/node_modules/.bin/grunt-string-replace/package.json
+148 verbose targetResolver reading package data from /Users/dima/revolution-slider/node_modules/.bin/jade/package.json
+149 verbose targetResolver reading package data from /Users/dima/revolution-slider/node_modules/.bin/jade-amd/package.json
+150 verbose targetResolver reading package data from /Users/dima/revolution-slider/node_modules/.bin/r.js/package.json
+151 verbose targetResolver reading package data from /Users/dima/revolution-slider/node_modules/.bin/r_js/package.json
+152 verbose targetResolver reading package data from /Users/dima/revolution-slider/node_modules/.bin/stylus/package.json
+153 verbose targetResolver reading package data from /Users/dima/revolution-slider/node_modules/.bin/tmpl.js/package.json
+154 verbose already installed skipping fs@0.0.2 /Users/dima/revolution-slider
+155 verbose already installed skipping grunt@~0.4.5 /Users/dima/revolution-slider
+156 verbose already installed skipping grunt-cli@~0.1.13 /Users/dima/revolution-slider
+157 verbose already installed skipping grunt-contrib-clean@~0.7.0 /Users/dima/revolution-slider
+158 verbose already installed skipping grunt-contrib-coffee@~0.13.0 /Users/dima/revolution-slider
+159 verbose already installed skipping grunt-contrib-concat@~0.5.1 /Users/dima/revolution-slider
+160 verbose already installed skipping grunt-contrib-copy@~0.8.2 /Users/dima/revolution-slider
+161 verbose already installed skipping grunt-contrib-cssmin@~0.14.0 /Users/dima/revolution-slider
+162 verbose already installed skipping grunt-contrib-requirejs@^1.0.0 /Users/dima/revolution-slider
+163 verbose already installed skipping grunt-contrib-stylus@~1.0.0 /Users/dima/revolution-slider
+164 verbose already installed skipping grunt-contrib-uglify@~0.11.0 /Users/dima/revolution-slider
+165 verbose already installed skipping grunt-contrib-watch@~0.6.1 /Users/dima/revolution-slider
+166 verbose already installed skipping grunt-mkdir@~0.1.2 /Users/dima/revolution-slider
+167 verbose already installed skipping grunt-regex-replace@^0.2.9 /Users/dima/revolution-slider
+168 verbose already installed skipping grunt-replace@^1.0.1 /Users/dima/revolution-slider
+169 verbose already installed skipping grunt-shell@~1.1.2 /Users/dima/revolution-slider
+170 verbose already installed skipping grunt-string-replace@^1.2.1 /Users/dima/revolution-slider
+171 verbose already installed skipping http@0.0.0 /Users/dima/revolution-slider
+172 verbose already installed skipping https@~1.0.0 /Users/dima/revolution-slider
+173 verbose already installed skipping jade@~1.11.0 /Users/dima/revolution-slider
+174 verbose already installed skipping jade-amd@^0.2.3 /Users/dima/revolution-slider
+175 verbose already installed skipping jade-runtime@^2.0.0 /Users/dima/revolution-slider
+176 verbose already installed skipping jquery@~2.2.0 /Users/dima/revolution-slider
+177 verbose already installed skipping jquery-knob@~1.2.11 /Users/dima/revolution-slider
+178 verbose already installed skipping jquery-mousewheel@^3.1.13 /Users/dima/revolution-slider
+179 silly cache add args [ 'jquery-ui@1.11.3', null ]
+180 verbose cache add spec jquery-ui@1.11.3
+181 silly cache add parsed spec Result {
+181 silly cache add   raw: 'jquery-ui@1.11.3',
+181 silly cache add   scope: null,
+181 silly cache add   name: 'jquery-ui',
+181 silly cache add   rawSpec: '1.11.3',
+181 silly cache add   spec: '1.11.3',
+181 silly cache add   type: 'version' }
+182 silly addNamed jquery-ui@1.11.3
+183 verbose addNamed "1.11.3" is a plain semver version for jquery-ui
+184 silly mapToRegistry name jquery-ui
+185 silly mapToRegistry using default registry
+186 silly mapToRegistry registry https://registry.npmjs.org/
+187 silly mapToRegistry data Result {
+187 silly mapToRegistry   raw: 'jquery-ui',
+187 silly mapToRegistry   scope: null,
+187 silly mapToRegistry   name: 'jquery-ui',
+187 silly mapToRegistry   rawSpec: '',
+187 silly mapToRegistry   spec: 'latest',
+187 silly mapToRegistry   type: 'tag' }
+188 silly mapToRegistry uri https://registry.npmjs.org/jquery-ui
+189 verbose addNameVersion registry:https://registry.npmjs.org/jquery-ui not in flight; fetching
+190 verbose already installed skipping malihu-custom-scrollbar-plugin@^3.1.3 /Users/dima/revolution-slider
+191 verbose already installed skipping react@~0.14.6 /Users/dima/revolution-slider
+192 verbose already installed skipping request@^2.72.0 /Users/dima/revolution-slider
+193 verbose already installed skipping require-jade@0.0.1 /Users/dima/revolution-slider
+194 verbose already installed skipping requirejs@^2.2.0 /Users/dima/revolution-slider
+195 verbose already installed skipping stylus@~0.53.0 /Users/dima/revolution-slider
+196 verbose already installed skipping stylus-font-face@~1.1.0 /Users/dima/revolution-slider
+197 verbose already installed skipping stylus-import-tree@~0.1.10 /Users/dima/revolution-slider
+198 verbose already installed skipping sweetalert@~1.1.3 /Users/dima/revolution-slider
+199 verbose already installed skipping sys@0.0.1 /Users/dima/revolution-slider
+200 silly cache add args [ 'text@github:requirejs/text', null ]
+201 verbose cache add spec text@github:requirejs/text
+202 verbose already installed skipping underscore@^1.8.3 /Users/dima/revolution-slider
+203 verbose already installed skipping url@~0.11.0 /Users/dima/revolution-slider
+204 verbose already installed skipping backbone@^1.3.3 /Users/dima/revolution-slider
+205 verbose already installed skipping backbone.babysitter@^0.1.12 /Users/dima/revolution-slider
+206 verbose already installed skipping backbone.marionette@^2.4.6 /Users/dima/revolution-slider
+207 verbose already installed skipping backbone.wreqr@^1.3.7 /Users/dima/revolution-slider
+208 verbose already installed skipping blueimp-file-upload@^9.12.5 /Users/dima/revolution-slider
+209 silly cache add parsed spec Result {
+209 silly cache add   raw: 'text@github:requirejs/text',
+209 silly cache add   scope: null,
+209 silly cache add   name: 'text',
+209 silly cache add   rawSpec: 'github:requirejs/text',
+209 silly cache add   spec: 'github:requirejs/text',
+209 silly cache add   type: 'hosted',
+209 silly cache add   hosted:
+209 silly cache add    { type: 'github',
+209 silly cache add      ssh: 'git@github.com:requirejs/text.git',
+209 silly cache add      sshUrl: 'git+ssh://git@github.com/requirejs/text.git',
+209 silly cache add      httpsUrl: 'git+https://github.com/requirejs/text.git',
+209 silly cache add      gitUrl: 'git://github.com/requirejs/text.git',
+209 silly cache add      shortcut: 'github:requirejs/text',
+209 silly cache add      directUrl: 'https://raw.githubusercontent.com/requirejs/text/master/package.json' } }
+210 verbose addRemoteGit caching github:requirejs/text
+211 verbose addRemoteGit requirejs/text is a repository hosted by github
+212 silly tryGitProto attempting to clone git://github.com/requirejs/text.git
+213 silly tryClone cloning requirejs/text via git://github.com/requirejs/text.git
+214 verbose tryClone git-github-com-requirejs-text-git-a4388600 not in flight; caching
+215 verbose correctMkdir /Users/dima/.npm/_git-remotes correctMkdir not in flight; initializing
+216 verbose already installed skipping blueimp-tmpl@^3.4.0 /Users/dima/revolution-slider
+217 verbose already installed skipping body-parser@~1.14.2 /Users/dima/revolution-slider
+218 verbose get https://registry.npmjs.org/jquery-ui not expired, no request
+219 info git [ 'config', '--get', 'remote.origin.url' ]
+220 verbose already installed skipping bootstrap@~3.3.6 /Users/dima/revolution-slider
+221 verbose already installed skipping busboy@^0.2.13 /Users/dima/revolution-slider
+222 silly validateExistingRemote requirejs/text remote.origin.url: git://github.com/requirejs/text.git
+223 verbose validateExistingRemote requirejs/text is updating existing cached remote /Users/dima/.npm/_git-remotes/git-github-com-requirejs-text-git-a4388600
+224 verbose already installed skipping coffee-script@~1.10.0 /Users/dima/revolution-slider
+225 verbose already installed skipping d3@^3.5.17 /Users/dima/revolution-slider
+226 info git [ 'fetch', '-a', 'origin' ]
+227 verbose already installed skipping events@~1.1.0 /Users/dima/revolution-slider
+228 verbose already installed skipping express@~4.13.3 /Users/dima/revolution-slider
+229 verbose already installed skipping express-session@~1.13.0 /Users/dima/revolution-slider
+230 verbose updateRemote git fetch -a origin (git://github.com/requirejs/text.git)
+231 verbose correctMkdir /Users/dima/.npm/_git-remotes correctMkdir not in flight; initializing
+232 verbose setPermissions requirejs/text set permissions on /Users/dima/.npm/_git-remotes/git-github-com-requirejs-text-git-a4388600
+233 verbose resolveHead requirejs/text original treeish: master
+234 info git [ 'rev-list', '-n1', 'master' ]
+235 silly resolveHead requirejs/text resolved treeish: d04de4ffd7bf5ba6cb80cdca2d40d4f6f52a1b1f
+236 verbose resolveHead requirejs/text resolved Git URL: git://github.com/requirejs/text.git#d04de4ffd7bf5ba6cb80cdca2d40d4f6f52a1b1f
+237 silly resolveHead Git working directory: /tmp/npm-33027-82b59790/git-cache-62a5f3f94ca7/d04de4ffd7bf5ba6cb80cdca2d40d4f6f52a1b1f
+238 info git [ 'clone',
+238 info git   '/Users/dima/.npm/_git-remotes/git-github-com-requirejs-text-git-a4388600',
+238 info git   '/tmp/npm-33027-82b59790/git-cache-62a5f3f94ca7/d04de4ffd7bf5ba6cb80cdca2d40d4f6f52a1b1f' ]
+239 verbose cloneResolved requirejs/text clone Cloning into '/tmp/npm-33027-82b59790/git-cache-62a5f3f94ca7/d04de4ffd7bf5ba6cb80cdca2d40d4f6f52a1b1f'...
+239 verbose cloneResolved done.
+240 info git [ 'checkout', 'd04de4ffd7bf5ba6cb80cdca2d40d4f6f52a1b1f' ]
+241 verbose checkoutTreeish requirejs/text checkout Note: checking out 'd04de4ffd7bf5ba6cb80cdca2d40d4f6f52a1b1f'.
+241 verbose checkoutTreeish
+241 verbose checkoutTreeish You are in 'detached HEAD' state. You can look around, make experimental
+241 verbose checkoutTreeish changes and commit them, and you can discard any commits you make in this
+241 verbose checkoutTreeish state without impacting any branches by performing another checkout.
+241 verbose checkoutTreeish
+241 verbose checkoutTreeish If you want to create a new branch to retain commits you create, you may
+241 verbose checkoutTreeish do so (now or later) by using -b with the checkout command again. Example:
+241 verbose checkoutTreeish
+241 verbose checkoutTreeish   git checkout -b <new-branch-name>
+241 verbose checkoutTreeish
+241 verbose checkoutTreeish HEAD is now at d04de4f... Rev to 2.0.15
+242 verbose addLocalDirectory /Users/dima/.npm/text/2.0.15/package.tgz not in flight; packing
+243 verbose correctMkdir /Users/dima/.npm correctMkdir not in flight; initializing
+244 verbose tar pack [ '/Users/dima/.npm/text/2.0.15/package.tgz',
+244 verbose tar pack   '/tmp/npm-33027-82b59790/git-cache-62a5f3f94ca7/d04de4ffd7bf5ba6cb80cdca2d40d4f6f52a1b1f' ]
+245 verbose tarball /Users/dima/.npm/text/2.0.15/package.tgz
+246 verbose folder /tmp/npm-33027-82b59790/git-cache-62a5f3f94ca7/d04de4ffd7bf5ba6cb80cdca2d40d4f6f52a1b1f
+247 verbose addLocalTarball adding from inside cache /Users/dima/.npm/text/2.0.15/package.tgz
+248 verbose correctMkdir /Users/dima/.npm correctMkdir not in flight; initializing
+249 verbose addRemoteGit data._from: requirejs/text
+250 verbose addRemoteGit data._resolved: git://github.com/requirejs/text.git#d04de4ffd7bf5ba6cb80cdca2d40d4f6f52a1b1f
+251 silly cache afterAdd text@2.0.15
+252 verbose afterAdd /Users/dima/.npm/text/2.0.15/package/package.json not in flight; writing
+253 verbose correctMkdir /Users/dima/.npm correctMkdir not in flight; initializing
+254 verbose afterAdd /Users/dima/.npm/text/2.0.15/package/package.json written
+255 verbose stack Error: version not found: jquery-ui@1.11.3
+255 verbose stack     at setData (/usr/local/lib/node_modules/npm/lib/cache/add-named.js:137:12)
+255 verbose stack     at RES (/usr/local/lib/node_modules/npm/node_modules/inflight/inflight.js:23:14)
+255 verbose stack     at f (/usr/local/lib/node_modules/npm/node_modules/once/once.js:17:25)
+255 verbose stack     at fixName (/usr/local/lib/node_modules/npm/lib/cache/add-named.js:29:5)
+255 verbose stack     at CachingRegistryClient.get_ (/usr/local/lib/node_modules/npm/lib/cache/caching-client.js:125:16)
+255 verbose stack     at /usr/local/lib/node_modules/npm/lib/cache/caching-client.js:91:14
+255 verbose stack     at /usr/local/lib/node_modules/npm/node_modules/graceful-fs/graceful-fs.js:78:16
+255 verbose stack     at FSReqWrap.readFileAfterClose [as oncomplete] (fs.js:380:3)
+256 verbose statusCode 404
+257 verbose cwd /Users/dima/revolution-slider
+258 error Darwin 15.5.0
+259 error argv "/usr/local/bin/node" "/usr/local/bin/npm" "install"
+260 error node v4.4.3
+261 error npm  v2.15.1
+262 error version not found: jquery-ui@1.11.3
+263 error If you need help, you may report this error at:
+263 error     <https://github.com/npm/npm/issues>
+264 verbose exit [ 1, true ]

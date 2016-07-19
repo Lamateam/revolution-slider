@@ -36,7 +36,7 @@ module.exports = (grunt) ->
             dest: "tmp/modules/jquery.js"            
           }
           {
-            src: "node_modules/jquery-ui/dist/jquery-ui.js"
+            src: "vendor/jquery-ui-1.11.4/jquery-ui.js"
             dest: "tmp/modules/jquery-ui.js"            
           }
           {
