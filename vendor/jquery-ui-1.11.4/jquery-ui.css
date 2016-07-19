@@ -18,7 +18,7 @@
 	padding: 0;
 	position: absolute;
 	width: 1px;
-}
+}F
 .ui-helper-reset {
 	margin: 0;
 	padding: 0;
@@ -1223,3 +1223,4 @@ body .ui-tooltip {
 	filter: Alpha(Opacity=20); /* support: IE8 */
 	border-radius: 5px;
 }
+
