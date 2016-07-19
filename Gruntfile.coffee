@@ -191,7 +191,7 @@ module.exports = (grunt) ->
       vendor_css:
         src: [
           "vendor/animate.css"
-          "vendor/jquery-ui.min.css"
+          "vendor/jquery-ui-1.11.4/jquery-ui.min.css"
         ]
         dest: "tmp/vendor.css"
       css:

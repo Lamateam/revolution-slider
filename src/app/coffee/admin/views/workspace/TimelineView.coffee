@@ -7,7 +7,7 @@ define "views/workspace/TimelineView", [
 ], (Marionette, TimelineTemplate, TimelineItemTemplate)->
   TimelineItem = Marionette.ItemView.extend
     template: TimelineItemTemplate
-    className: 'timeline_item custom.active'
+    className: 'timeline_item custom active'
     ui:
       runner: '.timeline_time'
     events:

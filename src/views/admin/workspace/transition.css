@@ -1,0 +1,19 @@
+.ease {
+  transition-timing-function: ease;
+}
+
+.easeIn {
+  transition-timing-function: ease-in;
+}
+
+.easeOut {
+  transition-timing-function: ease-out;
+}
+
+.easeInOut {
+  transition-timing-function: ease-in-out;
+}
+
+.linear {
+  transition-timing-function: linear;
+}
