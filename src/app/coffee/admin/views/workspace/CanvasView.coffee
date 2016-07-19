@@ -59,39 +59,51 @@ define "views/workspace/CanvasView", [
         window.App.trigger "element:click", { id: id }
       @listenTo @getOption("stateModel"), "change:isElementSelected", @onSomeElementSelected
       @listenTo window.App, 'element:' + @model.get('id') + ':animation:play', @playAnimation
-    playAnimation: (data)->
-      switch data.type
-        when 'fadeIn'
-          @$el.hide().fadeIn data.duration
-        when 'fadeOut'
-          @$el.fadeOut data.duration, => @$el.show()
-        when 'rotate', 'antirotate'
-          props     = @model.get 'props'
-          w2        = props.width*0.5
-          h2        = props.height*0.5
-          angle     = parseFloat props.angle, 10
-          el        = @d3_el
-          step      = data.duration / 360
-          direction = if data.type is 'rotate' then 1 else -1
+      @listenTo window.App, 'element:' + @model.get('id') + ':animations:play', @playAnimations
+    playAnimations: (data)->
+      for animation in data.animations
+        @playAnimation animation, animation.start
+    playAnimation: (data, start=0)->
+      setTimeout =>
+        switch data.type
+          when 'fadeIn', 'fadeOut'
+            step = 10 / data.duration
+            el = @$el
 
-          handler  = (now)->
-            ->
-              el.attr 'transform', 'rotate(' + (angle + direction*now) + ',' + (props.x+w2) + ',' + (props.y+h2) + ')'
+            el.css 'opacity', if data.type is 'fadeIn' then 0 else 1
 
-          for i in [1..360]
-            setTimeout handler(i), i*step
+            handler = (now)->
+              ->
+                opacity = if data.type is 'fadeIn' then step*now else 1-step*now
+                el.css { opacity: opacity }
 
-          setTimeout -> el.attr 'transform', 'rotate(' + angle + ',' + (props.x+w2) + ',' + (props.y+h2) + ')'
+            for i in [1..data.duration*0.1]
+              setTimeout handler(i), i*10
 
-          # @$el.animate { borderSpacing: 360 }, {
-          #   duration: data.duration
-          #   step: (now, fx)=>
-          #     @d3_el.attr 'transform', 'rotate(' + (angle + now) + ',' + (props.x+w2) + ',' + (props.y+h2) + ')'
-          #   done: =>
-          #     @$el
-          #       .css 'borderSpacing', 0
-          #     @d3_el.attr 'transform', 'rotate(' + angle + ',' + (props.x+w2) + ',' + (props.y+h2) + ')'
-          # }
+            setTimeout ->
+              el.css 'opacity', 1
+            , data.duration
+
+          # when 'fadeOut'
+          #   @$el.fadeOut data.duration, => @$el.show()
+          when 'rotate', 'antirotate'
+            props     = @model.get 'props'
+            w2        = props.width*0.5
+            h2        = props.height*0.5
+            angle     = parseFloat props.angle, 10
+            el        = @d3_el
+            step      = data.duration / 360
+            direction = if data.type is 'rotate' then 1 else -1
+
+            handler  = (now)->
+              ->
+                el.attr 'transform', 'rotate(' + (angle + direction*now) + ',' + (props.x+w2) + ',' + (props.y+h2) + ')'
+
+            for i in [1..360]
+              setTimeout handler(i), i*step
+
+            setTimeout -> el.attr 'transform', 'rotate(' + angle + ',' + (props.x+w2) + ',' + (props.y+h2) + ')'
+      , start
     onSomeElementSelected: ->
       if @getOption("stateModel").get("isElementSelected") is @model.get("id") then @setActive() else @setInactive()
     setNodeAttribute: (node, key, value)->

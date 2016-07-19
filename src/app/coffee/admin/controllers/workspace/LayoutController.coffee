@@ -208,7 +208,6 @@ define "controllers/workspace/LayoutController", [
             is_new = true
 
             for animation in animations
-              console.log 'diff: ', animation.id, a.id
               if animation.id is a.id
                 animation[key] = value for own key, value of a.data
                 is_new         = false
@@ -223,9 +222,8 @@ define "controllers/workspace/LayoutController", [
             is_new = true
 
             for animation in animations
-              console.log 'diff: ', animation.id, a.id
               if animation.id is a.id
-                animation[key] = value for own key, value of data.data  
+                animation[key] = value for own key, value of a.data  
                 is_new         = false
 
             animations.push a if is_new

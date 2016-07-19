@@ -34,6 +34,10 @@ define "views/workspace/TimelineView", [
           placeholder: "ui-state-highlight"
         @$el.disableSelection()
       , 0
+    playAnimations: ->
+      @collection.each (model)->
+        window.App.trigger 'element:' + model.get('id') + ':animations:play', { animations: model.get 'animations' }
+
     initialize: (options)->
       maxTime    = { minutes: 0, seconds: 0, milliseconds: 0 }
 
@@ -67,6 +71,7 @@ define "views/workspace/TimelineView", [
 
       @collection = options.elements
 
+      @listenTo window.App, 'animations:play', @playAnimations
     reOrderElements: ->
       @$el.find('.timeline_item').each (index, element)=>
         model_id = element.getAttribute 'model-id'
