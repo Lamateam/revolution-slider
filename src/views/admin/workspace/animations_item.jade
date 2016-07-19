@@ -41,8 +41,27 @@
         option(value="fadeOut") Из прозрачного в непрозрачный
 
 .workspace-right_panel-container-block.margintop_15
-  select
-    option(selected="selected") Ease In/Out
+  select.bind-effect
+    if effect == 'ease'
+      option(value="ease", selected="selected") Ease
+    else
+      option(value="ease") Ease
+    if effect == 'ease-in'
+      option(value="ease-in", selected="selected") Ease In
+    else
+      option(value="ease-in") Ease In
+    if effect == 'ease-out'
+      option(value="ease-out", selected="selected") Ease Out
+    else
+      option(value="ease-out") Ease Out
+    if effect == 'ease-in-out'
+      option(value="ease-in-out", selected="selected") Ease In & Out
+    else
+      option(value="ease-in-out") Ease In & Out
+    if effect == 'linear'
+      option(value="linear", selected="selected") Linear
+    else
+      option(value="linear") Linear
 .workspace-right_panel-container-block_plus
   input.time.bind-duration(type="text", value=duration)
   button.plus

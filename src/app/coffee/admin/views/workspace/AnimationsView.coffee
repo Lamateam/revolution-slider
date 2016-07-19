@@ -8,9 +8,13 @@ define "views/workspace/AnimationsView", [
     template: AnimationsItemTemplate
     events: 
       'blur .bind-duration': 'changeDuration'
+      'change .bind-effect': 'changeEffect'
     changeDuration: (e)->
       duration = parseInt e.target.value, 10
       @model.collection.changeAnimation @model.get('id'), { duration: duration }
+    changeEffect: (e)->
+      effect = $(e.target).val()
+      @model.collection.changeAnimation @model.get('id'), { effect: effect }
     onRender: ->
       @$el.hide() if !@model.get('visible')
   Marionette.CompositeView.extend

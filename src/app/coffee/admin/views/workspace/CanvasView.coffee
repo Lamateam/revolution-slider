@@ -16,11 +16,7 @@ define "views/workspace/CanvasView", [
     _createElement: (tagName)->
       @d3_el.remove() if @d3_el isnt undefined
       svg        = d3.select(@options.svg)
-      dimensions = svg.node().getBBox()
       @d3_el     = svg.append(tagName)
-
-      @options.parentX = dimensions.x
-      @options.parentY = dimensions.y
 
       @d3_el.node()
     _removeElement: ()->

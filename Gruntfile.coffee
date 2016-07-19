@@ -171,6 +171,7 @@ module.exports = (grunt) ->
           appDir: "./tmp/"
           baseUrl: "."
           dir: "dist/js"
+          optimize: 'none'
           findNestedDependencies: true
           inlineText: true
           mainConfigFile: './tmp/admin.js'
