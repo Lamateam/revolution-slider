@@ -11,6 +11,8 @@
   .mCSB_scrollTools.mCSB_scrollTools_horizontal
     left 5px
     right 5px
+    
+  &_time
 
   &_scale
     height 30px
@@ -18,7 +20,7 @@
     white-space nowrap
 
     & ul
-      padding-left 32px
+      padding-left 25px
       height 100%
       position relative
       white-space nowrap
@@ -56,7 +58,7 @@
     
 
   &_item
-    background url(images/timeline/dots.svg) 4px center no-repeat 
+    background url(images/timeline/dots.svg) 6px center no-repeat 
     height 40px
     float left
     clear both
@@ -89,12 +91,13 @@
       height 26px
       float left
       opacity 0.6
-      margin-left 15px
+      margin-left 18px
       
     & ul
       position relative
-      margin-left 5px
+      margin-left 11px
       float left
+      background white
 
       & li
         position absolute
@@ -105,10 +108,15 @@
         box-shadow: 0px 1px 4px 0px rgba(0,0,0,0.10), inset 0px 0px 3px 0px rgba(255,255,255,0.50);
 
     &.active
-      background rgba(20,30,36,0.80) url(images/timeline/dots_active.svg) 4px center no-repeat
+      background rgba(20,30,36,0.80) url(images/timeline/dots_active.svg) 6px center no-repeat
       
       & img
         opacity 1
+
+.ui
+  &-state
+    &-highlight
+      height 40px
     
 
     
