@@ -67,13 +67,13 @@ define "views/workspace/CanvasView", [
       @listenTo window.App, 'element:' + @model.get('id') + ':keyframe:create', @createKeyframe
       @listenTo window.App, 'element:' + @model.get('id') + ':keyframe:select', @selectKeyframe
       @listenTo window.App, 'element:' + @model.get('id') + ':change', @onElementChange
+      @listenTo window.App, 'element:' + @model.get('id') + ':animations:play', @playAnimations
     initEvents: (n)->
       id = @model.get 'id'
       n.on "click", ->
         return if d3.event.defaultPrevented
         window.App.trigger "element:click", { id: id }
       # @listenTo window.App, 'element:' + @model.get('id') + ':animation:play', @playAnimation
-      @listenTo window.App, 'element:' + @model.get('id') + ':animations:play', @playAnimations
     onSomeElementSelected: ->
       if @getOption("stateModel").get("isElementSelected") is @model.get("id") then @setActive() else @setInactive()
     setNodeAttribute: (node, key, value)->
@@ -81,10 +81,11 @@ define "views/workspace/CanvasView", [
       center_x = if @model.get('type') is 'circle' then props.cx else props.x + props.width*0.5
       center_y = if @model.get('type') is 'circle' then props.cy else props.y + props.height*0.5
       switch 
-        when key is 'x', key is 'y'
-          node.selectAll('tspan').attr 'x', props.x
+        when key is 'x'
+          node.selectAll('tspan').attr key, value
           node.attr key, value
         when key is 'text', key is 'texts'
+          console.log 'here text!!!'
           node.selectAll('tspan').remove()
           arr   = value.split '\n'
           fsize = props['font-size']
@@ -232,13 +233,15 @@ define "views/workspace/CanvasView", [
         hash_props = {  }
 
         for own key, value of next_kf.props
-          old_value = kf.props[key]
+          if (key isnt 'text') and (key isnt 'texts')
+            console.log key
+            old_value = kf.props[key]
 
-          if key is 'fill'
-            value     = '#' + value 
-            old_value = '#' + old_value
+            if key is 'fill'
+              value     = '#' + value 
+              old_value = '#' + old_value
 
-          hash_props[key] = d3.interpolate(old_value, value) 
+            hash_props[key] = d3.interpolate(old_value, value) 
 
         (t)=>
           for own key, value of hash_props
@@ -246,7 +249,7 @@ define "views/workspace/CanvasView", [
               @setNodeAttribute(@options.node, key, value(t)) 
 
           dimensions = @options.node.node().getBBox()
-          @setAngle hash_props['angle'](t), hash_props['x'](t) + dimensions.width*0.5, hash_props['y'](t) + dimensions.height*0.5
+          @setAngle hash_props['angle'](t), hash_props['x'](t) + dimensions.width*0.5, hash_props['y'](t) + dimensions.height*0.5 if @canRotate
 
           @moveDots() if @getOption("stateModel").get("isElementSelected") is @model.get("id")
     
@@ -288,6 +291,7 @@ define "views/workspace/CanvasView", [
 
     playAnimations: (data)->
       el = @d3_el
+      
       transition = el
 
       @selectKeyframe { id: 0 }
