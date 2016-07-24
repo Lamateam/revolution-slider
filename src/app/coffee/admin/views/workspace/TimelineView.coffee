@@ -72,8 +72,8 @@ define "views/workspace/TimelineView", [
   Marionette.CompositeView.extend
     template: TimelineTemplate
     childView: TimelineItem
-    # behaviors:
-    #   MCustomScrollbar: { mouseWheel: { invert: true } }
+    behaviors:
+      MCustomScrollbar: { mouseWheel: { invert: true } }
     className: 'timeline'
     childViewContainer: ".bind-timeline-items"
     events:
@@ -91,33 +91,39 @@ define "views/workspace/TimelineView", [
       # @children.each (view)->
       #   view.runAll()
     initialize: (options)->
-      maxTime    = { minutes: 0, seconds: 0, milliseconds: 0 }
+      # maxTime    = { minutes: 0, seconds: 0, milliseconds: 0 }
 
-      for element in options.elements.toJSON()
-        for animation in element.animations
-          animationTime        = { minutes: 0, seconds: 0, milliseconds: 0 }
-          durationSeconds      = Math.floor (animation.duration + animation.start) / 1000
-          durationMilliSeconds = animation.duration + animation.start
+      # for element in options.elements.toJSON()
+      #   for animation in element.animations
+      #     animationTime        = { minutes: 0, seconds: 0, milliseconds: 0 }
+      #     durationSeconds      = Math.floor (animation.duration + animation.start) / 1000
+      #     durationMilliSeconds = animation.duration + animation.start
 
-          animationTime.minutes  = Math.floor durationSeconds / 60
-          animationTime.seconds  = durationSeconds % 60
-          animationTime.milliseconds = durationMilliSeconds % 1000
+      #     animationTime.minutes  = Math.floor durationSeconds / 60
+      #     animationTime.seconds  = durationSeconds % 60
+      #     animationTime.milliseconds = durationMilliSeconds % 1000
 
-          maxTime = animationTime if (maxTime.minutes < animationTime.minutes) or ((maxTime.minutes is animationTime.minutes) and (maxTime.seconds < animationTime.seconds)) or ((maxTime.seconds is animationTime.seconds) and (maxTime.milliseconds < animationTime.milliseconds))
+      #     maxTime = animationTime if (maxTime.minutes < animationTime.minutes) or ((maxTime.minutes is animationTime.minutes) and (maxTime.seconds < animationTime.seconds)) or ((maxTime.seconds is animationTime.seconds) and (maxTime.milliseconds < animationTime.milliseconds))
 
+      # timesegments = [  ]
+      # if maxTime.minutes isnt 0
+      #   for i in [0..maxTime.minutes-1]
+      #     for j in [0..59]
+      #       for k in [0..2]
+      #         timesegments.push { minutes: i, seconds: j, milliseconds: k*50 }
+
+      # for j in [0..maxTime.seconds-1]
+      #   for k in [0..1]
+      #     timesegments.push { minutes: maxTime.minutes, seconds: j, milliseconds: k*50 }
+
+      # for k in [0..Math.floor(maxTime.milliseconds / 500)]
+      #   timesegments.push { minutes: maxTime.minutes, seconds: maxTime.seconds, milliseconds: k*50 }
       timesegments = [  ]
-      if maxTime.minutes isnt 0
-        for i in [0..maxTime.minutes-1]
-          for j in [0..59]
-            for k in [0..2]
-              timesegments.push { minutes: i, seconds: j, milliseconds: k*50 }
 
-      for j in [0..maxTime.seconds-1]
-        for k in [0..1]
-          timesegments.push { minutes: maxTime.minutes, seconds: j, milliseconds: k*50 }
-
-      for k in [0..Math.floor(maxTime.milliseconds / 500)]
-        timesegments.push { minutes: maxTime.minutes, seconds: maxTime.seconds, milliseconds: k*50 }
+      for i in [0..5]
+        for j in [0..60]
+          for k in [0..1]
+            timesegments.push { minutes: i, seconds: j, milliseconds: k*50 }
 
       @model = new Backbone.Model { timesegments: timesegments }
 
