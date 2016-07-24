@@ -32,7 +32,8 @@ define "views/workspace/TimelineView", [
         i = d3.interpolate start*0.12, end*0.12
         (t)-> runner.css({ left: i(t) + 'px' })
     runAll: ->
-      keyframes  = @model.get 'keyframes'
+      keyframes = _.sortBy _.clone(@model.get('keyframes')), (keyframe)-> 
+        keyframe.start
       transition = @runner
       runner     = @ui.runner
 
@@ -105,7 +106,9 @@ define "views/workspace/TimelineView", [
       , 0
     playAnimations: ->
       @collection.each (model)->
-        window.App.trigger 'element:' + model.get('id') + ':animations:play', { animations: model.get('animations'), keyframes: model.get('keyframes') }
+        keyframes = _.sortBy _.clone(model.get('keyframes')), (keyframe)-> 
+          keyframe.start
+        window.App.trigger 'element:' + model.get('id') + ':animations:play', { animations: model.get('animations'), keyframes: keyframes }
       @children.each (view)->
         view.runAll()
     initialize: (options)->
