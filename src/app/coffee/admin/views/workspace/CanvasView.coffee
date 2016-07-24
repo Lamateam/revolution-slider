@@ -83,7 +83,6 @@ define "views/workspace/CanvasView", [
       switch 
         when key is 'x', key is 'y'
           node.selectAll('tspan').attr 'x', props.x
-          @d3_el.data [ { x: props.x, y: props.y } ]
           node.attr key, value
         when key is 'text', key is 'texts'
           node.selectAll('tspan').remove()
@@ -95,7 +94,8 @@ define "views/workspace/CanvasView", [
           @setAngle value, center_x, center_y
         when true then node.attr key, value
     setAngle: (angle, x_center, y_center)->
-      @d3_el.attr 'transform', 'rotate(' + angle + ',' + x_center + ',' + y_center + ')'
+      if @canRotate
+        @d3_el.attr 'transform', 'rotate(' + angle + ',' + x_center + ',' + y_center + ')'
     moveDots: ->
       dimensions = @options.node.node().getBBox()
       x_center   = dimensions.x + dimensions.width*0.5
@@ -174,8 +174,8 @@ define "views/workspace/CanvasView", [
               props.angle = props.angle % 360
               @setNodeAttribute n, 'angle', props.angle
           when 'c'
-            props.x = move_x - props.width*0.5
-            props.y = move_y - props.height*0.5
+            props.x = move_x - dimensions.width*0.5
+            props.y = move_y - dimensions.height*0.5
             # props.x = props.x + d3.event.dx
             # props.y = props.y + d3.event.dy
             # @setNodeAttribute(n, 'angle', props.angle) if @canRotate
@@ -224,12 +224,13 @@ define "views/workspace/CanvasView", [
     selectKeyframe: (data)->
       @current_keyframe = data.id 
       @render()
+
     createTransition: (kf, next_kf)->
       =>
         hash_props = {  }
 
         hash_props[key] = d3.interpolate(kf.props[key], value) for own key, value of next_kf.props
-        
+
         (t)=>
           for own key, value of hash_props
             if key isnt 'angle'
@@ -239,6 +240,43 @@ define "views/workspace/CanvasView", [
           @setAngle hash_props['angle'](t), hash_props['x'](t) + dimensions.width*0.5, hash_props['y'](t) + dimensions.height*0.5
 
           @moveDots() if @getOption("stateModel").get("isElementSelected") is @model.get("id")
+    
+    createEnterAnimation: (animation)->
+      el = @d3_el
+      switch animation.type 
+        when 'fadeIn'
+          step = 1 / animation.duration
+
+          handler = (i)->
+            ->
+              el.style 'opacity', i*step
+
+          for i in [0..animation.duration]
+            setTimeout handler(i), i
+
+    createLeaveAnimation: (animation, keyframes)->
+      total_duration = 0
+
+      for kf in keyframes
+        total_duration = kf.start if kf.start > total_duration
+
+      el = @d3_el
+
+      switch animation.type 
+        when 'fadeOut'
+          step = 1 / animation.duration
+
+          handler = (i)->
+            ->
+              el.style 'opacity', (total_duration - i)*step
+
+          for i in [total_duration - animation.duration..total_duration]
+            setTimeout handler(i), i  
+
+          setTimeout ->
+            el.style 'opacity', 1
+          , total_duration
+
     playAnimations: (data)->
       el = @d3_el
       transition = el
@@ -246,12 +284,21 @@ define "views/workspace/CanvasView", [
       @selectKeyframe { id: 0 }
 
       for kf, i in data.keyframes
-        console.log 'animation: ', i
         next_kf = data.keyframes[i+1]
         if next_kf isnt undefined
           transition = transition.transition()
             .duration next_kf.start-kf.start
             .tween 'animation-'+i, @createTransition(kf, next_kf)
+
+      animations = @model.get 'animations'
+
+      for animation in animations
+        if animation.link is 'enter'
+          @createEnterAnimation animation
+        else if animation.link is 'leave'
+          @createLeaveAnimation animation, data.keyframes
+
+
     onElementChange: (data)->
       props = @model.get('keyframes')[@current_keyframe].props
       props[key] = value for own key, value of data.props
