@@ -23,7 +23,7 @@ exports.init = (app)->
             keyframes: [
               {
                 start: 0
-                props: { fill: "rgb(255,0,0)", x: 100, y: 100, angle: 30, width: 100, height: 100 }
+                props: { fill: "ff0000", x: 100, y: 100, angle: 30, width: 100, height: 100 }
               }
             ] 
           }
@@ -36,7 +36,7 @@ exports.init = (app)->
             keyframes: [
               {
                 start: 0
-                props: { fill: "rgb(255,0,0)", x: 0, y: 0, angle: 0, width: 100, height: 100 } 
+                props: { fill: "ff0000", x: 0, y: 0, angle: 0, width: 100, height: 100 } 
               }
             ]
           }

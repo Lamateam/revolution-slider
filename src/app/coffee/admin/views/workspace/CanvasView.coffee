@@ -92,6 +92,8 @@ define "views/workspace/CanvasView", [
             node.append('tspan').attr('dy', if i is 0 then 0 else fsize).attr('x', props.x).text(str)
         when key is 'angle' 
           @setAngle value, center_x, center_y
+        when key is 'fill'
+          node.attr 'fill', if value.indexOf('#') is -1 then '#' + value else value
         when true then node.attr key, value
     setAngle: (angle, x_center, y_center)->
       if @canRotate
@@ -213,7 +215,7 @@ define "views/workspace/CanvasView", [
           d.y
         .attr 'r', 3
         .attr 'stroke', 'black'
-        .attr 'fill', @model.get('keyframes')[@current_keyframe].props.fill
+        .attr 'fill', '#' + @model.get('keyframes')[@current_keyframe].props.fill
         .call drag
     destroyDots: ->
       @d3_el.selectAll('.dot').remove()
@@ -229,7 +231,14 @@ define "views/workspace/CanvasView", [
       =>
         hash_props = {  }
 
-        hash_props[key] = d3.interpolate(kf.props[key], value) for own key, value of next_kf.props
+        for own key, value of next_kf.props
+          old_value = kf.props[key]
+
+          if key is 'fill'
+            value     = '#' + value 
+            old_value = '#' + old_value
+
+          hash_props[key] = d3.interpolate(old_value, value) 
 
         (t)=>
           for own key, value of hash_props

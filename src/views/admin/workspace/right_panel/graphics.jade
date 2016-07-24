@@ -43,13 +43,18 @@
       .workspace-right_panel-container-size_block
         .width50_percent.position
           label X
-          - console.log(keyframes, keyframe())
           input.bind-props(type="text", bind-to="x", value=keyframes[keyframe()].props.x, parse-float)
           span px
         .width50_percent.position.y
           label Y
           input.bind-props(type="text", bind-to="y", value=keyframes[keyframe()].props.y, parse-float)
           span px
+
+    .floatleft.width100.margintop10
+      .workspace-right_panel-container-size_block
+        .width100_percent.position
+          label Угол
+          input.bind-props(type="text", bind-to="angle", value=keyframes[keyframe()].props.angle, parse-float)
 
 
     .workspace-right_panel-container_big

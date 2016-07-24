@@ -25,7 +25,7 @@ define "views/workspace/LeftPanelView", [
             props: 
               x: 250
               y: 250
-              fill: "rgb(0,0,0)"
+              fill: "000000"
               "font-size": "12px"
               text: "Текст" 
           } 

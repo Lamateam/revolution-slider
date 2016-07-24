@@ -20,6 +20,8 @@ define "views/workspace/RightPanelView", [
     behaviors:
       MCustomScrollbar: { scrollbarPosition: 'outside' }
       PreventDefaultStopPropagation: {  }
+    modelEvents:
+      'sync': 'render'
     ui:
       set_color: '.set_color'
       # WorkspaceRightPanelProjectTemplate ui
@@ -46,7 +48,7 @@ define "views/workspace/RightPanelView", [
       # WorkspaceRightPanelSlideTemplate handlers
       'change #set_slide_input': 'onInputChange'
       # WorkspaceRightPanelTextTemplate handlers
-      # 'change #set_text_input': 'onInputPropsChange'
+      'change #set_text_input': 'onInputPropsChange'
     getTemplate: ->
       res = switch @getOption('type')
         when 'project' then WorkspaceRightPanelProjectTemplate
@@ -101,6 +103,8 @@ define "views/workspace/RightPanelView", [
       data  = {  }
 
       data[field] = value
+
+      console.log value, field
 
       data      
     onInputPropsChange: (e)-> window.App.trigger 'element:' + @model.get('id') + ':change', { props: @getDataFromInput(e.target) }
