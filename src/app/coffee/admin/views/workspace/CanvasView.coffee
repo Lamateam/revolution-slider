@@ -291,7 +291,7 @@ define "views/workspace/CanvasView", [
 
     playAnimations: (data)->
       el = @d3_el
-      
+
       transition = el
 
       @selectKeyframe { id: 0 }
@@ -300,7 +300,7 @@ define "views/workspace/CanvasView", [
         next_kf = data.keyframes[i+1]
         if next_kf isnt undefined
           transition = transition.transition()
-            .duration next_kf.start-kf.start
+            .duration next_kf.start - kf.start
             .tween 'animation-'+i, @createTransition(kf, next_kf)
 
       animations = @model.get 'animations'

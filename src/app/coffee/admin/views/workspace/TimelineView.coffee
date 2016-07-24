@@ -4,6 +4,7 @@ define "views/workspace/TimelineView", [
   "templates/workspace/timeline_item"
   "behaviors/MCustomScrollbar"
   "jquery-ui"
+  "d3"
 ], (Marionette, TimelineTemplate, TimelineItemTemplate)->
   TimelineItem = Marionette.ItemView.extend
     template: TimelineItemTemplate
@@ -12,7 +13,6 @@ define "views/workspace/TimelineView", [
       runner: '.timeline_time'
       keyframes: '.timeline_item-keyframe'
     events:
-      'click [data-animation]': 'playAnimation'
       'click .timeline_item-keyframe': 'selectKeyframe'
     modelEvents:
       'sync': 'render'
@@ -21,16 +21,35 @@ define "views/workspace/TimelineView", [
       @active_keyframe   = 0
       @listenTo window.App, 'element:' + @model.get('id') + ':animation:change', @changeAnimation
       @listenTo window.App, 'element:' + @model.get('id') + ':keyframe:create', @onKeyframeCreate
+      @runner = d3.select @el
     onRender: ->
       @el.setAttribute 'model-id', @model.get 'id'
       @ui.runner.hide()
       @_selectKeyframe(@active_keyframe)
+    createTransition: (start, end)->
+      runner = @ui.runner
+      ->
+        i = d3.interpolate start*0.12, end*0.12
+        (t)-> runner.css({ left: i(t) + 'px' })
     runAll: ->
-      for animation in @model.get 'animations'
-        @runAnimation animation, animation.start
-    runAnimation: (data, start=0)->
+      keyframes  = @model.get 'keyframes'
+      transition = @runner
+      runner     = @ui.runner
+
+      for keyframe, i in keyframes
+        if keyframes[i + 1] isnt undefined
+          start = keyframe.start
+          end   = keyframes[i + 1].start
+
+          transition = transition.transition()
+            .duration end - start
+            .each 'start', -> runner.show()
+            .each 'end', -> runner.hide()
+            .ease 'linear'
+            .tween 'animation-'+i, @createTransition(start, end)
+    runAnimation: (start, end)->
       r    = @ui.runner
-      left = data.start*0.12
+      left = start*0.12
       arr  = @active_animations
 
       arr.push setTimeout ->
@@ -40,13 +59,13 @@ define "views/workspace/TimelineView", [
           ->
             r.css { left: (left+now*0.12) + 'px' }
 
-        for i in [0..data.duration]
+        for i in [0..end - start]
           setTimeout handler(i), i
 
         setTimeout ->
           arr.pop()
           r.hide() if arr.length is 0
-        , data.duration
+        , end - start
       , start 
     playAnimation: (e)->
       data = JSON.parse(e.target.getAttribute('data-animation'))
@@ -67,7 +86,6 @@ define "views/workspace/TimelineView", [
 
       window.App.trigger 'element:' + @model.get('id') + ':keyframe:select', { id: id }
     onKeyframeCreate: ->
-      console.log @model.get('keyframes').length
       @active_keyframe = @model.get('keyframes').length - 1
   Marionette.CompositeView.extend
     template: TimelineTemplate
@@ -88,8 +106,8 @@ define "views/workspace/TimelineView", [
     playAnimations: ->
       @collection.each (model)->
         window.App.trigger 'element:' + model.get('id') + ':animations:play', { animations: model.get('animations'), keyframes: model.get('keyframes') }
-      # @children.each (view)->
-      #   view.runAll()
+      @children.each (view)->
+        view.runAll()
     initialize: (options)->
       # maxTime    = { minutes: 0, seconds: 0, milliseconds: 0 }
 
