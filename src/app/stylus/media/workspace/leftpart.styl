@@ -6,13 +6,14 @@
         &-add_list
           max-width 200px
           
-          & li
+          & li.workspace-left_panel-top_list-item
           
             &:first-child
               
               & ul
                 & li:not(.workspace-left_panel-top_list-add_list_header):last-child
                   width 101px!important
+                  height 100px!important
             
             & ul
               & li
@@ -79,5 +80,5 @@
       & li
         &.active
         &:hover
-          & ul
+          & ul:not(.slides):not(.slides_list)
             width 200px
