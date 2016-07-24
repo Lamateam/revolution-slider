@@ -6,6 +6,13 @@ define "views/workspace/CanvasView", [
   "d3"
 ], (Marionette, Helpers, TimelineView, CanvasTemplate)->
   html = d3.select 'html'
+
+  pageX = 0
+  pageY = 0
+  $(window).on 'mousemove', (e)->
+    pageX = e.pageX
+    pageY = e.pageY
+
   CanvasItem = Marionette.ItemView.extend
     tagName: "g"
     canResize: true
@@ -41,7 +48,7 @@ define "views/workspace/CanvasView", [
       @d3_el.attr "stroke", "transparent"
       @destroyDots()
     attachElContent: ->
-      @setD3Attributes @model.get('type'), @model.get('props')
+      @setD3Attributes @model.get('type'), @model.get('keyframes')[@current_keyframe].props
     setD3Attributes: (type, props)->
       @options.node = @d3_el.append type if @options.node is undefined
       @setNodeAttribute(@options.node, key, value) for own key, value of props
@@ -52,100 +59,31 @@ define "views/workspace/CanvasView", [
       @setActive() if @getOption("stateModel").get("isElementSelected") is @model.get("id")
 
       @initEvents @options.node
+    initialize: ->
+      @transitions      = [  ]
+      @current_keyframe = 0
+
+      @listenTo @getOption("stateModel"), "change:isElementSelected", @onSomeElementSelected
+      @listenTo window.App, 'element:' + @model.get('id') + ':keyframe:create', @createKeyframe
+      @listenTo window.App, 'element:' + @model.get('id') + ':keyframe:select', @selectKeyframe
+      @listenTo window.App, 'element:' + @model.get('id') + ':change', @onElementChange
     initEvents: (n)->
       id = @model.get 'id'
       n.on "click", ->
         return if d3.event.defaultPrevented
         window.App.trigger "element:click", { id: id }
-      @listenTo @getOption("stateModel"), "change:isElementSelected", @onSomeElementSelected
-      @listenTo window.App, 'element:' + @model.get('id') + ':animation:play', @playAnimation
+      # @listenTo window.App, 'element:' + @model.get('id') + ':animation:play', @playAnimation
       @listenTo window.App, 'element:' + @model.get('id') + ':animations:play', @playAnimations
-    playAnimations: (data)->
-      for animation in data.animations
-        @playAnimation animation, animation.start
-    playAnimation: (data, start=0)->
-      props     = @model.get 'props'
-      w2        = props.width*0.5
-      h2        = props.height*0.5
-      angle     = parseFloat props.angle, 10
-
-      property = switch data.type
-        when 'fadeIn', 'fadeOut' then 'opacity'
-        when 'rotate', 'antirotate' then 'transform'
-
-      start_value = switch data.type
-        when 'fadeIn' then 0
-        when 'fadeOut' then 1
-        when 'rotate', 'antirotate' then 'rotate(' + angle + ',' + (props.x+w2) + ',' + (props.y+h2) + ')'
-      
-      end_value = switch data.type
-        when 'fadeIn' then 1
-        when 'fadeOut' then 0
-        when 'rotate' then ->
-          i   = d3.interpolate(angle, 360+angle)
-          (t)->
-            'rotate(' + i(t) + ',' + (props.x+w2) + ',' + (props.y+h2) + ')'
-        when 'antirotate' then ->
-          i   = d3.interpolate(angle, -360+angle)
-          (t)->
-            'rotate(' + i(t) + ',' + (props.x+w2) + ',' + (props.y+h2) + ')'
-
-      handler = if typeof end_value is 'function' then 'attrTween' else 'attr'
-
-      transition = @d3_el.transition()
-        .delay(start)
-        .each 'start', -> d3.select(@).attr(property, start_value)
-        .duration data.duration
-      transition[handler](property, end_value)
-      # setTimeout =>
-      #   switch data.type
-      #     when 'fadeIn', 'fadeOut'
-      #       step = 10 / data.duration
-      #       el = @$el
-
-      #       el.css 'opacity', if data.type is 'fadeIn' then 0 else 1
-
-      #       handler = (now)->
-      #         ->
-      #           opacity = if data.type is 'fadeIn' then step*now else 1-step*now
-      #           el.css { opacity: opacity }
-
-      #       for i in [1..data.duration*0.1]
-      #         setTimeout handler(i), i*10
-
-      #       setTimeout ->
-      #         el.css 'opacity', 1
-      #       , data.duration
-
-      #     # when 'fadeOut'
-      #     #   @$el.fadeOut data.duration, => @$el.show()
-      #     when 'rotate', 'antirotate'
-      #       props     = @model.get 'props'
-      #       w2        = props.width*0.5
-      #       h2        = props.height*0.5
-      #       angle     = parseFloat props.angle, 10
-      #       el        = @d3_el
-      #       step      = data.duration / 360
-      #       direction = if data.type is 'rotate' then 1 else -1
-
-      #       handler  = (now)->
-      #         ->
-      #           el.attr 'transform', 'rotate(' + (angle + direction*now) + ',' + (props.x+w2) + ',' + (props.y+h2) + ')'
-
-      #       for i in [1..360]
-      #         setTimeout handler(i), i*step
-
-      #       setTimeout -> el.attr 'transform', 'rotate(' + angle + ',' + (props.x+w2) + ',' + (props.y+h2) + ')'
-      # , start
     onSomeElementSelected: ->
       if @getOption("stateModel").get("isElementSelected") is @model.get("id") then @setActive() else @setInactive()
     setNodeAttribute: (node, key, value)->
-      props    = @model.get 'props'
+      props    = @model.get('keyframes')[@current_keyframe].props
       center_x = if @model.get('type') is 'circle' then props.cx else props.x + props.width*0.5
       center_y = if @model.get('type') is 'circle' then props.cy else props.y + props.height*0.5
       switch 
         when key is 'x', key is 'y'
           node.selectAll('tspan').attr 'x', props.x
+          @d3_el.data [ { x: props.x, y: props.y } ]
           node.attr key, value
         when key is 'text', key is 'texts'
           node.selectAll('tspan').remove()
@@ -154,10 +92,10 @@ define "views/workspace/CanvasView", [
           for str, i in arr
             node.append('tspan').attr('dy', if i is 0 then 0 else fsize).attr('x', props.x).text(str)
         when key is 'angle' 
-          w2    = props.width*0.5
-          h2    = props.height*0.5
-          @d3_el.attr 'transform', 'rotate(' + value + ',' + (props.x+w2) + ',' + (props.y+h2) + ')'
+          @setAngle value, center_x, center_y
         when true then node.attr key, value
+    setAngle: (angle, x_center, y_center)->
+      @d3_el.attr 'transform', 'rotate(' + angle + ',' + x_center + ',' + y_center + ')'
     moveDots: ->
       dimensions = @options.node.node().getBBox()
       x_center   = dimensions.x + dimensions.width*0.5
@@ -191,11 +129,14 @@ define "views/workspace/CanvasView", [
       x_center   = dimensions.x + dimensions.width*0.5
       y_center   = dimensions.y + dimensions.height*0.5
       type       = @model.get 'type'
-      props      = @model.get 'props'
+      props      = @model.get('keyframes')[@current_keyframe].props
       node       = @options.node
 
       drag = d3.behavior.drag()
       drag.on 'drag', (d)=>
+        offset     = $('svg').offset()
+        move_x     = pageX - offset.left
+        move_y     = pageY - offset.top
         x          = d3.event.x
         y          = d3.event.y
         dimensions = n.node().getBBox()
@@ -233,16 +174,20 @@ define "views/workspace/CanvasView", [
               props.angle = props.angle % 360
               @setNodeAttribute n, 'angle', props.angle
           when 'c'
-            props.x = x - dimensions.width*0.5
-            props.y = y - dimensions.height*0.5
+            props.x = move_x - props.width*0.5
+            props.y = move_y - props.height*0.5
+            # props.x = props.x + d3.event.dx
+            # props.y = props.y + d3.event.dy
+            # @setNodeAttribute(n, 'angle', props.angle) if @canRotate
             @setNodeAttribute n, 'x', props.x
             @setNodeAttribute n, 'y', props.y
-            @setNodeAttribute(n, 'angle', props.angle) if @canRotate
+
+            @setAngle props.angle, move_x, move_y
         
         @moveDots()
 
       drag.on 'dragend', =>
-        window.App.trigger "element:resize", { el: @model.get('id'), props: props }
+        window.App.trigger "element:resize", { el: @model.get('id'), keyframe: @current_keyframe, props: props }
 
       data = []
       if @canResize
@@ -258,15 +203,59 @@ define "views/workspace/CanvasView", [
       if @canMove
         data.push { x: x_center, y: y_center, name: 'c' }
 
-      @options.dots = @d3_el.selectAll('.dot').data(data, (d)->
-        d.name
-      ).enter().append('circle').classed('dot', true).attr('cx', (d)->
-        d.x
-      ).attr('cy', (d)->
-        d.y
-      ).attr('r', 3).attr('fill', @model.get('props').fill).call drag
+      @options.dots = @d3_el.selectAll('.dot')
+        .data data, (d)->
+          d.name
+        .enter().append('circle').classed('dot', true)
+        .attr 'cx', (d)->
+          d.x
+        .attr 'cy', (d)->
+          d.y
+        .attr 'r', 3
+        .attr 'stroke', 'black'
+        .attr 'fill', @model.get('keyframes')[@current_keyframe].props.fill
+        .call drag
     destroyDots: ->
       @d3_el.selectAll('.dot').remove()
+    createKeyframe: (data)->
+      props = _.clone @model.get('keyframes')[@current_keyframe].props
+      window.App.trigger "element:create_keyframe", { el: @model.get('id'), props: props, start: data.start }
+      @current_keyframe = @model.get('keyframes').length - 1
+    selectKeyframe: (data)->
+      @current_keyframe = data.id 
+      @render()
+    createTransition: (kf, next_kf)->
+      =>
+        hash_props = {  }
+
+        hash_props[key] = d3.interpolate(kf.props[key], value) for own key, value of next_kf.props
+        
+        (t)=>
+          for own key, value of hash_props
+            if key isnt 'angle'
+              @setNodeAttribute(@options.node, key, value(t)) 
+
+          dimensions = @options.node.node().getBBox()
+          @setAngle hash_props['angle'](t), hash_props['x'](t) + dimensions.width*0.5, hash_props['y'](t) + dimensions.height*0.5
+
+          @moveDots() if @getOption("stateModel").get("isElementSelected") is @model.get("id")
+    playAnimations: (data)->
+      el = @d3_el
+      transition = el
+
+      @selectKeyframe { id: 0 }
+
+      for kf, i in data.keyframes
+        console.log 'animation: ', i
+        next_kf = data.keyframes[i+1]
+        if next_kf isnt undefined
+          transition = transition.transition()
+            .duration next_kf.start-kf.start
+            .tween 'animation-'+i, @createTransition(kf, next_kf)
+    onElementChange: (data)->
+      props = @model.get('keyframes')[@current_keyframe].props
+      props[key] = value for own key, value of data.props
+      window.App.trigger "element:resize", { el: @model.get('id'), keyframe: @current_keyframe, props: props }
 
   CanvasWidget = CanvasItem.extend
     canResize: false

@@ -10,14 +10,21 @@ define "views/workspace/TimelineView", [
     className: 'timeline_item custom active'
     ui:
       runner: '.timeline_time'
+      keyframes: '.timeline_item-keyframe'
     events:
       'click [data-animation]': 'playAnimation'
+      'click .timeline_item-keyframe': 'selectKeyframe'
+    modelEvents:
+      'sync': 'render'
     initialize: ->
       @active_animations = [  ]
+      @active_keyframe   = 0
       @listenTo window.App, 'element:' + @model.get('id') + ':animation:change', @changeAnimation
+      @listenTo window.App, 'element:' + @model.get('id') + ':keyframe:create', @onKeyframeCreate
     onRender: ->
       @el.setAttribute 'model-id', @model.get 'id'
       @ui.runner.hide()
+      @_selectKeyframe(@active_keyframe)
     runAll: ->
       for animation in @model.get 'animations'
         @runAnimation animation, animation.start
@@ -48,6 +55,20 @@ define "views/workspace/TimelineView", [
     changeAnimation: (data)->
       @model.set 'animations', data.animations
       @render()
+    _selectKeyframe: (id)->
+      @active_keyframe = id
+      el = @$el.find '[keyframe-id=' + id + ']'
+      @ui.keyframes.removeClass 'active'
+      el.addClass 'active'      
+    selectKeyframe: (e)->
+      id = e.target.getAttribute 'keyframe-id'
+
+      @_selectKeyframe id
+
+      window.App.trigger 'element:' + @model.get('id') + ':keyframe:select', { id: id }
+    onKeyframeCreate: ->
+      console.log @model.get('keyframes').length
+      @active_keyframe = @model.get('keyframes').length - 1
   Marionette.CompositeView.extend
     template: TimelineTemplate
     childView: TimelineItem
@@ -57,6 +78,7 @@ define "views/workspace/TimelineView", [
     childViewContainer: ".bind-timeline-items"
     events:
       'sortstop .bind-timeline-items': 'reOrderElements'
+      'dblclick .bind-timeline-items': 'createKeyframe'
     onRender: ->
       setTimeout =>
         @$el.find('.bind-timeline-items').sortable
@@ -65,9 +87,9 @@ define "views/workspace/TimelineView", [
       , 0
     playAnimations: ->
       @collection.each (model)->
-        window.App.trigger 'element:' + model.get('id') + ':animations:play', { animations: model.get 'animations' }
-      @children.each (view)->
-        view.runAll()
+        window.App.trigger 'element:' + model.get('id') + ':animations:play', { animations: model.get('animations'), keyframes: model.get('keyframes') }
+      # @children.each (view)->
+      #   view.runAll()
     initialize: (options)->
       maxTime    = { minutes: 0, seconds: 0, milliseconds: 0 }
 
@@ -110,3 +132,12 @@ define "views/workspace/TimelineView", [
         if model.get('order') isnt index
           model.set 'order', index
           window.App.trigger "element:reorder", { el: model.get('id'), order: index }
+    createKeyframe: (e)->
+      offset   = $(e.target).offset()
+      model_id = e.target.getAttribute 'model-id'
+
+      x = e.pageX - offset.left - 53
+      
+      start = Math.floor x * 8.333333333333334
+      
+      window.App.trigger 'element:' + model_id + ':keyframe:create', { start: start } 

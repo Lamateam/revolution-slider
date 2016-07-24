@@ -24,6 +24,12 @@ define "views/workspace/RightPanelView", [
       set_color: '.set_color'
       # WorkspaceRightPanelProjectTemplate ui
       repeat_num: '[name="repeatNum"]'
+    templateHelpers: ->
+      res = 
+        keyframe: => @active_keyframe
+    initialize: ->
+      if @getOption('type') is 'element'
+        @listenTo window.App, 'element:' + @model.get('id') + ':keyframe:select', @selectKeyframe
     events:
       'blur input[type="text"].bind-props': 'onInputPropsChange'
       'blur input[type="text"].bind': 'onInputChange'
@@ -48,7 +54,7 @@ define "views/workspace/RightPanelView", [
         when 'element'
           switch @model.get('type')
             when 'text' 
-              if @model.get('props').text isnt undefined then WorkspaceRightPanelTextTemplate else WorkspaceRightPanelParagraphTemplate
+              if @model.get('keyframes')[0].props.text isnt undefined then WorkspaceRightPanelTextTemplate else WorkspaceRightPanelParagraphTemplate
             when 'date' then WorkspaceRightPanelDateTemplate
             when 'image' then WorkspaceRightPanelGraphicsTemplate
             when 'rect' then WorkspaceRightPanelShapeTemplate
@@ -97,7 +103,9 @@ define "views/workspace/RightPanelView", [
       data[field] = value
 
       data      
-    onInputPropsChange: (e)-> window.App.trigger "element:change", { el: @model.get('id'), props: @getDataFromInput(e.target) }
+    onInputPropsChange: (e)-> window.App.trigger 'element:' + @model.get('id') + ':change', { props: @getDataFromInput(e.target) }
+    onBeforeRender: ->
+      @active_keyframe = 0 if @active_keyframe is undefined
     onInputChange: (e)-> window.App.trigger @getOption('type') + ":update", @getDataFromInput(e.target)
     # WorkspaceRightPanelGraphicsTemplate handlers
     onImageLoadingClick: -> window.App.trigger "image:edit", { id: @model.get 'id' }
@@ -112,3 +120,6 @@ define "views/workspace/RightPanelView", [
         @ui.repeat_num
           .addClass 'disabled'
           .attr 'disabled', true
+    selectKeyframe: (data)->
+      @active_keyframe = data.id 
+      @render()

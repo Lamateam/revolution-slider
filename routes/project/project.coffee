@@ -15,9 +15,31 @@ exports.init = (app)->
         repeatNum: 1
         animations: []
         elements: [ 
-          { id: 0, order: 1, type: "rect", animations: [], props: { fill: "rgb(255,0,0)", x: 100, y: 100, angle: 30, width: 100, height: 100 } }
+          { 
+            id: 0
+            order: 1
+            type: "rect"
+            animations: []
+            keyframes: [
+              {
+                start: 0
+                props: { fill: "rgb(255,0,0)", x: 100, y: 100, angle: 30, width: 100, height: 100 }
+              }
+            ] 
+          }
           # { id: 1, type: "circle", props: { fill: "rgb(255,255,0)", cx: 50, cy: 50, r: 100 } } 
-          { id: 1, order: 0, type: "rect", animations: [], props: { fill: "rgb(255,0,0)", x: 0, y: 0, angle: 0, width: 100, height: 100 } }
+          { 
+            id: 1
+            order: 0
+            type: "rect"
+            animations: []
+            keyframes: [
+              {
+                start: 0
+                props: { fill: "rgb(255,0,0)", x: 0, y: 0, angle: 0, width: 100, height: 100 } 
+              }
+            ]
+          }
         ]
       }
     ]
