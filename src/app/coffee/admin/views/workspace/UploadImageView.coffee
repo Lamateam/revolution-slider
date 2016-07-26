@@ -21,6 +21,21 @@ define "views/workspace/UploadImageView", [
           @createElement data
           @destroy()
     createElement: (data)->
-      window.App.trigger "element:create", { type: "image", props: { x: 100, y: 100, angle: 0, width: 170, height: 200, fill: "rgb(0,0,0)", "xlink:href": data.result.url } }
+      window.App.trigger "element:create", { 
+        type: "image"
+        keyframes: [
+          {
+            start: 0
+            props: 
+              x: 100
+              y: 100
+              angle: 0
+              width: 170
+              height: 200
+              fill: "rgb(0,0,0)"
+              "xlink:href": data.result.url
+          }
+        ]
+      }
     onImageUrlBlur: ->
       window.App.trigger "image:url_upload", { url: @ui.image_url.val() }

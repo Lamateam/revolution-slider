@@ -6,7 +6,7 @@
 
     .workspace-right_panel-container-input_block
       label Текст
-      textarea.bind-props(type="text", bind-to="texts")= props.texts
+      textarea.bind-props(type="text", bind-to="texts")= keyframes[keyframe()].props.texts
 
     .workspace-right_panel-container_big
       h3 Настройки текста 
@@ -22,7 +22,7 @@
           .workspace-right_panel-container-color_picker
             div.set_color_div.set_color(data-valueelement = "set_text_input", data-styleelement="set_slide_button")
               button#set_slide_button.set_color_button
-              input#set_text_input.set_color_input(value=props.fill, bind-to="fill")
+              input#set_text_input.set_color_input(value=keyframes[keyframe()].props.fill, bind-to="fill")
 
           .workspace-right_panel-container-select_block.fourth
             select.bind-props.text-center(bind-to="font-size")
@@ -134,11 +134,11 @@
         .workspace-right_panel-container-size_block
           .width50_percent.position
             label X
-            input.bind-props(type="text", value=props.x, bind-to="x")
+            input.bind-props(type="text", value=keyframes[keyframe()].props.x, bind-to="x")
             span px
           .width50_percent.position.y
             label Y
-            input.bind-props(type="text", value=props.y, bind-to="y")
+            input.bind-props(type="text", value=keyframes[keyframe()].props.y, bind-to="y")
             span px
 
       //- .workspace-right_panel-container-rotate.margintop10
