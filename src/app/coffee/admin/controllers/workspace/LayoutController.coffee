@@ -117,6 +117,8 @@ define "controllers/workspace/LayoutController", [
       keyframes = model.get 'keyframes'
       keyframe  = keyframes[keyframe]
 
+      console.log data
+
       keyframe[key] = value for own key, value of data
 
       model.save { keyframes: keyframes }, { wait: true, patch: true }  
@@ -151,6 +153,8 @@ define "controllers/workspace/LayoutController", [
       model = @getOption('elementsCollection').findWhere { id: data.el }
       keyframes = model.get 'keyframes'
       keyframes.push { start: data.start, props: data.props }
+      _.sortBy keyframes, (keyframe)-> 
+        keyframe.start
       model.save { keyframes: keyframes }, { patch: true, wait: true }
     onElementReOrder: (data)->
       model = @getOption('elementsCollection').findWhere { id: data.el }
