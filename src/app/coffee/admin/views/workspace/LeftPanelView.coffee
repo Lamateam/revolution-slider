@@ -10,12 +10,29 @@ define "views/workspace/LeftPanelView", [
     events:
       'click .bind-text-btn': 'onTextButtonClick'
       'click .bind-graph-btn': 'onGraphButtonClick'
+      'click .bind-figures-btn': 'onShapeButtonClick'
       'click .bind-paragraph-btn': 'onParagraphButtonClick'
       'click .bind-play:not(.active)': 'playAnimations'
       # 'click .bind-play.active': 'stopAnimations'
     modelEvents:
       'sync': 'render'
     template: WorkspaceLeftPanelTemplate
+    onShapeButtonClick: ->
+      window.App.trigger "element:create", { 
+        type: "rect"
+        keyframes: [
+          {
+            start: 0
+            props: 
+              x: 250
+              y: 250
+              fill: "ffff00"
+              width: 100
+              height: 150
+              angle: 0
+          } 
+        ]
+      }
     onTextButtonClick: ->
       window.App.trigger "element:create", { 
         type: "text"
@@ -28,6 +45,9 @@ define "views/workspace/LeftPanelView", [
               fill: "000000"
               "font-size": "12px"
               text: "Текст" 
+              background_fill: "ffffff"
+              text_offset: 10
+              angle: 0
           } 
         ]
       }
@@ -37,7 +57,23 @@ define "views/workspace/LeftPanelView", [
     onVideoButtonClick: ->
       window.App.trigger "element:create", { type: "video", props: { x: 100, y: 100, angle: 0, width: 170, height: 200, fill: "rgb(0,0,0)", "xlink:href": "http://fyf.tac-cdn.net/images/products/large/T46-1.jpg" } }
     onParagraphButtonClick: ->
-      window.App.trigger "element:create", { type: "text", props: { x: 250, y: 250, fill: "rgb(0,0,0)", "font-size": "12px", texts: "Текст \n Новая строка" } }
+      window.App.trigger "element:create", { 
+        type: "text"
+        keyframes: [
+          {
+            start: 0
+            props: 
+              x: 250
+              y: 250
+              fill: "000000"
+              "font-size": "12px"
+              texts: "Текст \n Новая строка" 
+              background_fill: "ffffff"
+              text_offset: 10
+              angle: 0
+          } 
+        ]
+      }
     playAnimations: ->
       window.App.trigger "animations:play"
       # @ui.playBtn.addClass 'active'

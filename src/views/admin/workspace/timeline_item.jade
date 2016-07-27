@@ -1,12 +1,19 @@
 img(src="static/images/demo/layout_images.jpg")
-for keyframe, i in keyframes
-  - var left = keyframe.start*0.12 + 53
-  .timeline_item-keyframe(
-    style="left: " + left + "px;",
-    keyframe-id=i
-  )
+
 ul
   span.timeline_time
+  for keyframe, i in keyframes
+    - var left = keyframe.start*0.12 - 2.5
+    .timeline_item-keyframe(
+      style="left: " + left + "px;",
+      keyframe-id=i
+    )
+    if i != 0
+      - var offset = keyframes[i-1].start*0.12 
+      - var dur    = (keyframe.start - keyframes[i-1].start)*0.12
+      li(
+        style='left: ' + offset + 'px; width: ' + dur + 'px'
+      )
   //- for animation, i in animations
   //-   - var offset = animation.start * 0.12
   //-   - var dur    = animation.duration * 0.12

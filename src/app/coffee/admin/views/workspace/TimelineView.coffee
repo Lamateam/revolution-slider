@@ -14,6 +14,8 @@ define "views/workspace/TimelineView", [
       keyframes: '.timeline_item-keyframe'
     events:
       'click .timeline_item-keyframe': 'selectKeyframe'
+      'drag .timeline_item-keyframe': 'onDrag'
+      'dragstop .timeline_item-keyframe': 'onDragStop'
     modelEvents:
       'sync': 'render'
     initialize: ->
@@ -25,7 +27,11 @@ define "views/workspace/TimelineView", [
     onRender: ->
       @el.setAttribute 'model-id', @model.get 'id'
       @ui.runner.hide()
+
       @_selectKeyframe(@active_keyframe)
+
+      # @$el.find('.timeline_item-keyframe').draggable
+      #   axis: 'x'
     createTransition: (start, end)->
       runner = @ui.runner
       ->
@@ -43,35 +49,44 @@ define "views/workspace/TimelineView", [
           end   = keyframes[i + 1].start
 
           transition = transition.transition()
+
+          if i is 0 and start isnt 0
+            transition.delay start
+
+          transition
             .duration end - start
             .each 'start', -> runner.show()
             .each 'end', -> runner.hide()
             .ease 'linear'
             .tween 'animation-'+i, @createTransition(start, end)
-    runAnimation: (start, end)->
-      r    = @ui.runner
-      left = start*0.12
-      arr  = @active_animations
-
-      arr.push setTimeout ->
-        r.css { left: left + 'px' }
-        r.show()
-        handler = (now)->
-          ->
-            r.css { left: (left+now*0.12) + 'px' }
-
-        for i in [0..end - start]
-          setTimeout handler(i), i
-
-        setTimeout ->
-          arr.pop()
-          r.hide() if arr.length is 0
-        , end - start
-      , start 
+            
+        else 
+          setTimeout =>
+            id = 0
+            @_selectKeyframe id
+            window.App.trigger 'element:' + @model.get('id') + ':keyframe:select', { id: id }
+          , keyframe.start
     playAnimation: (e)->
       data = JSON.parse(e.target.getAttribute('data-animation'))
       window.App.trigger 'element:' + @model.get('id') + ':animation:play', data
       @runAnimation data
+    onDrag: (e)->
+      offset      = @$el.offset()
+      keyframe_id = parseInt e.target.getAttribute 'keyframe-id', 10
+      model_id    = @model.get 'id'
+
+      x = e.pageX - offset.left - 53
+      
+      start = Math.floor x * 8.333333333333334
+
+      lis = @$el.find 'li'
+      kfs = @model.get 'keyframes'
+
+      if lis[keyframe_id-1] isnt undefined
+        lis[keyframe_id-1].style.width = (start - kfs[keyframe_id-1].start)*0.12 + 'px'
+      if lis[keyframe_id] isnt undefined
+        lis[keyframe_id].style.left = start*0.12 + 'px'
+        lis[keyframe_id].style.width = (kfs[keyframe_id+1].start - start)*0.12 + 'px'
     changeAnimation: (data)->
       @model.set 'animations', data.animations
       @render()
@@ -88,6 +103,17 @@ define "views/workspace/TimelineView", [
       window.App.trigger 'element:' + @model.get('id') + ':keyframe:select', { id: id }
     onKeyframeCreate: ->
       @active_keyframe = @model.get('keyframes').length - 1
+    onDragStop: (e)->
+      offset      = @$el.offset()
+      keyframe_id = e.target.getAttribute 'keyframe-id'
+      model_id    = @model.get 'id'
+
+      x = e.pageX - offset.left - 53
+      
+      start = Math.floor x * 8.333333333333334
+
+      window.App.trigger "element:resize", { el: model_id, keyframe: keyframe_id, props: { start: start } }
+
   Marionette.CompositeView.extend
     template: TimelineTemplate
     childView: TimelineItem
@@ -102,6 +128,8 @@ define "views/workspace/TimelineView", [
       setTimeout =>
         @$el.find('.bind-timeline-items').sortable
           placeholder: "ui-state-highlight"
+          handle: 'img'
+          axis: 'y'
         @$el.disableSelection()
       , 0
     playAnimations: ->

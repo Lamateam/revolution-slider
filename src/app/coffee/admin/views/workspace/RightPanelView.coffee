@@ -49,6 +49,7 @@ define "views/workspace/RightPanelView", [
       'change #set_slide_input': 'onInputChange'
       # WorkspaceRightPanelTextTemplate handlers
       'change #set_text_input': 'onInputPropsChange'
+      'change #set_bg_input': 'onInputPropsChange'
     getTemplate: ->
       res = switch @getOption('type')
         when 'project' then WorkspaceRightPanelProjectTemplate

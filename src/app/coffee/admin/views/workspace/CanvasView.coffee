@@ -22,8 +22,9 @@ define "views/workspace/CanvasView", [
       "element_" + @model.get "id"
     _createElement: (tagName)->
       @d3_el.remove() if @d3_el isnt undefined
-      svg        = d3.select(@options.svg)
-      @d3_el     = svg.append(tagName)
+
+      svg        = d3.select @options.svg
+      @d3_el     = svg.append tagName
 
       @d3_el.node()
     _removeElement: ()->
@@ -39,10 +40,7 @@ define "views/workspace/CanvasView", [
     modelEvents:
       "sync": "render"
     setActive: ->
-      colors = Helpers.invertRGB @options.node.attr("fill")
-      prefix = if colors.length is 3 then 'rgb' else 'rgba'
-      @d3_el.attr "stroke", prefix + '(' + colors.join(",") + ')'
-
+      @d3_el.attr "stroke", '#000000'
       @initDots @options.node
     setInactive: ->
       @d3_el.attr "stroke", "transparent"
@@ -51,14 +49,15 @@ define "views/workspace/CanvasView", [
       @setD3Attributes @model.get('type'), @model.get('keyframes')[@current_keyframe].props
     setD3Attributes: (type, props)->
       @options.node = @d3_el.append type if @options.node is undefined
-      @setNodeAttribute(@options.node, key, value) for own key, value of props
+
+      # @setNodeAttribute(@options.node, key, value) for own key, value of props
 
       @canResize = false if type is 'text'
-      @canRotate = false if type is 'text'
+      # @canRotate = false if type is 'text'
       
-      @setActive() if @getOption("stateModel").get("isElementSelected") is @model.get("id")
+      # @setActive() if @getOption("stateModel").get("isElementSelected") is @model.get("id")
 
-      @initEvents @options.node
+      # @initEvents @options.node
     initialize: ->
       @transitions      = [  ]
       @current_keyframe = 0
@@ -66,8 +65,39 @@ define "views/workspace/CanvasView", [
       @listenTo @getOption("stateModel"), "change:isElementSelected", @onSomeElementSelected
       @listenTo window.App, 'element:' + @model.get('id') + ':keyframe:create', @createKeyframe
       @listenTo window.App, 'element:' + @model.get('id') + ':keyframe:select', @selectKeyframe
+      @listenTo window.App, 'element:' + @model.get('id') + ':keyframe:change', @changeKeyframe
       @listenTo window.App, 'element:' + @model.get('id') + ':change', @onElementChange
       @listenTo window.App, 'element:' + @model.get('id') + ':animations:play', @playAnimations
+    onRender: ->
+      setTimeout =>
+
+        props = @model.get('keyframes')[@current_keyframe].props
+
+        @setNodeAttribute(@options.node, key, value) for own key, value of props
+        
+        @setActive() if @getOption("stateModel").get("isElementSelected") is @model.get("id")
+
+        @initEvents @options.node
+
+        if @model.get('type') is 'text'
+
+          @d3_el.selectAll('.background_rect').remove()
+
+          dimensions = @d3_el.node().getBBox()
+          offset     = props.text_offset
+          fill       = props.background_fill
+
+          @d3_el
+            .insert 'rect', ':first-child'
+            .classed 'background_rect', true
+            .attr 'x', dimensions.x - offset
+            .attr 'y', dimensions.y - offset
+            .attr 'width', dimensions.width + offset*2
+            .attr 'height', dimensions.height + offset*2
+            .attr 'fill', if fill.indexOf('#') is -1 then '#' + fill else fill
+
+      , 0
+
     initEvents: (n)->
       id = @model.get 'id'
       n.on "click", ->
@@ -78,23 +108,34 @@ define "views/workspace/CanvasView", [
       if @getOption("stateModel").get("isElementSelected") is @model.get("id") then @setActive() else @setInactive()
     setNodeAttribute: (node, key, value)->
       props    = @model.get('keyframes')[@current_keyframe].props
-      center_x = if @model.get('type') is 'circle' then props.cx else props.x + props.width*0.5
-      center_y = if @model.get('type') is 'circle' then props.cy else props.y + props.height*0.5
+      dims     = node.node().getBBox()
+      center_x = if @model.get('type') is 'circle' then props.cx else props.x + (if props.width is undefined then dims.width else props.width)*0.5
+      center_y = if @model.get('type') is 'circle' then props.cy else props.y + (if props.height is undefined then dims.height else props.height)*0.5
       switch 
         when key is 'x'
-          node.selectAll('tspan').attr key, value
-          node.attr key, value
+          node
+            .selectAll 'tspan'
+            .attr key, value
+          node.attr key, value       
         when key is 'text', key is 'texts'
-          console.log 'here text!!!'
           node.selectAll('tspan').remove()
-          arr   = value.split '\n'
-          fsize = props['font-size']
+          arr    = value.split '\n'
+          fsize  = props['font-size']
           for str, i in arr
-            node.append('tspan').attr('dy', if i is 0 then 0 else fsize).attr('x', props.x).text(str)
+            node
+              .append 'tspan'
+              .attr 'dy', if i is 0 then 0 else fsize
+              .attr 'x', props.x
+              .text str
         when key is 'angle' 
           @setAngle value, center_x, center_y
+        when key is 'font-size'
+          node.style key, value
         when key is 'fill'
           node.attr 'fill', if value.indexOf('#') is -1 then '#' + value else value
+        when key is 'background_fill', key is 'text_offset'
+          # Это служебные поля, ничего делать не надо
+          console.log 'junk'
         when true then node.attr key, value
     setAngle: (angle, x_center, y_center)->
       if @canRotate
@@ -140,13 +181,15 @@ define "views/workspace/CanvasView", [
         offset     = $('svg').offset()
         move_x     = pageX - offset.left
         move_y     = pageY - offset.top
+
         x          = d3.event.x
         y          = d3.event.y
+
         dimensions = n.node().getBBox()
         x_center   = dimensions.x + dimensions.width*0.5
         y_center   = dimensions.y + dimensions.height*0.5
 
-        new_d = Math.sqrt Math.pow( y - y_center, 2 ) + Math.pow( x - x_center, 2 )
+        new_d = Math.sqrt Math.pow( move_y - y_center, 2 ) + Math.pow( move_x - x_center, 2 )
         switch d.name
           when 'n', 's'
             dh = new_d - dimensions.height*0.5
@@ -156,7 +199,9 @@ define "views/workspace/CanvasView", [
 
             @setNodeAttribute n, 'height', props.height
             @setNodeAttribute n, 'y', props.y
-            @setNodeAttribute(n, 'angle', props.angle) if @canRotate
+
+            _dimensions = n.node().getBBox()
+            @setAngle props.angle, _dimensions.x + _dimensions.width*0.5, _dimensions.y + _dimensions.height*0.5 if @canRotate
           when 'w', 'e'
             dw = new_d - dimensions.width*0.5
 
@@ -165,7 +210,8 @@ define "views/workspace/CanvasView", [
 
             @setNodeAttribute n, 'width', props.width
             @setNodeAttribute n, 'x', props.x
-            @setNodeAttribute(n, 'angle', props.angle) if @canRotate            
+
+            # @setAngle props.angle, props.x + dimensions.width*0.5, props.y + dimensions.height*0.5 if @canRotate
           when 'ne', 'nw', 'se', 'sw'
             if (x isnt x_center) or (y isnt y_center)
               props.angle = props.angle + (180 / Math.PI) * Math.atan2(y - y_center, x - x_center)
@@ -177,20 +223,24 @@ define "views/workspace/CanvasView", [
               props.angle = props.angle % 360
               @setNodeAttribute n, 'angle', props.angle
           when 'c'
+            dy = if props['font-size'] is undefined then 0 else parseInt(props['font-size'], 10)
+            
             props.x = move_x - dimensions.width*0.5
-            props.y = move_y - dimensions.height*0.5
-            # props.x = props.x + d3.event.dx
-            # props.y = props.y + d3.event.dy
-            # @setNodeAttribute(n, 'angle', props.angle) if @canRotate
+            props.y = move_y - dimensions.height*0.5 
+
             @setNodeAttribute n, 'x', props.x
             @setNodeAttribute n, 'y', props.y
 
             @setAngle props.angle, move_x, move_y
+
+            # @d3_el
+            #   .selectAll '.background_rect'
+            #   .attr 'y', move_y - dimensions.height*0.5 - props.text_offset
         
         @moveDots()
 
       drag.on 'dragend', =>
-        window.App.trigger "element:resize", { el: @model.get('id'), keyframe: @current_keyframe, props: props }
+        window.App.trigger "element:resize", { el: @model.get('id'), keyframe: @current_keyframe, props: { props: props } }
 
       data = []
       if @canResize
@@ -227,7 +277,6 @@ define "views/workspace/CanvasView", [
     selectKeyframe: (data)->
       @current_keyframe = data.id 
       @render()
-
     createTransition: (kf, next_kf)->
       =>
         hash_props = {  }
@@ -300,6 +349,11 @@ define "views/workspace/CanvasView", [
         next_kf = data.keyframes[i+1]
         if next_kf isnt undefined
           transition = transition.transition()
+
+          if i is 0 and kf.start isnt 0
+            transition.delay kf.start
+
+          transition
             .duration next_kf.start - kf.start
             .tween 'animation-'+i, @createTransition(kf, next_kf)
 
@@ -315,7 +369,7 @@ define "views/workspace/CanvasView", [
     onElementChange: (data)->
       props = @model.get('keyframes')[@current_keyframe].props
       props[key] = value for own key, value of data.props
-      window.App.trigger "element:resize", { el: @model.get('id'), keyframe: @current_keyframe, props: props }
+      window.App.trigger "element:resize", { el: @model.get('id'), keyframe: @current_keyframe, props: { props: props } }
 
   CanvasWidget = CanvasItem.extend
     canResize: false
