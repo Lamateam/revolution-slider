@@ -22,34 +22,12 @@
         input(type="radio", name="shape", id = "round")
       label.item3(for="round")
 
-
-    .floatleft.width100.margintop10
-      .workspace-right_panel-container-size_block
-        .width50_percent.hor
-          input(type="text")
-          span px
-        .width50_percent.ver
-          input(type="text")
-          span px
-    .floatleft.width100.margintop10
-      .workspace-right_panel-container-size_block.margintop10
-        .width50_percent.position
-          label X
-          input(type="text")
-          span px
-        .width50_percent.position.y
-          label Y
-          input(type="text")
-          span px
-
-
-
     .floatleft.width100.margintop10
       .workspace-right_panel-container-color_picker
         //- не вешается active на блок!
-        .set_color_div.set_color(data-valueelement = "set_slide_input", data-styleelement="set_slide_button")
+        .set_color_div.set_color(data-valueelement = "set_text_input", data-styleelement="set_slide_button")
           button#set_slide_button.set_color_button
-          input#set_slide_input.set_color_input(value="#fff")
+          input#set_text_input.set_color_input(value=keyframes[keyframe()].props.fill, bind-to="fill")
 
 
       if shape == "round"            
@@ -89,20 +67,21 @@
         label.item4(for="4")
           
     .floatleft.width100.margintop10
-      .workspace-right_panel-container-size_block.margintop10
+      .workspace-right_panel-container-size_block
         .width50_percent.position
           label X
-          input(type="text")
+          input.bind-props(type="text", bind-to="x", value=keyframes[keyframe()].props.x, parse-float)
           span px
         .width50_percent.position.y
           label Y
-          input(type="text")
+          input.bind-props(type="text", bind-to="y", value=keyframes[keyframe()].props.y, parse-float)
           span px
+
     .floatleft.width100.margintop10
-      .workspace-right_panel-container-rotate.margintop10
-        .zindex.width50_percent
-          label Z-index
-          input(type="text")
+      .workspace-right_panel-container-size_block
+        .width100_percent.position
+          label Угол
+          input.bind-props(type="text", bind-to="angle", value=keyframes[keyframe()].props.angle, parse-float)
 
 
     include ./_animations.jade

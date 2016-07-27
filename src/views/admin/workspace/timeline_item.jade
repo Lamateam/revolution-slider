@@ -1,4 +1,10 @@
 img(src="static/images/demo/layout_images.jpg")
+for keyframe, i in keyframes
+  - var left = keyframe.start*0.12 + 53
+  .timeline_item-keyframe(
+    style="left: " + left + "px;",
+    keyframe-id=i
+  )
 ul
   span.timeline_time
   for animation, i in animations
@@ -10,3 +16,4 @@ ul
       data-animation=dataAnimation
     )
       include components/tooltip.jade
+

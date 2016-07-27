@@ -30,6 +30,7 @@ define "controllers/workspace/LayoutController", [
       @listenTo window.App, "element:change", @onElementChange
       @listenTo window.App, "element:create", @onElementCreate
       @listenTo window.App, "element:reorder", @onElementReOrder
+      @listenTo window.App, "element:create_keyframe", @onElementCreateKeyframe
 
       @listenTo window.App, "slide:change", @onSlideChange
       @listenTo window.App, "slide:select", @onSlideSelect
@@ -58,10 +59,11 @@ define "controllers/workspace/LayoutController", [
         height: 500
         model: slide
         stateModel: @getOption 'stateModel'
-    renderRightPanel: (model, type)->
+    renderRightPanel: (model, type, keyframe=0)->
       @getOption('layout').renderRightPanel
         model: model
         type: type
+        keyframe: keyframe
     renderLeftPanel: ->
       @getOption('layout').renderLeftPanel
         model: @getOption('projectModel')
@@ -110,26 +112,29 @@ define "controllers/workspace/LayoutController", [
       props = model.get 'props'
       props[key] = props[key] + value for key, value of data
       model.save { props: props }, { wait: true, patch: true }
-    changeElement: (el, data)->
-      model = @getOption('elementsCollection').findWhere { id: el }
-      props = model.get 'props'
-      props[key] = value for key, value of data
-      model.save { props: props }, { wait: true, patch: true }  
+    changeElement: (el, keyframe, data)->
+      model     = @getOption('elementsCollection').findWhere { id: el }
+      keyframes = model.get 'keyframes'
+      keyframe  = keyframes[keyframe]
+
+      keyframe[key] = value for own key, value of data
+
+      model.save { keyframes: keyframes }, { wait: true, patch: true }  
     changeSlide: (data)->
       @getOption('slideModel').save data, { wait: true, patch: true }        
     onElementMove: (data)->
       @getOption('historyCollection').addAction { action: "move", el: data.el, options: data.props }
       @getOption('stateModel').setState "isElementSelected", data.el
       @moveElement data.el, data.props
-      @renderRightPanel @getOption('elementsCollection').findWhere({ id: data.el }), 'element'
+      # @renderRightPanel @getOption('elementsCollection').findWhere({ id: data.el }), 'element'
     onElementClick: (data)->
       @getOption('stateModel').setState "isElementSelected", data.id
       model = @getOption('elementsCollection').findWhere { id: data.id }
-      @renderRightPanel model, 'element'
+      @renderRightPanel model, 'element', data.keyframe
     onElementResize: (data)->
       model = @getOption('elementsCollection').findWhere { id: data.el }
       @getOption('historyCollection').addAction { action: "resize", el: data.el, options: {current: data.props, previous: _.clone(model.get('props')) } }
-      @changeElement data.el, data.props
+      @changeElement data.el, data.keyframe, data.props
     onElementChange: (data)->
       model = @getOption('elementsCollection').findWhere { id: data.el }
       @getOption('historyCollection').addAction { action: "change", el: data.el, options: {current: data.props, previous: _.clone(model.get('props')) } }
@@ -142,6 +147,11 @@ define "controllers/workspace/LayoutController", [
       data.id    = if ids.length is 0 then 0 else Math.max.apply(null, ids) + 1
 
       elementsCollection.addElement data
+    onElementCreateKeyframe: (data)->
+      model = @getOption('elementsCollection').findWhere { id: data.el }
+      keyframes = model.get 'keyframes'
+      keyframes.push { start: data.start, props: data.props }
+      model.save { keyframes: keyframes }, { patch: true, wait: true }
     onElementReOrder: (data)->
       model = @getOption('elementsCollection').findWhere { id: data.el }
       model.save { order: data.order }, { patch: true, wait: true }
