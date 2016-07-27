@@ -70,7 +70,7 @@
     clear both
     width 100%
     
-    &:nth-child(4n)
+/*    &:nth-child(4n)
       ul 
         li
           background-image: linear-gradient(-180deg, #FFC991 0%, #F6B26B 100%);
@@ -88,7 +88,7 @@
     &:nth-child(4n+3)
       ul 
         li
-          background-image: linear-gradient(-180deg, #CAC1E1 0%, #B4A7D6 100%);
+          background-image: linear-gradient(-180deg, #CAC1E1 0%, #B4A7D6 100%);*/  
      
     & img
       display block
@@ -112,6 +112,16 @@
         top 11px
         height 18px
         box-shadow: 0px 1px 4px 0px rgba(0,0,0,0.10), inset 0px 0px 3px 0px rgba(255,255,255,0.50);
+        
+
+        &.enter
+          background-image: linear-gradient(-180deg, #FFC991 0%, #F6B26B 100%);
+        
+        &.process
+          background-image: linear-gradient(-180deg, #BCD9FF 0%, #9FC5F8 100%);
+          
+        &.leave
+          background-image: linear-gradient(-180deg, #B6D7A8 0%, #98C984 100%);
 
     &.active
       background rgba(20,30,36,0.80) url(images/timeline/dots_active.svg) 6px center no-repeat
@@ -127,7 +137,6 @@
       border-radius 50%
       background-color red
       cursor pointer
-      z-index 1000
       
       &.active
         background-color yellow

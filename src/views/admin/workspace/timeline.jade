@@ -3,10 +3,11 @@
   .timeline_scale
     //- 5 секунд - 40px, 1 cекунда - 8 пикселей
     ul
+
       for timesegment in timesegments
         - var minutes = (timesegment.minutes < 10 ? '0' + timesegment.minutes : timesegment.minutes)
         - var seconds = (timesegment.seconds < 10 ? '0' + timesegment.seconds : timesegment.seconds)
-        - var milliseconds = (timesegment.milliseconds < 10 ? '0' + timesegment.milliseconds : timesegment.milliseconds)
+        - var milliseconds = (timesegment.milliseconds < 10 ? '0' + timesegment.milliseconds : timesegment.milliseconds*10)
         li
           span=minutes + ':' + seconds + ':' + milliseconds
   //- второй скролл - вертикальный
