@@ -4,17 +4,19 @@ ul
   span.timeline_time
   for keyframe, i in keyframes
     - var left = keyframe.start*0.12 - 2.5
-    .timeline_item-keyframe(
+    li.timeline_item-keyframe(
       style="left: " + left + "px;",
       keyframe-id=i
     )
+      include components/tooltip.jade
     if i != 0
       - var offset = keyframes[i-1].start*0.12 
       - var dur    = (keyframe.start - keyframes[i-1].start)*0.12
       li(
         style='left: ' + offset + 'px; width: ' + dur + 'px'
       )
-        //- include components/tooltip.jade
+
+        //- 
   //- for animation, i in animations
   //-   - var offset = animation.start * 0.12
   //-   - var dur    = animation.duration * 0.12
