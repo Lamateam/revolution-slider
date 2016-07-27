@@ -5,6 +5,7 @@ define "views/workspace/TimelineView", [
   "behaviors/MCustomScrollbar"
   "jquery-ui"
   "d3"
+  "bootstrap"
 ], (Marionette, TimelineTemplate, TimelineItemTemplate)->
   TimelineItem = Marionette.ItemView.extend
     template: TimelineItemTemplate
@@ -30,6 +31,13 @@ define "views/workspace/TimelineView", [
 
       @_selectKeyframe(@active_keyframe)
 
+      setTimeout =>
+        @$el.find('.timeline_item-keyframe').each ->
+          $(@).popover
+            html: true
+            trigger: 'hover'
+            placement: 'top'
+            container: $(@)
       # @$el.find('.timeline_item-keyframe').draggable
       #   axis: 'x'
     createTransition: (start, end)->

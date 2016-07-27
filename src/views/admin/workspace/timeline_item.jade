@@ -4,9 +4,14 @@ ul
   span.timeline_time
   for keyframe, i in keyframes
     - var left = keyframe.start*0.12 - 2.5
+    - var x_input = 'X: <input value=' + keyframe.props.x + ' />'
+    - var y_input = 'Y: <input value=' + keyframe.props.y + ' />'
+    - var angle_input = 'Angle: <input value=' + keyframe.props.angle + ' />'
     .timeline_item-keyframe(
       style="left: " + left + "px;",
-      keyframe-id=i
+      keyframe-id=i,
+      data-toggle="popover",
+      data-content=x_input + y_input + angle_input
     )
     if i != 0
       - var offset = keyframes[i-1].start*0.12 

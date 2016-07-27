@@ -131,6 +131,10 @@ module.exports = (grunt) ->
             src: "node_modules/blueimp-tmpl/js/tmpl.js"
             dest: "tmp/modules/tmpl.js"
           }
+          {
+            src: "node_modules/bootstrap/dist/bootstrap.js"
+            dest: "tmp/modules/bootstrap.js"
+          }
         ]
       requirejs: 
         files: [

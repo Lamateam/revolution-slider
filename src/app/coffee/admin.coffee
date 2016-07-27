@@ -33,6 +33,7 @@ require.config
     "load-image-meta": "vendor/load-image-meta"
     "load-image-exif": "vendor/load-image-exif"
     "canvas-to-blob": "vendor/canvas-to-blob"
+    "bootstrap": "modules/bootstrap"
   shim:
     "libs/api": 
       deps: [ "jquery" ]
@@ -58,6 +59,8 @@ require.config
     "jquery.fileupload-ui":
       deps: [ "jquery" ]
     "jquery.ui.widget":
+      deps: [ "jquery" ]
+    "bootstrap":
       deps: [ "jquery" ]
 
 window.Behaviors = {}
