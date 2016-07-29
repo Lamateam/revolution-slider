@@ -28,6 +28,8 @@ define "views/workspace/LeftPanelView", [
               fill: "000000"
               "font-size": "12px"
               text: "Текст" 
+              background_fill: "ffffff"
+              angle: 0
           } 
         ]
       }

@@ -48,7 +48,8 @@ define "views/workspace/CanvasView", [
     attachElContent: ->
       @setD3Attributes @model.get('type'), @model.get('keyframes')[@current_keyframe].props
     setD3Attributes: (type, props)->
-      @options.node = @d3_el.append type if @options.node is undefined
+      if @options.node is undefined
+        @options.node = @d3_el.append if type isnt 'text' then type else 'rect' 
 
       # @setNodeAttribute(@options.node, key, value) for own key, value of props
 
@@ -79,22 +80,22 @@ define "views/workspace/CanvasView", [
 
         @initEvents @options.node
 
-        if @model.get('type') is 'text'
+        # if @model.get('type') is 'text'
 
-          @d3_el.selectAll('.background_rect').remove()
+        #   @d3_el.selectAll('.background_rect').remove()
 
-          dimensions = @d3_el.node().getBBox()
-          offset     = props.text_offset
-          fill       = props.background_fill
+        #   dimensions = @d3_el.node().getBBox()
+        #   offset     = props.text_offset
+        #   fill       = props.background_fill
 
-          @d3_el
-            .insert 'rect', ':first-child'
-            .classed 'background_rect', true
-            .attr 'x', dimensions.x - offset
-            .attr 'y', dimensions.y - offset
-            .attr 'width', dimensions.width + offset*2
-            .attr 'height', dimensions.height + offset*2
-            .attr 'fill', if fill.indexOf('#') is -1 then '#' + fill else fill
+        #   @d3_el
+        #     .insert 'rect', ':first-child'
+        #     .classed 'background_rect', true
+        #     .attr 'x', dimensions.x - offset
+        #     .attr 'y', dimensions.y - offset
+        #     .attr 'width', dimensions.width + offset*2
+        #     .attr 'height', dimensions.height + offset*2
+        #     .attr 'fill', if fill.indexOf('#') is -1 then '#' + fill else fill
 
       , 0
 
@@ -113,27 +114,48 @@ define "views/workspace/CanvasView", [
       center_y = if @model.get('type') is 'circle' then props.cy else props.y + (if props.height is undefined then dims.height else props.height)*0.5
       switch 
         when key is 'x'
-          node
+          @d3_el
             .selectAll 'tspan'
+            .attr key, value + 10
+          @d3_el 
+            .selectAll 'text'
             .attr key, value
-          node.attr key, value       
+          node.attr key, value
+        when key is 'y'
+          @d3_el 
+            .selectAll 'text'
+            .attr key, value + 20
+          node.attr key, value                 
         when key is 'text', key is 'texts'
-          node.selectAll('tspan').remove()
+          @d3_el.selectAll('text').remove()
+
+          text_node = @d3_el
+            .append 'text'
+            .attr 'x', props.x
+            .attr 'y', props.y + 20
+
           arr    = value.split '\n'
           fsize  = props['font-size']
           for str, i in arr
-            node
+            text_node
               .append 'tspan'
               .attr 'dy', if i is 0 then 0 else fsize
-              .attr 'x', props.x
+              .attr 'x', props.x + 10
               .text str
+
+          node.attr 'width', text_node.node().getBBox().width + 20
+          node.attr 'height', text_node.node().getBBox().height + 20
         when key is 'angle' 
           @setAngle value, center_x, center_y
         when key is 'font-size'
-          node.style key, value
+          @d3_el.selectAll('text').style key, value
         when key is 'fill'
+          n = if @model.get('type') is 'text' then @d3_el.selectAll('text') else node
+          console.log @model.get('type')
+          n.attr 'fill', if value.indexOf('#') is -1 then '#' + value else value
+        when key is 'background_fill'
           node.attr 'fill', if value.indexOf('#') is -1 then '#' + value else value
-        when key is 'background_fill', key is 'text_offset'
+        when key is 'text_offset'
           # Это служебные поля, ничего делать не надо
           console.log 'junk'
         when true then node.attr key, value
