@@ -15,14 +15,21 @@
           option(value="", selected="selected") Helvetica
 
         div.floatleft.width100.margintop5
+          
           .workspace-right_panel-container-input_block.biu
             button.bold
             button.italic
             button.underline
+
           .workspace-right_panel-container-color_picker
             div.set_color_div.set_color(data-valueelement = "set_text_input", data-styleelement="set_slide_button")
               button#set_slide_button.set_color_button
               input#set_text_input.set_color_input(value=keyframes[keyframe()].props.fill, bind-to="fill")
+
+          .workspace-right_panel-container-color_picker
+            div.set_color_div.set_color(data-valueelement = "set_bg_input", data-styleelement="set_bg_button")
+              button#set_bg_button.set_color_button
+              input#set_bg_input.set_color_input(value=keyframes[keyframe()].props.background_fill, bind-to="background_fill")
 
           .workspace-right_panel-container-select_block.fourth
             select.bind-props.text-center(bind-to="font-size")
@@ -141,7 +148,7 @@
       //-     input(type="text")
 
 
-
-    include ./_animations.jade
+    if isAnimation()
+      include ./_animations.jade
 
 

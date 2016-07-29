@@ -29,6 +29,7 @@ define "views/workspace/RightPanelView", [
     templateHelpers: ->
       res = 
         keyframe: => @active_keyframe
+        isAnimation: => (@options.animation_options.start_keyframe isnt undefined) && (@options.animation_options.end_keyframe isnt undefined)
     initialize: ->
       if @getOption('type') is 'element'
         @listenTo window.App, 'element:' + @model.get('id') + ':keyframe:select', @selectKeyframe
@@ -49,6 +50,7 @@ define "views/workspace/RightPanelView", [
       'change #set_slide_input': 'onInputChange'
       # WorkspaceRightPanelTextTemplate handlers
       'change #set_text_input': 'onInputPropsChange'
+      'change #set_bg_input': 'onInputPropsChange'
     getTemplate: ->
       res = switch @getOption('type')
         when 'project' then WorkspaceRightPanelProjectTemplate
@@ -63,30 +65,38 @@ define "views/workspace/RightPanelView", [
             when 'circle' then WorkspaceRightPanelShapeTemplate
     onRender: ->
       @initPicker()
-      setTimeout =>
-        manager = new Marionette.RegionManager
-          regions:
-            animationsEnterRegion: '#animations_enter'
-            animationsLeaveRegion: '#animations_leave'
+      console.log @options.animation_options
+      if (@options.animation_options.start_keyframe isnt undefined) && (@options.animation_options.end_keyframe isnt undefined)
+        setTimeout =>
+          @selectAnimation @options.animation_options
+        , 0
+      # setTimeout =>
+      #   manager = new Marionette.RegionManager
+      #     regions:
+      #       animationsEnterRegion: '#animations_enter'
+      #       animationsLeaveRegion: '#animations_leave'
 
-        manager.get('animationsEnterRegion').show new AnimationsView
-          link: 'enter'
-          animations: @model.get 'animations'
-          element: { type: @getOption('type'), id: @model.get('id') } 
+      #   manager.get('animationsEnterRegion').show new AnimationsView
+      #     link: 'enter'
+      #     animations: @model.get 'animations'
+      #     element: { type: @getOption('type'), id: @model.get('id') } 
+      #     keyframe: @active_keyframe
         
-        manager.get('animationsLeaveRegion').show new AnimationsView
-          link: 'leave'
-          animations: @model.get 'animations'
-          element: { type: @getOption('type'), id: @model.get('id') } 
+      #   manager.get('animationsLeaveRegion').show new AnimationsView
+      #     link: 'leave'
+      #     animations: @model.get 'animations'
+      #     element: { type: @getOption('type'), id: @model.get('id') } 
+      #     keyframe: @active_keyframe
 
-        if @$el.find('#animations_process').length isnt 0
-          manager.addRegion "animationsProcessRegion", '#animations_process'
-          manager.get('animationsProcessRegion').show new AnimationsView
-            link: 'process'
-            animations: @model.get 'animations'
-            element: { type: @getOption('type'), id: @model.get('id') }
+      #   if @$el.find('#animations_process').length isnt 0
+      #     manager.addRegion "animationsProcessRegion", '#animations_process'
+      #     manager.get('animationsProcessRegion').show new AnimationsView
+      #       link: 'process'
+      #       animations: @model.get 'animations'
+      #       element: { type: @getOption('type'), id: @model.get('id') }
+      #       keyframe: @active_keyframe
 
-      , 0
+      # , 0
     initPicker: ->
       for el in @ui.set_color
         new jscolor(el, { valueElement: @$el.find('#' + el.getAttribute('data-valueelement'))[0], styleElement: @$el.find('#' + el.getAttribute('data-styleelement'))[0] })
@@ -127,3 +137,20 @@ define "views/workspace/RightPanelView", [
     selectKeyframe: (data)->
       @active_keyframe = data.id 
       @render()
+    selectAnimation: (data)->
+      manager = new Marionette.RegionManager
+        regions:
+          animationsEnterRegion: '#animations_enter'
+          animationsLeaveRegion: '#animations_leave'
+
+      manager.get('animationsEnterRegion').show new AnimationsView
+        link: 'enter'
+        animations: @model.get 'animations'
+        element: { type: @getOption('type'), id: @model.get('id') } 
+        keyframe: data.start_keyframe
+      
+      manager.get('animationsLeaveRegion').show new AnimationsView
+        link: 'leave'
+        animations: @model.get 'animations'
+        element: { type: @getOption('type'), id: @model.get('id') } 
+        keyframe: data.end_keyframe

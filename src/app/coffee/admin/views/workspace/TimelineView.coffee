@@ -13,8 +13,10 @@ define "views/workspace/TimelineView", [
     ui:
       runner: '.timeline_time'
       keyframes: '.timeline_item-keyframe'
+      animations: '.timeline-animation'
     events:
       'click .timeline_item-keyframe': 'selectKeyframe'
+      'click .timeline-animation': 'selectAnimation'
       'drag .timeline_item-keyframe': 'onDrag'
       'dragstop .timeline_item-keyframe': 'onDragStop'
     modelEvents:
@@ -22,24 +24,22 @@ define "views/workspace/TimelineView", [
     initialize: ->
       @active_animations = [  ]
       @active_keyframe   = 0
+      @active_animation  = undefined
       @listenTo window.App, 'element:' + @model.get('id') + ':animation:change', @changeAnimation
       @listenTo window.App, 'element:' + @model.get('id') + ':keyframe:create', @onKeyframeCreate
       @runner = d3.select @el
     onRender: ->
-      @el.setAttribute 'model-id', @model.get 'id'
+      # @el.setAttribute 'model-id', @model.get 'id'
       @ui.runner.hide()
 
       @_selectKeyframe(@active_keyframe)
+      @_selectAnimation(@active_animation) if @active_animation isnt undefined
 
-      setTimeout =>
-        @$el.find('.timeline_item-keyframe').each ->
-          $(@).popover
-            html: true
-            trigger: 'hover'
-            placement: 'top'
-            container: $(@)
-      # @$el.find('.timeline_item-keyframe').draggable
-      #   axis: 'x'
+      @ui.keyframes
+        .draggable
+          axis: 'x'
+    onAttach: ->
+      @render()
     createTransition: (start, end)->
       runner = @ui.runner
       ->
@@ -78,17 +78,20 @@ define "views/workspace/TimelineView", [
       data = JSON.parse(e.target.getAttribute('data-animation'))
       window.App.trigger 'element:' + @model.get('id') + ':animation:play', data
       @runAnimation data
-    onDrag: (e)->
-      offset      = @$el.offset()
+    onDrag: (e, ui)->
       keyframe_id = parseInt e.target.getAttribute 'keyframe-id', 10
       model_id    = @model.get 'id'
 
-      x = e.pageX - offset.left - 53
+      ui.position.left = if ui.position.left > -3 then ui.position.left else -3
+
+      x = ui.position.left + 3
       
       start = Math.floor x * 8.333333333333334
 
       lis = @$el.find 'li'
       kfs = @model.get 'keyframes'
+
+      console.log ui.position
 
       if lis[keyframe_id-1] isnt undefined
         lis[keyframe_id-1].style.width = (start - kfs[keyframe_id-1].start)*0.12 + 'px'
@@ -102,7 +105,14 @@ define "views/workspace/TimelineView", [
       @active_keyframe = id
       el = @$el.find '[keyframe-id=' + id + ']'
       @ui.keyframes.removeClass 'active'
-      el.addClass 'active'      
+      el.addClass 'active'  
+    _selectAnimation: (data)->
+      el = @$el.find('[keyframe-start=' + data.start + ']')
+
+      $('.timeline-animation').removeClass 'active'
+      el.addClass 'active'
+
+      window.App.trigger 'element:' + @model.get('id') + ':animation:select', data          
     selectKeyframe: (e)->
       id = e.target.getAttribute 'keyframe-id'
 
@@ -111,12 +121,18 @@ define "views/workspace/TimelineView", [
       window.App.trigger 'element:' + @model.get('id') + ':keyframe:select', { id: id }
     onKeyframeCreate: ->
       @active_keyframe = @model.get('keyframes').length - 1
-    onDragStop: (e)->
-      offset      = @$el.offset()
+    selectAnimation: (e)->
+      el = $(e.target)
+
+      @active_animation = { start: parseInt(el.attr('keyframe-start'), 10), end: parseInt(el.attr('keyframe-end'), 10) }
+
+      @_selectAnimation @active_animation
+    onDragStop: (e, ui)->
       keyframe_id = e.target.getAttribute 'keyframe-id'
       model_id    = @model.get 'id'
 
-      x = e.pageX - offset.left - 53
+      ui.position.left = if ui.position.left > -3 then ui.position.left else -3
+      x = ui.position.left + 3
       
       start = Math.floor x * 8.333333333333334
 
@@ -131,7 +147,7 @@ define "views/workspace/TimelineView", [
     childViewContainer: ".bind-timeline-items"
     events:
       'sortstop .bind-timeline-items': 'reOrderElements'
-      'dblclick .bind-timeline-items': 'createKeyframe'
+      'dblclick .bind-timeline-items ul': 'createKeyframe'
     onRender: ->
       setTimeout =>
         @$el.find('.bind-timeline-items').sortable
@@ -199,7 +215,7 @@ define "views/workspace/TimelineView", [
       offset   = $(e.target).offset()
       model_id = e.target.getAttribute 'model-id'
 
-      x = e.pageX - offset.left - 53
+      x = e.pageX - offset.left
       
       start = Math.floor x * 8.333333333333334
       

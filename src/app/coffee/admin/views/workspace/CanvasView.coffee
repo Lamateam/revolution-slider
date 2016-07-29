@@ -49,7 +49,7 @@ define "views/workspace/CanvasView", [
       @setD3Attributes @model.get('type'), @model.get('keyframes')[@current_keyframe].props
     setD3Attributes: (type, props)->
       if @options.node is undefined
-        @options.node = @d3_el.append if type isnt 'text' then type else 'rect' 
+        @options.node = @d3_el.append if type isnt 'text' then type else 'rect'
 
       # @setNodeAttribute(@options.node, key, value) for own key, value of props
 
@@ -66,9 +66,12 @@ define "views/workspace/CanvasView", [
       @listenTo @getOption("stateModel"), "change:isElementSelected", @onSomeElementSelected
       @listenTo window.App, 'element:' + @model.get('id') + ':keyframe:create', @createKeyframe
       @listenTo window.App, 'element:' + @model.get('id') + ':keyframe:select', @selectKeyframe
+      @listenTo window.App, 'element:' + @model.get('id') + ':animation:select', @selectAnimation
       @listenTo window.App, 'element:' + @model.get('id') + ':keyframe:change', @changeKeyframe
       @listenTo window.App, 'element:' + @model.get('id') + ':change', @onElementChange
       @listenTo window.App, 'element:' + @model.get('id') + ':animations:play', @playAnimations
+    
+      @is_play = false
     onRender: ->
       setTimeout =>
 
@@ -100,11 +103,11 @@ define "views/workspace/CanvasView", [
       , 0
 
     initEvents: (n)->
+      n.on "click", @onNodeClick.bind @
+    onNodeClick: ->
+      return if d3.event && d3.event.defaultPrevented
       id = @model.get 'id'
-      n.on "click", ->
-        return if d3.event.defaultPrevented
-        window.App.trigger "element:click", { id: id }
-      # @listenTo window.App, 'element:' + @model.get('id') + ':animation:play', @playAnimation
+      window.App.trigger "element:click", { id: id }      
     onSomeElementSelected: ->
       if @getOption("stateModel").get("isElementSelected") is @model.get("id") then @setActive() else @setInactive()
     setNodeAttribute: (node, key, value)->
@@ -151,7 +154,6 @@ define "views/workspace/CanvasView", [
           @d3_el.selectAll('text').style key, value
         when key is 'fill'
           n = if @model.get('type') is 'text' then @d3_el.selectAll('text') else node
-          console.log @model.get('type')
           n.attr 'fill', if value.indexOf('#') is -1 then '#' + value else value
         when key is 'background_fill'
           node.attr 'fill', if value.indexOf('#') is -1 then '#' + value else value
@@ -296,16 +298,18 @@ define "views/workspace/CanvasView", [
       props = _.clone @model.get('keyframes')[@current_keyframe].props
       window.App.trigger "element:create_keyframe", { el: @model.get('id'), props: props, start: data.start }
       @current_keyframe = @model.get('keyframes').length - 1
+      @onNodeClick()
     selectKeyframe: (data)->
       @current_keyframe = data.id 
       @render()
+    selectAnimation: (data)->
+      window.App.trigger "element:select_animation", { el: @model.get('id'), data: data }
     createTransition: (kf, next_kf)->
       =>
         hash_props = {  }
 
         for own key, value of next_kf.props
           if (key isnt 'text') and (key isnt 'texts')
-            console.log key
             old_value = kf.props[key]
 
             if key is 'fill'
@@ -324,7 +328,7 @@ define "views/workspace/CanvasView", [
 
           @moveDots() if @getOption("stateModel").get("isElementSelected") is @model.get("id")
     
-    createEnterAnimation: (animation)->
+    createEnterAnimation: (animation, start)->
       el = @d3_el
       switch animation.type 
         when 'fadeIn'
@@ -333,16 +337,12 @@ define "views/workspace/CanvasView", [
           handler = (i)->
             ->
               el.style 'opacity', i*step
+          setTimeout ->
+            for i in [0..animation.duration]
+              setTimeout handler(i), i
+          , start
 
-          for i in [0..animation.duration]
-            setTimeout handler(i), i
-
-    createLeaveAnimation: (animation, keyframes)->
-      total_duration = 0
-
-      for kf in keyframes
-        total_duration = kf.start if kf.start > total_duration
-
+    createLeaveAnimation: (animation, end, isLast)->
       el = @d3_el
 
       switch animation.type 
@@ -351,14 +351,15 @@ define "views/workspace/CanvasView", [
 
           handler = (i)->
             ->
-              el.style 'opacity', (total_duration - i)*step
+              el.style 'opacity', (end - i)*step
 
-          for i in [total_duration - animation.duration..total_duration]
+          for i in [end - animation.duration..end]
             setTimeout handler(i), i  
 
-          setTimeout ->
-            el.style 'opacity', 1
-          , total_duration
+          if isLast
+            setTimeout ->
+              el.style 'opacity', 1
+            , end
 
     playAnimations: (data)->
       el = @d3_el
@@ -381,11 +382,11 @@ define "views/workspace/CanvasView", [
 
       animations = @model.get 'animations'
 
-      for animation in animations
+      for animation, i in animations
         if animation.link is 'enter'
-          @createEnterAnimation animation
+          @createEnterAnimation animation, data.keyframes[animation.keyframe].start
         else if animation.link is 'leave'
-          @createLeaveAnimation animation, data.keyframes
+          @createLeaveAnimation animation, data.keyframes[animation.keyframe].start, i is animations.length-1
 
 
     onElementChange: (data)->

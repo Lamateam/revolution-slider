@@ -1,25 +1,21 @@
 img(src="static/images/demo/layout_images.jpg")
 
-ul
+ul(model-id=id)
   span.timeline_time
   for keyframe, i in keyframes
     - var left = keyframe.start*0.12 - 2.5
-    - var x_input = 'X: <input value=' + keyframe.props.x + ' />'
-    - var y_input = 'Y: <input value=' + keyframe.props.y + ' />'
-    - var angle_input = 'Angle: <input value=' + keyframe.props.angle + ' />'
     .timeline_item-keyframe(
       style="left: " + left + "px;",
-      keyframe-id=i,
-      data-toggle="popover",
-      data-content=x_input + y_input + angle_input
+      keyframe-id=i
     )
     if i != 0
       - var offset = keyframes[i-1].start*0.12 
       - var dur    = (keyframe.start - keyframes[i-1].start)*0.12
-      li(
+      li.timeline-animation.process(
         style='left: ' + offset + 'px; width: ' + dur + 'px'
+        keyframe-start=i-1
+        keyframe-end=i
       )
-        //- include components/tooltip.jade
   //- for animation, i in animations
   //-   - var offset = animation.start * 0.12
   //-   - var dur    = animation.duration * 0.12

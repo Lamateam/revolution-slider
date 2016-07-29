@@ -104,4 +104,5 @@
               option(value="60") 60
               option(value="72") 72
 
-    include ./_animations.jade
+    if isAnimation()
+      include ./_animations.jade

@@ -6,7 +6,7 @@ define "collections/AnimationsCollection", [
   leave_queue = [ 'enter', 'process', 'leave' ]
 
   Backbone.Collection.extend
-    comparator: 'id'
+    comparator: 'keyframe'
     model: AnimationModel
     initialize: (data, @options)->
     changeAnimation: (id, data)->
@@ -15,25 +15,10 @@ define "collections/AnimationsCollection", [
       data.id = if @length is 0 then 1 else @last().get('id') + 1
 
       animations = [  ]
-      
-      start = 0
-      @each (model)=>
-        link     = model.get 'link'
-        duration = model.get 'duration'
-        if (link is data.link) or (leave_queue.indexOf(link) < leave_queue.indexOf(data.link))
-          start += duration
-
-      @each (model)=>
-        link     = model.get 'link'
-        duration = model.get 'duration'        
-        if leave_queue.indexOf(link) > leave_queue.indexOf(data.link)
-          _data = { start: model.get('start') + 500 }
-          animations.push { id: model.get('id'), data: _data }
-          # window.App.trigger 'animation:change', { id: model.get('id'), element: @options.element, data: data }
-
-      data.start = start
 
       animations.push (new AnimationModel(data)).toJSON()
+
+      console.log data
 
       window.App.trigger 'animations:change', { element: @options.element, animations: animations }
 

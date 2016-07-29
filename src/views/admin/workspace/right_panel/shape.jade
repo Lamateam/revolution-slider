@@ -83,5 +83,5 @@
           label Угол
           input.bind-props(type="text", bind-to="angle", value=keyframes[keyframe()].props.angle, parse-float)
 
-
-    include ./_animations.jade
+    if isAnimation()
+      include ./_animations.jade

@@ -195,11 +195,11 @@ module.exports = (grunt) ->
       vendor_css:
         src: [
           "vendor/animate.css"
-          "vendor/jquery-ui-1.11.4/jquery-ui.min.css"
         ]
         dest: "tmp/vendor.css"
       css:
         src: [
+          "vendor/jquery-ui-1.11.4/jquery-ui.min.css"
           "node_modules/bootstrap/dist/css/bootstrap.css"
           "node_modules/sweetalert/dist/sweetalert.css"
           "node_modules/blueimp-file-upload/css/jquery.fileupload.css"

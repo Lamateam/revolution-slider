@@ -23,16 +23,23 @@ define "views/workspace/AnimationsView", [
     childViewContainer: ".bind-animations"
     events:
       'click .bind-add-animation': 'addAnimation'
+    templateHelpers: ->
+      res = 
+        hasAnimations: =>
+          console.log @collection.where({ visible: true }).length
+          @collection.where({ visible: true }).length isnt 0
     initialize: (options)->
       for a in options.animations
-        a.visible = a.link is options.link
+        console.log a.keyframe, options.keyframe + 1
+        a.visible = (a.link is options.link) and (parseInt(a.keyframe, 10) is parseInt(options.keyframe, 10))
       @collection = new AnimationsCollection options.animations, { element: options.element }
     addAnimation: ->
-      link = @options.link
+      link     = @options.link
+      keyframe = @options.keyframe
       type = switch link 
         when 'enter' then 'fadeIn'
         when 'process' then 'rotate' 
         when 'leave' then 'fadeOut'
-      @collection.addAnimation { link: link, type: type, visible: true }
+      @collection.addAnimation { link: link, type: type, visible: true, keyframe: keyframe }
 
 

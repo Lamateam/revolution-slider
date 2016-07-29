@@ -31,6 +31,7 @@ define "controllers/workspace/LayoutController", [
       @listenTo window.App, "element:create", @onElementCreate
       @listenTo window.App, "element:reorder", @onElementReOrder
       @listenTo window.App, "element:create_keyframe", @onElementCreateKeyframe
+      @listenTo window.App, "element:select_animation", @onElementSelectAnimation
 
       @listenTo window.App, "slide:change", @onSlideChange
       @listenTo window.App, "slide:select", @onSlideSelect
@@ -59,11 +60,13 @@ define "controllers/workspace/LayoutController", [
         height: 500
         model: slide
         stateModel: @getOption 'stateModel'
-    renderRightPanel: (model, type, keyframe=0)->
+    renderRightPanel: (model, type, keyframe=0, animation_options={})->
+      console.log animation_options
       @getOption('layout').renderRightPanel
         model: model
         type: type
         keyframe: keyframe
+        animation_options: animation_options
     renderLeftPanel: ->
       @getOption('layout').renderLeftPanel
         model: @getOption('projectModel')
@@ -156,6 +159,11 @@ define "controllers/workspace/LayoutController", [
       _.sortBy keyframes, (keyframe)-> 
         keyframe.start
       model.save { keyframes: keyframes }, { patch: true, wait: true }
+    onElementSelectAnimation: (data)->
+      console.log 'a'
+      @getOption('stateModel').setState "isElementSelected", data.el
+      model = @getOption('elementsCollection').findWhere { id: data.el }
+      @renderRightPanel model, 'element', data.data.start, { start_keyframe: data.data.start, end_keyframe: data.data.end }      
     onElementReOrder: (data)->
       model = @getOption('elementsCollection').findWhere { id: data.el }
       model.save { order: data.order }, { patch: true, wait: true }

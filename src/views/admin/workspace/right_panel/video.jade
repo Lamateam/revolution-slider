@@ -77,4 +77,5 @@
             label.margintop_5(for="nosound") Без звука
 
 
-    include ./_animations.jade
+    if isAnimation()
+      include ./_animations.jade
