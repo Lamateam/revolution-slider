@@ -104,6 +104,7 @@ define "views/workspace/CanvasView", [
 
     initEvents: (n)->
       n.on "click", @onNodeClick.bind @
+      @d3_el.selectAll('text').on 'click', @onNodeClick.bind @
     onNodeClick: ->
       return if d3.event && d3.event.defaultPrevented
       id = @model.get 'id'
