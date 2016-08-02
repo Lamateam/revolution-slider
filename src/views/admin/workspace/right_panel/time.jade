@@ -3,97 +3,98 @@
     h2 Время
     buttom.workspace-right_panel-settings
   form.workspace-right_panel-container.scroll.mcsb-behavior.pd-submit-behavior
-    .workspace-right_panel-container-time
-      input.time(type="text")
-      span GMT +3 
-      //- показываешь текущее смещение
-    .workspace-right_panel-container-checkbox_block
-      input(type="checkbox", name="showsec", id = "showsec")
-      label(for="showsec")
-      label(for="showsec") показывать секунды
+    if !isAnimation()
+      .workspace-right_panel-container-time
+        input.time(type="text")
+        span GMT +3 
+        //- показываешь текущее смещение
+      .workspace-right_panel-container-checkbox_block
+        input(type="checkbox", name="showsec", id = "showsec")
+        label(for="showsec")
+        label(for="showsec") показывать секунды
 
-    .workspace-right_panel-container_big
-      h3 Позиция
-      .workspace-right_panel-container-position
-      
-        if position == "1"
-          input(type="radio", name="position", id = "1", checked="checked")
-        else
-          input(type="radio", name="position", id = "1")
-        label.item1(for="1")
+      .workspace-right_panel-container_big
+        h3 Позиция
+        .workspace-right_panel-container-position
+        
+          if position == "1"
+            input(type="radio", name="position", id = "1", checked="checked")
+          else
+            input(type="radio", name="position", id = "1")
+          label.item1(for="1")
 
-        if position == "2"
-          input(type="radio", name="position", id = "2", checked="checked")
-        else
-          input(type="radio", name="position", id = "2")
-        label.item2(for="2")
+          if position == "2"
+            input(type="radio", name="position", id = "2", checked="checked")
+          else
+            input(type="radio", name="position", id = "2")
+          label.item2(for="2")
 
-        if position == "3"
-          input(type="radio", name="position", id = "3", checked="checked")
-        else
-          input(type="radio", name="position", id = "3")
-        label.item3(for="3")
+          if position == "3"
+            input(type="radio", name="position", id = "3", checked="checked")
+          else
+            input(type="radio", name="position", id = "3")
+          label.item3(for="3")
 
-        if position == "4"
-          input(type="radio", name="position", id = "4", checked="checked")
-        else
-          input(type="radio", name="position", id = "4")
-        label.item4(for="4")
+          if position == "4"
+            input(type="radio", name="position", id = "4", checked="checked")
+          else
+            input(type="radio", name="position", id = "4")
+          label.item4(for="4")
 
-      .floatleft.width100.margintop10
-        .workspace-right_panel-container-size_block
-          .width50_percent.position
-            label X
+        .floatleft.width100.margintop10
+          .workspace-right_panel-container-size_block
+            .width50_percent.position
+              label X
+              input(type="text")
+              span px
+            .width50_percent.position.y
+              label Y
+              input(type="text")
+              span px
+
+        .workspace-right_panel-container-rotate.margintop10
+          .rotate.width50_percent
             input(type="text")
-            span px
-          .width50_percent.position.y
-            label Y
+
+          .zindex.width50_percent
+            label Z-index
             input(type="text")
-            span px
-
-      .workspace-right_panel-container-rotate.margintop10
-        .rotate.width50_percent
-          input(type="text")
-
-        .zindex.width50_percent
-          label Z-index
-          input(type="text")
 
 
 
-    .workspace-right_panel-container_big
-      h3 Текст
-      .workspace-right_panel-container-select_block
-        select
-          option(value="", selected="selected") Helvetica
+      .workspace-right_panel-container_big
+        h3 Текст
+        .workspace-right_panel-container-select_block
+          select
+            option(value="", selected="selected") Helvetica
 
-        .floatleft.width100.margintop5
-          .workspace-right_panel-container-input_block.biu
-            button.bold
-            button.italic
-            button.underline
-          .workspace-right_panel-container-color_picker
-            .set_color_div.set_color(data-valueelement = "set_slide_input", data-styleelement="set_slide_button")
-              button#set_slide_button.set_color_button
-              input#set_slide_input.set_color_input(value="#fff")
+          .floatleft.width100.margintop5
+            .workspace-right_panel-container-input_block.biu
+              button.bold
+              button.italic
+              button.underline
+            .workspace-right_panel-container-color_picker
+              .set_color_div.set_color(data-valueelement = "set_slide_input", data-styleelement="set_slide_button")
+                button#set_slide_button.set_color_button
+                input#set_slide_input.set_color_input(value="#fff")
 
-          .workspace-right_panel-container-select_block.fourth
-            select.bind-slide_duration.text-center
-              option(value="8") 8
-              option(value="9",selected="selected") 9
-              option(value="10") 10
-              option(value="11") 11
-              option(value="12") 12
-              option(value="14") 14
-              option(value="16") 16
-              option(value="18") 18
-              option(value="20") 20
-              option(value="24") 24
-              option(value="30") 30
-              option(value="36") 36
-              option(value="48") 48
-              option(value="60") 60
-              option(value="72") 72
+            .workspace-right_panel-container-select_block.fourth
+              select.bind-slide_duration.text-center
+                option(value="8") 8
+                option(value="9",selected="selected") 9
+                option(value="10") 10
+                option(value="11") 11
+                option(value="12") 12
+                option(value="14") 14
+                option(value="16") 16
+                option(value="18") 18
+                option(value="20") 20
+                option(value="24") 24
+                option(value="30") 30
+                option(value="36") 36
+                option(value="48") 48
+                option(value="60") 60
+                option(value="72") 72
 
     if isAnimation()
       include ./_animations.jade

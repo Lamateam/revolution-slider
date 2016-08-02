@@ -70,7 +70,7 @@ define "views/workspace/TimelineView", [
             
         else 
           setTimeout =>
-            id = 0
+            id = keyframes.length - 1
             @_selectKeyframe id
             window.App.trigger 'element:' + @model.get('id') + ':keyframe:select', { id: id }
           , keyframe.start
@@ -80,24 +80,39 @@ define "views/workspace/TimelineView", [
       @runAnimation data
     onDrag: (e, ui)->
       keyframe_id = parseInt e.target.getAttribute 'keyframe-id', 10
-      model_id    = @model.get 'id'
 
       ui.position.left = if ui.position.left > -3 then ui.position.left else -3
 
       x = ui.position.left + 3
-      
-      start = Math.floor x * 8.333333333333334
 
       lis = @$el.find 'li'
       kfs = @model.get 'keyframes'
+      
+      start     = Math.floor x * 8.333333333333334
+      old_start = kfs[keyframe_id].start 
 
-      console.log ui.position
+      for i in [keyframe_id..kfs.length-1]
+        kfs[i].start += start - old_start
+
+        @ui.keyframes[i].style.left = kfs[i].start*0.12-3 + 'px'
+
+        if lis[i] isnt undefined
+          lis[i].style.left = kfs[i].start*0.12 + 'px'
 
       if lis[keyframe_id-1] isnt undefined
         lis[keyframe_id-1].style.width = (start - kfs[keyframe_id-1].start)*0.12 + 'px'
-      if lis[keyframe_id] isnt undefined
-        lis[keyframe_id].style.left = start*0.12 + 'px'
-        lis[keyframe_id].style.width = (kfs[keyframe_id+1].start - start)*0.12 + 'px'
+      
+      # if lis[keyframe_id] isnt undefined
+      #   offset = 0
+      #   for i in [keyframe_id..lis.length-1]
+      #     lis[i].style.left = (offset + start)*0.12 + 'px'
+      #     offset = offset + kfs[i+1].start - kfs[i].start
+          # lis[keyframe_id].style.width = (kfs[keyframe_id+1].start - start)*0.12 + 'px'
+        
+        # offset = 0
+        # for i in [keyframe_id..kfs.length-1]
+        #   kfs[i].start = offset + start 
+        #   offset = offset + kfs[i+1].start - kfs[i].start if kfs[i+1] isnt undefined
     changeAnimation: (data)->
       @model.set 'animations', data.animations
       @render()

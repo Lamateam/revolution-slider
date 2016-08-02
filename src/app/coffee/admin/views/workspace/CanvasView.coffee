@@ -296,7 +296,8 @@ define "views/workspace/CanvasView", [
     destroyDots: ->
       @d3_el.selectAll('.dot').remove()
     createKeyframe: (data)->
-      props = _.clone @model.get('keyframes')[@current_keyframe].props
+      keyframes = @model.get('keyframes')
+      props = _.clone keyframes[keyframes.length-1].props
       window.App.trigger "element:create_keyframe", { el: @model.get('id'), props: props, start: data.start }
       @current_keyframe = @model.get('keyframes').length - 1
       @onNodeClick()
@@ -357,10 +358,10 @@ define "views/workspace/CanvasView", [
           for i in [end - animation.duration..end]
             setTimeout handler(i), i  
 
-          if isLast
-            setTimeout ->
-              el.style 'opacity', 1
-            , end
+          # if isLast
+          #   setTimeout ->
+          #     el.style 'opacity', 1
+          #   , end
 
     playAnimations: (data)->
       el = @d3_el

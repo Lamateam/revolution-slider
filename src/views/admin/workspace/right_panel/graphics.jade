@@ -3,63 +3,63 @@
     h2 Графика
     buttom.workspace-right_panel-settings
   form.workspace-right_panel-container.scroll.mcsb-behavior.pd-submit-behavior
+    if !isAnimation()
+      .floatleft.width100
+        .workspace-right_panel-container-size_block.margintop_10
+          .width50_percent.hor
+            input.bind-props(type="text", bind-to="width", value=keyframes[keyframe()].props.width, parse-float)
+            span px
+          .width50_percent.ver
+            input.bind-props(type="text", bind-to="height", value=keyframes[keyframe()].props.height, parse-float)
+            span px
 
-    .floatleft.width100
-      .workspace-right_panel-container-size_block.margintop_10
-        .width50_percent.hor
-          input.bind-props(type="text", bind-to="width", value=keyframes[keyframe()].props.width, parse-float)
-          span px
-        .width50_percent.ver
-          input.bind-props(type="text", bind-to="height", value=keyframes[keyframe()].props.height, parse-float)
-          span px
+      .workspace-right_panel-container-position
+        
+        if position == "1"
+          input(type="radio", name="position", id = "1", checked="checked")
+        else
+          input(type="radio", name="position", id = "1")
+        label.item1(for="1")
 
-    .workspace-right_panel-container-position
-      
-      if position == "1"
-        input(type="radio", name="position", id = "1", checked="checked")
-      else
-        input(type="radio", name="position", id = "1")
-      label.item1(for="1")
+        if position == "2"
+          input(type="radio", name="position", id = "2", checked="checked")
+        else
+          input(type="radio", name="position", id = "2")
+        label.item2(for="2")
 
-      if position == "2"
-        input(type="radio", name="position", id = "2", checked="checked")
-      else
-        input(type="radio", name="position", id = "2")
-      label.item2(for="2")
+        if position == "3"
+          input(type="radio", name="position", id = "3", checked="checked")
+        else
+          input(type="radio", name="position", id = "3")
+        label.item3(for="3")
 
-      if position == "3"
-        input(type="radio", name="position", id = "3", checked="checked")
-      else
-        input(type="radio", name="position", id = "3")
-      label.item3(for="3")
+        if position == "4"
+          input(type="radio", name="position", id = "4", checked="checked")
+        else
+          input(type="radio", name="position", id = "4")
+        label.item4(for="4")
 
-      if position == "4"
-        input(type="radio", name="position", id = "4", checked="checked")
-      else
-        input(type="radio", name="position", id = "4")
-      label.item4(for="4")
+      .floatleft.width100.margintop10
+        .workspace-right_panel-container-size_block
+          .width50_percent.position
+            label X
+            input.bind-props(type="text", bind-to="x", value=keyframes[keyframe()].props.x, parse-float)
+            span px
+          .width50_percent.position.y
+            label Y
+            input.bind-props(type="text", bind-to="y", value=keyframes[keyframe()].props.y, parse-float)
+            span px
 
-    .floatleft.width100.margintop10
-      .workspace-right_panel-container-size_block
-        .width50_percent.position
-          label X
-          input.bind-props(type="text", bind-to="x", value=keyframes[keyframe()].props.x, parse-float)
-          span px
-        .width50_percent.position.y
-          label Y
-          input.bind-props(type="text", bind-to="y", value=keyframes[keyframe()].props.y, parse-float)
-          span px
-
-    .floatleft.width100.margintop10
-      .workspace-right_panel-container-size_block
-        .width100_percent.position
-          label Угол
-          input.bind-props(type="text", bind-to="angle", value=keyframes[keyframe()].props.angle, parse-float)
+      .floatleft.width100.margintop10
+        .workspace-right_panel-container-size_block
+          .width100_percent.position
+            label Угол
+            input.bind-props(type="text", bind-to="angle", value=keyframes[keyframe()].props.angle, parse-float)
 
 
-    .workspace-right_panel-container_big
-      h3 Фаил
-      button.workspace-right_panel_add.file.loading.bind-image-loading
+      .workspace-right_panel-container_big
+        h3 Фаил
+        button.workspace-right_panel_add.file.loading.bind-image-loading
 
 
     if isAnimation()

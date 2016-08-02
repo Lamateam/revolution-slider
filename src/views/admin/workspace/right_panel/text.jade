@@ -3,149 +3,149 @@
     h2 Текст
     buttom.workspace-right_panel-settings
   form.workspace-right_panel-container.scroll.mcsb-behavior.pd-submit-behavior
+    if !isAnimation()
+      .workspace-right_panel-container-input_block
+        label Текст
+        input.bind-props(type="text", value=keyframes[keyframe()].props.text, bind-to="text")
 
-    .workspace-right_panel-container-input_block
-      label Текст
-      input.bind-props(type="text", value=keyframes[keyframe()].props.text, bind-to="text")
+      .workspace-right_panel-container_big
+        h3 Настройки текста 
+        .workspace-right_panel-container-select_block.margintop_5
+          select
+            option(value="", selected="selected") Helvetica
 
-    .workspace-right_panel-container_big
-      h3 Настройки текста 
-      .workspace-right_panel-container-select_block.margintop_5
-        select
-          option(value="", selected="selected") Helvetica
+          div.floatleft.width100.margintop5
+            
+            .workspace-right_panel-container-input_block.biu
+              button.bold
+              button.italic
+              button.underline
 
-        div.floatleft.width100.margintop5
-          
-          .workspace-right_panel-container-input_block.biu
-            button.bold
-            button.italic
-            button.underline
+            .workspace-right_panel-container-color_picker
+              div.set_color_div.set_color(data-valueelement = "set_text_input", data-styleelement="set_slide_button")
+                button#set_slide_button.set_color_button
+                input#set_text_input.set_color_input(value=keyframes[keyframe()].props.fill, bind-to="fill")
 
-          .workspace-right_panel-container-color_picker
-            div.set_color_div.set_color(data-valueelement = "set_text_input", data-styleelement="set_slide_button")
-              button#set_slide_button.set_color_button
-              input#set_text_input.set_color_input(value=keyframes[keyframe()].props.fill, bind-to="fill")
+            .workspace-right_panel-container-color_picker
+              div.set_color_div.set_color(data-valueelement = "set_bg_input", data-styleelement="set_bg_button")
+                button#set_bg_button.set_color_button
+                input#set_bg_input.set_color_input(value=keyframes[keyframe()].props.background_fill, bind-to="background_fill")
 
-          .workspace-right_panel-container-color_picker
-            div.set_color_div.set_color(data-valueelement = "set_bg_input", data-styleelement="set_bg_button")
-              button#set_bg_button.set_color_button
-              input#set_bg_input.set_color_input(value=keyframes[keyframe()].props.background_fill, bind-to="background_fill")
+            .workspace-right_panel-container-select_block.fourth
+              select.bind-props.text-center(bind-to="font-size")
+                - var size = keyframes[keyframe()].props['font-size']
+                if size == '8px'
+                  option(value="8px", selected) 8
+                else
+                  option(value="8px") 8
+                if size == '9px'
+                  option(value="8px", selected) 9
+                else
+                  option(value="9px") 9
+                if size == '10px'
+                  option(value="8px", selected) 10
+                else
+                  option(value="10px") 10
+                if size == '11px'
+                  option(value="8px", selected) 11
+                else
+                  option(value="8px") 11
+                if size == '12px'
+                  option(value="12px", selected) 12
+                else
+                  option(value="12px") 12
+                if size == '14px'
+                  option(value="8px", selected) 14
+                else
+                  option(value="8px") 14
+                if size == '16px'
+                  option(value="8px", selected) 16
+                else
+                  option(value="8px") 16
+                if size == '18px'
+                  option(value="18px", selected) 18
+                else
+                  option(value="18px") 18
+                if size == '20px'
+                  option(value="20px", selected) 20
+                else
+                  option(value="20px") 20
+                if size == '24px'
+                  option(value="24px", selected) 24
+                else
+                  option(value="24px") 24
+                if size == '30px'
+                  option(value="30px", selected) 30
+                else
+                  option(value="30px") 30
+                if size == '36px'
+                  option(value="36px", selected) 36
+                else
+                  option(value="36px") 36
+                if size == '48px'
+                  option(value="48px", selected) 48
+                else
+                  option(value="48px") 48
+                if size == '60px'
+                  option(value="60px", selected) 60
+                else
+                  option(value="60px") 60
+                if size == '72px'
+                  option(value="72px", selected) 72
+                else
+                  option(value="72px") 72
+                if size == '90px'
+                  option(value="90px", selected) 90
+                else
+                  option(value="90px") 90
 
-          .workspace-right_panel-container-select_block.fourth
-            select.bind-props.text-center(bind-to="font-size")
-              - var size = keyframes[keyframe()].props['font-size']
-              if size == '8px'
-                option(value="8px", selected) 8
-              else
-                option(value="8px") 8
-              if size == '9px'
-                option(value="8px", selected) 9
-              else
-                option(value="9px") 9
-              if size == '10px'
-                option(value="8px", selected) 10
-              else
-                option(value="10px") 10
-              if size == '11px'
-                option(value="8px", selected) 11
-              else
-                option(value="8px") 11
-              if size == '12px'
-                option(value="12px", selected) 12
-              else
-                option(value="12px") 12
-              if size == '14px'
-                option(value="8px", selected) 14
-              else
-                option(value="8px") 14
-              if size == '16px'
-                option(value="8px", selected) 16
-              else
-                option(value="8px") 16
-              if size == '18px'
-                option(value="18px", selected) 18
-              else
-                option(value="18px") 18
-              if size == '20px'
-                option(value="20px", selected) 20
-              else
-                option(value="20px") 20
-              if size == '24px'
-                option(value="24px", selected) 24
-              else
-                option(value="24px") 24
-              if size == '30px'
-                option(value="30px", selected) 30
-              else
-                option(value="30px") 30
-              if size == '36px'
-                option(value="36px", selected) 36
-              else
-                option(value="36px") 36
-              if size == '48px'
-                option(value="48px", selected) 48
-              else
-                option(value="48px") 48
-              if size == '60px'
-                option(value="60px", selected) 60
-              else
-                option(value="60px") 60
-              if size == '72px'
-                option(value="72px", selected) 72
-              else
-                option(value="72px") 72
-              if size == '90px'
-                option(value="90px", selected) 90
-              else
-                option(value="90px") 90
+      .workspace-right_panel-container_big
+        h3 Позиция
+        .workspace-right_panel-container-position
+        
+          if position == "1"
+            input(type="radio", name="position", id = "1", checked="checked")
+          else
+            input(type="radio", name="position", id = "1")
+          label.item1(for="1")
 
-    .workspace-right_panel-container_big
-      h3 Позиция
-      .workspace-right_panel-container-position
-      
-        if position == "1"
-          input(type="radio", name="position", id = "1", checked="checked")
-        else
-          input(type="radio", name="position", id = "1")
-        label.item1(for="1")
+          if position == "2"
+            input(type="radio", name="position", id = "2", checked="checked")
+          else
+            input(type="radio", name="position", id = "2")
+          label.item2(for="2")
 
-        if position == "2"
-          input(type="radio", name="position", id = "2", checked="checked")
-        else
-          input(type="radio", name="position", id = "2")
-        label.item2(for="2")
+          if position == "3"
+            input(type="radio", name="position", id = "3", checked="checked")
+          else
+            input(type="radio", name="position", id = "3")
+          label.item3(for="3")
 
-        if position == "3"
-          input(type="radio", name="position", id = "3", checked="checked")
-        else
-          input(type="radio", name="position", id = "3")
-        label.item3(for="3")
+          if position == "4"
+            input(type="radio", name="position", id = "4", checked="checked")
+          else
+            input(type="radio", name="position", id = "4")
+          label.item4(for="4")
 
-        if position == "4"
-          input(type="radio", name="position", id = "4", checked="checked")
-        else
-          input(type="radio", name="position", id = "4")
-        label.item4(for="4")
-
-      .floatleft.width100.margintop10
-        .workspace-right_panel-container-size_block
-          .width50_percent.position
-            label X
-            input.bind-props(type="text", value=keyframes[keyframe()].props.x, bind-to="x")
-            span px
-          .width50_percent.position.y
-            label Y
-            input.bind-props(type="text", value=keyframes[keyframe()].props.y, bind-to="y")
-            span px
+        .floatleft.width100.margintop10
+          .workspace-right_panel-container-size_block
+            .width50_percent.position
+              label X
+              input.bind-props(type="text", value=keyframes[keyframe()].props.x, bind-to="x")
+              span px
+            .width50_percent.position.y
+              label Y
+              input.bind-props(type="text", value=keyframes[keyframe()].props.y, bind-to="y")
+              span px
 
 
-      //- .workspace-right_panel-container-rotate.margintop10
-      //-   .rotate.width50_percent
-      //-     input(type="text")
+        //- .workspace-right_panel-container-rotate.margintop10
+        //-   .rotate.width50_percent
+        //-     input(type="text")
 
-      //-   .zindex.width50_percent
-      //-     label Z-index
-      //-     input(type="text")
+        //-   .zindex.width50_percent
+        //-     label Z-index
+        //-     input(type="text")
 
 
     if isAnimation()

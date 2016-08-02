@@ -3,85 +3,86 @@
     h2 Фигура
     buttom.workspace-right_panel-settings
   form.workspace-right_panel-container.scroll.mcsb-behavior.pd-submit-behavior
-    .workspace-right_panel-container-shape
-      if shape == "rect"
-        input(type="radio", name="shape", id = "rect", checked="checked")
-      else
-        input(type="radio", name="shape", id = "rect")
-      label.item1(for="rect")
-
-      if shape == "circle"
-        input(type="radio", name="shape", id = "circle", checked="checked")
-      else
-        input(type="radio", name="shape", id = "circle")
-      label.item2(for="circle")
-
-      if shape == "round"
-        input(type="radio", name="shape", id = "round", checked="checked")
-      else
-        input(type="radio", name="shape", id = "round")
-      label.item3(for="round")
-
-    .floatleft.width100.margintop10
-      .workspace-right_panel-container-color_picker
-        //- не вешается active на блок!
-        .set_color_div.set_color(data-valueelement = "set_text_input", data-styleelement="set_slide_button")
-          button#set_slide_button.set_color_button
-          input#set_text_input.set_color_input(value=keyframes[keyframe()].props.fill, bind-to="fill")
-
-
-      if shape == "round"            
-        .workspace-right_panel-container-input_block.floatright
-          span.radius Радиус угла
-          .workspace-right_panel-container-block_plus.radius.margintop10
-            input(type="text", value="500")
-            button.plus
-            button.minus     
-
-    .workspace-right_panel-container_big
-      h3 Позиция
-      .workspace-right_panel-container-position
-      
-        if position == "1"
-          input(type="radio", name="position", id = "1", checked="checked")
+    if !isAnimation()
+      .workspace-right_panel-container-shape
+        if shape == "rect"
+          input(type="radio", name="shape", id = "rect", checked="checked")
         else
-          input(type="radio", name="position", id = "1")
-        label.item1(for="1")
+          input(type="radio", name="shape", id = "rect")
+        label.item1(for="rect")
 
-        if position == "2"
-          input(type="radio", name="position", id = "2", checked="checked")
+        if shape == "circle"
+          input(type="radio", name="shape", id = "circle", checked="checked")
         else
-          input(type="radio", name="position", id = "2")
-        label.item2(for="2")
+          input(type="radio", name="shape", id = "circle")
+        label.item2(for="circle")
 
-        if position == "3"
-          input(type="radio", name="position", id = "3", checked="checked")
+        if shape == "round"
+          input(type="radio", name="shape", id = "round", checked="checked")
         else
-          input(type="radio", name="position", id = "3")
-        label.item3(for="3")
+          input(type="radio", name="shape", id = "round")
+        label.item3(for="round")
 
-        if position == "4"
-          input(type="radio", name="position", id = "4", checked="checked")
-        else
-          input(type="radio", name="position", id = "4")
-        label.item4(for="4")
-          
-    .floatleft.width100.margintop10
-      .workspace-right_panel-container-size_block
-        .width50_percent.position
-          label X
-          input.bind-props(type="text", bind-to="x", value=keyframes[keyframe()].props.x, parse-float)
-          span px
-        .width50_percent.position.y
-          label Y
-          input.bind-props(type="text", bind-to="y", value=keyframes[keyframe()].props.y, parse-float)
-          span px
+      .floatleft.width100.margintop10
+        .workspace-right_panel-container-color_picker
+          //- не вешается active на блок!
+          .set_color_div.set_color(data-valueelement = "set_text_input", data-styleelement="set_slide_button")
+            button#set_slide_button.set_color_button
+            input#set_text_input.set_color_input(value=keyframes[keyframe()].props.fill, bind-to="fill")
 
-    .floatleft.width100.margintop10
-      .workspace-right_panel-container-size_block
-        .width100_percent.position
-          label Угол
-          input.bind-props(type="text", bind-to="angle", value=keyframes[keyframe()].props.angle, parse-float)
+
+        if shape == "round"            
+          .workspace-right_panel-container-input_block.floatright
+            span.radius Радиус угла
+            .workspace-right_panel-container-block_plus.radius.margintop10
+              input(type="text", value="500")
+              button.plus
+              button.minus     
+
+      .workspace-right_panel-container_big
+        h3 Позиция
+        .workspace-right_panel-container-position
+        
+          if position == "1"
+            input(type="radio", name="position", id = "1", checked="checked")
+          else
+            input(type="radio", name="position", id = "1")
+          label.item1(for="1")
+
+          if position == "2"
+            input(type="radio", name="position", id = "2", checked="checked")
+          else
+            input(type="radio", name="position", id = "2")
+          label.item2(for="2")
+
+          if position == "3"
+            input(type="radio", name="position", id = "3", checked="checked")
+          else
+            input(type="radio", name="position", id = "3")
+          label.item3(for="3")
+
+          if position == "4"
+            input(type="radio", name="position", id = "4", checked="checked")
+          else
+            input(type="radio", name="position", id = "4")
+          label.item4(for="4")
+            
+      .floatleft.width100.margintop10
+        .workspace-right_panel-container-size_block
+          .width50_percent.position
+            label X
+            input.bind-props(type="text", bind-to="x", value=keyframes[keyframe()].props.x, parse-float)
+            span px
+          .width50_percent.position.y
+            label Y
+            input.bind-props(type="text", bind-to="y", value=keyframes[keyframe()].props.y, parse-float)
+            span px
+
+      .floatleft.width100.margintop10
+        .workspace-right_panel-container-size_block
+          .width100_percent.position
+            label Угол
+            input.bind-props(type="text", bind-to="angle", value=keyframes[keyframe()].props.angle, parse-float)
 
     if isAnimation()
       include ./_animations.jade
