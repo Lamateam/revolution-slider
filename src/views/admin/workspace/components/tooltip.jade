@@ -1,6 +1,59 @@
 //- Навесь класс active, когда показывается
-.tooltips.active
+//- Придется позиционировать руками - там overflow: hidden из-за скрола
+
+//- скрывать при движении скрола!!!
+.tooltips.active(style='left: 31px; bottom: 183px')
+  select.tooltips_select
+    option(value="", selected="selected") Анимация 1
+    option(value="") Анимация 2
+    option(value="") Анимация 3
+  //- Навесить active, когда выбран нужный селект
+  
+  .tooltips_addon
+   
+    .tooltips_addon_row
+      .tooltips_input_block.tooltips_input_block-third
+        label X
+        input(type="text")
+      .tooltips_input_block.tooltips_input_block-third
+        label Y
+        input(type="text")
+      .tooltips_input_block.tooltips_input_block-third
+        label Z
+        input(type="text")
+    
+    .tooltips_addon_row
+      .tooltips_input_block
+        label Скос по X
+        input(type="text")
+    .tooltips_addon_row
+      .tooltips_input_block
+        label Скос по Y
+        input(type="text")
+    .tooltips_addon_row
+      .tooltips_input_block
+        label Скос по Z
+        input(type="text")
+    
+    .tooltips_addon_row
+      .tooltips_input_block
+        label Угол X
+        input(type="text")
+    .tooltips_addon_row
+      .tooltips_input_block
+        label Угол Y
+        input(type="text")
+    .tooltips_addon_row
+      .tooltips_input_block
+        label Угол Z
+        input(type="text")
+
+
+
   //- Навесь класс active, когда пауза
-  button.tooltips_play
-  span.tooltips_length 00.00.120
-  span.tooltips_start 00.04.000
+  //-button.tooltips_play
+  //-label.tooltips_length 00.00.120
+  //-label.tooltips_start 00.04.000
+
+
+  //-X, y, z, anglex, angley, anglez, opacity, skewx, skewy

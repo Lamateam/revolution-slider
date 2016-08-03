@@ -26,6 +26,7 @@
     "bootstrap": "~3.3.6",
     "busboy": "^0.2.13",
     "coffee-script": "~1.10.0",
+    "colors": "^1.1.2",
     "d3": "^3.5.17",
     "events": "~1.1.0",
     "express": "~4.13.3",

@@ -2,6 +2,7 @@ express      = require 'express'
 session      = require 'express-session'
 body_parser  = require 'body-parser'
 jade_amd     = require "jade-amd"
+colors       = require 'colors'
 
 config       = require "./config.json"
 
@@ -28,5 +29,7 @@ app.use body_parser.json({ type: 'application/json' })
 # routes
 require("./routes/main.coffee").init app
 
+
 app.listen config.port, ()->
-  console.log 'App listening on port 3000!'
+  console.log 'Lama'.bold.blue.bgBlack + 'Labs'.bold.white.bgBlack + ' LLC'.white.bold.bgBlack + ' (OOO), MMXVI'
+  console.log 'App is listening on port: ' + '3000'.red

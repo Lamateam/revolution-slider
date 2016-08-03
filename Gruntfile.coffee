@@ -235,7 +235,7 @@ module.exports = (grunt) ->
     watch:
       main:
         files: ["src/app/**/*.*"]
-        tasks: ["compile-development"]
+        tasks: ["compile-test"]
       styles:
         files: ["src/app/**/*.*"]
         tasks: ["compile-styles-short"]
