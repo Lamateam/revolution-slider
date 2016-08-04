@@ -108,7 +108,7 @@ define "views/workspace/CanvasView", [
     onNodeClick: ->
       return if d3.event && d3.event.defaultPrevented
       id = @model.get 'id'
-      window.App.trigger "element:click", { id: id }      
+      window.App.trigger "element:click", { id: id, keyframe: @current_keyframe }      
     onSomeElementSelected: ->
       if @getOption("stateModel").get("isElementSelected") is @model.get("id") then @setActive() else @setInactive()
     setNodeAttribute: (node, key, value)->
@@ -161,6 +161,9 @@ define "views/workspace/CanvasView", [
         when key is 'text_offset'
           # Это служебные поля, ничего делать не надо
           console.log 'junk'
+        when key is 'fill-opacity'
+          @d3_el.style 'opacity', value
+          node.attr key, value
         when true then node.attr key, value
     setAngle: (angle, x_center, y_center)->
       if @canRotate
@@ -304,6 +307,7 @@ define "views/workspace/CanvasView", [
     selectKeyframe: (data)->
       @current_keyframe = data.id 
       @render()
+      @onNodeClick()
     selectAnimation: (data)->
       window.App.trigger "element:select_animation", { el: @model.get('id'), data: data }
     createTransition: (kf, next_kf)->
@@ -311,7 +315,7 @@ define "views/workspace/CanvasView", [
         hash_props = {  }
 
         for own key, value of next_kf.props
-          if (key isnt 'text') and (key isnt 'texts')
+          if (key isnt 'text') and (key isnt 'texts') and (key isnt 'fill-opacity')
             old_value = kf.props[key]
 
             if key is 'fill'
@@ -369,6 +373,7 @@ define "views/workspace/CanvasView", [
       transition = el
 
       @selectKeyframe { id: 0 }
+      el.style 'opacity', 1
 
       for kf, i in data.keyframes
         next_kf = data.keyframes[i+1]

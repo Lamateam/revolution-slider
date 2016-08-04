@@ -32,8 +32,9 @@ define "views/workspace/UploadImageView", [
               angle: 0
               width: 170
               height: 200
-              fill: "rgb(0,0,0)"
+              fill: "ffffff"
               "xlink:href": data.result.url
+              'fill-opacity': 1
           }
         ]
       }

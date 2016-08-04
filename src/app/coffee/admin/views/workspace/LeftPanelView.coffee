@@ -30,6 +30,7 @@ define "views/workspace/LeftPanelView", [
               width: 100
               height: 150
               angle: 0
+              'fill-opacity': 1
           } 
         ]
       }
@@ -47,6 +48,7 @@ define "views/workspace/LeftPanelView", [
               text: "Текст" 
               background_fill: "ffffff"
               angle: 0
+              'fill-opacity': 1
           } 
         ]
       }
@@ -54,7 +56,7 @@ define "views/workspace/LeftPanelView", [
       # window.App.trigger "element:create", { type: "image", props: { x: 100, y: 100, angle: 0, width: 170, height: 200, fill: "rgb(0,0,0)", "xlink:href": "http://fyf.tac-cdn.net/images/products/large/T46-1.jpg" } }
       window.App.trigger "image:create"
     onVideoButtonClick: ->
-      window.App.trigger "element:create", { type: "video", props: { x: 100, y: 100, angle: 0, width: 170, height: 200, fill: "rgb(0,0,0)", "xlink:href": "http://fyf.tac-cdn.net/images/products/large/T46-1.jpg" } }
+      # window.App.trigger "element:create", { type: "video", props: { x: 100, y: 100, angle: 0, width: 170, height: 200, fill: "rgb(0,0,0)", "xlink:href": "http://fyf.tac-cdn.net/images/products/large/T46-1.jpg" } }
     onParagraphButtonClick: ->
       window.App.trigger "element:create", { 
         type: "text"
@@ -70,6 +72,7 @@ define "views/workspace/LeftPanelView", [
               background_fill: "ffffff"
               text_offset: 10
               angle: 0
+              'fill-opacity': 1
           } 
         ]
       }

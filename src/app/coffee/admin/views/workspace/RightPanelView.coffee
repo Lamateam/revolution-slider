@@ -28,11 +28,12 @@ define "views/workspace/RightPanelView", [
       repeat_num: '[name="repeatNum"]'
     templateHelpers: ->
       res = 
-        keyframe: => @active_keyframe
+        keyframe: => 
+          console.log @active_keyframe
+          @active_keyframe
         isAnimation: => (@options.animation_options.start_keyframe isnt undefined) && (@options.animation_options.end_keyframe isnt undefined)
-    initialize: ->
-      if @getOption('type') is 'element'
-        @listenTo window.App, 'element:' + @model.get('id') + ':keyframe:select', @selectKeyframe
+    initialize: (options)->
+      @active_keyframe = if options.keyframe is undefined then 0 else options.keyframe
     events:
       'blur input[type="text"].bind-props': 'onInputPropsChange'
       'blur input[type="text"].bind': 'onInputChange'
@@ -118,8 +119,6 @@ define "views/workspace/RightPanelView", [
 
       data      
     onInputPropsChange: (e)-> window.App.trigger 'element:' + @model.get('id') + ':change', { props: @getDataFromInput(e.target) }
-    onBeforeRender: ->
-      @active_keyframe = 0 if @active_keyframe is undefined
     onInputChange: (e)-> window.App.trigger @getOption('type') + ":update", @getDataFromInput(e.target)
     # WorkspaceRightPanelGraphicsTemplate handlers
     onImageLoadingClick: -> window.App.trigger "image:edit", { id: @model.get 'id' }
@@ -134,9 +133,6 @@ define "views/workspace/RightPanelView", [
         @ui.repeat_num
           .addClass 'disabled'
           .attr 'disabled', true
-    selectKeyframe: (data)->
-      @active_keyframe = data.id 
-      @render()
     selectAnimation: (data)->
       manager = new Marionette.RegionManager
         regions:
