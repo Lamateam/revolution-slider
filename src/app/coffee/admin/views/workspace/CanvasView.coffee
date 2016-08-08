@@ -450,6 +450,10 @@ define "views/workspace/CanvasView", [
     modelEvents:
       'change:name': 'render'
       'change:background': 'render'
+    collectionEvents:
+      'resort': ->
+        @collection.sort { silent: true }
+        @_renderChildren()
     events:
       'click .bind-slide-select': 'onSlideEditClick'
     buildChildView: (item, ItemViewType, itemViewOptions)->

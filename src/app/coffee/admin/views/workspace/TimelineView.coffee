@@ -29,6 +29,8 @@ define "views/workspace/TimelineView", [
       @listenTo window.App, 'element:' + @model.get('id') + ':keyframe:create', @onKeyframeCreate
       @runner = d3.select @el
     onRender: ->
+      @$el.attr 'model-id', @model.get('id')
+
       @ui.runner.hide()
 
       @_selectKeyframe(@active_keyframe)
@@ -187,6 +189,8 @@ define "views/workspace/TimelineView", [
         if model.get('order') isnt index
           model.set 'order', index
           window.App.trigger "element:reorder", { el: model.get('id'), order: index }
+      
+      @collection.trigger 'resort'
     createKeyframe: (e)->
       offset   = $(e.target).offset()
       model_id = e.target.getAttribute 'model-id'
