@@ -13,6 +13,7 @@ define "views/workspace/LeftPanelView", [
       'click .bind-figures-btn': 'onShapeButtonClick'
       'click .bind-paragraph-btn': 'onParagraphButtonClick'
       'click .bind-play:not(.active)': 'playAnimations'
+      'click .bind-timeline': 'toggleTimeline'
       # 'click .bind-play.active': 'stopAnimations'
     modelEvents:
       'sync': 'render'
@@ -82,3 +83,8 @@ define "views/workspace/LeftPanelView", [
     stopAnimations: ->
       window.App.trigger "animations:stop"
       @ui.playBtn.removeClass 'active'
+    toggleTimeline: ->
+      $('#timeline')
+        .toggle()
+        .find '.mcsb-behavior'
+        .mCustomScrollbar "scrollTo", 'left'

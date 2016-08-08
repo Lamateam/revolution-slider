@@ -4,6 +4,7 @@ define "views/workspace/CanvasView", [
   "views/workspace/TimelineView"
   "templates/workspace/canvas"
   "d3"
+  "jquery-ui"
 ], (Marionette, Helpers, TimelineView, CanvasTemplate)->
   html = d3.select 'html'
 
@@ -174,12 +175,12 @@ define "views/workspace/CanvasView", [
       y_center   = dimensions.y + dimensions.height*0.5
 
       data       = []
-      if @canResize
-        data.push { x: x_center, y: dimensions.y, name: 'n' }
-        data.push { x: dimensions.x + dimensions.width, y: y_center, name: 'e' }
-        data.push { x: dimensions.x, y: y_center, name: 'w' }
-        data.push { x: x_center, y: dimensions.y + dimensions.height, name: 's' }
       if @canRotate
+        data.push { x: x_center, y: dimensions.y - 10, name: 'n' }
+        data.push { x: dimensions.x + dimensions.width + 10, y: y_center, name: 'e' }
+        data.push { x: dimensions.x - 10, y: y_center, name: 'w' }
+        data.push { x: x_center, y: dimensions.y + dimensions.height + 10, name: 's' }
+      if @canResize
         data.push { x: dimensions.x + dimensions.width, y: dimensions.y, name: 'ne' }
         data.push { x: dimensions.x, y: dimensions.y, name: 'nw' }
         data.push { x: dimensions.x + dimensions.width, y: dimensions.y + dimensions.height, name: 'se' }
@@ -213,41 +214,73 @@ define "views/workspace/CanvasView", [
         x          = d3.event.x
         y          = d3.event.y
 
+        o          = $(n.node()).offset()
+        $dimensions = 
+          x: o.left - offset.left
+          y: o.top - offset.top
+
         dimensions = n.node().getBBox()
         x_center   = dimensions.x + dimensions.width*0.5
         y_center   = dimensions.y + dimensions.height*0.5
 
-        new_d = Math.sqrt Math.pow( move_y - y_center, 2 ) + Math.pow( move_x - x_center, 2 )
+        # new_d = Math.sqrt Math.pow( move_y - y_center, 2 ) + Math.pow( move_x - x_center, 2 )
         switch d.name
-          when 'n', 's'
-            dh = new_d - dimensions.height*0.5
+          when 'ne', 'se', 'nw', 'sw'
+            # dalpha = Math.atan(dimensions.width / dimensions.height)
 
-            props.height = dimensions.height + dh
-            props.y      = dimensions.y - dh if d.name is 'n'
+            # dh = new_d*Math.cos(dalpha) - dimensions.height*0.5
+            # dw = new_d*Math.sin(dalpha) - dimensions.width*0.5
+            # console.log dalpha
 
-            @setNodeAttribute n, 'height', props.height
+            rad_angle = (Math.PI / 180) * props.angle 
+
+            cos = Math.cos rad_angle
+            sin = Math.sin rad_angle
+
+            rotated_x = (move_x - x_center)*cos + (move_y - y_center)*sin + x_center
+            rotated_y = -(move_x - x_center)*sin + (move_y - y_center)*cos + y_center
+
+
+            dh = rotated_y - props.y
+            dw = rotated_x - props.x
+
+            switch d.name
+              when 'ne'
+                props.width = props.width + 2*(dw - props.width)
+                props.height = props.height - 2*dh
+                props.y = rotated_y
+                props.x = rotated_x - props.width
+              when 'nw'
+                props.width = props.width - 2*dw
+                props.height = props.height - 2*dh
+                props.y = rotated_y
+                props.x = rotated_x
+              when 'se'
+                props.width = props.width + 2*(dw - props.width)
+                props.height = props.height + 2*(dh - props.height)  
+                props.y = rotated_y - props.height
+                props.x = rotated_x - props.width 
+              when 'sw'
+                props.width = props.width - 2*dw
+                props.height = props.height + 2*(dh - props.height)  
+                props.y = rotated_y - props.height
+                props.x = rotated_x                                             
+
             @setNodeAttribute n, 'y', props.y
-
-            _dimensions = n.node().getBBox()
-            @setAngle props.angle, _dimensions.x + _dimensions.width*0.5, _dimensions.y + _dimensions.height*0.5 if @canRotate
-          when 'w', 'e'
-            dw = new_d - dimensions.width*0.5
-
-            props.width = dimensions.width + dw
-            props.x     = dimensions.x - dw if d.name is 'w'
-
-            @setNodeAttribute n, 'width', props.width
             @setNodeAttribute n, 'x', props.x
+            @setNodeAttribute n, 'width', props.width
+            @setNodeAttribute n, 'height', props.height
 
-            # @setAngle props.angle, props.x + dimensions.width*0.5, props.y + dimensions.height*0.5 if @canRotate
-          when 'ne', 'nw', 'se', 'sw'
+          when 'n', 'w', 'e', 's'
             if (x isnt x_center) or (y isnt y_center)
-              props.angle = props.angle + (180 / Math.PI) * Math.atan2(y - y_center, x - x_center)
-              dalpha      = (180 / Math.PI) * Math.atan(dimensions.width / dimensions.height)
-              props.angle = props.angle + 90 - dalpha if d.name is 'ne'
-              props.angle = props.angle + 90 + dalpha if d.name is 'nw'
-              props.angle = props.angle + 270 + dalpha if d.name is 'se'
-              props.angle = props.angle + 270 - dalpha if d.name is 'sw'
+              a = (180 / Math.PI) * Math.atan2(move_y - y_center, move_x - x_center)
+
+              props.angle = switch d.name 
+                when 'n' then 90 + a
+                when 's' then a - 90
+                when 'e' then a
+                when 'w' then 180 + a
+
               props.angle = props.angle % 360
               @setNodeAttribute n, 'angle', props.angle
           when 'c'
@@ -271,18 +304,18 @@ define "views/workspace/CanvasView", [
         window.App.trigger "element:resize", { el: @model.get('id'), keyframe: @current_keyframe, props: { props: props } }
 
       data = []
-      if @canResize
-        data.push { x: x_center, y: dimensions.y, name: 'n' }
-        data.push { x: dimensions.x + dimensions.width, y: y_center, name: 'e' }
-        data.push { x: dimensions.x, y: y_center, name: 'w' }
-        data.push { x: x_center, y: dimensions.y + dimensions.height, name: 's' }
       if @canRotate
-        data.push { x: dimensions.x + dimensions.width, y: dimensions.y, name: 'ne' }
-        data.push { x: dimensions.x, y: dimensions.y, name: 'nw' }
-        data.push { x: dimensions.x + dimensions.width, y: dimensions.y + dimensions.height, name: 'se' }
-        data.push { x: dimensions.x, y: dimensions.y + dimensions.height, name: 'sw' }
+        data.push { x: x_center, y: dimensions.y - 10, name: 'n', cursor: 'pointer' }
+        data.push { x: dimensions.x + dimensions.width + 10, y: y_center, name: 'e', cursor: 'pointer' }
+        data.push { x: dimensions.x - 10, y: y_center, name: 'w', cursor: 'pointer' }
+        data.push { x: x_center, y: dimensions.y + dimensions.height + 10, name: 's', cursor: 'pointer' }
+      if @canResize
+        data.push { x: dimensions.x + dimensions.width, y: dimensions.y, name: 'ne', cursor: 'ne-resize' }
+        data.push { x: dimensions.x, y: dimensions.y, name: 'nw', cursor: 'nw-resize' }
+        data.push { x: dimensions.x + dimensions.width, y: dimensions.y + dimensions.height, name: 'se', cursor: 'se-resize' }
+        data.push { x: dimensions.x, y: dimensions.y + dimensions.height, name: 'sw', cursor: 'sw-resize' }
       if @canMove
-        data.push { x: x_center, y: y_center, name: 'c' }
+        data.push { x: x_center, y: y_center, name: 'c', cursor: "pointer" }
 
       @options.dots = @d3_el.selectAll('.dot')
         .data data, (d)->
@@ -292,10 +325,13 @@ define "views/workspace/CanvasView", [
           d.x
         .attr 'cy', (d)->
           d.y
+        .style 'cursor', (d)->
+          d.cursor
         .attr 'r', 3
         .attr 'stroke', 'black'
         .attr 'fill', '#' + @model.get('keyframes')[@current_keyframe].props.fill
         .call drag
+
     destroyDots: ->
       @d3_el.selectAll('.dot').remove()
     createKeyframe: (data)->

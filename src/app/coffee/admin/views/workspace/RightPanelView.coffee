@@ -28,10 +28,9 @@ define "views/workspace/RightPanelView", [
       repeat_num: '[name="repeatNum"]'
     templateHelpers: ->
       res = 
-        keyframe: => 
-          console.log @active_keyframe
-          @active_keyframe
+        keyframe: => @active_keyframe
         isAnimation: => (@options.animation_options.start_keyframe isnt undefined) && (@options.animation_options.end_keyframe isnt undefined)
+        isDeletable: => @options.animation_options.isDeletable()
     initialize: (options)->
       @active_keyframe = if options.keyframe is undefined then 0 else options.keyframe
     events:
@@ -52,6 +51,8 @@ define "views/workspace/RightPanelView", [
       # WorkspaceRightPanelTextTemplate handlers
       'change #set_text_input': 'onInputPropsChange'
       'change #set_bg_input': 'onInputPropsChange'
+      # Animation handlers
+      'click .event-delete-animations': 'deleteAnimation'
     getTemplate: ->
       res = switch @getOption('type')
         when 'project' then WorkspaceRightPanelProjectTemplate
@@ -71,33 +72,6 @@ define "views/workspace/RightPanelView", [
         setTimeout =>
           @selectAnimation @options.animation_options
         , 0
-      # setTimeout =>
-      #   manager = new Marionette.RegionManager
-      #     regions:
-      #       animationsEnterRegion: '#animations_enter'
-      #       animationsLeaveRegion: '#animations_leave'
-
-      #   manager.get('animationsEnterRegion').show new AnimationsView
-      #     link: 'enter'
-      #     animations: @model.get 'animations'
-      #     element: { type: @getOption('type'), id: @model.get('id') } 
-      #     keyframe: @active_keyframe
-        
-      #   manager.get('animationsLeaveRegion').show new AnimationsView
-      #     link: 'leave'
-      #     animations: @model.get 'animations'
-      #     element: { type: @getOption('type'), id: @model.get('id') } 
-      #     keyframe: @active_keyframe
-
-      #   if @$el.find('#animations_process').length isnt 0
-      #     manager.addRegion "animationsProcessRegion", '#animations_process'
-      #     manager.get('animationsProcessRegion').show new AnimationsView
-      #       link: 'process'
-      #       animations: @model.get 'animations'
-      #       element: { type: @getOption('type'), id: @model.get('id') }
-      #       keyframe: @active_keyframe
-
-      # , 0
     initPicker: ->
       for el in @ui.set_color
         new jscolor(el, { valueElement: @$el.find('#' + el.getAttribute('data-valueelement'))[0], styleElement: @$el.find('#' + el.getAttribute('data-styleelement'))[0] })
@@ -150,3 +124,5 @@ define "views/workspace/RightPanelView", [
         animations: @model.get 'animations'
         element: { type: @getOption('type'), id: @model.get('id') } 
         keyframe: data.end_keyframe
+    deleteAnimation: -> window.App.trigger 'animation:delete', { el: @model.get('id'), start: @options.animation_options.start_keyframe, end: @options.animation_options.end_keyframe }
+

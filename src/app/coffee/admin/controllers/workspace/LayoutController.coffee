@@ -42,6 +42,7 @@ define "controllers/workspace/LayoutController", [
 
       @listenTo window.App, "animation:add", @onAnimationAdd
       @listenTo window.App, "animation:change", @onAnimationChange
+      @listenTo window.App, "animation:delete", @onAnimationDelete
       @listenTo window.App, "animations:change", @onAnimationsChange
 
       Marionette.LayoutController.prototype.initialize.apply @
@@ -163,7 +164,7 @@ define "controllers/workspace/LayoutController", [
       console.log 'a'
       @getOption('stateModel').setState "isElementSelected", data.el
       model = @getOption('elementsCollection').findWhere { id: data.el }
-      @renderRightPanel model, 'element', data.data.start, { start_keyframe: data.data.start, end_keyframe: data.data.end }      
+      @renderRightPanel model, 'element', data.data.start, { start_keyframe: data.data.start, end_keyframe: data.data.end, isDeletable: data.data.isDeletable }      
     onElementReOrder: (data)->
       model = @getOption('elementsCollection').findWhere { id: data.el }
       model.save { order: data.order }, { patch: true, wait: true }
@@ -221,6 +222,20 @@ define "controllers/workspace/LayoutController", [
 
           model.save { animations: animations }, { wait: true, patch: true } 
           window.App.trigger 'element:' + model.get('id') + ':animation:change', { animations: animations }  
+    onAnimationDelete: (data)->
+      model = @getOption('elementsCollection').findWhere { id: data.el }
+
+      animations = model.get 'animations'
+      keyframes  = model.get 'keyframes'
+
+      keyframes.pop()
+
+      valid_animations = [ ]
+      for animation in animations
+        toDelete = ((animation.link is 'enter') && (animation.keyframe is data.start)) || ((animation.link is 'leave') && (animation.keyframe is data.end))
+        valid_animations.push animation if !toDelete
+
+      model.save { animations: valid_animations, keyframes: keyframes }, { wait: true, patch: true, success: => @renderRightPanel model, 'element' }
     onAnimationsChange: (data)->
       console.log 'data: ', data
       switch data.element.type

@@ -29,7 +29,6 @@ define "views/workspace/TimelineView", [
       @listenTo window.App, 'element:' + @model.get('id') + ':keyframe:create', @onKeyframeCreate
       @runner = d3.select @el
     onRender: ->
-      # @el.setAttribute 'model-id', @model.get 'id'
       @ui.runner.hide()
 
       @_selectKeyframe(@active_keyframe)
@@ -101,18 +100,7 @@ define "views/workspace/TimelineView", [
 
       if lis[keyframe_id-1] isnt undefined
         lis[keyframe_id-1].style.width = (start - kfs[keyframe_id-1].start)*0.12 + 'px'
-      
-      # if lis[keyframe_id] isnt undefined
-      #   offset = 0
-      #   for i in [keyframe_id..lis.length-1]
-      #     lis[i].style.left = (offset + start)*0.12 + 'px'
-      #     offset = offset + kfs[i+1].start - kfs[i].start
-          # lis[keyframe_id].style.width = (kfs[keyframe_id+1].start - start)*0.12 + 'px'
-        
-        # offset = 0
-        # for i in [keyframe_id..kfs.length-1]
-        #   kfs[i].start = offset + start 
-        #   offset = offset + kfs[i+1].start - kfs[i].start if kfs[i+1] isnt undefined
+
     changeAnimation: (data)->
       @model.set 'animations', data.animations
       @render()
@@ -139,7 +127,7 @@ define "views/workspace/TimelineView", [
     selectAnimation: (e)->
       el = $(e.target)
 
-      @active_animation = { start: parseInt(el.attr('keyframe-start'), 10), end: parseInt(el.attr('keyframe-end'), 10) }
+      @active_animation = { start: parseInt(el.attr('keyframe-start'), 10), end: parseInt(el.attr('keyframe-end'), 10), isDeletable: => el.is(@ui.animations.last()) }
 
       @_selectAnimation @active_animation
     onDragStop: (e, ui)->
@@ -179,33 +167,6 @@ define "views/workspace/TimelineView", [
       @children.each (view)->
         view.runAll()
     initialize: (options)->
-      # maxTime    = { minutes: 0, seconds: 0, milliseconds: 0 }
-
-      # for element in options.elements.toJSON()
-      #   for animation in element.animations
-      #     animationTime        = { minutes: 0, seconds: 0, milliseconds: 0 }
-      #     durationSeconds      = Math.floor (animation.duration + animation.start) / 1000
-      #     durationMilliSeconds = animation.duration + animation.start
-
-      #     animationTime.minutes  = Math.floor durationSeconds / 60
-      #     animationTime.seconds  = durationSeconds % 60
-      #     animationTime.milliseconds = durationMilliSeconds % 1000
-
-      #     maxTime = animationTime if (maxTime.minutes < animationTime.minutes) or ((maxTime.minutes is animationTime.minutes) and (maxTime.seconds < animationTime.seconds)) or ((maxTime.seconds is animationTime.seconds) and (maxTime.milliseconds < animationTime.milliseconds))
-
-      # timesegments = [  ]
-      # if maxTime.minutes isnt 0
-      #   for i in [0..maxTime.minutes-1]
-      #     for j in [0..59]
-      #       for k in [0..2]
-      #         timesegments.push { minutes: i, seconds: j, milliseconds: k*50 }
-
-      # for j in [0..maxTime.seconds-1]
-      #   for k in [0..1]
-      #     timesegments.push { minutes: maxTime.minutes, seconds: j, milliseconds: k*50 }
-
-      # for k in [0..Math.floor(maxTime.milliseconds / 500)]
-      #   timesegments.push { minutes: maxTime.minutes, seconds: maxTime.seconds, milliseconds: k*50 }
       timesegments = [  ]
 
       for i in [0..5]
