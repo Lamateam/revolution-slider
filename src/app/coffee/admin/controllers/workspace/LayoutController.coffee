@@ -233,7 +233,7 @@ define "controllers/workspace/LayoutController", [
                 }
               ]
             }
-      onAnimationAdd: (data)->
+    onAnimationAdd: (data)->
       switch data.element.type
         when 'slide'
           animations = @getOption('slideModel').get 'animations'
