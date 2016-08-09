@@ -228,7 +228,7 @@ define "controllers/workspace/LayoutController", [
                     width: 170
                     height: 200
                     fill: "ffffff"
-                    "xlink:href": data.result.url
+                    "xlink:href": data.url
                     'fill-opacity': 1
                 }
               ]
