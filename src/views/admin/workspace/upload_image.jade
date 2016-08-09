@@ -7,12 +7,29 @@ div._modal
       ul.bind-menu.home_menu
         //- li.bind-my.item_1.active 
           a(href="#home/my_projects", title="Мои проекты") Мои проекты
-        //- li.bind-blanc.item_4
-        //-   a(href="#", title="Мои изображения") Мои изображения
-        li.bind-template.item_5.active
-          a(href="#", title="Импорт из сети") Импорт из сети
+        if state() == 'gallery'
+          li.bind-blanc.item_4.active
+            a.bind-gallery(href="javascript:void(0);", title="Мои изображения") Мои изображения
+        else
+          li.bind-blanc.item_4
+            a.bind-gallery(href="javascript:void(0);", title="Мои изображения") Мои изображения
+        if state() == 'upload'
+          li.bind-template.item_5.active
+            a.bind-upload(href="javascript:void(0);", title="Импорт из сети") Импорт из сети
+        else
+          li.bind-template.item_5
+            a.bind-upload(href="javascript:void(0);", title="Импорт из сети") Импорт из сети
       div.load_button.btn.bind-image-button Загрузить с диска
         input#fileupload.bind-image-input(type="file", accept=".png,.jpg,.jpeg,.gif,.bmp", data-url='/api/images/upload/file')
 
     div.home_container_right
-      input.load-input.loop.bind-image-url(type="text")
+      if state() == 'upload'
+        input.load-input.loop.bind-image-url(type="text")
+      if state() == 'gallery'
+        ul.home_container_project_list
+          for image in images()
+            li 
+              div.marginbottom_20.margintop_10.image_item
+                div.image_size
+                  div.image_block
+                    img.img-responsive.event-select-img(src=image.url)

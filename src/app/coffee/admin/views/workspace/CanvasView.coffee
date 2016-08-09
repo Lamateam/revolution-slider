@@ -354,10 +354,10 @@ define "views/workspace/CanvasView", [
           if (key isnt 'text') and (key isnt 'texts') and (key isnt 'fill-opacity')
             old_value = kf.props[key]
 
-            if key is 'fill'
-              value     = '#' + value 
-              old_value = '#' + old_value
-
+            if (key is 'fill') or (key is 'background_fill')
+              value     = if value.indexOf('#') is -1 then '#' + value else value
+              old_value = if old_value.indexOf('#') is -1 then '#' + old_value else old_value
+              console.log value, old_value
             hash_props[key] = d3.interpolate(old_value, value) 
 
         (t)=>

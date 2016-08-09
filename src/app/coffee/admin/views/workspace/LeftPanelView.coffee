@@ -14,6 +14,7 @@ define "views/workspace/LeftPanelView", [
       'click .bind-paragraph-btn': 'onParagraphButtonClick'
       'click .bind-play:not(.active)': 'playAnimations'
       'click .bind-timeline': 'toggleTimeline'
+      'click .event-add-slide': 'addSlide'
       # 'click .bind-play.active': 'stopAnimations'
     modelEvents:
       'sync': 'render'
@@ -88,3 +89,5 @@ define "views/workspace/LeftPanelView", [
         .toggle()
         .find '.mcsb-behavior'
         .mCustomScrollbar "scrollTo", 'left'
+    addSlide: ->
+      window.App.trigger 'slide:add'

@@ -1,8 +1,20 @@
 button.bind-show
 ul.slides
-  li
+  li.slides_item
     ul.slides_list
-      li
-
-  li
-    button
+      for slide, i in slides
+        li
+          .slides_list_images
+            a(href="#workspace/" + id + "/" + slide.id, title=slide.name)
+            img.img-responsive(src="static/images/demo/layout_images.jpg", alt="slide.name")
+            button.slides_list_settings
+              span.rotate_1080deg
+          .slides_list_text
+            //- span.slides_list_text_time 00:30
+            span.slides_list_text_slide
+              span.slides_list_text_number 1.
+              a(href="#workspace/" + id + "/" + slide.id, title=slide.name)= slide.name
+          
+  li.slides_item
+    button.slides_button.event-add-slide
+      span.slides_button_add

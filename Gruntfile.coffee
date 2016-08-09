@@ -11,16 +11,26 @@ module.exports = (grunt) ->
       start:
         command: "coffee server.coffee"
     clean: 
-      tmp: ["tmp"]
-      dist: ["dist"]
+      tmp: [ "tmp" ]
+      dist: [ "dist/**/**.*", "!dist/uploaded_images/**/**.*" ]
     copy:
       vendor:
         files: [
-          {expand: true, cwd: 'vendor/', src: [ 'fonts/**/*.*', 'images/**/*.*' ], dest: 'dist/'}
+          { 
+            expand: true
+            cwd: 'vendor/'
+            src: [ 'fonts/**/*.*', 'images/**/*.*' ]
+            dest: 'dist/'
+          }
         ]
       vendor_js:
         files: [
-          {expand: true, cwd: 'vendor/', src: [ '*.js' ], dest: 'tmp/vendor'}
+          {
+            expand: true
+            cwd: 'vendor/'
+            src: [ '*.js' ]
+            dest: 'tmp/vendor'
+          }
         ]
       modules_images:
         files: [
@@ -250,7 +260,7 @@ module.exports = (grunt) ->
       all:
         options:
           mode: 777
-          create: ['dist/files']
+          create: ['dist/uploaded_images']
 
   # Load external Grunt task plugins.
   grunt.loadNpmTasks 'grunt-contrib-coffee'

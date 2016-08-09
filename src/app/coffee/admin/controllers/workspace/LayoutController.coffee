@@ -23,6 +23,7 @@ define "controllers/workspace/LayoutController", [
 
       @listenTo window.App, "project:update", @onProjectUpdate
       @listenTo window.App, "slide:update", @onSlideChange
+      @listenTo window.App, "slide:add", @onSlideAdd
 
       @listenTo window.App, "element:move", @onElementMove
       @listenTo window.App, "element:click", @onElementClick
@@ -171,6 +172,33 @@ define "controllers/workspace/LayoutController", [
     onSlideChange: (data)->
       @getOption('historyCollection').addAction { action: "change_slide", options: {current: data, previous: @getOption('slideModel').toJSON() } }
       @changeSlide data
+    onSlideAdd: ->
+      slides = @getOption('projectModel').get 'slides'
+
+      slides.push 
+        id: slides.length
+        name: "Новый слайд"
+        duration: 3
+        background: "ffffff"
+        repeat: 'no-repeat'
+        repeatNum: 1
+        animations: []
+        elements: [ 
+          { 
+            id: 0
+            order: 1
+            type: "rect"
+            animations: []
+            keyframes: [
+              {
+                start: 0
+                props: { fill: "ff0000", x: 100, y: 100, angle: 30, width: 100, height: 100, 'fill-opacity': 1 }
+              }
+            ] 
+          }
+        ]
+
+      @getOption('projectModel').save { slides: slides }, { patch: true, wait: true }
     onSlideSelect: (data)->
       @getOption('stateModel').clearState "isElementSelected"
       @renderRightPanel @options.slideModel, 'slide'
@@ -188,8 +216,24 @@ define "controllers/workspace/LayoutController", [
           if _data.id isnt undefined
             window.App.trigger "element:change", { el: _data.id, props: { "xlink:href": data.url } }
           else
-            window.App.trigger "element:create", { type: "image", props: { x: 100, y: 100, angle: 0, width: 170, height: 200, fill: "rgb(0,0,0)", "xlink:href": data.fileName } }
-    onAnimationAdd: (data)->
+            window.App.trigger "element:create", { 
+              type: "image"
+              keyframes: [
+                {
+                  start: 0
+                  props: 
+                    x: 100
+                    y: 100
+                    angle: 0
+                    width: 170
+                    height: 200
+                    fill: "ffffff"
+                    "xlink:href": data.result.url
+                    'fill-opacity': 1
+                }
+              ]
+            }
+      onAnimationAdd: (data)->
       switch data.element.type
         when 'slide'
           animations = @getOption('slideModel').get 'animations'

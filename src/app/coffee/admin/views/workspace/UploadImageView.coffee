@@ -1,9 +1,10 @@
 define "views/workspace/UploadImageView", [ 
   "marionette"
+  'collections/ImagesCollection'
   "templates/workspace/upload_image"
   "jquery.iframe-transport"
   "jquery.fileupload"
-], (Marionette, UploadImageTemplate)->
+], (Marionette, ImagesCollection, UploadImageTemplate)->
   Marionette.ItemView.extend
     className: 'load'
     ui:
@@ -12,8 +13,26 @@ define "views/workspace/UploadImageView", [
       image_button: '.bind-image-button'
     events:
       'blur .bind-image-url': 'onImageUrlBlur'
+      'click .bind-gallery': 'switchGallery'
+      'click .bind-upload': 'switchUpload'
       'click .event-close-btn': 'destroy'
+      'click .event-select-img': 'selectImage'
     template: UploadImageTemplate
+    templateHelpers: ->
+      opt = @options
+      res = 
+        state: -> opt.state
+        images: -> opt.images
+    initialize: (@options={})->
+      @options.state = 'upload'
+      @options.images = [  ]
+      collection = new ImagesCollection()
+      collection.fetch { 
+        success: => 
+          console.log collection.toJSON()
+          @options.images = collection.toJSON() 
+          @render()
+      }
     onRender: ->
       $(@ui.image_input).fileupload 
         dataType: 'json'
@@ -40,3 +59,12 @@ define "views/workspace/UploadImageView", [
       }
     onImageUrlBlur: ->
       window.App.trigger "image:url_upload", { url: @ui.image_url.val() }
+    switchUpload: (e)->
+      @options.state = 'upload'
+      @render()
+    switchGallery: (e)->
+      @options.state = 'gallery'
+      @render()
+    selectImage: (e)->
+      @createElement { result: { url: e.target.src } }
+      @destroy()

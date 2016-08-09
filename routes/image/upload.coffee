@@ -12,8 +12,8 @@ exports.init = (app)->
         arr    = req.body.url.split '.'
         ext    = arr[arr.length - 1]
         fname  = Date.now() + '.' + ext
-        request(req.body.url).pipe(fs.createWriteStream('dist/images/' + fname)).on 'close', ->
-          response.send { url: '/static/images/' + fname }
+        request(req.body.url).pipe(fs.createWriteStream('dist/uploaded_images/' + fname)).on 'close', ->
+          response.send { url: '/static/uploaded_images/' + fname }
 
   app.post '/api/images/upload/file', (req, res, next)->
     busboy = new Busboy { headers: req.headers }
@@ -23,7 +23,7 @@ exports.init = (app)->
 
       arr = filename.split '.'
       extension = arr[arr.length-1]
-      file_name = 'images/image-' + Date.now() + "." + extension
+      file_name = 'uploaded_images/image-' + Date.now() + "." + extension
 
       stream = file.pipe fs.createWriteStream("./dist/" + file_name)
       stream.on 'finish', ->
