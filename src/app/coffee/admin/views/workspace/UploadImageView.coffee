@@ -33,6 +33,7 @@ define "views/workspace/UploadImageView", [
           @options.images = collection.toJSON() 
           @render()
       }
+      @listenTo window.App, 'popup:close', @destroy
     onRender: ->
       $(@ui.image_input).fileupload 
         dataType: 'json'

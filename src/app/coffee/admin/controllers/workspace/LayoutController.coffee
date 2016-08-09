@@ -233,6 +233,7 @@ define "controllers/workspace/LayoutController", [
                 }
               ]
             }
+          window.App.trigger 'popup:close'
     onAnimationAdd: (data)->
       switch data.element.type
         when 'slide'

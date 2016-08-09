@@ -27,7 +27,6 @@ exports.init = (app)->
               }
             ] 
           }
-          # { id: 1, type: "circle", props: { fill: "rgb(255,255,0)", cx: 50, cy: 50, r: 100 } } 
           { 
             id: 1
             order: 0
