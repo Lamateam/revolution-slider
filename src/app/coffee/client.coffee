@@ -176,6 +176,9 @@ class Slide
   constructor: (@svg, @slide)->
     @els = [  ]
 
+    @slide.elements = @slide.elements.sort (a, b)->
+      if a.order < b.order then -1 else 1
+
     for element in @slide.elements
       el = new Element(@svg, element, { scale: scale })
       @els.push el
