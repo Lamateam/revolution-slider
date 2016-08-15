@@ -63,7 +63,8 @@ define "views/workspace/CanvasView", [
       @listenTo window.App, 'element:' + @model.get('id') + ':keyframe:change', @changeKeyframe
       @listenTo window.App, 'element:' + @model.get('id') + ':change', @onElementChange
       @listenTo window.App, 'element:' + @model.get('id') + ':animations:play', @playAnimations
-    
+      @listenTo window.App, 'element:' + @model.get('id') + ':animations:end', @onAnimationsEnd
+
       @is_play = false
     onRender: ->
       setTimeout =>
@@ -307,8 +308,9 @@ define "views/workspace/CanvasView", [
       @onNodeClick()
     selectKeyframe: (data)->
       @current_keyframe = data.id 
-      @render()
-      @onNodeClick()
+      if !data.silent
+        @render()
+        @onNodeClick()
     selectAnimation: (data)->
       window.App.trigger "element:select_animation", { el: @model.get('id'), data: data }
     createTransition: (kf, next_kf)->
@@ -390,8 +392,8 @@ define "views/workspace/CanvasView", [
           @createEnterAnimation animation, data.keyframes[animation.keyframe].start
         else if animation.link is 'leave'
           @createLeaveAnimation animation, data.keyframes[animation.keyframe].start, i is animations.length-1
-
-
+    onAnimationsEnd: ->
+      @render()
     onElementChange: (data)->
       props = @model.get('keyframes')[@current_keyframe].props
       props[key] = value for own key, value of data.props

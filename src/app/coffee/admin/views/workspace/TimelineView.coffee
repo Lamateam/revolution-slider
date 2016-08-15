@@ -73,7 +73,7 @@ define "views/workspace/TimelineView", [
           setTimeout =>
             id = keyframes.length - 1
             @_selectKeyframe id
-            window.App.trigger 'element:' + @model.get('id') + ':keyframe:select', { id: id }
+            window.App.trigger 'element:' + @model.get('id') + ':keyframe:select', { id: id, silent: true }
           , keyframe.start
     playAnimation: (e)->
       data = JSON.parse(e.target.getAttribute('data-animation'))
@@ -162,10 +162,20 @@ define "views/workspace/TimelineView", [
         @$el.disableSelection()
       , 0
     playAnimations: ->
+      max_duration = 0
+
       @collection.each (model)->
         keyframes = _.sortBy _.clone(model.get('keyframes')), (keyframe)-> 
           keyframe.start
         window.App.trigger 'element:' + model.get('id') + ':animations:play', { animations: model.get('animations'), keyframes: keyframes }
+        max_duration = keyframes[keyframes.length-1].start if keyframes[keyframes.length-1].start > max_duration
+
+      console.log max_duration
+      setTimeout =>
+        @collection.each (model)->
+          window.App.trigger 'element:' + model.get('id') + ':animations:end'
+      , max_duration
+
       @children.each (view)->
         view.runAll()
     initialize: (options)->

@@ -27,6 +27,7 @@ class Element
           .attr key, value + 20 * @options.scale.x
         node.attr key, value                 
       when key is 'text', key is 'texts'
+        console.log key, value
         @d3_el.selectAll('text').remove()
 
         text_node = @d3_el
@@ -67,13 +68,15 @@ class Element
       hash_props = {  }
 
       for own key, value of next_kf.props
-        if (key isnt 'text') and (key isnt 'texts') and (key isnt 'fill-opacity')
-          old_value = kf.props[key]
+        old_value = kf.props[key]
 
+        if (key isnt 'text') and (key isnt 'texts') and (key isnt 'fill-opacity')
           if (key is 'fill') or (key is 'background_fill')
             value     = if value.indexOf('#') is -1 then '#' + value else value
             old_value = if old_value.indexOf('#') is -1 then '#' + old_value else old_value
           hash_props[key] = d3.interpolate(old_value, value) 
+        else if (key is 'text') or (key is 'texts')
+          @setNodeAttribute(@node, key, old_value)
 
       (t)=>
         for own key, value of hash_props
@@ -238,6 +241,13 @@ $(document).ready ->
   delay = 0
   current_slide = null
 
+  getSlideDuration = (slide)->
+    max_start = 0
+    for element in slide.elements
+      for k in element.keyframes
+        max_start = k.start if k.start > max_start
+    max_start
+
   renderSlide = (slide)->
     setTimeout ->
       current_slide.fadeOut() if current_slide isnt null
@@ -249,7 +259,7 @@ $(document).ready ->
         , 200
       , _delay
     , delay     
-    delay = delay + slide.duration*1000 + 1000
+    delay = delay + getSlideDuration(slide) + 1000
 
   for slide in my_project.slides
     renderSlide slide
