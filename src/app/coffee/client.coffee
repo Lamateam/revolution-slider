@@ -213,6 +213,7 @@ $(document).ready ->
   $('svg')
     .width winWidth
     .height winHeight
+    .css 'background', '#ffffff'
 
   switch my_project.dim 
     when '4x3'
@@ -233,7 +234,6 @@ $(document).ready ->
     y: winHeight / oHeight
 
   svg = d3.select('svg')
-  svg.style 'background', '#ffffff'
 
   delay = 0
   current_slide = null

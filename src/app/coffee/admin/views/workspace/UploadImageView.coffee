@@ -67,5 +67,6 @@ define "views/workspace/UploadImageView", [
       @options.state = 'gallery'
       @render()
     selectImage: (e)->
-      @createElement { result: { url: e.target.src } }
+      console.log e.target.getAttribute 'data-url'
+      @createElement { result: { url: e.target.getAttribute 'data-url' } }
       @destroy()

@@ -316,8 +316,8 @@ define "controllers/workspace/LayoutController", [
       @options.slideModel            = new SlideModel @getOption('projectModel').get('slides')[@slide]
       @options.slideModel.project_id = @getOption('projectModel').get 'id'
 
-      @listenTo @options.slideModel, 'sync', ->
-        @renderRightPanel @options.slideModel, 'slide'
+      # @listenTo @options.slideModel, 'sync', _.once ->
+      #   @renderRightPanel @options.slideModel, 'slide'
 
       @renderCanvas @options.slideModel
       @renderRightPanel @options.slideModel, 'slide'

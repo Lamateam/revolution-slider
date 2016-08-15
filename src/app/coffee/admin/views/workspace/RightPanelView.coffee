@@ -21,7 +21,10 @@ define "views/workspace/RightPanelView", [
       MCustomScrollbar: { scrollbarPosition: 'outside' }
       PreventDefaultStopPropagation: {  }
     modelEvents:
-      'sync': 'render'
+      'sync': -> 
+        console.log @disableSync
+        @render() if !@disableSync
+        @disableSync = false
     ui:
       set_color: '.set_color'
       # WorkspaceRightPanelProjectTemplate ui
@@ -32,6 +35,7 @@ define "views/workspace/RightPanelView", [
         isAnimation: => (@options.animation_options.start_keyframe isnt undefined) && (@options.animation_options.end_keyframe isnt undefined)
         isDeletable: => @options.animation_options.isDeletable()
     initialize: (options)->
+      @disableSync = false
       @active_keyframe = if options.keyframe is undefined then 0 else options.keyframe
     events:
       'blur input[type="text"].bind-props': 'onInputPropsChange'
@@ -47,10 +51,16 @@ define "views/workspace/RightPanelView", [
       # WorkspaceRightPanelProjectTemplate handlers
       'change input[name="repeat"]': 'onRepeatChange'
       # WorkspaceRightPanelSlideTemplate handlers
-      'change #set_slide_input': 'onInputChange'
+      'change #set_slide_input': (e)->
+        @disableSync = true
+        @onInputChange e
       # WorkspaceRightPanelTextTemplate handlers
-      'change #set_text_input': 'onInputPropsChange'
-      'change #set_bg_input': 'onInputPropsChange'
+      'change #set_text_input': (e)->
+        @disableSync = true
+        @onInputPropsChange e
+      'change #set_bg_input': (e)->
+        @disableSync = true
+        @onInputPropsChange e
       # Animation handlers
       'click .event-delete-animations': 'deleteAnimation'
     getTemplate: ->
