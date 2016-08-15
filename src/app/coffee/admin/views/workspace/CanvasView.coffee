@@ -51,15 +51,7 @@ define "views/workspace/CanvasView", [
     setD3Attributes: (type, props)->
       if @options.node is undefined
         @options.node = @d3_el.append if type isnt 'text' then type else 'rect'
-
-      # @setNodeAttribute(@options.node, key, value) for own key, value of props
-
       @canResize = false if type is 'text'
-      # @canRotate = false if type is 'text'
-      
-      # @setActive() if @getOption("stateModel").get("isElementSelected") is @model.get("id")
-
-      # @initEvents @options.node
     initialize: ->
       @transitions      = [  ]
       @current_keyframe = 0
@@ -83,23 +75,6 @@ define "views/workspace/CanvasView", [
         @setActive() if @getOption("stateModel").get("isElementSelected") is @model.get("id")
 
         @initEvents @options.node
-
-        # if @model.get('type') is 'text'
-
-        #   @d3_el.selectAll('.background_rect').remove()
-
-        #   dimensions = @d3_el.node().getBBox()
-        #   offset     = props.text_offset
-        #   fill       = props.background_fill
-
-        #   @d3_el
-        #     .insert 'rect', ':first-child'
-        #     .classed 'background_rect', true
-        #     .attr 'x', dimensions.x - offset
-        #     .attr 'y', dimensions.y - offset
-        #     .attr 'width', dimensions.width + offset*2
-        #     .attr 'height', dimensions.height + offset*2
-        #     .attr 'fill', if fill.indexOf('#') is -1 then '#' + fill else fill
 
       , 0
 
@@ -223,14 +198,8 @@ define "views/workspace/CanvasView", [
         x_center   = dimensions.x + dimensions.width*0.5
         y_center   = dimensions.y + dimensions.height*0.5
 
-        # new_d = Math.sqrt Math.pow( move_y - y_center, 2 ) + Math.pow( move_x - x_center, 2 )
         switch d.name
           when 'ne', 'se', 'nw', 'sw'
-            # dalpha = Math.atan(dimensions.width / dimensions.height)
-
-            # dh = new_d*Math.cos(dalpha) - dimensions.height*0.5
-            # dw = new_d*Math.sin(dalpha) - dimensions.width*0.5
-            # console.log dalpha
 
             rad_angle = (Math.PI / 180) * props.angle 
 
@@ -293,10 +262,6 @@ define "views/workspace/CanvasView", [
             @setNodeAttribute n, 'y', props.y
 
             @setAngle props.angle, move_x, move_y
-
-            # @d3_el
-            #   .selectAll '.background_rect'
-            #   .attr 'y', move_y - dimensions.height*0.5 - props.text_offset
         
         @moveDots()
 
@@ -396,12 +361,7 @@ define "views/workspace/CanvasView", [
               el.style 'opacity', (end - i)*step
 
           for i in [end - animation.duration..end]
-            setTimeout handler(i), i  
-
-          # if isLast
-          #   setTimeout ->
-          #     el.style 'opacity', 1
-          #   , end
+            setTimeout handler(i), i 
 
     playAnimations: (data)->
       el = @d3_el
@@ -469,8 +429,7 @@ define "views/workspace/CanvasView", [
     attachHtml: (collectionView, childView, index)->
     templateHelpers: ->
       res = 
-        width: @options.width
-        height: @options.height
+        dim: @options.dim
     template: CanvasTemplate
     onRender: ->
       setTimeout =>

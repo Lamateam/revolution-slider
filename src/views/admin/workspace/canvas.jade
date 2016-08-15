@@ -16,8 +16,18 @@
   //- в варианте 4:3
   //- 
 
-  svg(width="100%", height=height, style="background: #" + background + ";")
-    style(type="text/css"): include transition.css
+  if dim == '4x3'
+    svg(width="640px", height="480px", style="background: #" + background + ";")
+      style(type="text/css"): include transition.css
+  if dim == '3x4'
+    svg(width="480px", height="640px", style="background: #" + background + ";")
+      style(type="text/css"): include transition.css
+  if dim == '16x9'
+    svg(width="640px", height="360px", style="background: #" + background + ";")
+      style(type="text/css"): include transition.css
+  if dim == '9x16'
+    svg(width="360px", height="640px", style="background: #" + background + ";")
+      style(type="text/css"): include transition.css
 
 
 

@@ -12,7 +12,7 @@ module.exports = (grunt) ->
         command: "coffee server.coffee"
     clean: 
       tmp: [ "tmp" ]
-      dist: [ "dist/**/**.*", "!dist/uploaded_images/**/**.*" ]
+      dist: [ "dist/**/*.*", "!dist/uploaded_images/**/*.*" ]
     copy:
       vendor:
         files: [
@@ -260,7 +260,7 @@ module.exports = (grunt) ->
       all:
         options:
           mode: 777
-          create: ['dist/uploaded_images']
+          create: [ 'dist/uploaded_images' ]
 
   # Load external Grunt task plugins.
   grunt.loadNpmTasks 'grunt-contrib-coffee'
@@ -282,7 +282,7 @@ module.exports = (grunt) ->
   grunt.registerTask "compile-development", ["clean:tmp", "clean:dist", "compile-scripts", "compile-styles", "copy", "mkdir", "clean:tmp"]
   grunt.registerTask "compile-release", ["compile-development", "uglify:js", "cssmin"]
   
-  grunt.registerTask "compile-test", [ "clean:tmp", "clean:dist", "copy", "compile-scripts", "requirejs:compile_dev", "compile-styles", "mkdir" ]
+  grunt.registerTask "compile-test", [ "clean:tmp", "clean:dist", "copy", "compile-scripts", "requirejs:compile_dev", "compile-styles", 'mkdir' ]
 
   grunt.registerTask "compile-styles-short", ["compile-styles", "cssmin", "clean:tmp", "watch:styles"]
 

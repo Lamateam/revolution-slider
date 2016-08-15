@@ -58,8 +58,7 @@ define "controllers/workspace/LayoutController", [
 
       @getOption('layout').renderCanvas
         collection: c
-        width: 500
-        height: 500
+        dim: @getOption('projectModel').get 'dim'
         model: slide
         stateModel: @getOption 'stateModel'
     renderRightPanel: (model, type, keyframe=0, animation_options={})->

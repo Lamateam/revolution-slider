@@ -15,7 +15,8 @@ header
 
     //- Запускает привив - 04_01_preview.jpg
     li.workspace-top_panel-buttons-preview
-      button.bind-preview
+      a(href="/api/project/" + id + "/export", target="_blanc")
+        button.bind-preview
 
     //- Как я понял, при любом изменении должна идти сохранение
     //- следовательно еще 2 статуса - сохраняется и не сохранено

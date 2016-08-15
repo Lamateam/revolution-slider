@@ -67,4 +67,4 @@ exports.init = (app)->
   app.get '/api/project/:id/export', (req, res, next)->
     project = projects[req.params.id]
 
-    res.render "client/index", project
+    res.render "client/index", { project: JSON.stringify(project) }
