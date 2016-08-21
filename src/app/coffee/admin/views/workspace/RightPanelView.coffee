@@ -99,8 +99,6 @@ define "views/workspace/RightPanelView", [
 
       data[field] = value
 
-      console.log value, field
-
       data      
     onInputPropsChange: (e)-> window.App.trigger 'element:' + @model.get('id') + ':change', { props: @getDataFromInput(e.target) }
     onInputChange: (e)-> window.App.trigger @getOption('type') + ":update", @getDataFromInput(e.target)
@@ -134,5 +132,4 @@ define "views/workspace/RightPanelView", [
         animations: @model.get 'animations'
         element: { type: @getOption('type'), id: @model.get('id') } 
         keyframe: data.end_keyframe
-    deleteAnimation: -> window.App.trigger 'animation:delete', { el: @model.get('id'), start: @options.animation_options.start_keyframe, end: @options.animation_options.end_keyframe }
 

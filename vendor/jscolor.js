@@ -1731,14 +1731,10 @@ var jsc = {
     }
     this.targetElement._jscLinkedInstance = this;
 
-    // console.log('here s and v', this.valueElement, this.styleElement);
-
     // Find the value element
     this.valueElement = jsc.fetchElement(this.valueElement);
     // Find the style element
     this.styleElement = jsc.fetchElement(this.styleElement);
-
-    console.log('here s and v', this.valueElement, this.styleElement);
 
     var THIS = this;
     var container =

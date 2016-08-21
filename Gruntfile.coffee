@@ -201,6 +201,16 @@ module.exports = (grunt) ->
             flags: "gi"
           }
         ]
+      bootstrap_fonts:
+        src: [ "./dist/style.css" ]
+        actions: [
+          {
+            name: "bootstrap_fonts"
+            search: "../fonts/glyphicons-halflings-regular"
+            replace: "/static/fonts/glyphicons-halflings-regular"
+            flags: "gi"
+          }
+        ]
     concat:
       vendor_css:
         src: [

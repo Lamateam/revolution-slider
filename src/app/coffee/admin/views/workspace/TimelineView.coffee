@@ -17,7 +17,10 @@ define "views/workspace/TimelineView", [
     events:
       'click .timeline_item-keyframe': 'selectKeyframe'
       'click .timeline-animation': 'selectAnimation'
+      'contextmenu .timeline-animation:last-child': 'renderDeleteButton'
+      'click .event-remove-animation': 'onDeleteButtonClick'
       'drag .timeline_item-keyframe': 'onDrag'
+      'dragstart .timeline_item-keyframe': 'onDragStart'
       'dragstop .timeline_item-keyframe': 'onDragStop'
     modelEvents:
       'sync': 'render'
@@ -26,8 +29,46 @@ define "views/workspace/TimelineView", [
       @active_keyframe   = 0
       @active_animation  = undefined
       @listenTo window.App, 'element:' + @model.get('id') + ':animation:change', @changeAnimation
+      @listenTo window.App, 'element:' + @model.get('id') + ':animation:delete', @deleteAnimation
       @listenTo window.App, 'element:' + @model.get('id') + ':keyframe:create', @onKeyframeCreate
       @runner = d3.select @el
+      @dragged = false
+    renderDeleteButton: (e)->
+      if !@dragged
+        offset = $(e.target).offset()
+        button = $ '''
+          <div class="dropdown open">
+            <div class="dropdown-menu">
+              <div>
+                <a href="#" class="event-remove-animation" style="margin-left: 20px;">Удалить колено</a>
+              </div>
+            </div>
+          </div>'''
+        button.css { position: 'absolute', top: e.pageY - offset.top - 20, left: e.pageX - offset.left }
+        $(e.target).append button
+
+        $(document.body).trigger 'contextmenu_fake'
+
+        $(document.body).on 'click contextmenu contextmenu_fake', _.once (e)->
+          console.log 'remove dialog'
+          button.remove()
+
+        e.preventDefault()
+        e.stopPropagation()
+    removeDeleteButton: (e)->
+      target = if e.target.tagName.toLowerCase() is 'li' then $(e.target) else $(e.target).parent()
+      target.find('.event-remove-animation').remove()
+    onDeleteButtonClick: (e)->
+      target = $(e.target).parent()
+      start  = parseInt target.attr('keyframe-start'), 10
+      end    = parseInt target.attr('keyframe-end'), 10
+      console.log @model.get('id'), start, end
+      
+      window.App.trigger 'animation:delete', { el: @model.get('id'), start: start, end: end }
+      window.App.trigger 'element:' + @model.get('id') + ':animation:delete'
+      
+      e.preventDefault()
+      e.stopPropagation()
     onRender: ->
       @$el.attr 'model-id', @model.get('id')
 
@@ -129,9 +170,24 @@ define "views/workspace/TimelineView", [
     selectAnimation: (e)->
       el = $(e.target)
 
-      @active_animation = { start: parseInt(el.attr('keyframe-start'), 10), end: parseInt(el.attr('keyframe-end'), 10), isDeletable: => el.is(@ui.animations.last()) }
+      @active_animation = 
+        start: parseInt el.attr('keyframe-start'), 10
+        end: parseInt el.attr('keyframe-end'), 10
+        isDeletable: => 
+          (el.attr('keyframe-start') is @ui.animations.last().attr('keyframe-start')) and (el.attr('keyframe-end') is @ui.animations.last().attr('keyframe-end'))
 
       @_selectAnimation @active_animation
+    deleteAnimation: ->
+      @ui.animations.last().remove()
+      deleted_element = @ui.keyframes.last()
+      deleted_id = parseInt deleted_element.attr('keyframe-id'), 10
+      deleted_element.remove()
+      console.log deleted_id, @active_keyframe
+      if @active_keyframe is deleted_id
+        new_id = deleted_id - 1
+        console.log 'oh, no: ', new_id
+        @_selectKeyframe new_id
+        window.App.trigger 'element:' + @model.get('id') + ':keyframe:select', { id: new_id }
     onDragStop: (e, ui)->
       keyframe_id = e.target.getAttribute 'keyframe-id'
       model_id    = @model.get 'id'
@@ -143,6 +199,9 @@ define "views/workspace/TimelineView", [
 
       window.App.trigger "element:resize", { el: model_id, keyframe: keyframe_id, props: { start: start } }
 
+      @dragged = false
+    onDragStart: ->
+      @dragged = true
   Marionette.CompositeView.extend
     template: TimelineTemplate
     childView: TimelineItem

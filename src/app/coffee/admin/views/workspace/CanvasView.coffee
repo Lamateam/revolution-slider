@@ -139,12 +139,12 @@ define "views/workspace/CanvasView", [
           # Это служебные поля, ничего делать не надо
           console.log 'junk'
         when key is 'fill-opacity'
-          @d3_el.style 'opacity', value
           node.attr key, value
         when true then node.attr key, value
     setAngle: (angle, x_center, y_center)->
       if @canRotate
         @d3_el.attr 'transform', 'rotate(' + angle + ',' + x_center + ',' + y_center + ')'
+        @node_angle = angle
     moveDots: ->
       dimensions = @options.node.node().getBBox()
       x_center   = dimensions.x + dimensions.width*0.5
@@ -313,18 +313,18 @@ define "views/workspace/CanvasView", [
         @onNodeClick()
     selectAnimation: (data)->
       window.App.trigger "element:select_animation", { el: @model.get('id'), data: data }
-    createTransition: (kf, next_kf)->
+    createTransition: (kf, next_kf, blockers)->
       =>
         hash_props = {  }
 
         for own key, value of next_kf.props
-          if (key isnt 'text') and (key isnt 'texts') and (key isnt 'fill-opacity')
+          if blockers.indexOf(key) is -1
+            console.log key
             old_value = kf.props[key]
 
             if (key is 'fill') or (key is 'background_fill')
               value     = if value.indexOf('#') is -1 then '#' + value else value
               old_value = if old_value.indexOf('#') is -1 then '#' + old_value else old_value
-              console.log value, old_value
             hash_props[key] = d3.interpolate(old_value, value) 
 
         (t)=>
@@ -339,18 +339,18 @@ define "views/workspace/CanvasView", [
     
     createEnterAnimation: (animation, start)->
       el = @d3_el
-      switch animation.type 
-        when 'fadeIn'
-          step = 1 / animation.duration
 
-          handler = (i)->
-            ->
-              el.style 'opacity', i*step
-          setTimeout ->
-            for i in [0..animation.duration]
-              setTimeout handler(i), i
-          , start
+      $(el.node()).css 'opacity', 0
 
+      duration = switch animation.type 
+        when 'fadeIn' then animation.duration
+        when 'sft', 'sfb', 'sfl', 'sfr' then animation.duration*0.8
+        else 
+          0
+
+      setTimeout ->
+        $(el.node()).animate { opacity: 1 }, duration
+      , start
     createLeaveAnimation: (animation, end, isLast)->
       el = @d3_el
 
@@ -368,10 +368,19 @@ define "views/workspace/CanvasView", [
     playAnimations: (data)->
       el = @d3_el
 
-      transition = el
+      animations = @model.get 'animations'
+
+      transition     = el
+      external_delay = 0
 
       @selectKeyframe { id: 0 }
       el.style 'opacity', 1
+
+      for animation, i in animations
+        if animation.link is 'enter'
+          @createEnterAnimation animation, data.keyframes[animation.keyframe].start
+        else if animation.link is 'leave'
+          @createLeaveAnimation animation, data.keyframes[animation.keyframe].start, i is animations.length-1
 
       for kf, i in data.keyframes
         next_kf = data.keyframes[i+1]
@@ -381,17 +390,38 @@ define "views/workspace/CanvasView", [
           if i is 0 and kf.start isnt 0
             transition.delay kf.start
 
+          blockers = [ 'text', 'texts', 'fill-opacity' ]
+
+          for animation in animations
+            if (animation.keyframe is i) and (animation.type isnt 'none') and (animation.type isnt 'fadeIn') and (animation.type isnt 'fadeOut')
+              start_kf = $.extend true, {}, kf 
+              switch animation.type 
+                when 'sft'
+                  start_kf.props.y = start_kf.props.y - 50
+                when 'sfb'
+                  start_kf.props.y = start_kf.props.y + 50
+                when 'lft'
+                  start_kf.props.y = start_kf.props.y - 1000
+                when 'lfb'
+                  start_kf.props.y = start_kf.props.y + 1000
+                when 'sfl'
+                  start_kf.props.x = start_kf.props.x - 50
+                when 'sfr'
+                  start_kf.props.x = start_kf.props.x + 50
+                when 'lfl'
+                  start_kf.props.x = start_kf.props.x - 1000
+                when 'lfr'
+                  start_kf.props.x = start_kf.props.x + 1000
+              transition
+                .duration animation.duration
+                .tween 'animation-'+i+'-before', @createTransition(start_kf, kf, blockers)
+              transition = transition.transition()
+              external_delay = animation.duration
+
           transition
-            .duration next_kf.start - kf.start
-            .tween 'animation-'+i, @createTransition(kf, next_kf)
+            .duration next_kf.start - kf.start - external_delay
+            .tween 'animation-'+i, @createTransition(kf, next_kf, blockers)
 
-      animations = @model.get 'animations'
-
-      for animation, i in animations
-        if animation.link is 'enter'
-          @createEnterAnimation animation, data.keyframes[animation.keyframe].start
-        else if animation.link is 'leave'
-          @createLeaveAnimation animation, data.keyframes[animation.keyframe].start, i is animations.length-1
     onAnimationsEnd: ->
       @render()
     onElementChange: (data)->

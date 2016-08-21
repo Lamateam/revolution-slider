@@ -13,26 +13,49 @@
 //-   button.rotate_1080deg
 
 .workspace-right_panel-container-select_block.margintop_5
-  select
+  select.bind-type
+    if type == 'none'
+      option(value="none", selected) Никакой
+    else
+      option(value="none") Никакой  
+
     if link == 'enter'
       if type == 'fadeIn'
         option(value="fadeIn", selected) Из непрозрачного в прозрачный
       else
         option(value="fadeIn") Из непрозрачного в прозрачный
-        
-    if link == 'process'
-      if type == 'rotate'
-        option(value="rotate", selected) Поворот (по часовой)
+      if type == 'sft'
+        option(value="sft", selected) Появление сверху 
       else
-        option(value="rotate") Поворот (по часовой)
-      if type == 'antirotate'
-        option(value="rotate", selected) Поворот (против часовой)
+        option(value="sft") Появление сверху 
+      if type == 'sfb'
+        option(value="sfb", selected) Появление снизу 
       else
-        option(value="antirotate") Поворот (против часовой)
-      if type == 'pulsar'
-        option(value="pulsar", selected) Пульсация
+        option(value="sfb") Появление снизу 
+      if type == 'sfl'
+        option(value="sfl", selected) Появление слева 
       else
-        option(value="pulsar") Пульсация      
+        option(value="sfl") Появление слева 
+      if type == 'sfr'
+        option(value="sfr", selected) Появление справа 
+      else
+        option(value="sfr") Появление справа
+      if type == 'lft'
+        option(value="lft", selected) Вылет сверху 
+      else
+        option(value="lft") Вылет сверху 
+      if type == 'lfb'
+        option(value="lfb", selected) Вылет снизу 
+      else
+        option(value="lfb") Вылет снизу 
+      if type == 'lfl'
+        option(value="lfl", selected) Вылет слева 
+      else
+        option(value="lfl") Вылет слева 
+      if type == 'lfr'
+        option(value="lfr", selected) Вылет справа 
+      else
+        option(value="lfr") Вылет справа
 
     if link == 'leave'
       if type == 'fadeOut'
@@ -40,31 +63,32 @@
       else
         option(value="fadeOut") Из прозрачного в непрозрачный
 
-.workspace-right_panel-container-block.margintop_15
-  select.bind-effect
-    if effect == 'ease'
-      option(value="ease", selected="selected") Ease
-    else
-      option(value="ease") Ease
-    if effect == 'ease-in'
-      option(value="ease-in", selected="selected") Ease In
-    else
-      option(value="ease-in") Ease In
-    if effect == 'ease-out'
-      option(value="ease-out", selected="selected") Ease Out
-    else
-      option(value="ease-out") Ease Out
-    if effect == 'ease-in-out'
-      option(value="ease-in-out", selected="selected") Ease In & Out
-    else
-      option(value="ease-in-out") Ease In & Out
-    if effect == 'linear'
-      option(value="linear", selected="selected") Linear
-    else
-      option(value="linear") Linear
-.workspace-right_panel-container-block_plus
-  input.time.bind-duration(type="text", value=duration)
-  button.plus
-  button.minus
+if type != 'none'
+  .workspace-right_panel-container-block.margintop_15
+    select.bind-effect
+      if effect == 'ease'
+        option(value="ease", selected="selected") Ease
+      else
+        option(value="ease") Ease
+      if effect == 'ease-in'
+        option(value="ease-in", selected="selected") Ease In
+      else
+        option(value="ease-in") Ease In
+      if effect == 'ease-out'
+        option(value="ease-out", selected="selected") Ease Out
+      else
+        option(value="ease-out") Ease Out
+      if effect == 'ease-in-out'
+        option(value="ease-in-out", selected="selected") Ease In & Out
+      else
+        option(value="ease-in-out") Ease In & Out
+      if effect == 'linear'
+        option(value="linear", selected="selected") Linear
+      else
+        option(value="linear") Linear
+  .workspace-right_panel-container-block_plus
+    input.time.bind-duration(type="text", value=duration)
+    button.plus
+    button.minus
 
 div(style="clear:both;")

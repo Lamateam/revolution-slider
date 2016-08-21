@@ -63,14 +63,14 @@ class Element
       when true then node.attr key, value
   setAngle: (angle, x_center, y_center)->
     @d3_el.attr 'transform', 'rotate(' + angle + ',' + x_center + ',' + y_center + ')'
-  createTransition: (kf, next_kf)->
+  createTransition: (kf, next_kf, blockers)->
     =>
       hash_props = {  }
 
       for own key, value of next_kf.props
         old_value = kf.props[key]
 
-        if (key isnt 'text') and (key isnt 'texts') and (key isnt 'fill-opacity')
+        if blockers.indexOf(key) is -1
           if (key is 'fill') or (key is 'background_fill')
             value     = if value.indexOf('#') is -1 then '#' + value else value
             old_value = if old_value.indexOf('#') is -1 then '#' + old_value else old_value
@@ -88,19 +88,18 @@ class Element
   
   createEnterAnimation: (animation, start)->
     el = @d3_el
-    switch animation.type 
-      when 'fadeIn'
-        el.style 'opacity', 0
 
-        step = 1 / animation.duration
+    $(el.node()).css 'opacity', 0
 
-        handler = (i)->
-          ->
-            el.style 'opacity', i*step
-        setTimeout ->
-          for i in [0..animation.duration]
-            setTimeout handler(i), i
-        , start
+    duration = switch animation.type 
+      when 'fadeIn' then animation.duration
+      when 'sft', 'sfb', 'sfl', 'sfr' then animation.duration*0.8
+      else
+        0 
+
+    setTimeout ->
+      $(el.node()).animate { opacity: 1 }, duration
+    , start
 
   createLeaveAnimation: (animation, end, isLast)->
     el = @d3_el
@@ -123,12 +122,13 @@ class Element
 
     animations = @model.animations
 
+    external_delay = 0
+
     for animation, i in animations
       if animation.link is 'enter'
         @createEnterAnimation animation, keyframes[animation.keyframe].start
       else if animation.link is 'leave'
         @createLeaveAnimation animation, keyframes[animation.keyframe].start, i is animations.length-1
-
 
     for kf, i in keyframes
       next_kf = keyframes[i+1]
@@ -138,9 +138,38 @@ class Element
         if i is 0 and kf.start isnt 0
           transition.delay kf.start
 
+        blockers = [ 'text', 'texts', 'fill-opacity' ]
+
+        for animation in animations
+          if (animation.keyframe is i) and (animation.type isnt 'none') and (animation.type isnt 'fadeIn') and (animation.type isnt 'fadeOut')
+            start_kf = $.extend true, {}, kf 
+            switch animation.type 
+              when 'sft'
+                start_kf.props.y = start_kf.props.y - 50 * @options.scale.x
+              when 'sfb'
+                start_kf.props.y = start_kf.props.y + 50 * @options.scale.x
+              when 'lft'
+                start_kf.props.y = start_kf.props.y - 1000 * @options.scale.x
+              when 'lfb'
+                start_kf.props.y = start_kf.props.y + 1000 * @options.scale.x
+              when 'sfl'
+                start_kf.props.x = start_kf.props.x - 50 * @options.scale.x
+              when 'sfr'
+                start_kf.props.x = start_kf.props.x + 50 * @options.scale.x
+              when 'lfl'
+                start_kf.props.x = start_kf.props.x - 1000 * @options.scale.x
+              when 'lfr'
+                start_kf.props.x = start_kf.props.x + 1000 * @options.scale.x
+
+            transition
+              .duration animation.duration
+              .tween 'animation-'+i+'-before', @createTransition(start_kf, kf, blockers)
+            transition = transition.transition()
+            external_delay = animation.duration
+
         transition
-          .duration next_kf.start - kf.start
-          .tween 'animation-'+i, @createTransition(kf, next_kf)
+          .duration next_kf.start - kf.start - external_delay
+          .tween 'animation-'+i, @createTransition(kf, next_kf, blockers)
 
   render: ->
     # рисуем лейаут

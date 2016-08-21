@@ -62,7 +62,6 @@ define "controllers/workspace/LayoutController", [
         model: slide
         stateModel: @getOption 'stateModel'
     renderRightPanel: (model, type, keyframe=0, animation_options={})->
-      console.log animation_options
       @getOption('layout').renderRightPanel
         model: model
         type: type
@@ -121,8 +120,6 @@ define "controllers/workspace/LayoutController", [
       keyframes = model.get 'keyframes'
       keyframe  = keyframes[keyframe]
 
-      console.log data
-
       keyframe[key] = value for own key, value of data
 
       model.save { keyframes: keyframes }, { wait: true, patch: true }  
@@ -161,7 +158,6 @@ define "controllers/workspace/LayoutController", [
         keyframe.start
       model.save { keyframes: keyframes }, { patch: true, wait: true }
     onElementSelectAnimation: (data)->
-      console.log 'a'
       @getOption('stateModel').setState "isElementSelected", data.el
       model = @getOption('elementsCollection').findWhere { id: data.el }
       @renderRightPanel model, 'element', data.data.start, { start_keyframe: data.data.start, end_keyframe: data.data.end, isDeletable: data.data.isDeletable }      
@@ -250,7 +246,6 @@ define "controllers/workspace/LayoutController", [
           animations = @getOption('slideModel').get 'animations'
 
           for animation in animations
-            console.log 'diff: ', animation.id, data.id
             if animation.id is data.id
               animation[key] = value for own key, value of data.data
 
@@ -260,7 +255,6 @@ define "controllers/workspace/LayoutController", [
           animations = model.get 'animations'
 
           for animation in animations
-            console.log 'diff: ', animation.id, data.id
             if animation.id is data.id
               animation[key] = value for own key, value of data.data  
 
@@ -281,7 +275,6 @@ define "controllers/workspace/LayoutController", [
 
       model.save { animations: valid_animations, keyframes: keyframes }, { wait: true, patch: true, success: => @renderRightPanel model, 'element' }
     onAnimationsChange: (data)->
-      console.log 'data: ', data
       switch data.element.type
         when 'slide'
           animations = @getOption('slideModel').get 'animations'
