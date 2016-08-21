@@ -55,11 +55,9 @@ define "views/workspace/TimelineView", [
 
         e.preventDefault()
         e.stopPropagation()
-    removeDeleteButton: (e)->
-      target = if e.target.tagName.toLowerCase() is 'li' then $(e.target) else $(e.target).parent()
-      target.find('.event-remove-animation').remove()
     onDeleteButtonClick: (e)->
-      target = $(e.target).parent()
+      console.log 'j'
+      target = @$el.find('.timeline-animation').last()
       start  = parseInt target.attr('keyframe-start'), 10
       end    = parseInt target.attr('keyframe-end'), 10
       console.log @model.get('id'), start, end

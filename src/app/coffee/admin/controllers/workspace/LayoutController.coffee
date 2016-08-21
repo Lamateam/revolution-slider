@@ -269,6 +269,7 @@ define "controllers/workspace/LayoutController", [
       keyframes.pop()
 
       valid_animations = [ ]
+      console.log data
       for animation in animations
         toDelete = ((animation.link is 'enter') && (animation.keyframe is data.start)) || ((animation.link is 'leave') && (animation.keyframe is data.end))
         valid_animations.push animation if !toDelete
