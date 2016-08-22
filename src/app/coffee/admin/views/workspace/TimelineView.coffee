@@ -163,15 +163,15 @@ define "views/workspace/TimelineView", [
     onKeyframeCreate: ->
       @active_keyframe = @model.get('keyframes').length - 1
     selectAnimation: (e)->
-      el = $(e.target)
+      # el = $(e.target)
 
-      @active_animation = 
-        start: parseInt el.attr('keyframe-start'), 10
-        end: parseInt el.attr('keyframe-end'), 10
-        isDeletable: => 
-          (el.attr('keyframe-start') is @ui.animations.last().attr('keyframe-start')) and (el.attr('keyframe-end') is @ui.animations.last().attr('keyframe-end'))
+      # @active_animation = 
+      #   start: parseInt el.attr('keyframe-start'), 10
+      #   end: parseInt el.attr('keyframe-end'), 10
+      #   isDeletable: => 
+      #     (el.attr('keyframe-start') is @ui.animations.last().attr('keyframe-start')) and (el.attr('keyframe-end') is @ui.animations.last().attr('keyframe-end'))
 
-      @_selectAnimation @active_animation
+      # @_selectAnimation @active_animation
     deleteAnimation: ->
       @ui.animations.last().remove()
       deleted_element = @ui.keyframes.last()
