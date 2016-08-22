@@ -5,7 +5,7 @@ class Element
     dims     = node.node().getBBox()
 
     center_x = (if @model.type is 'circle' then props.cx else props.x + (if props.width is undefined then dims.width else props.width)*0.5) * @options.scale.x
-    center_y = (if @model.type is 'circle' then props.cy else props.y + (if props.height is undefined then dims.height else props.height)*0.5)  * @options.scale.x
+    center_y = (if @model.type is 'circle' then props.cy else props.y + (if props.height is undefined then dims.height else props.height)*0.5) * @options.scale.x
     
     # переводим параметры в актуальный размер
     value = value * @options.scale.x if (key is 'x') or (key is 'width') or (key is 'y') or (key is 'height')
@@ -67,12 +67,14 @@ class Element
             .attr 'x', props.x + 10
             .text str
 
-        node.attr 'width', text_node.node().getBBox().width + 20
-        node.attr 'height', text_node.node().getBBox().height + 20
+        node.attr 'width', text_node.node().getBBox().width + 20 * @options.scale.x
+        node.attr 'height', text_node.node().getBBox().height + 20 * @options.scale.x
       when 'angle' 
         @setAngle value, center_x, center_y
       when 'font-size', 'font-family'
-        @d3_el.selectAll('text').style key, value
+        text_node = @d3_el.select('text').style key, value
+        node.attr 'width', text_node.node().getBBox().width + 20 * @options.scale.x
+        node.attr 'height', text_node.node().getBBox().height + 20 * @options.scale.x    
       when 'fill'
         n = if @model.type is 'text' then @d3_el.selectAll('text') else node
         n.attr 'fill', if value.indexOf('#') is -1 then '#' + value else value

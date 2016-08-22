@@ -157,7 +157,9 @@ define "views/workspace/CanvasView", [
         when 'angle' 
           @setAngle value, center_x, center_y
         when 'font-size', 'font-family'
-          @d3_el.selectAll('text').style key, value
+          text_node = @d3_el.select('text').style key, value
+          node.attr 'width', text_node.node().getBBox().width + 20
+          node.attr 'height', text_node.node().getBBox().height + 20          
         when 'fill'
           n = if @model.get('type') is 'text' then @d3_el.selectAll('text') else node
           n.attr 'fill', if value.indexOf('#') is -1 then '#' + value else value
@@ -167,7 +169,8 @@ define "views/workspace/CanvasView", [
           # Это служебные поля, ничего делать не надо
           console.log 'junk'
         when 'fill-opacity'
-          @d3_el.attr key, value
+          key = 'opacity'
+          @d3_el.style key, value
         else
           node.attr key, value
     setAngle: (angle, x_center, y_center)->
