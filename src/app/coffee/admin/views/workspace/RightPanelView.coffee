@@ -46,6 +46,7 @@ define "views/workspace/RightPanelView", [
       'change input[type="checkbox"].bind-props': 'onInputPropsChange'
       'change select.bind-props': 'onInputPropsChange'
       'change textarea.bind-props': 'onInputPropsChange'
+      'click button.bind-props': 'onButtonPropsClick'
       # WorkspaceRightPanelGraphicsTemplate handlers
       'click .bind-image-loading': 'onImageLoadingClick'
       # WorkspaceRightPanelProjectTemplate handlers
@@ -75,8 +76,7 @@ define "views/workspace/RightPanelView", [
               if @model.get('keyframes')[0].props.text isnt undefined then WorkspaceRightPanelTextTemplate else WorkspaceRightPanelParagraphTemplate
             when 'date' then WorkspaceRightPanelDateTemplate
             when 'image' then WorkspaceRightPanelGraphicsTemplate
-            when 'rect' then WorkspaceRightPanelShapeTemplate
-            when 'circle' then WorkspaceRightPanelShapeTemplate
+            when 'rect', 'ellipse' then WorkspaceRightPanelShapeTemplate
     onRender: ->
       @initPicker()
       console.log @options.animation_options
@@ -96,6 +96,7 @@ define "views/workspace/RightPanelView", [
       value = parseInt(value, 10) if target.hasAttribute 'parse-int'
 
       value = target.checked if el.attr('type') is 'checkbox'
+      value = target.id if el.attr('type') is 'radio'
 
       data  = {  }
 
@@ -103,7 +104,19 @@ define "views/workspace/RightPanelView", [
 
       data      
     onInputPropsChange: (e)-> window.App.trigger 'element:' + @model.get('id') + ':change', { props: @getDataFromInput(e.target) }
-    onInputChange: (e)-> window.App.trigger @getOption('type') + ":update", @getDataFromInput(e.target)
+    onInputChange: (e)-> window.App.trigger @getOption('type') + ":update", { el: @model.get('id'), data: @getDataFromInput(e.target) }
+    onButtonPropsClick: (e)->
+      el = $(e.target)
+      field = el.attr 'bind-to'
+      value = el.attr 'bind-value'
+      data  = { }
+
+      data[field] = value
+
+      window.App.trigger 'element:' + @model.get('id') + ':change', { props: data }
+
+      e.preventDefault()
+      e.stopPropagation()
     # WorkspaceRightPanelGraphicsTemplate handlers
     onImageLoadingClick: -> window.App.trigger "image:edit", { id: @model.get 'id' }
     # WorkspaceRightPanelProjectTemplate handlers

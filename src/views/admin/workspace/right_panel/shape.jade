@@ -5,23 +5,23 @@
   form.workspace-right_panel-container.scroll.mcsb-behavior.pd-submit-behavior
     if !isAnimation()
       .workspace-right_panel-container-shape
-        if shape == "rect"
-          input(type="radio", name="shape", id = "rect", checked="checked")
+        if type == "rect"
+          input.bind(bind-to="type", type="radio", name="shape", id = "rect", value="rect", checked)
         else
-          input(type="radio", name="shape", id = "rect")
+          input.bind(bind-to="type", type="radio", name="shape", value="rect", id = "rect")
         label.item1(for="rect")
 
-        if shape == "circle"
-          input(type="radio", name="shape", id = "circle", checked="checked")
+        if type == "ellipse"
+          input.bind(bind-to="type", type="radio", name="shape", value="ellipse", id = "ellipse", checked)
         else
-          input(type="radio", name="shape", id = "circle")
-        label.item2(for="circle")
+          input.bind(bind-to="type", type="radio", name="shape", value="ellipse", id = "ellipse")
+        label.item2(for="ellipse")
 
-        if shape == "round"
-          input(type="radio", name="shape", id = "round", checked="checked")
-        else
-          input(type="radio", name="shape", id = "round")
-        label.item3(for="round")
+        //- if type == "round"
+        //-   input.bind(bind-to="type", type="radio", name="shape", id = "round", checked)
+        //- else
+        //-   input.bind(bind-to="type", type="radio", name="shape", id = "round")
+        //- label.item3(for="round")
 
       .floatleft.width100.margintop10
         .workspace-right_panel-container-color_picker

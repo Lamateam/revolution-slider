@@ -22,12 +22,13 @@ define "controllers/workspace/LayoutController", [
       @listenTo window.App, "workspace:preview", @onWorkspacePreview
 
       @listenTo window.App, "project:update", @onProjectUpdate
-      @listenTo window.App, "slide:update", @onSlideChange
+      @listenTo window.App, "slide:update", @onSlideUpdate
       @listenTo window.App, "slide:add", @onSlideAdd
 
       @listenTo window.App, "element:move", @onElementMove
       @listenTo window.App, "element:click", @onElementClick
       @listenTo window.App, "element:resize", @onElementResize
+      @listenTo window.App, "element:update", @onElementUpdate
       @listenTo window.App, "element:change", @onElementChange
       @listenTo window.App, "element:create", @onElementCreate
       @listenTo window.App, "element:reorder", @onElementReOrder
@@ -141,7 +142,11 @@ define "controllers/workspace/LayoutController", [
     onElementChange: (data)->
       model = @getOption('elementsCollection').findWhere { id: data.el }
       @getOption('historyCollection').addAction { action: "change", el: data.el, options: {current: data.props, previous: _.clone(model.get('props')) } }
-      @changeElement data.el, data.props      
+      @changeElement data.el, data.props
+    onElementUpdate: (data)->
+      model = @getOption('elementsCollection').findWhere { id: data.el }
+
+      model.save data.data, { patch: true, wait: true }
     onElementCreate: (data)->
       elementsCollection = @getOption 'elementsCollection'
       ids                = elementsCollection.pluck 'id'
@@ -167,6 +172,9 @@ define "controllers/workspace/LayoutController", [
     onSlideChange: (data)->
       @getOption('historyCollection').addAction { action: "change_slide", options: {current: data, previous: @getOption('slideModel').toJSON() } }
       @changeSlide data
+    onSlideUpdate: (data)->
+      @getOption('historyCollection').addAction { action: "change_slide", options: {current: data.data, previous: @getOption('slideModel').toJSON() } }
+      @changeSlide data.data
     onSlideAdd: ->
       slides = @getOption('projectModel').get 'slides'
 

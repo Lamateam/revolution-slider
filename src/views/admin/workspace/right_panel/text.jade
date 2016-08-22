@@ -30,13 +30,29 @@
               option(value="Georgia", selected="selected") Georgia
             else
               option(value="Georgia") Georgia
+            if family == 'Times New Roman'
+              option(value="Times New Roman", selected="selected") Times New Roman
+            else
+              option(value="Times New Roman") Times New Roman
 
           div.floatleft.width100.margintop5
             
             .workspace-right_panel-container-input_block.biu
-              button.bold
-              button.italic
-              button.underline
+
+              if keyframes[keyframe()].props['font-weight'] == 'bold'
+                button.bold.active.bind-props(bind-to="font-weight", bind-value="normal")
+              else
+                button.bold.bind-props(bind-to="font-weight", bind-value="bold")
+
+              if keyframes[keyframe()].props['font-style'] == 'italic'
+                button.italic.active.bind-props(bind-to="font-style", bind-value="normal")
+              else
+                button.italic.bind-props(bind-to="font-style", bind-value="italic")
+
+              if keyframes[keyframe()].props['text-decoration'] == 'underline'
+                button.underline.active.bind-props(bind-to="text-decoration", bind-value="none")
+              else
+                button.underline.bind-props(bind-to="text-decoration", bind-value="underline")
 
             .workspace-right_panel-container-color_picker
               div.set_color_div.set_color(data-valueelement = "set_text_input", data-styleelement="set_slide_button")

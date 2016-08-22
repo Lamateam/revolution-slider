@@ -49,6 +49,9 @@ define "views/workspace/CanvasView", [
     attachElContent: ->
       @setD3Attributes @model.get('type'), @model.get('keyframes')[@current_keyframe].props
     setD3Attributes: (type, props)->
+      if (@options.node isnt undefined) and (type isnt 'text') and (@options.node.node().tagName.toLowerCase() isnt type)
+        @options.node.remove() 
+        @options.node = @d3_el.append type
       if @options.node is undefined
         @options.node = @d3_el.append if type isnt 'text' then type else 'rect'
       @canResize = false if type is 'text'
@@ -91,8 +94,8 @@ define "views/workspace/CanvasView", [
     setNodeAttribute: (node, key, value)->
       props    = @model.get('keyframes')[@current_keyframe].props
       dims     = node.node().getBBox()
-      center_x = if @model.get('type') is 'circle' then props.cx else props.x + (if props.width is undefined then dims.width else props.width)*0.5
-      center_y = if @model.get('type') is 'circle' then props.cy else props.y + (if props.height is undefined then dims.height else props.height)*0.5
+      center_x = props.x + (if props.width is undefined then dims.width else props.width)*0.5
+      center_y = props.y + (if props.height is undefined then dims.height else props.height)*0.5
       switch key
         when 'x'
           @d3_el
@@ -101,12 +104,32 @@ define "views/workspace/CanvasView", [
           @d3_el 
             .selectAll 'text'
             .attr key, value
+
+          if @model.get('type') is 'ellipse'
+            key   = 'cx' 
+            value = value + props.width*0.5
+
           node.attr key, value
         when 'y'
           @d3_el 
             .selectAll 'text'
             .attr key, value + 20
-          node.attr key, value                 
+
+          if @model.get('type') is 'ellipse'
+            key   = 'cy' 
+            value = value + props.height*0.5
+
+          node.attr key, value    
+        when 'width'
+          if @model.get('type') is 'ellipse'
+            key   = 'rx' 
+            value = value*0.5
+          node.attr key, value
+        when 'height'
+          if @model.get('type') is 'ellipse'
+            key   = 'ry' 
+            value = value*0.5
+          node.attr key, value
         when 'text', 'texts'
           @d3_el.selectAll('text').remove()
           fsize  = props['font-size']
@@ -117,6 +140,9 @@ define "views/workspace/CanvasView", [
             .attr 'y', props.y + 20
             .attr 'font-size', fsize
             .attr 'font-family', props['font-family']
+            .style 'font-weight', props['font-weight']
+            .style 'font-style', props['font-style']
+            .style 'text-decoration', props['text-decoration']
 
           arr    = value.split '\n'
           for str, i in arr
@@ -393,7 +419,7 @@ define "views/workspace/CanvasView", [
           if i is 0 and kf.start isnt 0
             transition.delay kf.start
 
-          blockers = [ 'text', 'texts', 'fill-opacity', 'font-family' ]
+          blockers = [ 'text', 'texts', 'font-family', 'font-weight', 'font-style', 'text-decoration' ]
 
           for animation in animations
             if (animation.keyframe is i) and (animation.type isnt 'none') and (animation.type isnt 'fadeIn') and (animation.type isnt 'fadeOut')
