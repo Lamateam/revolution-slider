@@ -82,7 +82,8 @@ class Element
         # Это служебные поля, ничего делать не надо
         console.log 'junk'
       when 'fill-opacity'
-        @d3_el.attr key, value
+        key = 'opacity'
+        @d3_el.style key, value
       else
         node.attr key, value
   setAngle: (angle, x_center, y_center)->
