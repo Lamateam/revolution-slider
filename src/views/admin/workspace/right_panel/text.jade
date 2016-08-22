@@ -8,11 +8,28 @@
         label Текст
         input.bind-props(type="text", value=keyframes[keyframe()].props.text, bind-to="text")
 
+      .workspace-right_panel-container-input_block
+        label Прозрачность, % 
+        br
+        input.bind-opacity(type="text", style={ width: '50px' }, value=keyframes[keyframe()].props['fill-opacity']*100)
+
       .workspace-right_panel-container_big
         h3 Настройки текста 
         .workspace-right_panel-container-select_block.margintop_5
-          select
-            option(value="", selected="selected") Helvetica
+          select.bind-props(bind-to="font-family")
+            - var family = keyframes[keyframe()].props['font-family']
+            if family == 'Helvetica'
+              option(value="Helvetica", selected="selected") Helvetica
+            else
+              option(value="Helvetica") Helvetica
+            if family == 'Arial'
+              option(value="Arial", selected="selected") Arial
+            else
+              option(value="Arial") Arial
+            if family == 'Georgia'
+              option(value="Georgia", selected="selected") Georgia
+            else
+              option(value="Georgia") Georgia
 
           div.floatleft.width100.margintop5
             
@@ -139,13 +156,9 @@
               span px
 
 
-        //- .workspace-right_panel-container-rotate.margintop10
-        //-   .rotate.width50_percent
-        //-     input(type="text")
-
-        //-   .zindex.width50_percent
-        //-     label Z-index
-        //-     input(type="text")
+        .workspace-right_panel-container-rotate.margintop10
+          .rotate.width50_percent
+            input.bind-props(type="text", bind-to="angle", value=keyframes[keyframe()].props.angle, parse-float)
 
 
     if isAnimation()

@@ -47,6 +47,7 @@ define "views/workspace/LeftPanelView", [
               y: 250
               fill: "000000"
               "font-size": "12px"
+              "font-family": "Helvetica"
               text: "Текст" 
               background_fill: "ffffff"
               angle: 0
@@ -70,6 +71,7 @@ define "views/workspace/LeftPanelView", [
               y: 250
               fill: "000000"
               "font-size": "12px"
+              "font-family": "Helvetica"
               texts: "Текст \n Новая строка" 
               background_fill: "ffffff"
               text_offset: 10

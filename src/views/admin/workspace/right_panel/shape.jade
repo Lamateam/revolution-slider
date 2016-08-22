@@ -78,6 +78,20 @@
             input.bind-props(type="text", bind-to="y", value=keyframes[keyframe()].props.y, parse-float)
             span px
 
+      .floatleft.width100
+        .workspace-right_panel-container-size_block.margintop_10
+          .width50_percent.hor
+            input.bind-props(type="text", bind-to="width", value=keyframes[keyframe()].props.width, parse-float)
+            span px
+          .width50_percent.ver
+            input.bind-props(type="text", bind-to="height", value=keyframes[keyframe()].props.height, parse-float)
+            span px
+
+      .floatleft.width100
+        .workspace-right_panel-container-size_block.margintop_10
+          label Прозрачность, %    
+          input.bind-opacity(type="text", style={ width: '50px' }, value=keyframes[keyframe()].props['fill-opacity']*100)
+
       .floatleft.width100.margintop10
         .workspace-right_panel-container-size_block
           .width100_percent.position

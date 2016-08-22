@@ -11,8 +11,20 @@
       .workspace-right_panel-container_big
         h3 Настройки текста 
         .workspace-right_panel-container-select_block.margintop_5
-          select
-            option(value="", selected="selected") Helvetica
+          select.bind-props(bind-to="font-family")
+            - var family = keyframes[keyframe()].props['font-family']
+            if family == 'Helvetica'
+              option(value="Helvetica", selected="selected") Helvetica
+            else
+              option(value="Helvetica") Helvetica
+            if family == 'Arial'
+              option(value="Arial", selected="selected") Arial
+            else
+              option(value="Arial") Arial
+            if family == 'Georgia'
+              option(value="Georgia", selected="selected") Georgia
+            else
+              option(value="Georgia") Georgia
 
           div.floatleft.width100.margintop5
 

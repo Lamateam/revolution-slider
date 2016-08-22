@@ -63,6 +63,8 @@ define "views/workspace/RightPanelView", [
         @onInputPropsChange e
       # Animation handlers
       'click .event-delete-animations': 'deleteAnimation'
+      # Opacity handler
+      'blur .bind-opacity': 'onOpacityChange'
     getTemplate: ->
       res = switch @getOption('type')
         when 'project' then WorkspaceRightPanelProjectTemplate
@@ -132,4 +134,7 @@ define "views/workspace/RightPanelView", [
         animations: @model.get 'animations'
         element: { type: @getOption('type'), id: @model.get('id') } 
         keyframe: data.end_keyframe
+    onOpacityChange: (e)->
+      value = parseInt($(e.target).val(), 10) / 100
+      window.App.trigger 'element:' + @model.get('id') + ':change', { props: { 'fill-opacity': value } }
 

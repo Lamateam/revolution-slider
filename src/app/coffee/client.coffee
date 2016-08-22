@@ -142,24 +142,24 @@ class Element
 
         for animation in animations
           if (animation.keyframe is i) and (animation.type isnt 'none') and (animation.type isnt 'fadeIn') and (animation.type isnt 'fadeOut')
-            start_kf = $.extend true, {}, kf 
+            start_kf = $.extend true, { }, kf 
             switch animation.type 
               when 'sft'
                 start_kf.props.y = start_kf.props.y - 50 * @options.scale.x
               when 'sfb'
                 start_kf.props.y = start_kf.props.y + 50 * @options.scale.x
               when 'lft'
-                start_kf.props.y = start_kf.props.y - 1000 * @options.scale.x
+                start_kf.props.y = - @d3_el.node().getBBox().height
               when 'lfb'
-                start_kf.props.y = start_kf.props.y + 1000 * @options.scale.x
+                start_kf.props.y = start_kf.props.y + $(@options.svg).height() / @options.scale.x
               when 'sfl'
                 start_kf.props.x = start_kf.props.x - 50 * @options.scale.x
               when 'sfr'
                 start_kf.props.x = start_kf.props.x + 50 * @options.scale.x
               when 'lfl'
-                start_kf.props.x = start_kf.props.x - 1000 * @options.scale.x
+                start_kf.props.x = - @d3_el.node().getBBox().width
               when 'lfr'
-                start_kf.props.x = start_kf.props.x + 1000 * @options.scale.x
+                start_kf.props.x = start_kf.props.x + $(@options.svg).width() / @options.scale.x
 
             transition
               .duration animation.duration

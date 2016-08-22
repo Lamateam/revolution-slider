@@ -49,14 +49,11 @@ define "views/workspace/TimelineView", [
 
         $(document.body).trigger 'contextmenu_fake'
 
-        $(document.body).on 'click contextmenu contextmenu_fake', _.once (e)->
-          console.log 'remove dialog'
-          button.remove()
+        $(document.body).on 'click contextmenu contextmenu_fake', _.once (e)-> button.remove()
 
         e.preventDefault()
         e.stopPropagation()
     onDeleteButtonClick: (e)->
-      console.log 'j'
       target = @$el.find('.timeline-animation').last()
       start  = parseInt target.attr('keyframe-start'), 10
       end    = parseInt target.attr('keyframe-end'), 10

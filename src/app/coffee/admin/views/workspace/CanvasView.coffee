@@ -93,8 +93,8 @@ define "views/workspace/CanvasView", [
       dims     = node.node().getBBox()
       center_x = if @model.get('type') is 'circle' then props.cx else props.x + (if props.width is undefined then dims.width else props.width)*0.5
       center_y = if @model.get('type') is 'circle' then props.cy else props.y + (if props.height is undefined then dims.height else props.height)*0.5
-      switch 
-        when key is 'x'
+      switch key
+        when 'x'
           @d3_el
             .selectAll 'tspan'
             .attr key, value + 10
@@ -102,21 +102,23 @@ define "views/workspace/CanvasView", [
             .selectAll 'text'
             .attr key, value
           node.attr key, value
-        when key is 'y'
+        when 'y'
           @d3_el 
             .selectAll 'text'
             .attr key, value + 20
           node.attr key, value                 
-        when key is 'text', key is 'texts'
+        when 'text', 'texts'
           @d3_el.selectAll('text').remove()
+          fsize  = props['font-size']
 
           text_node = @d3_el
             .append 'text'
             .attr 'x', props.x
             .attr 'y', props.y + 20
+            .attr 'font-size', fsize
+            .attr 'font-family', props['font-family']
 
           arr    = value.split '\n'
-          fsize  = props['font-size']
           for str, i in arr
             text_node
               .append 'tspan'
@@ -126,21 +128,22 @@ define "views/workspace/CanvasView", [
 
           node.attr 'width', text_node.node().getBBox().width + 20
           node.attr 'height', text_node.node().getBBox().height + 20
-        when key is 'angle' 
+        when 'angle' 
           @setAngle value, center_x, center_y
-        when key is 'font-size'
+        when 'font-size', 'font-family'
           @d3_el.selectAll('text').style key, value
-        when key is 'fill'
+        when 'fill'
           n = if @model.get('type') is 'text' then @d3_el.selectAll('text') else node
           n.attr 'fill', if value.indexOf('#') is -1 then '#' + value else value
-        when key is 'background_fill'
+        when 'background_fill'
           node.attr 'fill', if value.indexOf('#') is -1 then '#' + value else value
-        when key is 'text_offset'
+        when 'text_offset'
           # Это служебные поля, ничего делать не надо
           console.log 'junk'
-        when key is 'fill-opacity'
+        when 'fill-opacity'
+          @d3_el.attr key, value
+        else
           node.attr key, value
-        when true then node.attr key, value
     setAngle: (angle, x_center, y_center)->
       if @canRotate
         @d3_el.attr 'transform', 'rotate(' + angle + ',' + x_center + ',' + y_center + ')'
@@ -390,7 +393,7 @@ define "views/workspace/CanvasView", [
           if i is 0 and kf.start isnt 0
             transition.delay kf.start
 
-          blockers = [ 'text', 'texts', 'fill-opacity' ]
+          blockers = [ 'text', 'texts', 'fill-opacity', 'font-family' ]
 
           for animation in animations
             if (animation.keyframe is i) and (animation.type isnt 'none') and (animation.type isnt 'fadeIn') and (animation.type isnt 'fadeOut')
@@ -401,17 +404,17 @@ define "views/workspace/CanvasView", [
                 when 'sfb'
                   start_kf.props.y = start_kf.props.y + 50
                 when 'lft'
-                  start_kf.props.y = start_kf.props.y - 1000
+                  start_kf.props.y = -@d3_el.node().getBBox().height
                 when 'lfb'
-                  start_kf.props.y = start_kf.props.y + 1000
+                  start_kf.props.y = start_kf.props.y + $(@options.svg).height()
                 when 'sfl'
                   start_kf.props.x = start_kf.props.x - 50
                 when 'sfr'
                   start_kf.props.x = start_kf.props.x + 50
                 when 'lfl'
-                  start_kf.props.x = start_kf.props.x - 1000
+                  start_kf.props.x = -@d3_el.node().getBBox().width
                 when 'lfr'
-                  start_kf.props.x = start_kf.props.x + 1000
+                  start_kf.props.x = start_kf.props.x + $(@options.svg).width()
               transition
                 .duration animation.duration
                 .tween 'animation-'+i+'-before', @createTransition(start_kf, kf, blockers)
