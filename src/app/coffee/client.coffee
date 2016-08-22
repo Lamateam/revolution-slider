@@ -11,80 +11,80 @@ class Element
     value = value * @options.scale.x if (key is 'x') or (key is 'width') or (key is 'y') or (key is 'height')
     # value = value * @options.scale.y if (key is 'y') or (key is 'height')
     
-      switch key
-        when 'x'
-          @d3_el
-            .selectAll 'tspan'
-            .attr key, value + 10
-          @d3_el 
-            .selectAll 'text'
-            .attr key, value
+    switch key
+      when 'x'
+        @d3_el
+          .selectAll 'tspan'
+          .attr key, value + 10
+        @d3_el 
+          .selectAll 'text'
+          .attr key, value
 
-          if @model.get('type') is 'ellipse'
-            key   = 'cx' 
-            value = value + props.width*0.5
+        if @model.get('type') is 'ellipse'
+          key   = 'cx' 
+          value = value + props.width*0.5
 
-          node.attr key, value
-        when 'y'
-          @d3_el 
-            .selectAll 'text'
-            .attr key, value + 20
+        node.attr key, value
+      when 'y'
+        @d3_el 
+          .selectAll 'text'
+          .attr key, value + 20
 
-          if @model.get('type') is 'ellipse'
-            key   = 'cy' 
-            value = value + props.height*0.5
+        if @model.get('type') is 'ellipse'
+          key   = 'cy' 
+          value = value + props.height*0.5
 
-          node.attr key, value    
-        when 'width'
-          if @model.get('type') is 'ellipse'
-            key   = 'rx' 
-            value = value*0.5
-          node.attr key, value
-        when 'height'
-          if @model.get('type') is 'ellipse'
-            key   = 'ry' 
-            value = value*0.5
-          node.attr key, value
-        when 'text', 'texts'
-          @d3_el.selectAll('text').remove()
-          fsize  = props['font-size']
+        node.attr key, value    
+      when 'width'
+        if @model.get('type') is 'ellipse'
+          key   = 'rx' 
+          value = value*0.5
+        node.attr key, value
+      when 'height'
+        if @model.get('type') is 'ellipse'
+          key   = 'ry' 
+          value = value*0.5
+        node.attr key, value
+      when 'text', 'texts'
+        @d3_el.selectAll('text').remove()
+        fsize  = props['font-size']
 
-          text_node = @d3_el
-            .append 'text'
-            .attr 'x', props.x
-            .attr 'y', props.y + 20
-            .attr 'font-size', fsize
-            .attr 'font-family', props['font-family']
-            .style 'font-weight', props['font-weight']
-            .style 'font-style', props['font-style']
-            .style 'text-decoration', props['text-decoration']
+        text_node = @d3_el
+          .append 'text'
+          .attr 'x', props.x
+          .attr 'y', props.y + 20
+          .attr 'font-size', fsize
+          .attr 'font-family', props['font-family']
+          .style 'font-weight', props['font-weight']
+          .style 'font-style', props['font-style']
+          .style 'text-decoration', props['text-decoration']
 
-          arr    = value.split '\n'
-          for str, i in arr
-            text_node
-              .append 'tspan'
-              .attr 'dy', if i is 0 then 0 else fsize
-              .attr 'x', props.x + 10
-              .text str
+        arr    = value.split '\n'
+        for str, i in arr
+          text_node
+            .append 'tspan'
+            .attr 'dy', if i is 0 then 0 else fsize
+            .attr 'x', props.x + 10
+            .text str
 
-          node.attr 'width', text_node.node().getBBox().width + 20
-          node.attr 'height', text_node.node().getBBox().height + 20
-        when 'angle' 
-          @setAngle value, center_x, center_y
-        when 'font-size', 'font-family'
-          @d3_el.selectAll('text').style key, value
-        when 'fill'
-          n = if @model.get('type') is 'text' then @d3_el.selectAll('text') else node
-          n.attr 'fill', if value.indexOf('#') is -1 then '#' + value else value
-        when 'background_fill'
-          node.attr 'fill', if value.indexOf('#') is -1 then '#' + value else value
-        when 'text_offset'
-          # Это служебные поля, ничего делать не надо
-          console.log 'junk'
-        when 'fill-opacity'
-          @d3_el.attr key, value
-        else
-          node.attr key, value
+        node.attr 'width', text_node.node().getBBox().width + 20
+        node.attr 'height', text_node.node().getBBox().height + 20
+      when 'angle' 
+        @setAngle value, center_x, center_y
+      when 'font-size', 'font-family'
+        @d3_el.selectAll('text').style key, value
+      when 'fill'
+        n = if @model.get('type') is 'text' then @d3_el.selectAll('text') else node
+        n.attr 'fill', if value.indexOf('#') is -1 then '#' + value else value
+      when 'background_fill'
+        node.attr 'fill', if value.indexOf('#') is -1 then '#' + value else value
+      when 'text_offset'
+        # Это служебные поля, ничего делать не надо
+        console.log 'junk'
+      when 'fill-opacity'
+        @d3_el.attr key, value
+      else
+        node.attr key, value
   setAngle: (angle, x_center, y_center)->
     @d3_el.attr 'transform', 'rotate(' + angle + ',' + x_center + ',' + y_center + ')'
   createTransition: (kf, next_kf, blockers)->
