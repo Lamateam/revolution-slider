@@ -158,7 +158,7 @@ define "views/workspace/CanvasView", [
           @setAngle value, center_x, center_y
         when 'font-size', 'font-family'
           text_node = @d3_el.select('text').style key, value
-          if text_node isnt undefined
+          if text_node.node() isnt null
             node.attr 'width', text_node.node().getBBox().width + 20
             node.attr 'height', text_node.node().getBBox().height + 20          
         when 'fill'
