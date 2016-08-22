@@ -20,7 +20,7 @@ class Element
           .selectAll 'text'
           .attr key, value
 
-        if @model.get('type') is 'ellipse'
+        if @model.type is 'ellipse'
           key   = 'cx' 
           value = value + props.width*0.5
 
@@ -30,18 +30,18 @@ class Element
           .selectAll 'text'
           .attr key, value + 20
 
-        if @model.get('type') is 'ellipse'
+        if @model.type is 'ellipse'
           key   = 'cy' 
           value = value + props.height*0.5
 
         node.attr key, value    
       when 'width'
-        if @model.get('type') is 'ellipse'
+        if @model.type is 'ellipse'
           key   = 'rx' 
           value = value*0.5
         node.attr key, value
       when 'height'
-        if @model.get('type') is 'ellipse'
+        if @model.type is 'ellipse'
           key   = 'ry' 
           value = value*0.5
         node.attr key, value
@@ -74,7 +74,7 @@ class Element
       when 'font-size', 'font-family'
         @d3_el.selectAll('text').style key, value
       when 'fill'
-        n = if @model.get('type') is 'text' then @d3_el.selectAll('text') else node
+        n = if @model.type is 'text' then @d3_el.selectAll('text') else node
         n.attr 'fill', if value.indexOf('#') is -1 then '#' + value else value
       when 'background_fill'
         node.attr 'fill', if value.indexOf('#') is -1 then '#' + value else value
